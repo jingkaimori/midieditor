@@ -898,25 +898,7 @@ void MainWindow::load() {
     if (file) {
         oldPath = file->path();
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
 
@@ -938,25 +920,7 @@ void MainWindow::loadFile(QString nfile) {
     if (file) {
         oldPath = file->path();
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
     if (!nfile.isEmpty()) {
@@ -1054,29 +1018,10 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     if (!file || file->saved()) {
         event->accept();
     } else {
-        switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-            case 0: {
-                // save
-                if (QFile(file->path()).exists()) {
-                    file->save(file->path());
-                    event->accept();
-                } else {
-                    saveas();
-                    event->accept();
-                }
-                break;
-            }
-            case 1: {
-                // close
-                event->accept();
-                break;
-            }
-            case 2: {
-                // break
-                event->ignore();
-                return;
-            }
-        }
+        bool sbc = saveBeforeClose();
+
+        if(sbc) event->accept();
+        else event->ignore();
     }
 
     if (MidiOutput::outputPort() != "") {
@@ -1143,28 +1088,28 @@ void MainWindow::setStartDir(QString dir) {
     startDirectory = dir;
 }
 
+bool MainWindow::saveBeforeClose() {
+    switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
+        case 0:
+            // save
+            if (QFile(file->path()).exists())
+                file->save(file->path());
+            else saveas();
+            return true;
+
+        case 2:
+            // break
+            return false;
+
+        default:
+            return true;
+    }
+}
+
 void MainWindow::newFile() {
     if (file) {
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
 
@@ -1423,28 +1368,8 @@ void MainWindow::openRecent(QAction* action) {
     QString path = action->data().toString();
 
     if (file) {
-        QString oldPath = file->path();
-
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) { // PROPHESSOR: Are you fuckin' serious? Third time? Move it to separated method!
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
 

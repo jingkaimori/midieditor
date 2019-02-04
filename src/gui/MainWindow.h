@@ -47,18 +47,19 @@ class MainWindow : public QMainWindow {
 
     Q_OBJECT
 
-public:
+  public:
     MainWindow(QString initFile = "");
     void setFile(MidiFile* f);
     EventWidget* eventWidget();
     void setStartDir(QString dir);
     void setInitFile(const char* file);
+    bool saveBeforeClose();
 
-protected:
+  protected:
     void dropEvent(QDropEvent* ev);
     void dragEnterEvent(QDragEnterEvent* ev);
 
-public slots:
+  public slots:
 
     void loadInitFile();
     void matrixSizeChanged(int maxScrollTime, int maxScrollLine, int vX, int vY);
@@ -88,7 +89,7 @@ public slots:
     void about();
     void setFileLengthMs();
     void scrollPositionsChanged(int startMs, int maxMs, int startLine,
-        int maxLine);
+                                int maxLine);
     void record();
     void newFile();
     void panic();
@@ -173,12 +174,12 @@ public slots:
     void updateDetected(Update* update);
     void promtUpdatesDeactivatedDialog();
 
-protected:
+  protected:
     void closeEvent(QCloseEvent* event);
     void keyPressEvent(QKeyEvent* e);
     void keyReleaseEvent(QKeyEvent* event);
 
-private:
+  private:
     MatrixWidget* mw_matrixWidget;
     QScrollBar *vert, *hori;
     ChannelListWidget* channelWidget;
@@ -190,8 +191,8 @@ private:
     QSettings* _settings;
     QStringList _recentFilePaths;
     QMenu *_recentPathsMenu, *_deleteChannelMenu,
-        *_moveSelectedEventsToTrackMenu, *_moveSelectedEventsToChannelMenu,
-        *_pasteToTrackMenu, *_pasteToChannelMenu, *_selectAllFromTrackMenu, *_selectAllFromChannelMenu;
+          *_moveSelectedEventsToTrackMenu, *_moveSelectedEventsToChannelMenu,
+          *_pasteToTrackMenu, *_pasteToChannelMenu, *_selectAllFromTrackMenu, *_selectAllFromChannelMenu;
 
     QTabWidget* lowerTabWidget;
     QAction *_colorsByChannel, *_colorsByTracks;
@@ -207,7 +208,7 @@ private:
 
     QComboBox *_miscMode, *_miscController, *_miscChannel;
     QAction *setSingleMode, *setLineMode, *setFreehandMode, *_allChannelsVisible, *_allChannelsInvisible, *_allTracksAudible, *_allTracksMute,
-        *_allChannelsAudible, *_allChannelsMute, *_allTracksVisible, *_allTracksInvisible, *stdToolAction, *undoAction, *redoAction, *_pasteAction, *pasteActionTB;
+            *_allChannelsAudible, *_allChannelsMute, *_allTracksVisible, *_allTracksInvisible, *stdToolAction, *undoAction, *redoAction, *_pasteAction, *pasteActionTB;
     MiscWidget* _miscWidget;
 
     QWidget* setupActions(QWidget* parent);
