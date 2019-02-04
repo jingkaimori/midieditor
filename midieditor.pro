@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = MidiEditor
+TARGET = ProMidEdit
 TRANSLATIONS += \
         locale/locale_ru.ts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

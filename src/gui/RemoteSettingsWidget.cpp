@@ -71,6 +71,6 @@ bool RemoteSettingsWidget::accept() {
     _server->setIp(ip);
     _server->setPort(port);
     //_server->tryConnect();
-    QMessageBox::information(this, tr("Restart"), QString(tr("You have to restart MidiEditor to connect!")));
+    QMessageBox::information(this, tr("Restart"), QString(tr("You have to restart ProMidEdit to connect!")));
     return true;
 }

@@ -55,7 +55,7 @@ UpdateDialog::UpdateDialog(Update* update, QWidget* parent)
     QLabel* content = new QLabel("<html>"
                                  "<body>"
                                  "<p>"
-                                 "Good news: a new version of MidiEditor has been released and is ready to be downloaded and installed on your system. "
+                                 "Good news: a new version of <b>MidiEditor</b> has been released and is ready to be downloaded and installed on your system. "
                                  "Please read the instructions below to learn how to install the update."
                                  "</p>"
                                  "<h3>Update</h3>"
