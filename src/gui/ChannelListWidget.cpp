@@ -46,6 +46,8 @@ ChannelListItem::ChannelListItem(int ch, ChannelListWidget* parent)
     QString text = tr("Channel ") + QString::number(channel);
     if (channel == 16) {
         text = tr("General Events");
+    } else if (channel == 9) {
+        text = tr("Percussion");
     }
     QLabel* text1 = new QLabel(text, this);
     text1->setFixedHeight(15);
@@ -85,10 +87,12 @@ ChannelListItem::ChannelListItem(int ch, ChannelListWidget* parent)
 
         toolBar->addSeparator();
 
-        // instrument
-        QAction* instrumentAction = new QAction(QIcon(":/run_environment/graphics/channelwidget/instrument.png"), tr("Select instrument"), toolBar);
-        toolBar->addAction(instrumentAction);
-        connect(instrumentAction, SIGNAL(triggered()), this, SLOT(instrument()));
+        if (channel != 9) {
+            // instrument
+            QAction* instrumentAction = new QAction(QIcon(":/run_environment/graphics/channelwidget/instrument.png"), tr("Select instrument"), toolBar);
+            toolBar->addAction(instrumentAction);
+            connect(instrumentAction, SIGNAL(triggered()), this, SLOT(instrument()));
+        }
     }
 
     layout->addWidget(toolBar, 2, 1, 1, 1);
@@ -140,6 +144,8 @@ void ChannelListItem::onBeforeUpdate() {
     QString text = MidiFile::instrumentName(channelList->midiFile()->channel(channel)->progAtTick(channelList->midiFile()->cursorTick()));
     if (channel == 16) {
         text = tr("Events affecting all channels");
+    } else if (channel == 9) {
+        text = tr("Drums and percussion events");
     }
     instrumentLabel->setText(text);
 

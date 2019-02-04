@@ -48,8 +48,12 @@
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="83"/>
+        <source>The start command can be used to start additional software components (e.g. Midi synthesizers) each time, ProMidEdit is started. You can see the output of the started software / script in the field below.</source>
+        <translation>Команду запуска можно использовать для запуска дополнительных программ (т.к. Midi синтезаторы) сразу после запуска ProMidEdit. Вы можете видеть их выхлоп в поле ниже.</translation>
+    </message>
+    <message>
         <source>The start command can be used to start additional software components (e.g. Midi synthesizers) each time, MidiEditor is started. You can see the output of the started software / script in the field below.</source>
-        <translation>Команду запуска можно использовать для запуска дополнительных программ (т.к. Midi синтезаторы) сразу после запуска MidiEditor. Вы можете видеть их выхлоп в поле ниже.</translation>
+        <translation type="vanished">Команду запуска можно использовать для запуска дополнительных программ (т.к. Midi синтезаторы) сразу после запуска MidiEditor. Вы можете видеть их выхлоп в поле ниже.</translation>
     </message>
 </context>
 <context>
@@ -60,9 +64,13 @@
         <translation>Внимание</translation>
     </message>
     <message>
-        <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="53"/>
         <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Enable Automatic Checking for Updates?&lt;/h3&gt;&lt;p&gt;Click below to enable or disable automatic checking for updates. &lt;/p&gt;&lt;p&gt;You can enable this option now, or later by navigating to Edit - Settings - Updates in the menu bar. You can always update your preference in that very same Settings page.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Privacy Note&lt;/b&gt;&lt;/p&gt;&lt;p&gt;When checking for updates, MidiEditor transmits your IP address as well as the currently installed version of MidiEditor and you operating system to a server which is located within the European Union.&lt;/p&gt;&lt;p&gt;Please read our privacy policy at &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt;By enabling the option, you confirm that you have read and understood the terms under which MidiEditor provides this service and that you agree to them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Включить автоматическую проверку обновлений?&lt;/h3&gt;&lt;p&gt;Нажмите ниже, чтобы включить или выключить автоматическую проверку обновлений. &lt;/p&gt;&lt;p&gt;Вы можете сделать это сейчас, или позже, перейдя в Правка - Настройки - Обновления в главном меню. Вы всегда можете изменить настройки в том же окне Настройки.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Предупреждение конфиденциальности&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Во время проверки обновлений, MidiEditor отправляет ваш IP адрес, номер установленной версии и вашу операционную систему на сервер в пределах Евросоюза.&lt;/p&gt;&lt;p&gt;Пожалуйста, прочтите нашу полику конфиденциальности по ссылке &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; для дальнейшей информации.&lt;/p&gt;&lt;p&gt;Включая этот флажок, вы соглашаетесь с тем, что вы ознакомились и согласны с лицензионным соглашением.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;body&gt;&lt;h3&gt;Включить автоматическую проверку обновлений?&lt;/h3&gt;&lt;p&gt;Нажмите ниже, чтобы включить или выключить автоматическую проверку обновлений. &lt;/p&gt;&lt;p&gt;Вы можете сделать это сейчас, или позже, перейдя в Правка - Настройки - Обновления в главном меню. Вы всегда можете изменить настройки в том же окне Настройки.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Предупреждение конфиденциальности&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Во время проверки обновлений, MidiEditor отправляет ваш IP адрес, номер установленной версии и вашу операционную систему на сервер в пределах Евросоюза.&lt;/p&gt;&lt;p&gt;Пожалуйста, прочтите нашу полику конфиденциальности по ссылке &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; для дальнейшей информации.&lt;/p&gt;&lt;p&gt;Включая этот флажок, вы соглашаетесь с тем, что вы ознакомились и согласны с лицензионным соглашением.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="53"/>
+        <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Enable Automatic Checking for Updates?&lt;/h3&gt;&lt;p&gt;Click below to enable or disable automatic checking for updates. &lt;/p&gt;&lt;p&gt;You can enable this option now, or later by navigating to Edit - Settings - Updates in the menu bar. You can always update your preference in that very same Settings page.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Privacy Note&lt;/b&gt;&lt;/p&gt;&lt;p&gt;When checking for updates, ProMidEdit transmits your IP address as well as the currently installed version of ProMidEditor and you operating system to a server which is located within the European Union.&lt;/p&gt;&lt;p&gt;Please read our privacy policy at &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt;By enabling the option, you confirm that you have read and understood the terms under which ProMidEdit provides this service and that you agree to them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Включить автоматическую проверку обновлений?&lt;/h3&gt;&lt;p&gt;Нажмите ниже, чтобы включить или выключить автоматическую проверку обновлений. &lt;/p&gt;&lt;p&gt;Вы можете сделать это сейчас, или позже, перейдя в Правка - Настройки - Обновления в главном меню. Вы всегда можете изменить настройки в том же окне Настройки.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Предупреждение конфиденциальности&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Во время проверки обновлений, ProMidEdit отправляет ваш IP адрес, номер установленной версии и вашу операционную систему на сервер в пределах Евросоюза.&lt;/p&gt;&lt;p&gt;Пожалуйста, прочтите нашу полику конфиденциальности по ссылке &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; для дальнейшей информации.&lt;/p&gt;&lt;p&gt;Включая этот флажок, вы соглашаетесь с тем, что вы ознакомились и согласны с лицензионным соглашением.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="99"/>
@@ -88,50 +96,60 @@
         <translation>Общие события</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="54"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="50"/>
+        <source>Percussion</source>
+        <translation>Перкуссия</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="56"/>
         <source>none</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="65"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="67"/>
         <source>Channel visible</source>
         <translation>Канал виден</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="73"/>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="115"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="75"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="119"/>
         <source>Channel audible</source>
         <translation>Канал слышим</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="80"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="82"/>
         <source>Solo mode</source>
         <translation>Соло</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="89"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="92"/>
         <source>Select instrument</source>
         <translation>Выбор инструмента</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="102"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="106"/>
         <source>Hide channel</source>
         <translation>Скрыть канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="104"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="108"/>
         <source>Show channel</source>
         <translation>Показать канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="113"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="117"/>
         <source>Mute channel</source>
         <translation>Заглушить канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="142"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="146"/>
         <source>Events affecting all channels</source>
         <translation>События, влияющие на все каналы</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="148"/>
+        <source>Drums and percussion events</source>
+        <translation>Ударные и перкуссия</translation>
     </message>
 </context>
 <context>
@@ -153,13 +171,21 @@
     </message>
     <message>
         <location filename="../src/gui/CompleteMidiSetupDialog.cpp" line="52"/>
-        <source>&lt;h3&gt;Output is not connected&lt;/h3&gt;&lt;p&gt;In order to play your music, you have to connect MidiEditor to a midi device (on your computer or externally) which can play your sounds.&lt;/br&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Выход не подключён&lt;/h3&gt;&lt;p&gt;Для того, чтобы слышать музыку, вам нужно подключить MidiEditor к midi устройству (внешнее, или виртуальное), которое будет проигрывать звуки.&lt;/br&gt;&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;Output is not connected&lt;/h3&gt;&lt;p&gt;In order to play your music, you have to connect ProMidEdit to a midi device (on your computer or externally) which can play your sounds.&lt;/br&gt;&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Выход не подключён&lt;/h3&gt;&lt;p&gt;Для того, чтобы слышать музыку, вам нужно подключить ProMidEdit к midi устройству (внешнее, или виртуальное), которое будет проигрывать звуки.&lt;/br&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/CompleteMidiSetupDialog.cpp" line="60"/>
+        <source>&lt;h3&gt;Input is not connected&lt;/h3&gt;&lt;p&gt;In order to record music, ProMidEdit must be connected to a midi device that you will record music on.&lt;/br&gt;&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Вход не подключён&lt;/h3&gt;&lt;p&gt;Для записи музыки, ProMidEdit должен быть подключён к midi устройству, на котором она будет записываться.&lt;/br&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Output is not connected&lt;/h3&gt;&lt;p&gt;In order to play your music, you have to connect MidiEditor to a midi device (on your computer or externally) which can play your sounds.&lt;/br&gt;&lt;/p&gt;</source>
+        <translation type="vanished">&lt;h3&gt;Выход не подключён&lt;/h3&gt;&lt;p&gt;Для того, чтобы слышать музыку, вам нужно подключить MidiEditor к midi устройству (внешнее, или виртуальное), которое будет проигрывать звуки.&lt;/br&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
         <source>&lt;h3&gt;Input is not connected&lt;/h3&gt;&lt;p&gt;In order to record music, MidiEditor must be connected to a midi device that you will record music on.&lt;/br&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Вход не подключён&lt;/h3&gt;&lt;p&gt;Для записи музыки, MidiEditor должен быть подключён к midi устройству, на котором она будет записываться.&lt;/br&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;Вход не подключён&lt;/h3&gt;&lt;p&gt;Для записи музыки, MidiEditor должен быть подключён к midi устройству, на котором она будет записываться.&lt;/br&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/CompleteMidiSetupDialog.cpp" line="67"/>
@@ -191,9 +217,13 @@
     </message>
     <message>
         <location filename="../src/gui/DonateDialog.cpp" line="49"/>
+        <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Reasons to donate&lt;/h3&gt;&lt;p&gt;Dear User,&lt;br&gt;I offer ProMidEdit for free and I hope you enjoy it. Please note that I developed the editor during my spare time and that I&apos;ve been working on it for more than four years by now! If ProMidEdit is useful for you, please send me a little donation so that I can at least cover my huge coffee-bill ;)  &lt;br&gt;&lt;/p&gt;&lt;h3&gt;How to donate&lt;/h3&gt;&lt;p&gt;Donating is very simple - and secure. Please visit the &quot;Donate&quot; section at the editor&apos;s project page in order to make a donation.&lt;br&gt;&lt;a href=&quot;https://donationalerts.com/c/prophessor&quot;&gt;https://donationalerts.com/c/prophessor&lt;/a&gt;&lt;/p&gt;&lt;h3&gt;Thank you!&lt;/h3&gt;&lt;p&gt;Your donation will help me to maintain and update ProMidEdit.&lt;/p&gt;&lt;h3&gt;Other ways to Contribute&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/PROPHESSOR/ProMidEdit&quot;&gt;Rate ProMidEdit and provide feedback&lt;/a&gt; to let me and other users know about how you liked the software!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt; &lt;body&gt; &lt;h3&gt; Причины для пожертвования &lt;/h3&gt; &lt;p&gt; Уважаемый пользователь, &lt;br&gt; Я предлагаю ProMidEdit бесплатно и надеюсь, вам понравится. Обратите внимание, что я разрабатывал редактор в свободное время и работаю над ним уже более четырех лет! Если ProMidEdit полезен для вас, пожалуйста, пришлите мне небольшое пожертвование, чтобы я мог хотя бы покрыть мой огромный счет за кофе;) &lt;br&gt; &lt;/p&gt; &lt;h3&gt; Как сделать пожертвование &lt;/h3&gt; &lt;p&gt; Пожертвование очень просто - и безопасно. Пожалуйста, посетите раздел «Пожертвования» на странице проекта редактора, чтобы сделать пожертвование. &lt;br&gt; &lt;a href=&quot;https://midieditor.org/donate&quot;&gt; https://midieditor.org/donate&lt;/a &gt; &lt;/p&gt; &lt;h3&gt; Спасибо! &lt;/h3&gt; &lt;p&gt; Ваше пожертвование поможет мне поддерживать и обновлять ProMidEdit. &lt;/p&gt; &lt;h3&gt; Другие способы внести свой вклад &lt;/h3&gt; &lt;p&gt; &lt;a href = &quot;https://github.com/markusschwenk/midieditor&quot;&gt; Оцените MidiEditor и оставьте отзыв &lt;/a&gt;, чтобы сообщить мне и другим пользователям о том, как вам понравилось программное обеспечение! &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Reasons to donate&lt;/h3&gt;&lt;p&gt;Dear User,&lt;br&gt;I offer MidiEditor for free and I hope you enjoy it. Please note that I developed the editor during my spare time and that I&apos;ve been working on it for more than four years by now! If MidiEditor is useful for you, please send me a little donation so that I can at least cover my huge coffee-bill ;)  &lt;br&gt;&lt;/p&gt;&lt;h3&gt;How to donate&lt;/h3&gt;&lt;p&gt;Donating is very simple - and secure. Please visit the &quot;Donate&quot; section at the editor&apos;s project page in order to make a donation.&lt;br&gt;&lt;a href=&quot;https://midieditor.org/donate&quot;&gt;https://midieditor.org/donate&lt;/a&gt;&lt;/p&gt;&lt;h3&gt;Thank you!&lt;/h3&gt;&lt;p&gt;Your donation will help me to maintain and update MidiEditor.&lt;/p&gt;&lt;h3&gt;Other ways to Contribute&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/markusschwenk/midieditor&quot;&gt;Rate MidiEditor and provide feedback&lt;/a&gt; to let me and other users know about how you liked the software!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>translate.google.com</translatorcomment>
-        <translation>&lt;html&gt; &lt;body&gt; &lt;h3&gt; Причины для пожертвования &lt;/h3&gt; &lt;p&gt; Уважаемый пользователь, &lt;br&gt; Я предлагаю MidiEditor бесплатно и надеюсь, вам понравится. Обратите внимание, что я разрабатывал редактор в свободное время и работаю над ним уже более четырех лет! Если MidiEditor полезен для вас, пожалуйста, пришлите мне небольшое пожертвование, чтобы я мог хотя бы покрыть мой огромный счет за кофе;) &lt;br&gt; &lt;/p&gt; &lt;h3&gt; Как сделать пожертвование &lt;/h3&gt; &lt;p&gt; Пожертвование очень просто - и безопасно. Пожалуйста, посетите раздел «Пожертвования» на странице проекта редактора, чтобы сделать пожертвование. &lt;br&gt; &lt;a href=&quot;https://midieditor.org/donate&quot;&gt; https://midieditor.org/donate&lt;/a &gt; &lt;/p&gt; &lt;h3&gt; Спасибо! &lt;/h3&gt; &lt;p&gt; Ваше пожертвование поможет мне поддерживать и обновлять MidiEditor. &lt;/p&gt; &lt;h3&gt; Другие способы внести свой вклад &lt;/h3&gt; &lt;p&gt; &lt;a href = &quot;https://github.com/markusschwenk/midieditor&quot;&gt; Оцените MidiEditor и оставьте отзыв &lt;/a&gt;, чтобы сообщить мне и другим пользователям о том, как вам понравилось программное обеспечение! &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt; &lt;body&gt; &lt;h3&gt; Причины для пожертвования &lt;/h3&gt; &lt;p&gt; Уважаемый пользователь, &lt;br&gt; Я предлагаю MidiEditor бесплатно и надеюсь, вам понравится. Обратите внимание, что я разрабатывал редактор в свободное время и работаю над ним уже более четырех лет! Если MidiEditor полезен для вас, пожалуйста, пришлите мне небольшое пожертвование, чтобы я мог хотя бы покрыть мой огромный счет за кофе;) &lt;br&gt; &lt;/p&gt; &lt;h3&gt; Как сделать пожертвование &lt;/h3&gt; &lt;p&gt; Пожертвование очень просто - и безопасно. Пожалуйста, посетите раздел «Пожертвования» на странице проекта редактора, чтобы сделать пожертвование. &lt;br&gt; &lt;a href=&quot;https://midieditor.org/donate&quot;&gt; https://midieditor.org/donate&lt;/a &gt; &lt;/p&gt; &lt;h3&gt; Спасибо! &lt;/h3&gt; &lt;p&gt; Ваше пожертвование поможет мне поддерживать и обновлять MidiEditor. &lt;/p&gt; &lt;h3&gt; Другие способы внести свой вклад &lt;/h3&gt; &lt;p&gt; &lt;a href = &quot;https://github.com/markusschwenk/midieditor&quot;&gt; Оцените MidiEditor и оставьте отзыв &lt;/a&gt;, чтобы сообщить мне и другим пользователям о том, как вам понравилось программное обеспечение! &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/DonateDialog.cpp" line="89"/>
@@ -1239,8 +1269,12 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2593"/>
+        <source>About ProMidEdit</source>
+        <translation>Про ProMidEdit</translation>
+    </message>
+    <message>
         <source>About MidiEditor</source>
-        <translation>Про MidiEditor</translation>
+        <translation type="vanished">Про MidiEditor</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2597"/>
@@ -2423,25 +2457,37 @@
 <context>
     <name>MidiInput</name>
     <message>
-        <location filename="../src/midi/MidiInput.cpp" line="49"/>
         <source>MidiEditor input</source>
-        <translation>Вход MidiEditor</translation>
+        <translation type="vanished">Вход MidiEditor</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiInput.cpp" line="49"/>
+        <source>ProMidEdit input</source>
+        <translation>Вход ProMidEdit</translation>
     </message>
 </context>
 <context>
     <name>MidiOutput</name>
     <message>
-        <location filename="../src/midi/MidiOutput.cpp" line="47"/>
         <source>MidiEditor output</source>
-        <translation>Выход MidiEditor</translation>
+        <translation type="vanished">Выход MidiEditor</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiOutput.cpp" line="47"/>
+        <source>ProMidEdit output</source>
+        <translation>Выход ProMidEdit</translation>
     </message>
 </context>
 <context>
     <name>MidiSettingsWidget</name>
     <message>
-        <location filename="../src/gui/MidiSettingsWidget.cpp" line="118"/>
         <source>Choose the Midi ports on your machine to which MidiEditor connects in order to play and record Midi data.</source>
-        <translation>Выберите Midi порты на вашем устройстве, к которым MidiEditor&apos;у нужно подключиться для воспроизведения и записи Midi данных.</translation>
+        <translation type="vanished">Выберите Midi порты на вашем устройстве, к которым MidiEditor&apos;у нужно подключиться для воспроизведения и записи Midi данных.</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MidiSettingsWidget.cpp" line="118"/>
+        <source>Choose the Midi ports on your machine to which ProMidEdit connects in order to play and record Midi data.</source>
+        <translation>Выберите Midi порты на вашем устройстве, к которым ProMidEdit&apos;у нужно подключиться для воспроизведения и записи Midi данных.</translation>
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="122"/>
@@ -3011,8 +3057,12 @@
     </message>
     <message>
         <location filename="../src/gui/RemoteSettingsWidget.cpp" line="74"/>
+        <source>You have to restart ProMidEdit to connect!</source>
+        <translation>Вам нужно перезапустить ProMidEdit для подключения!</translation>
+    </message>
+    <message>
         <source>You have to restart MidiEditor to connect!</source>
-        <translation>Вам нужно перезапустить MidiEditor для подключения!</translation>
+        <translation type="vanished">Вам нужно перезапустить MidiEditor для подключения!</translation>
     </message>
 </context>
 <context>
