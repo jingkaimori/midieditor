@@ -2524,140 +2524,92 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(donateAction, SIGNAL(triggered()), this, SLOT(donate()));
     helpMB->addAction(donateAction);
 
+    // Button bar
+
     QWidget* buttonBar = new QWidget(parent);
     QGridLayout* btnLayout = new QGridLayout(buttonBar);
+
     buttonBar->setLayout(btnLayout);
     btnLayout->setSpacing(0);
     buttonBar->setContentsMargins(0, 0, 0, 0);
-    QToolBar* fileTB = new QToolBar("File", buttonBar);
 
-    fileTB->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    fileTB->setFloatable(false);
-    fileTB->setContentsMargins(0, 0, 0, 0);
-    fileTB->layout()->setSpacing(0);
-    fileTB->setIconSize(QSize(35, 35));
-    fileTB->addAction(newAction);
-    fileTB->setStyleSheet("QToolBar { border: 0px }");
+    QToolBar* toolBar = new QToolBar("File", buttonBar);
+    toolBar->setFloatable(false);
+    toolBar->setContentsMargins(0, 0, 0, 0);
+    toolBar->layout()->setSpacing(3);
+    toolBar->setIconSize(QSize(20, 20));
+    toolBar->addAction(newAction);
+    toolBar->setStyleSheet("QToolBar { border: 0px }");
+
     QAction* loadAction2 = new QAction(tr("Open..."), this);
     loadAction2->setIcon(QIcon(":/run_environment/graphics/tool/load.png"));
     connect(loadAction2, SIGNAL(triggered()), this, SLOT(load()));
     loadAction2->setMenu(_recentPathsMenu);
-    fileTB->addAction(loadAction2);
+    toolBar->addAction(loadAction2);
 
-    fileTB->addAction(saveAction);
-    fileTB->addSeparator();
+    toolBar->addAction(saveAction);
+    toolBar->addSeparator();
 
-    fileTB->addAction(undoAction);
-    fileTB->addAction(redoAction);
-    fileTB->addSeparator();
+    toolBar->addAction(undoAction);
+    toolBar->addAction(redoAction);
 
-    btnLayout->addWidget(fileTB, 0, 0, 2, 1);
+    toolBar->addSeparator();
 
-    if (QApplication::arguments().contains("--large-playback-toolbar")) {
+    toolBar->addAction(stdToolAction);
+    toolBar->addAction(selectLeftAction);
+    toolBar->addAction(selectRightAction);
 
-        QToolBar* playTB = new QToolBar(tr("Playback"), buttonBar);
+    toolBar->addSeparator();
 
-        playTB->setFloatable(false);
-        playTB->setContentsMargins(0, 0, 0, 0);
-        playTB->layout()->setSpacing(0);
-        playTB->setIconSize(QSize(35, 35));
-
-        playTB->addAction(backToBeginAction);
-        playTB->addAction(backAction);
-        playTB->addAction(playAction);
-        playTB->addAction(pauseAction);
-        playTB->addAction(stopAction);
-        playTB->addAction(recAction);
-        playTB->addAction(forwAction);
-        playTB->addSeparator();
-
-        btnLayout->addWidget(playTB, 0, 1, 2, 1);
-    }
-
-    QToolBar* upperTB = new QToolBar(buttonBar);
-    QToolBar* lowerTB = new QToolBar(buttonBar);
-    btnLayout->addWidget(upperTB, 0, 2, 1, 1);
-    btnLayout->addWidget(lowerTB, 1, 2, 1, 1);
-    upperTB->setFloatable(false);
-    upperTB->setContentsMargins(0, 0, 0, 0);
-    upperTB->layout()->setSpacing(0);
-    upperTB->setIconSize(QSize(20, 20));
-    lowerTB->setFloatable(false);
-    lowerTB->setContentsMargins(0, 0, 0, 0);
-    lowerTB->layout()->setSpacing(0);
-    lowerTB->setIconSize(QSize(20, 20));
-    lowerTB->setStyleSheet("QToolBar { border: 0px }");
-    upperTB->setStyleSheet("QToolBar { border: 0px }");
-
-    lowerTB->addAction(copyAction);
+    toolBar->addAction(newNoteAction);
+    toolBar->addAction(removeNotesAction);
+    toolBar->addAction(copyAction);
 
     pasteActionTB = new QAction(tr("Paste events"), this);
     pasteActionTB->setToolTip(tr("Paste events at cursor position"));
     pasteActionTB->setIcon(QIcon(":/run_environment/graphics/tool/paste.png"));
     connect(pasteActionTB, SIGNAL(triggered()), this, SLOT(paste()));
     pasteActionTB->setMenu(pasteOptionsMenu);
+    toolBar->addAction(pasteActionTB);
 
-    lowerTB->addAction(pasteActionTB);
+    toolBar->addSeparator();
 
-    lowerTB->addSeparator();
+    toolBar->addAction(backToBeginAction);
+    toolBar->addAction(backAction);
+    toolBar->addAction(playAction);
+    toolBar->addAction(pauseAction);
+    toolBar->addAction(stopAction);
+    toolBar->addAction(recAction);
+    toolBar->addAction(forwAction);
 
-    lowerTB->addAction(zoomHorInAction);
-    lowerTB->addAction(zoomHorOutAction);
-    lowerTB->addAction(zoomVerInAction);
-    lowerTB->addAction(zoomVerOutAction);
+    toolBar->addSeparator();
 
-    lowerTB->addSeparator();
+    toolBar->addAction(metronomeAction);
 
-    if (!QApplication::arguments().contains("--large-playback-toolbar")) {
+    toolBar->addAction(alignLeftAction);
+    toolBar->addAction(equalizeAction);
+    toolBar->addAction(alignRightAction);
 
-        lowerTB->addAction(backToBeginAction);
-        lowerTB->addAction(backAction);
-        lowerTB->addAction(playAction);
-        lowerTB->addAction(pauseAction);
-        lowerTB->addAction(stopAction);
-        lowerTB->addAction(recAction);
-        lowerTB->addAction(forwAction);
-        lowerTB->addSeparator();
-    }
+    toolBar->addSeparator();
 
-    lowerTB->addAction(lockAction);
+    toolBar->addAction(zoomHorInAction);
+    toolBar->addAction(zoomHorOutAction);
+    toolBar->addAction(zoomVerInAction);
+    toolBar->addAction(zoomVerOutAction);
 
-    upperTB->addAction(stdToolAction);
-    upperTB->addAction(selectSingleAction);
-    upperTB->addAction(selectBoxAction);
-    upperTB->addAction(selectLeftAction);
-    upperTB->addAction(selectRightAction);
+    toolBar->addAction(lockAction);
 
-    upperTB->addSeparator();
-    upperTB->addAction(moveAllAction);
-    upperTB->addAction(moveLRAction);
-    upperTB->addAction(moveUDAction);
-    upperTB->addAction(sizeChangeAction);
+    toolBar->addSeparator();
 
-    upperTB->addSeparator();
+    toolBar->addAction(quantizeAction);
+    toolBar->addAction(magnetAction);
 
-    upperTB->addAction(alignLeftAction);
-    upperTB->addAction(alignRightAction);
-    upperTB->addAction(equalizeAction);
+    toolBar->addSeparator();
 
-    upperTB->addSeparator();
-
-    upperTB->addAction(quantizeAction);
-
-    upperTB->addSeparator();
-
-    upperTB->addAction(newNoteAction);
-    upperTB->addAction(removeNotesAction);
-
-    upperTB->addSeparator();
-    upperTB->addAction(magnetAction);
-
-    lowerTB->addSeparator();
-    lowerTB->addAction(metronomeAction);
-    lowerTB->addSeparator();
-    lowerTB->addAction(thruAction);
+    toolBar->addAction(thruAction);
 
     btnLayout->setColumnStretch(4, 1);
+    btnLayout->addWidget(toolBar, 0, 0, 2, 1);
 
     return buttonBar;
 }

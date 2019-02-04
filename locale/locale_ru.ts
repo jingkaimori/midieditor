@@ -739,7 +739,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1230"/>
         <source>Equalize</source>
-        <translation>Выравнять</translation>
+        <translation>Выровнять в центр</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1254"/>
@@ -914,7 +914,6 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1960"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2558"/>
         <source>Playback</source>
         <translation>Воспроизведение</translation>
     </message>
@@ -935,7 +934,7 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1971"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2541"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2544"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
@@ -986,13 +985,13 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2058"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2594"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2568"/>
         <source>Paste events</source>
         <translation>Вставить события</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2059"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2595"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2569"/>
         <source>Paste events at cursor position</source>
         <translation>Вставить события после курсора</translation>
     </message>
@@ -1263,18 +1262,18 @@
         <translation>Поддержать проект</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2683"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2685"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2635"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2637"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2711"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2663"/>
         <source>Quantify events</source>
         <translation>Привязать к сетке</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2782"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2734"/>
         <source>Quantify tuplet</source>
         <translation>Привязать триоль</translation>
     </message>
