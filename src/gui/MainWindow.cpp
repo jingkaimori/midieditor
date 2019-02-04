@@ -445,7 +445,8 @@ MainWindow::MainWindow(QString initFile)
     chooserLayout->addWidget(channelLabel, 2, 0, 1, 1);
     _chooseEditChannel = new QComboBox(chooser);
     for (int i = 0; i < 16; i++) {
-        _chooseEditChannel->addItem(tr("Channel ") + QString::number(i));
+        if (i == 9) _chooseEditChannel->addItem(tr("Percussion channel"));
+        else _chooseEditChannel->addItem(tr("Channel ") + QString::number(i)); // TODO: Display channel instrument | UDP: But **file** is *nullptr*
     }
     connect(_chooseEditChannel, SIGNAL(activated(int)), this, SLOT(editChannel(int)));
 

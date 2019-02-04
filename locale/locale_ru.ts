@@ -504,25 +504,25 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="346"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1687"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1688"/>
         <source>All tracks audible</source>
         <translation>Все дорожки слышны</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="352"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1676"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1677"/>
         <source>Mute all tracks</source>
         <translation>Заглушить все дорожки</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="360"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1698"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1699"/>
         <source>Show all tracks</source>
         <translation>Показать все дорожки</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="366"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1709"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1710"/>
         <source>Hide all tracks</source>
         <translation>Скрыть все дорожки</translation>
     </message>
@@ -533,13 +533,13 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="388"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1021"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1022"/>
         <source>All channels audible</source>
         <translation>Все каналы слышны</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="394"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1010"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1011"/>
         <source>Mute all channels</source>
         <translation>Заглушить все каналы</translation>
     </message>
@@ -550,7 +550,7 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="408"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1043"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1044"/>
         <source>Hide all channels</source>
         <translation>Скрыть все каналы</translation>
     </message>
@@ -581,694 +581,699 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="448"/>
+        <source>Percussion channel</source>
+        <translation>Канал ударных</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="449"/>
         <source>Channel </source>
         <translation>Канал </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="453"/>
+        <location filename="../src/gui/MainWindow.cpp" line="454"/>
         <source>Track: </source>
         <translation>Дорожку: </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="721"/>
+        <location filename="../src/gui/MainWindow.cpp" line="722"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="721"/>
+        <location filename="../src/gui/MainWindow.cpp" line="722"/>
         <source>No events recorded.</source>
         <translation>Нет записанных событий.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="826"/>
-        <location filename="../src/gui/MainWindow.cpp" line="881"/>
+        <location filename="../src/gui/MainWindow.cpp" line="827"/>
+        <location filename="../src/gui/MainWindow.cpp" line="882"/>
         <source>Channels/Tracks mute</source>
         <translation>Заглушение каналов/дорожек</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="827"/>
-        <location filename="../src/gui/MainWindow.cpp" line="882"/>
+        <location filename="../src/gui/MainWindow.cpp" line="828"/>
+        <location filename="../src/gui/MainWindow.cpp" line="883"/>
         <source>One or more channels/tracks are not audible. They will be audible in the saved file.</source>
         <translation>Один, или более каналов/дорожек заглушены. В сохранённом файле они будут слышны.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="828"/>
-        <location filename="../src/gui/MainWindow.cpp" line="883"/>
+        <location filename="../src/gui/MainWindow.cpp" line="829"/>
+        <location filename="../src/gui/MainWindow.cpp" line="884"/>
         <source>Save file</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="832"/>
-        <location filename="../src/gui/MainWindow.cpp" line="891"/>
-        <location filename="../src/gui/MainWindow.cpp" line="974"/>
-        <location filename="../src/gui/MainWindow.cpp" line="987"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1647"/>
+        <location filename="../src/gui/MainWindow.cpp" line="833"/>
+        <location filename="../src/gui/MainWindow.cpp" line="892"/>
+        <location filename="../src/gui/MainWindow.cpp" line="975"/>
+        <location filename="../src/gui/MainWindow.cpp" line="988"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1648"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="832"/>
-        <location filename="../src/gui/MainWindow.cpp" line="891"/>
+        <location filename="../src/gui/MainWindow.cpp" line="833"/>
+        <location filename="../src/gui/MainWindow.cpp" line="892"/>
         <source>The file could not be saved. Please make sure that the destination directory exists and that you have the correct access rights to write into this directory.</source>
         <translation>Невозможно сохранить файл. Пожалуйста, убедитесь, что данная папка существует и у вас есть права для записи в неё.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="852"/>
+        <location filename="../src/gui/MainWindow.cpp" line="853"/>
         <source>Save file as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="900"/>
-        <location filename="../src/gui/MainWindow.cpp" line="940"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1056"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1148"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1428"/>
+        <location filename="../src/gui/MainWindow.cpp" line="901"/>
+        <location filename="../src/gui/MainWindow.cpp" line="941"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1057"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1149"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1429"/>
         <source>Save file?</source>
         <translation>Сохранить файл?</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="900"/>
-        <location filename="../src/gui/MainWindow.cpp" line="940"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1056"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1148"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1428"/>
+        <location filename="../src/gui/MainWindow.cpp" line="901"/>
+        <location filename="../src/gui/MainWindow.cpp" line="941"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1057"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1149"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1429"/>
         <source>Save file </source>
         <translation>Сохранить файл </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="900"/>
-        <location filename="../src/gui/MainWindow.cpp" line="940"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1056"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1148"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1428"/>
+        <location filename="../src/gui/MainWindow.cpp" line="901"/>
+        <location filename="../src/gui/MainWindow.cpp" line="941"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1057"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1149"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1429"/>
         <source> before closing?</source>
         <translation> перед закрытием?</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="900"/>
-        <location filename="../src/gui/MainWindow.cpp" line="940"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1056"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1148"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1428"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2060"/>
+        <location filename="../src/gui/MainWindow.cpp" line="901"/>
+        <location filename="../src/gui/MainWindow.cpp" line="941"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1057"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1149"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1429"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2061"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="900"/>
-        <location filename="../src/gui/MainWindow.cpp" line="940"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1056"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1148"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1428"/>
+        <location filename="../src/gui/MainWindow.cpp" line="901"/>
+        <location filename="../src/gui/MainWindow.cpp" line="941"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1057"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1149"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1429"/>
         <source>Close without saving</source>
         <translation>Закрыть без сохранения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="900"/>
-        <location filename="../src/gui/MainWindow.cpp" line="940"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1056"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1148"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1428"/>
+        <location filename="../src/gui/MainWindow.cpp" line="901"/>
+        <location filename="../src/gui/MainWindow.cpp" line="941"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1057"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1149"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1429"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="927"/>
+        <location filename="../src/gui/MainWindow.cpp" line="928"/>
         <source>Open file</source>
         <translation>Открыть файл</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="928"/>
+        <location filename="../src/gui/MainWindow.cpp" line="929"/>
         <source>MIDI Files(*.mid *.midi);;All Files(*)</source>
         <translation>MIDI Файлы(*.mid *.midi);;Все Файлы(*)</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="974"/>
+        <location filename="../src/gui/MainWindow.cpp" line="975"/>
         <source>The file [</source>
         <translation>Файл [</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="974"/>
+        <location filename="../src/gui/MainWindow.cpp" line="975"/>
         <source>]does not exist!</source>
         <translation>] не существует!</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="987"/>
+        <location filename="../src/gui/MainWindow.cpp" line="988"/>
         <source>The file is damaged and cannot be opened. </source>
         <translation>Файл повреждён и не может быть открыт. </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1032"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1033"/>
         <source>All channels visible</source>
         <translation>Все каналы видимы</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1176"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1177"/>
         <source> - Untitled Document[*]</source>
         <translation> - Безымянный файл[*]</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1189"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1190"/>
         <source>Scalefactor</source>
         <translation>Масштаб</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1190"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1191"/>
         <source>Scalefactor:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1200"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2350"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1201"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2351"/>
         <source>Scale events</source>
         <translation>Масштабировать ноты</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1223"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2225"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1224"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2226"/>
         <source>Align left</source>
         <translation>Выровнять влево</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1251"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2232"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1252"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2233"/>
         <source>Align right</source>
         <translation>Выровнять вправо</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1284"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1285"/>
         <source>Equalize</source>
         <translation>Выравнять</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1308"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1309"/>
         <source>Remove event(s)</source>
         <translation>Удалить события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1325"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1326"/>
         <source>Remove all events from channel </source>
         <translation>Удалить все события с канала </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1346"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1347"/>
         <source>Move selected events to channel </source>
         <translation>Переместить выбранные события в канал </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1372"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1373"/>
         <source>Move selected events to track </source>
         <translation>Переместить выбранные события на дорожку </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1516"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1536"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1517"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1537"/>
         <source>Track </source>
         <translation>Дорожка </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1532"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2151"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1533"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2152"/>
         <source>Same as selected for new events</source>
         <translation>Как новые события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1534"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1535"/>
         <source>Keep track</source>
         <translation>Отслеживать</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1557"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1558"/>
         <source>Mute channel</source>
         <translation>Заглушить канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1567"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1568"/>
         <source>Select solo channel</source>
         <translation>Выбрать соло канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1580"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1581"/>
         <source>Channel visibility changed</source>
         <translation>Изменена видимость канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1615"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1616"/>
         <source>Edit Track Name</source>
         <translation>Измененить название дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1618"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1658"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1619"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1659"/>
         <source>Set Track Name</source>
         <translation>Задать название дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1619"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1620"/>
         <source>Track name (Track </source>
         <translation>Название дорожки (Дорожка </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1640"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1641"/>
         <source>Remove track</source>
         <translation>Удалить дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1647"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1648"/>
         <source>The selected track can&apos;t be removed!
  It&apos;s the last track of the file.</source>
         <translation>Выбранная дорожка не может быть удалена!
 Она последняя в файле.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1659"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1660"/>
         <source>Track name (New Track)</source>
         <translation>Название дорожки (Новая дорожка)</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1660"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1661"/>
         <source>New Track</source>
         <translation>Новая дорожка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1720"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1721"/>
         <source>Show track</source>
         <translation>Показать дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1731"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1732"/>
         <source>Mute track</source>
         <translation>Заглушить дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1745"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1746"/>
         <source>Select all events from channel </source>
         <translation>Выбрать все события на канале </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1765"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1766"/>
         <source>Select all events from track </source>
         <translation>Выбрать все события на дорожке </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1785"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2095"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1786"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2096"/>
         <source>Select all</source>
         <translation>Выбрать всё</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1905"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1906"/>
         <source>Set spread-time</source>
         <translation>Установить время распространения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1906"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1907"/>
         <source>Spread time [ms]</source>
         <translation>Время распространения [мс]</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1921"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1922"/>
         <source>Spread events</source>
         <translation>Распространение событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1969"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1970"/>
         <source>Spreading done</source>
         <translation>Распространено</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1969"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1970"/>
         <source>Spreaded </source>
         <translation>Распространено</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1969"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1970"/>
         <source> events</source>
         <translation> событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2007"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2008"/>
         <source>Note: </source>
         <translation>Учтите: </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2030"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2031"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2031"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2032"/>
         <source>Edit</source>
         <translation>Правка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2032"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2033"/>
         <source>Tools</source>
         <translation>Инструменты</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2033"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2034"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2034"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2632"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2035"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2633"/>
         <source>Playback</source>
         <translation>Воспроизведение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2035"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2036"/>
         <source>Midi</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2036"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2037"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2039"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2040"/>
         <source>New</source>
         <translation>Новый</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2045"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2615"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2046"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2616"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2051"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2052"/>
         <source>Open recent..</source>
         <translation>Открыть последний...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2066"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2067"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2074"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2075"/>
         <source>Quit</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2081"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2082"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2087"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2088"/>
         <source>Redo</source>
         <translation>Вернуть</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2096"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2097"/>
         <source>Select all visible events</source>
         <translation>Выбрать все видимые события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2101"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2102"/>
         <source>Select all events from channel...</source>
         <translation>Выбрать все события на канале...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2112"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2113"/>
         <source>Select all events from track...</source>
         <translation>Выбрать все события на дорожке...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2125"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2126"/>
         <source>Copy events</source>
         <translation>Скопировать события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2132"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2668"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2133"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2669"/>
         <source>Paste events</source>
         <translation>Вставить события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2133"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2669"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2134"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2670"/>
         <source>Paste events at cursor position</source>
         <translation>Вставить события после курсора</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2138"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2139"/>
         <source>Paste to track...</source>
         <translation>Вставить на дорожку...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2139"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2140"/>
         <source>Paste to channel...</source>
         <translation>Вставить на канал...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2140"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2141"/>
         <source>Paste options...</source>
         <translation>Опции вставки...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2154"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2155"/>
         <source>Keep channel</source>
         <translatorcomment>??</translatorcomment>
         <translation>Сохранить канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2169"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2570"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2170"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2571"/>
         <source>Settings...</source>
         <translation>Настройки...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2175"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2176"/>
         <source>Current tool...</source>
         <translation>Текущий инструмент...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2215"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2216"/>
         <source>Remove events</source>
         <translation>Удаление событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2217"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2218"/>
         <source>Remove selected events</source>
         <translation>Удаляет выделенные события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2239"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2240"/>
         <source>Equalize selection</source>
         <translation>Выровнять выделение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2248"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2249"/>
         <source>Quantify selection</source>
         <translation>Подогнать под сетку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2255"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2256"/>
         <source>Quantization fractions</source>
         <translation>Размер сетки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2264"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2438"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2265"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2439"/>
         <source>Whole note</source>
         <translation>Целая нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2266"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2440"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2267"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2441"/>
         <source>Half note</source>
         <translation>Половинная нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2268"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2442"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2269"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2443"/>
         <source>Quarter note</source>
         <translation>Четвертная нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2270"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2444"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2271"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2445"/>
         <source>th note</source>
         <translation>-ая нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2283"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2284"/>
         <source>Quantify tuplet...</source>
         <translation>Выровнять триоль...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2289"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2290"/>
         <source>Repeat tuplet quantization</source>
         <translation>Повтор выравнивания триоли</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2297"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2298"/>
         <source>Spread selection</source>
         <translatorcomment>?</translatorcomment>
         <translation>Распространить выделение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2304"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2305"/>
         <source>Add track...</source>
         <translation>Добавить дорожку...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2310"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2311"/>
         <source>Remove events from channel...</source>
         <translation>Удалить события с канала...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2321"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2322"/>
         <source>Move events to channel...</source>
         <translation>Переместить события на канал...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2332"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2333"/>
         <source>Move events to track...</source>
         <translation>Переместить события на дорожку...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2338"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2339"/>
         <source>Transpose selection...</source>
         <translation>Транспонировать выделенное...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2346"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2347"/>
         <source>Set file duration</source>
         <translation>Задать длительность файла</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2357"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2358"/>
         <source>Magnet</source>
         <translation>Магнит</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2367"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2368"/>
         <source>Zoom...</source>
         <translation>Масштаб...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2368"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2369"/>
         <source>Horizontal out</source>
         <translation>- Гориз.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2375"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2376"/>
         <source>Horizontal in</source>
         <translation>+ Гориз.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2382"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2383"/>
         <source>Vertical out</source>
         <translation>- Верт.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2389"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2390"/>
         <source>Vertical in</source>
         <translation>+ Верт.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2398"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2399"/>
         <source>Restore default</source>
         <translation>Вернуть по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2415"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2416"/>
         <source>Colors ...</source>
         <translation>Цвета...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2416"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2417"/>
         <source>From channels</source>
         <translation>Цвета каналов</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2421"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2422"/>
         <source>From tracks</source>
         <translation>Цвета дорожек</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2430"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2431"/>
         <source>Raster</source>
         <translation>Сетка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2436"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2437"/>
         <source>Off</source>
         <translation>Выключить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2466"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2467"/>
         <source>Play</source>
         <translation>Играть</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2471"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2472"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2477"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2478"/>
         <source>Record</source>
         <translation>Запись</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2483"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2484"/>
         <source>Stop</source>
         <translation>Остановить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2490"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2491"/>
         <source>Back to begin</source>
         <translation>В начало</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2500"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2501"/>
         <source>Previous measure</source>
         <translation>Предыдущий такт</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2509"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2510"/>
         <source>Next measure</source>
         <translation>Следующий такт</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2520"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2521"/>
         <source>Playback speed...</source>
         <translation>Скорость воспроизведения...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2555"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2556"/>
         <source>Lock screen while playing</source>
         <translation>Блокировать экран во время воспроизведения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2562"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2563"/>
         <source>Metronome</source>
         <translation>Метроном</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2575"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2576"/>
         <source>Connect Midi In/Out</source>
         <translation>Подключить Midi Вход/Выход</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2584"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2585"/>
         <source>Midi panic</source>
         <translation>Midi паника</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2589"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2590"/>
         <source>Manual</source>
         <translation>Руководство</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2593"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2594"/>
         <source>About ProMidEdit</source>
         <translation>Про ProMidEdit</translation>
     </message>
@@ -1277,23 +1282,23 @@
         <translation type="vanished">Про MidiEditor</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2597"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2598"/>
         <source>Donate</source>
         <translation>Поддержать проект</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2757"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2759"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2758"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2760"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2785"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2786"/>
         <source>Quantify events</source>
         <translation>Привязать к сетке</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2856"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2857"/>
         <source>Quantify tuplet</source>
         <translation>Привязать триоль</translation>
     </message>
