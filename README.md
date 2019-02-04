@@ -1,6 +1,6 @@
 <img align="left" width="70px" src="run_environment/midieditor.ico">
 
-ProMidEdit (forked from markusschwenk/midieditor)
+ProMidEdit
 ===========
 
 Downloads : [last release](https://github.com/PROPHESSOR/ProMidEdit/releases/)
@@ -28,10 +28,11 @@ The editor is able to open existing Midi files and modify their content. New fil
 * Automatic Updates
 * Free
 * Available for Windows and Linux
+* English and Russian languages support
 
 ### Note
 
-ProMidEdit was developed by PROPHESSOR based on Markus Schwenk's MidiEditor.
+ProMidEdit was developed by PROPHESSOR based on [Markus Schwenk's MidiEditor](https://github.com/markusschwenk/midieditor).
 It is entirely written in C++ (Qt 5) and is available for the platforms Linux and Windows.
 Should ProMidEdit be a software which is helpful for you and which you use often, please let the developer and other users know by providing feedback.
 Moreover, the developer worked on ProMidEdit in his (rare) sparetime and offers it for free.
