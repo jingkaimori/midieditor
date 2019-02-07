@@ -63,7 +63,7 @@ unix: {
     DEFINES += __LINUX_ALSASEQ__
     DEFINES += __LINUX_ALSA__
     LIBS += -lasound
-    CONFIG += release
+    #CONFIG += release
     OBJECTS_DIR = .tmp
     MOC_DIR = .tmp
 }
