@@ -2771,26 +2771,6 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
 
     toolBar->addSeparator();
 
-    QToolBar* playTB = new QToolBar(tr("Playback"), buttonBar);
-
-    playTB->setFloatable(false);
-    playTB->setContentsMargins(0, 0, 0, 0);
-    playTB->layout()->setSpacing(0);
-    playTB->setIconSize(QSize(35, 35));
-
-    playTB->addAction(backToBeginAction);
-    playTB->addAction(backMarkerAction);
-    playTB->addAction(backAction);
-    playTB->addAction(playAction);
-    playTB->addAction(pauseAction);
-    playTB->addAction(stopAction);
-    playTB->addAction(recAction);
-    playTB->addAction(forwAction);
-    playTB->addAction(forwMarkerAction);
-    playTB->addSeparator();
-
-    btnLayout->addWidget(playTB, 0, 1, 2, 1);
-
     toolBar->addAction(newNoteAction);
     toolBar->addAction(removeNotesAction);
     toolBar->addAction(copyAction);
@@ -2805,12 +2785,14 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     toolBar->addSeparator();
 
     toolBar->addAction(backToBeginAction);
+    toolBar->addAction(backMarkerAction);
     toolBar->addAction(backAction);
     toolBar->addAction(playAction);
     toolBar->addAction(pauseAction);
     toolBar->addAction(stopAction);
     toolBar->addAction(recAction);
     toolBar->addAction(forwAction);
+    toolBar->addAction(forwMarkerAction);
 
     toolBar->addSeparator();
 
