@@ -86,68 +86,68 @@
 <context>
     <name>ChannelListItem</name>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="46"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="48"/>
         <source>Channel </source>
         <translation>Канал </translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="48"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="50"/>
         <source>General Events</source>
         <translation>Общие события</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="50"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="52"/>
         <source>Percussion</source>
         <translation>Перкуссия</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="56"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="58"/>
         <source>none</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="67"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="69"/>
         <source>Channel visible</source>
         <translation>Канал виден</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="75"/>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="119"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="77"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="121"/>
         <source>Channel audible</source>
         <translation>Канал слышим</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="82"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="84"/>
         <source>Solo mode</source>
         <translation>Соло</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="92"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="94"/>
         <source>Select instrument</source>
         <translation>Выбор инструмента</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="106"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="108"/>
         <source>Hide channel</source>
         <translation>Скрыть канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="108"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="110"/>
         <source>Show channel</source>
         <translation>Показать канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="117"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="119"/>
         <source>Mute channel</source>
         <translation>Заглушить канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="146"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="148"/>
         <source>Events affecting all channels</source>
         <translation>События, влияющие на все каналы</translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="148"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="150"/>
         <source>Drums and percussion events</source>
         <translation>Ударные и перкуссия</translation>
     </message>
@@ -234,178 +234,178 @@
 <context>
     <name>EventWidget</name>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="588"/>
-        <location filename="../src/gui/EventWidget.cpp" line="631"/>
+        <location filename="../src/gui/EventWidget.cpp" line="592"/>
+        <location filename="../src/gui/EventWidget.cpp" line="635"/>
         <source>Property</source>
         <translation>Свойство</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="589"/>
-        <location filename="../src/gui/EventWidget.cpp" line="632"/>
-        <location filename="../src/gui/EventWidget.cpp" line="812"/>
-        <location filename="../src/gui/EventWidget.cpp" line="818"/>
-        <location filename="../src/gui/EventWidget.cpp" line="824"/>
-        <location filename="../src/gui/EventWidget.cpp" line="842"/>
+        <location filename="../src/gui/EventWidget.cpp" line="593"/>
+        <location filename="../src/gui/EventWidget.cpp" line="636"/>
+        <location filename="../src/gui/EventWidget.cpp" line="816"/>
+        <location filename="../src/gui/EventWidget.cpp" line="822"/>
+        <location filename="../src/gui/EventWidget.cpp" line="828"/>
+        <location filename="../src/gui/EventWidget.cpp" line="846"/>
         <source>Value</source>
         <translation>Значение</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="648"/>
-        <location filename="../src/gui/EventWidget.cpp" line="860"/>
-        <location filename="../src/gui/EventWidget.cpp" line="870"/>
+        <location filename="../src/gui/EventWidget.cpp" line="652"/>
+        <location filename="../src/gui/EventWidget.cpp" line="864"/>
+        <location filename="../src/gui/EventWidget.cpp" line="874"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="762"/>
-        <location filename="../src/gui/EventWidget.cpp" line="802"/>
+        <location filename="../src/gui/EventWidget.cpp" line="766"/>
+        <location filename="../src/gui/EventWidget.cpp" line="806"/>
         <source>Midi Event</source>
         <translation>Midi событие</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="765"/>
+        <location filename="../src/gui/EventWidget.cpp" line="769"/>
         <source>Channel Pressure Event</source>
         <translation>Давление канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="768"/>
+        <location filename="../src/gui/EventWidget.cpp" line="772"/>
         <source>Control Change Event</source>
         <translation>Событие управления контроллером</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="771"/>
+        <location filename="../src/gui/EventWidget.cpp" line="775"/>
         <source>Key Pressure Event</source>
         <translation>Давление клавиши</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="774"/>
+        <location filename="../src/gui/EventWidget.cpp" line="778"/>
         <source>Key Signature Event</source>
         <translation>Смена тональности</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="777"/>
+        <location filename="../src/gui/EventWidget.cpp" line="781"/>
         <source>Note On/Off Event</source>
         <translation>Вкл./Откл. ноты</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="780"/>
+        <location filename="../src/gui/EventWidget.cpp" line="784"/>
         <source>Pitch Bend Event</source>
         <translation>Pitch Bend</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="783"/>
+        <location filename="../src/gui/EventWidget.cpp" line="787"/>
         <source>Program Change Event</source>
         <translation>Смена инструмента</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="786"/>
+        <location filename="../src/gui/EventWidget.cpp" line="790"/>
         <source>Sysex Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="789"/>
+        <location filename="../src/gui/EventWidget.cpp" line="793"/>
         <source>Temo Change Event</source>
         <translation>Изменение темпа</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="792"/>
+        <location filename="../src/gui/EventWidget.cpp" line="796"/>
         <source>Text Event</source>
         <translation>Текстовая вставка</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="795"/>
+        <location filename="../src/gui/EventWidget.cpp" line="799"/>
         <source>Time Signature Event</source>
         <translation>Размерность</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="798"/>
+        <location filename="../src/gui/EventWidget.cpp" line="802"/>
         <source>Unknown Event</source>
         <translation>Неизвестное событие</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="808"/>
+        <location filename="../src/gui/EventWidget.cpp" line="812"/>
         <source>On Tick</source>
         <translation>Тик включения</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="813"/>
-        <location filename="../src/gui/EventWidget.cpp" line="819"/>
-        <location filename="../src/gui/EventWidget.cpp" line="825"/>
-        <location filename="../src/gui/EventWidget.cpp" line="837"/>
-        <location filename="../src/gui/EventWidget.cpp" line="843"/>
-        <location filename="../src/gui/EventWidget.cpp" line="848"/>
+        <location filename="../src/gui/EventWidget.cpp" line="817"/>
+        <location filename="../src/gui/EventWidget.cpp" line="823"/>
+        <location filename="../src/gui/EventWidget.cpp" line="829"/>
+        <location filename="../src/gui/EventWidget.cpp" line="841"/>
+        <location filename="../src/gui/EventWidget.cpp" line="847"/>
+        <location filename="../src/gui/EventWidget.cpp" line="852"/>
         <source>Channel</source>
         <translation>Канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="817"/>
+        <location filename="../src/gui/EventWidget.cpp" line="821"/>
         <source>Control</source>
         <translation>Контроллер</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="823"/>
-        <location filename="../src/gui/EventWidget.cpp" line="835"/>
+        <location filename="../src/gui/EventWidget.cpp" line="827"/>
+        <location filename="../src/gui/EventWidget.cpp" line="839"/>
         <source>Note</source>
         <translation>Нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="829"/>
+        <location filename="../src/gui/EventWidget.cpp" line="833"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="833"/>
+        <location filename="../src/gui/EventWidget.cpp" line="837"/>
         <source>Off Tick</source>
         <translation>Тик выключения</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="834"/>
+        <location filename="../src/gui/EventWidget.cpp" line="838"/>
         <source>Duration</source>
         <translation>Длительность</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="836"/>
+        <location filename="../src/gui/EventWidget.cpp" line="840"/>
         <source>Velocity</source>
         <translation>Сила нажатия</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="847"/>
+        <location filename="../src/gui/EventWidget.cpp" line="851"/>
         <source>Program</source>
         <translation>Программа</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="852"/>
-        <location filename="../src/gui/EventWidget.cpp" line="871"/>
+        <location filename="../src/gui/EventWidget.cpp" line="856"/>
+        <location filename="../src/gui/EventWidget.cpp" line="875"/>
         <source>Data</source>
         <translation>Данные</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="856"/>
+        <location filename="../src/gui/EventWidget.cpp" line="860"/>
         <source>Tempo</source>
         <translation>Темп</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="861"/>
+        <location filename="../src/gui/EventWidget.cpp" line="865"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="865"/>
+        <location filename="../src/gui/EventWidget.cpp" line="869"/>
         <source>Numerator</source>
         <translation>Числитель</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="866"/>
+        <location filename="../src/gui/EventWidget.cpp" line="870"/>
         <source>Denominator</source>
         <translation>Знаменатель</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="875"/>
+        <location filename="../src/gui/EventWidget.cpp" line="879"/>
         <source>Track</source>
         <translation>Дорожка</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="904"/>
+        <location filename="../src/gui/EventWidget.cpp" line="908"/>
         <source>Track </source>
         <translation>Дорожка </translation>
     </message>
@@ -418,12 +418,12 @@
         <translation>Изменено </translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="529"/>
+        <location filename="../src/gui/EventWidget.cpp" line="533"/>
         <source>The entered type refers to known Meta Event (</source>
         <translation>Введённый тип относится к изветному Meta событию (</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="546"/>
+        <location filename="../src/gui/EventWidget.cpp" line="550"/>
         <source>The data must not contain byte 0xF7 (End of SysEx)</source>
         <translation>Данне должны содержать байт 0xF7 (Конец SysEx)</translation>
     </message>
@@ -498,757 +498,851 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="338"/>
+        <location filename="../src/gui/MainWindow.cpp" line="351"/>
         <source>Add track</source>
         <translation>Добавить дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="346"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1613"/>
+        <location filename="../src/gui/MainWindow.cpp" line="359"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1704"/>
         <source>All tracks audible</source>
         <translation>Все дорожки слышны</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="352"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1602"/>
+        <location filename="../src/gui/MainWindow.cpp" line="365"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1693"/>
         <source>Mute all tracks</source>
         <translation>Заглушить все дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="360"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1624"/>
+        <location filename="../src/gui/MainWindow.cpp" line="373"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1715"/>
         <source>Show all tracks</source>
         <translation>Показать все дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="366"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1635"/>
+        <location filename="../src/gui/MainWindow.cpp" line="379"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1726"/>
         <source>Hide all tracks</source>
         <translation>Скрыть все дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="378"/>
+        <location filename="../src/gui/MainWindow.cpp" line="391"/>
         <source>Tracks</source>
         <translation>Дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="388"/>
-        <location filename="../src/gui/MainWindow.cpp" line="986"/>
+        <location filename="../src/gui/MainWindow.cpp" line="401"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1076"/>
         <source>All channels audible</source>
         <translation>Все каналы слышны</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="394"/>
-        <location filename="../src/gui/MainWindow.cpp" line="975"/>
+        <location filename="../src/gui/MainWindow.cpp" line="407"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1065"/>
         <source>Mute all channels</source>
         <translation>Заглушить все каналы</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="402"/>
+        <location filename="../src/gui/MainWindow.cpp" line="415"/>
         <source>Show all channels</source>
         <translation>Показать все каналы</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="408"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1008"/>
+        <location filename="../src/gui/MainWindow.cpp" line="421"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1098"/>
         <source>Hide all channels</source>
         <translation>Скрыть все каналы</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="418"/>
+        <location filename="../src/gui/MainWindow.cpp" line="431"/>
         <source>Channels</source>
         <translation>Каналы</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="428"/>
+        <location filename="../src/gui/MainWindow.cpp" line="441"/>
         <source>Protocol</source>
         <translation>История</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="433"/>
+        <location filename="../src/gui/MainWindow.cpp" line="446"/>
         <source>Event</source>
         <translation>Событие</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="442"/>
+        <location filename="../src/gui/MainWindow.cpp" line="454"/>
         <source>Add new events to ...</source>
         <translation>Добавлять новые события в ...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="444"/>
+        <location filename="../src/gui/MainWindow.cpp" line="456"/>
         <source>Channel: </source>
         <translation>Канал: </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="448"/>
+        <location filename="../src/gui/MainWindow.cpp" line="460"/>
         <source>Percussion channel</source>
         <translation>Канал ударных</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="449"/>
+        <location filename="../src/gui/MainWindow.cpp" line="461"/>
         <source>Channel </source>
         <translation>Канал </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="454"/>
+        <location filename="../src/gui/MainWindow.cpp" line="466"/>
         <source>Track: </source>
         <translation>Дорожку: </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="722"/>
+        <location filename="../src/gui/MainWindow.cpp" line="746"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="722"/>
+        <location filename="../src/gui/MainWindow.cpp" line="746"/>
         <source>No events recorded.</source>
         <translation>Нет записанных событий.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="827"/>
-        <location filename="../src/gui/MainWindow.cpp" line="882"/>
+        <location filename="../src/gui/MainWindow.cpp" line="917"/>
+        <location filename="../src/gui/MainWindow.cpp" line="972"/>
         <source>Channels/Tracks mute</source>
         <translation>Заглушение каналов/дорожек</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="828"/>
-        <location filename="../src/gui/MainWindow.cpp" line="883"/>
+        <location filename="../src/gui/MainWindow.cpp" line="918"/>
+        <location filename="../src/gui/MainWindow.cpp" line="973"/>
         <source>One or more channels/tracks are not audible. They will be audible in the saved file.</source>
         <translation>Один, или более каналов/дорожек заглушены. В сохранённом файле они будут слышны.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="829"/>
-        <location filename="../src/gui/MainWindow.cpp" line="884"/>
+        <location filename="../src/gui/MainWindow.cpp" line="919"/>
+        <location filename="../src/gui/MainWindow.cpp" line="974"/>
         <source>Save file</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="833"/>
-        <location filename="../src/gui/MainWindow.cpp" line="892"/>
-        <location filename="../src/gui/MainWindow.cpp" line="939"/>
-        <location filename="../src/gui/MainWindow.cpp" line="952"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1573"/>
+        <location filename="../src/gui/MainWindow.cpp" line="923"/>
+        <location filename="../src/gui/MainWindow.cpp" line="982"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1029"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1042"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1664"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="833"/>
-        <location filename="../src/gui/MainWindow.cpp" line="892"/>
+        <location filename="../src/gui/MainWindow.cpp" line="923"/>
+        <location filename="../src/gui/MainWindow.cpp" line="982"/>
         <source>The file could not be saved. Please make sure that the destination directory exists and that you have the correct access rights to write into this directory.</source>
         <translation>Невозможно сохранить файл. Пожалуйста, убедитесь, что данная папка существует и у вас есть права для записи в неё.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="853"/>
+        <location filename="../src/gui/MainWindow.cpp" line="943"/>
         <source>Save file as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1092"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1184"/>
         <source>Save file?</source>
         <translation>Сохранить файл?</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1092"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1184"/>
         <source>Save file </source>
         <translation>Сохранить файл </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1092"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1184"/>
         <source> before closing?</source>
         <translation> перед закрытием?</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1092"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1986"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1184"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2065"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1092"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1184"/>
         <source>Close without saving</source>
         <translation>Закрыть без сохранения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1092"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1184"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="910"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1000"/>
         <source>Open file</source>
         <translation>Открыть файл</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="911"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1001"/>
         <source>MIDI Files(*.mid *.midi);;All Files(*)</source>
         <translation>MIDI Файлы(*.mid *.midi);;Все Файлы(*)</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="939"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1029"/>
         <source>The file [</source>
         <translation>Файл [</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="939"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1029"/>
         <source>]does not exist!</source>
         <translation>] не существует!</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="952"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1042"/>
         <source>The file is damaged and cannot be opened. </source>
         <translation>Файл повреждён и не может быть открыт. </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1087"/>
         <source>All channels visible</source>
         <translation>Все каналы видимы</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1122"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1214"/>
         <source> - Untitled Document[*]</source>
         <translation> - Безымянный файл[*]</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1135"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1227"/>
         <source>Scalefactor</source>
         <translation>Масштаб</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1136"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1228"/>
         <source>Scalefactor:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1146"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2276"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1238"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2464"/>
         <source>Scale events</source>
         <translation>Масштабировать ноты</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1169"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2151"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1261"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2339"/>
         <source>Align left</source>
         <translation>Выровнять влево</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1197"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2158"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1289"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2346"/>
         <source>Align right</source>
         <translation>Выровнять вправо</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1230"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1322"/>
         <source>Equalize</source>
         <translation>Выровнять в центр</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1254"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1346"/>
         <source>Remove event(s)</source>
         <translation>Удалить события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1271"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1363"/>
         <source>Remove all events from channel </source>
         <translation>Удалить все события с канала </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1292"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1384"/>
         <source>Move selected events to channel </source>
         <translation>Переместить выбранные события в канал </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1318"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1410"/>
         <source>Move selected events to track </source>
         <translation>Переместить выбранные события на дорожку </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1442"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1462"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1533"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1553"/>
         <source>Track </source>
         <translation>Дорожка </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1458"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2077"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1549"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2178"/>
         <source>Same as selected for new events</source>
         <translation>Как новые события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1460"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1551"/>
         <source>Keep track</source>
         <translation>Отслеживать</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1483"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1574"/>
         <source>Mute channel</source>
         <translation>Заглушить канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1493"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1584"/>
         <source>Select solo channel</source>
         <translation>Выбрать соло канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1506"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1597"/>
         <source>Channel visibility changed</source>
         <translation>Изменена видимость канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1541"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1632"/>
         <source>Edit Track Name</source>
         <translation>Измененить название дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1544"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1584"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1635"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1675"/>
         <source>Set Track Name</source>
         <translation>Задать название дорожки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1545"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1636"/>
         <source>Track name (Track </source>
         <translation>Название дорожки (Дорожка </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1566"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1657"/>
         <source>Remove track</source>
         <translation>Удалить дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1573"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1664"/>
         <source>The selected track can&apos;t be removed!
  It&apos;s the last track of the file.</source>
         <translation>Выбранная дорожка не может быть удалена!
 Она последняя в файле.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1585"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1676"/>
         <source>Track name (New Track)</source>
         <translation>Название дорожки (Новая дорожка)</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1586"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1677"/>
         <source>New Track</source>
         <translation>Новая дорожка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1646"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1737"/>
         <source>Show track</source>
         <translation>Показать дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1657"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1748"/>
         <source>Mute track</source>
         <translation>Заглушить дорожку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1671"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1762"/>
         <source>Select all events from channel </source>
         <translation>Выбрать все события на канале </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1691"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1782"/>
         <source>Select all events from track </source>
         <translation>Выбрать все события на дорожке </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1711"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2021"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1802"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2100"/>
         <source>Select all</source>
         <translation>Выбрать всё</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1831"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1922"/>
         <source>Set spread-time</source>
         <translation>Установить время распространения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1832"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1923"/>
         <source>Spread time [ms]</source>
         <translation>Время распространения [мс]</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1847"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1938"/>
         <source>Spread events</source>
         <translation>Распространение событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1895"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1986"/>
         <source>Spreading done</source>
         <translation>Распространено</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1895"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1986"/>
         <source>Spreaded </source>
         <translation>Распространено</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1895"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1986"/>
         <source> events</source>
         <translation> событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1933"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2010"/>
         <source>Note: </source>
         <translation>Учтите: </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1956"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2035"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1957"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2036"/>
         <source>Edit</source>
         <translation>Правка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1958"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2037"/>
         <source>Tools</source>
         <translation>Инструменты</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1959"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2038"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1960"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2039"/>
         <source>Playback</source>
         <translation>Воспроизведение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1961"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2040"/>
         <source>Midi</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1962"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2041"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1965"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2044"/>
         <source>New</source>
         <translation>Новый</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1971"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2544"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2050"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2754"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1977"/>
         <source>Open recent..</source>
-        <translation>Открыть последний...</translation>
+        <translation type="vanished">Открыть последний...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1992"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2056"/>
+        <source>Open recent...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2071"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2000"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2079"/>
         <source>Quit</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2007"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2086"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2013"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2092"/>
         <source>Redo</source>
         <translation>Вернуть</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2022"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2101"/>
         <source>Select all visible events</source>
         <translation>Выбрать все видимые события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2027"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2106"/>
         <source>Select all events from channel...</source>
         <translation>Выбрать все события на канале...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2038"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2117"/>
         <source>Select all events from track...</source>
         <translation>Выбрать все события на дорожке...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2051"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2130"/>
+        <source>Navigate selection up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2135"/>
+        <source>Navigate selection down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2140"/>
+        <source>Navigate selection left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2145"/>
+        <source>Navigate selection right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2152"/>
         <source>Copy events</source>
         <translation>Скопировать события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2058"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2568"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2159"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2778"/>
         <source>Paste events</source>
         <translation>Вставить события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2059"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2569"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2160"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2779"/>
         <source>Paste events at cursor position</source>
         <translation>Вставить события после курсора</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2064"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2165"/>
         <source>Paste to track...</source>
         <translation>Вставить на дорожку...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2065"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2166"/>
         <source>Paste to channel...</source>
         <translation>Вставить на канал...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2066"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2167"/>
         <source>Paste options...</source>
         <translation>Опции вставки...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2080"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2181"/>
         <source>Keep channel</source>
         <translatorcomment>??</translatorcomment>
         <translation>Сохранить канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2095"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2496"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2196"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2704"/>
         <source>Settings...</source>
         <translation>Настройки...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2101"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2202"/>
         <source>Current tool...</source>
         <translation>Текущий инструмент...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2141"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2254"/>
+        <source>Tweak...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2256"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2262"/>
+        <source>Start time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2268"/>
+        <source>End time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2274"/>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2280"/>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2297"/>
+        <source>Small decrease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2302"/>
+        <source>Small increase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2307"/>
+        <source>Medium decrease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2312"/>
+        <source>Medium increase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2317"/>
+        <source>Large decrease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2322"/>
+        <source>Large increase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2329"/>
         <source>Remove events</source>
         <translation>Удаление событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2143"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2331"/>
         <source>Remove selected events</source>
         <translation>Удаляет выделенные события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2165"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2353"/>
         <source>Equalize selection</source>
         <translation>Выровнять выделение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2174"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2362"/>
         <source>Quantify selection</source>
         <translation>Подогнать под сетку</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2181"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2369"/>
         <source>Quantization fractions</source>
         <translation>Размер сетки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2190"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2364"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2378"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2552"/>
         <source>Whole note</source>
         <translation>Целая нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2192"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2366"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2380"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2554"/>
         <source>Half note</source>
         <translation>Половинная нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2194"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2368"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2382"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2556"/>
         <source>Quarter note</source>
         <translation>Четвертная нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2196"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2370"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2384"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2558"/>
         <source>th note</source>
         <translation>-ая нота</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2209"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2397"/>
         <source>Quantify tuplet...</source>
         <translation>Выровнять триоль...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2215"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2403"/>
         <source>Repeat tuplet quantization</source>
         <translation>Повтор выравнивания триоли</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2223"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2411"/>
         <source>Spread selection</source>
         <translatorcomment>?</translatorcomment>
         <translation>Распространить выделение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2230"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2418"/>
         <source>Add track...</source>
         <translation>Добавить дорожку...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2236"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2424"/>
         <source>Remove events from channel...</source>
         <translation>Удалить события с канала...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2247"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2435"/>
         <source>Move events to channel...</source>
         <translation>Переместить события на канал...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2258"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2446"/>
         <source>Move events to track...</source>
         <translation>Переместить события на дорожку...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2264"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2452"/>
         <source>Transpose selection...</source>
         <translation>Транспонировать выделенное...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2272"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2460"/>
         <source>Set file duration</source>
         <translation>Задать длительность файла</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2283"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2471"/>
         <source>Magnet</source>
         <translation>Магнит</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2293"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2481"/>
         <source>Zoom...</source>
         <translation>Масштаб...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2294"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2482"/>
         <source>Horizontal out</source>
         <translation>- Гориз.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2301"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2489"/>
         <source>Horizontal in</source>
         <translation>+ Гориз.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2308"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2496"/>
         <source>Vertical out</source>
         <translation>- Верт.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2315"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2503"/>
         <source>Vertical in</source>
         <translation>+ Верт.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2324"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2512"/>
         <source>Restore default</source>
         <translation>Вернуть по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2341"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2529"/>
         <source>Colors ...</source>
         <translation>Цвета...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2342"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2530"/>
         <source>From channels</source>
         <translation>Цвета каналов</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2347"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2535"/>
         <source>From tracks</source>
         <translation>Цвета дорожек</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2356"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2544"/>
         <source>Raster</source>
         <translation>Сетка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2362"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2550"/>
         <source>Off</source>
         <translation>Выключить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2392"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2580"/>
         <source>Play</source>
         <translation>Играть</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2397"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2585"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2403"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2595"/>
         <source>Record</source>
         <translation>Запись</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2409"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2601"/>
         <source>Stop</source>
         <translation>Остановить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2416"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2608"/>
         <source>Back to begin</source>
         <translation>В начало</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2426"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2618"/>
         <source>Previous measure</source>
         <translation>Предыдущий такт</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2435"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2627"/>
         <source>Next measure</source>
         <translation>Следующий такт</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2446"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2638"/>
+        <source>Previous marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2645"/>
+        <source>Next marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2654"/>
         <source>Playback speed...</source>
         <translation>Скорость воспроизведения...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2481"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2689"/>
         <source>Lock screen while playing</source>
         <translation>Блокировать экран во время воспроизведения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2488"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2696"/>
         <source>Metronome</source>
         <translation>Метроном</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2501"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2709"/>
         <source>Connect Midi In/Out</source>
         <translation>Подключить Midi Вход/Выход</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2510"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2718"/>
         <source>Midi panic</source>
         <translation>Midi паника</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2515"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2725"/>
         <source>Manual</source>
         <translation>Руководство</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2519"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2729"/>
         <source>About ProMidEdit</source>
         <translation>Про ProMidEdit</translation>
     </message>
@@ -1257,23 +1351,23 @@
         <translation type="vanished">Про MidiEditor</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2523"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2733"/>
         <source>Donate</source>
         <translation>Поддержать проект</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2635"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2637"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2847"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2849"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2663"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2876"/>
         <source>Quantify events</source>
         <translation>Привязать к сетке</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2734"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2947"/>
         <source>Quantify tuplet</source>
         <translation>Привязать триоль</translation>
     </message>
@@ -1424,1012 +1518,1012 @@
         <translation>Предупреждение: не обнарушен TimeSignatureEvent на нулевом тике. Добавляется стандартное значение.</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="632"/>
+        <location filename="../src/midi/MidiFile.cpp" line="667"/>
         <source>Acoustic Grand Piano</source>
         <translation>Акустический рояль</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="635"/>
+        <location filename="../src/midi/MidiFile.cpp" line="670"/>
         <source>Bright Acoustic Piano</source>
         <translation>Акустическое пианино</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="638"/>
+        <location filename="../src/midi/MidiFile.cpp" line="673"/>
         <source>Electric Grand Piano</source>
         <translation>Электрический рояль</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="641"/>
+        <location filename="../src/midi/MidiFile.cpp" line="676"/>
         <source>Honky-tonk Piano</source>
         <translation>Фортепиано</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="644"/>
+        <location filename="../src/midi/MidiFile.cpp" line="679"/>
         <source> Electric Piano 1</source>
         <translation>Электрическое пианино 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="647"/>
+        <location filename="../src/midi/MidiFile.cpp" line="682"/>
         <source>Electric Piano 2</source>
         <translation>Электрическое пианино 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="650"/>
+        <location filename="../src/midi/MidiFile.cpp" line="685"/>
         <source>Harpsichord</source>
         <translation>Клавесин</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="653"/>
+        <location filename="../src/midi/MidiFile.cpp" line="688"/>
         <source>Clavinet (Clavi)</source>
         <translation>Клавинет</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="656"/>
+        <location filename="../src/midi/MidiFile.cpp" line="691"/>
         <source>Celesta</source>
         <translation>Челеста</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="659"/>
+        <location filename="../src/midi/MidiFile.cpp" line="694"/>
         <source>Glockenspiel</source>
         <translation>Колокольчики</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="662"/>
+        <location filename="../src/midi/MidiFile.cpp" line="697"/>
         <source>Music Box</source>
         <translation>Музыкальная шкатулка</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="665"/>
+        <location filename="../src/midi/MidiFile.cpp" line="700"/>
         <source>Vibraphone</source>
         <translation>Вибрафон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="668"/>
+        <location filename="../src/midi/MidiFile.cpp" line="703"/>
         <source>Marimba</source>
         <translation>Маримба</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="671"/>
+        <location filename="../src/midi/MidiFile.cpp" line="706"/>
         <source>Xylophone</source>
         <translation>Ксилофон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="674"/>
+        <location filename="../src/midi/MidiFile.cpp" line="709"/>
         <source>Tubular Bells</source>
         <translation>Колокола</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="677"/>
+        <location filename="../src/midi/MidiFile.cpp" line="712"/>
         <source>Dulcimer</source>
         <translation>Цимбалы</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="680"/>
+        <location filename="../src/midi/MidiFile.cpp" line="715"/>
         <source>Drawbar Organ</source>
         <translation>Орган Хаммонда</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="683"/>
+        <location filename="../src/midi/MidiFile.cpp" line="718"/>
         <source>Percussive Organ</source>
         <translation>Перкуссионный орган</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="686"/>
+        <location filename="../src/midi/MidiFile.cpp" line="721"/>
         <source>Rock Organ</source>
         <translation>Рок-орган</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="689"/>
+        <location filename="../src/midi/MidiFile.cpp" line="724"/>
         <source>Church Organ</source>
         <translation>Церковный орган</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="692"/>
+        <location filename="../src/midi/MidiFile.cpp" line="727"/>
         <source>Reed Organ</source>
         <translation>Тростниковый орган</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="695"/>
+        <location filename="../src/midi/MidiFile.cpp" line="730"/>
         <source>Accordion</source>
         <translation>Аккордеон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="698"/>
+        <location filename="../src/midi/MidiFile.cpp" line="733"/>
         <source>Harmonica</source>
         <translation>Гармоника</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="701"/>
+        <location filename="../src/midi/MidiFile.cpp" line="736"/>
         <source>Tango Accordion</source>
         <translation>Бандонеон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="704"/>
+        <location filename="../src/midi/MidiFile.cpp" line="739"/>
         <source>Acoustic Guitar (nylon)</source>
         <translation>Акустическая гитара (нейлон)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="707"/>
+        <location filename="../src/midi/MidiFile.cpp" line="742"/>
         <source>Acoustic Guitar (steel)</source>
         <translation>Акустическая гитара (сталь)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="710"/>
+        <location filename="../src/midi/MidiFile.cpp" line="745"/>
         <source>Electric Guitar (jazz)</source>
         <translation>Электрогитара (джаз)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="713"/>
+        <location filename="../src/midi/MidiFile.cpp" line="748"/>
         <source>Electric Guitar (clean)</source>
         <translation>Электрогитара (чистый звук)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="716"/>
+        <location filename="../src/midi/MidiFile.cpp" line="751"/>
         <source>Electric Guitar (muted)</source>
         <translation>Электрогитара (с приемом palm mute)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="719"/>
+        <location filename="../src/midi/MidiFile.cpp" line="754"/>
         <source>Overdriven Guitar</source>
         <translation>Перегруженная электрогитара</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="722"/>
+        <location filename="../src/midi/MidiFile.cpp" line="757"/>
         <source>Distortion Guitar</source>
         <translation>Дисторшн-электрогитара</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="725"/>
+        <location filename="../src/midi/MidiFile.cpp" line="760"/>
         <source>Guitar harmonics</source>
         <translation>Гитарные флажолеты</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="728"/>
+        <location filename="../src/midi/MidiFile.cpp" line="763"/>
         <source>Acoustic Bass</source>
         <translation>Акустический бас</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="731"/>
+        <location filename="../src/midi/MidiFile.cpp" line="766"/>
         <source>Electric Bass (finger)</source>
         <translation>Электрическая бас-гитара (палец)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="734"/>
+        <location filename="../src/midi/MidiFile.cpp" line="769"/>
         <source>Electric Bass (pick)</source>
         <translation>Электрическая бас-гитара (медиатор)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="737"/>
+        <location filename="../src/midi/MidiFile.cpp" line="772"/>
         <source>Fretless Bass</source>
         <translation>Безладовый бас</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="740"/>
+        <location filename="../src/midi/MidiFile.cpp" line="775"/>
         <source>Slap Bass 1</source>
         <translation>Слэп-бас 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="743"/>
+        <location filename="../src/midi/MidiFile.cpp" line="778"/>
         <source>Slap Bass 2</source>
         <translation>Слэп-бас 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="746"/>
+        <location filename="../src/midi/MidiFile.cpp" line="781"/>
         <source>Synth Bass 1</source>
         <translation>Синтезаторный бас 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="749"/>
+        <location filename="../src/midi/MidiFile.cpp" line="784"/>
         <source>Synth Bass 2</source>
         <translation>Синтезаторный бас 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="752"/>
+        <location filename="../src/midi/MidiFile.cpp" line="787"/>
         <source>Violin</source>
         <translation>Скрипка</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="755"/>
+        <location filename="../src/midi/MidiFile.cpp" line="790"/>
         <source>Viola</source>
         <translation>Виола</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="758"/>
+        <location filename="../src/midi/MidiFile.cpp" line="793"/>
         <source>Cello</source>
         <translation>Виолончель</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="761"/>
+        <location filename="../src/midi/MidiFile.cpp" line="796"/>
         <source>Contrabass</source>
         <translation>Контрабас</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="764"/>
+        <location filename="../src/midi/MidiFile.cpp" line="799"/>
         <source>Tremolo Strings</source>
         <translation>Скрипичное тремоло</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="767"/>
+        <location filename="../src/midi/MidiFile.cpp" line="802"/>
         <source>Pizzicato Strings</source>
         <translation>Скрипичное пиццикато</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="770"/>
+        <location filename="../src/midi/MidiFile.cpp" line="805"/>
         <source>Orchestral Harp</source>
         <translation>Арфа</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="773"/>
+        <location filename="../src/midi/MidiFile.cpp" line="808"/>
         <source>Timpani</source>
         <translation>Тимпан</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="776"/>
+        <location filename="../src/midi/MidiFile.cpp" line="811"/>
         <source>String Ensemble 1</source>
         <translation>Струнный оркестр 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="779"/>
+        <location filename="../src/midi/MidiFile.cpp" line="814"/>
         <source>String Ensemble 2</source>
         <translation>Струнный оркестр 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="782"/>
+        <location filename="../src/midi/MidiFile.cpp" line="817"/>
         <source>Synth Strings 1</source>
         <translation>Синтезаторный оркестр 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="785"/>
+        <location filename="../src/midi/MidiFile.cpp" line="820"/>
         <source>Synth Strings 2</source>
         <translation>Синтезаторный оркестр 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="788"/>
+        <location filename="../src/midi/MidiFile.cpp" line="823"/>
         <source>Choir Aahs</source>
         <translation>Хор, поющий «А»</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="791"/>
+        <location filename="../src/midi/MidiFile.cpp" line="826"/>
         <source>Voice Oohs</source>
         <translation>Голос, поющий «О»</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="794"/>
+        <location filename="../src/midi/MidiFile.cpp" line="829"/>
         <source>Synth Choir</source>
         <translation>Синтезаторный хор</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="797"/>
+        <location filename="../src/midi/MidiFile.cpp" line="832"/>
         <source>Orchestra Hit</source>
         <translation>Оркестровый акцент</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="800"/>
+        <location filename="../src/midi/MidiFile.cpp" line="835"/>
         <source>Trumpet</source>
         <translation>Труба</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="803"/>
+        <location filename="../src/midi/MidiFile.cpp" line="838"/>
         <source>Trombone</source>
         <translation>Тромбон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="806"/>
+        <location filename="../src/midi/MidiFile.cpp" line="841"/>
         <source>Tuba</source>
         <translation>Туба</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="809"/>
+        <location filename="../src/midi/MidiFile.cpp" line="844"/>
         <source>Muted Trumpet</source>
         <translation>Приглушенная труба</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="812"/>
+        <location filename="../src/midi/MidiFile.cpp" line="847"/>
         <source>French Horn</source>
         <translation>Валторна</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="815"/>
+        <location filename="../src/midi/MidiFile.cpp" line="850"/>
         <source>Brass Section</source>
         <translation>Духовой оркестр</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="818"/>
+        <location filename="../src/midi/MidiFile.cpp" line="853"/>
         <source>Synth Brass 1</source>
         <translation>Синтезаторные духовые 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="821"/>
+        <location filename="../src/midi/MidiFile.cpp" line="856"/>
         <source>Synth Brass 2</source>
         <translation>Синтезаторные духовые 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="824"/>
+        <location filename="../src/midi/MidiFile.cpp" line="859"/>
         <source>Soprano Sax</source>
         <translation>Сопрано-саксофон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="827"/>
+        <location filename="../src/midi/MidiFile.cpp" line="862"/>
         <source>Alto Sax</source>
         <translation>Альт-саксофон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="830"/>
+        <location filename="../src/midi/MidiFile.cpp" line="865"/>
         <source>Tenor Sax</source>
         <translation>Тенор-саксофон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="833"/>
+        <location filename="../src/midi/MidiFile.cpp" line="868"/>
         <source>Baritone Sax</source>
         <translation>Баритон-саксофон</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="836"/>
+        <location filename="../src/midi/MidiFile.cpp" line="871"/>
         <source>Oboe</source>
         <translation>Гобой</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="839"/>
+        <location filename="../src/midi/MidiFile.cpp" line="874"/>
         <source>English Horn</source>
         <translation>Английский рожок</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="842"/>
+        <location filename="../src/midi/MidiFile.cpp" line="877"/>
         <source>Bassoon</source>
         <translation>Фагот</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="845"/>
+        <location filename="../src/midi/MidiFile.cpp" line="880"/>
         <source>Clarinet</source>
         <translation>Кларнет</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="848"/>
+        <location filename="../src/midi/MidiFile.cpp" line="883"/>
         <source>Piccolo</source>
         <translation>Пикколо</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="851"/>
+        <location filename="../src/midi/MidiFile.cpp" line="886"/>
         <source>Flute</source>
         <translation>Флейта</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="854"/>
+        <location filename="../src/midi/MidiFile.cpp" line="889"/>
         <source>Recorder</source>
         <translation>Блокфлейта</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="857"/>
+        <location filename="../src/midi/MidiFile.cpp" line="892"/>
         <source>Pan Flute</source>
         <translation>Флейта Пана</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="860"/>
+        <location filename="../src/midi/MidiFile.cpp" line="895"/>
         <source>Blown Bottle</source>
         <translation>Бутылочные горлышки</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="863"/>
+        <location filename="../src/midi/MidiFile.cpp" line="898"/>
         <source>Shakuhachi</source>
         <translation>Сякухати</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="866"/>
+        <location filename="../src/midi/MidiFile.cpp" line="901"/>
         <source>Whistle</source>
         <translation>Свисток</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="869"/>
+        <location filename="../src/midi/MidiFile.cpp" line="904"/>
         <source>Ocarina</source>
         <translation>Окарина</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="872"/>
+        <location filename="../src/midi/MidiFile.cpp" line="907"/>
         <source>Lead 1 (square)</source>
         <translation>Ведущий голос 1 (квадрат)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="875"/>
+        <location filename="../src/midi/MidiFile.cpp" line="910"/>
         <source>Lead 2 (sawtooth)</source>
         <translation>Ведущий голос 2 (пила)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="878"/>
+        <location filename="../src/midi/MidiFile.cpp" line="913"/>
         <source>Lead 3 (calliope)</source>
         <translation>Ведущий голос 3 (каллиопа)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="881"/>
+        <location filename="../src/midi/MidiFile.cpp" line="916"/>
         <source>Lead 4 (chiff)</source>
         <translation>Ведущий голос 4 (чифф)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="884"/>
+        <location filename="../src/midi/MidiFile.cpp" line="919"/>
         <source>Lead 5 (charang)</source>
         <translation>Ведущий голос 5 (чаранг)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="887"/>
+        <location filename="../src/midi/MidiFile.cpp" line="922"/>
         <source>Lead 6 (voice)</source>
         <translation>Ведущий голос 6 (голос)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="890"/>
+        <location filename="../src/midi/MidiFile.cpp" line="925"/>
         <source>Lead 7 (fifths)</source>
         <translation>Ведущий голос 7 (квинта)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="893"/>
+        <location filename="../src/midi/MidiFile.cpp" line="928"/>
         <source>Lead 8 (bass + lead)</source>
         <translation>Ведущий голос 8 (бас и ведущий голос)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="896"/>
+        <location filename="../src/midi/MidiFile.cpp" line="931"/>
         <source>Pad 1 (new age)</source>
         <translation>Подголосок 1 (Нью Эйдж)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="899"/>
+        <location filename="../src/midi/MidiFile.cpp" line="934"/>
         <source>Pad 2 (warm)</source>
         <translation>Подголосок 2 (теплый звук)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="902"/>
+        <location filename="../src/midi/MidiFile.cpp" line="937"/>
         <source>Pad 3 (polysynth)</source>
         <translation>Подголосок 3 (полисинтезатор)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="905"/>
+        <location filename="../src/midi/MidiFile.cpp" line="940"/>
         <source>Pad 4 (choir)</source>
         <translation>Подголосок 4 (хор)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="908"/>
+        <location filename="../src/midi/MidiFile.cpp" line="943"/>
         <source>Pad 5 (bowed)</source>
         <translation>Подголосок 5 (искривленный звук)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="911"/>
+        <location filename="../src/midi/MidiFile.cpp" line="946"/>
         <source>Pad 6 (metallic)</source>
         <translation>Подголосок 6 (металлический звук)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="914"/>
+        <location filename="../src/midi/MidiFile.cpp" line="949"/>
         <source>Pad 7 (halo)</source>
         <translation>Подголосок 7 (гало)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="917"/>
+        <location filename="../src/midi/MidiFile.cpp" line="952"/>
         <source>Pad 8 (sweep)</source>
         <translation>Подголосок 8 (свип)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="920"/>
+        <location filename="../src/midi/MidiFile.cpp" line="955"/>
         <source>FX 1 (rain)</source>
         <translation>FX 1 (дождь)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="923"/>
+        <location filename="../src/midi/MidiFile.cpp" line="958"/>
         <source>FX 2 (soundtrack)</source>
         <translation>FX 2 (саундтрэк)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="926"/>
+        <location filename="../src/midi/MidiFile.cpp" line="961"/>
         <source>FX 3 (crystal)</source>
         <translation>FX 3 (кристалл)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="929"/>
+        <location filename="../src/midi/MidiFile.cpp" line="964"/>
         <source>FX 4 (atmosphere)</source>
         <translation>FX 4 (атмосфера)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="932"/>
+        <location filename="../src/midi/MidiFile.cpp" line="967"/>
         <source>FX 5 (brightness)</source>
         <translation>FX 5 (яркость)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="935"/>
+        <location filename="../src/midi/MidiFile.cpp" line="970"/>
         <source>FX 6 (goblins)</source>
         <translation>FX 6 (гоблины)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="938"/>
+        <location filename="../src/midi/MidiFile.cpp" line="973"/>
         <source>FX 7 (echoes)</source>
         <translation>FX 7 (эхо)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="941"/>
+        <location filename="../src/midi/MidiFile.cpp" line="976"/>
         <source>FX 8 (sci-fi)</source>
         <translation>FX 8 (сай-фай)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="944"/>
+        <location filename="../src/midi/MidiFile.cpp" line="979"/>
         <source>Sitar</source>
         <translation>Ситар</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="947"/>
+        <location filename="../src/midi/MidiFile.cpp" line="982"/>
         <source>Banjo</source>
         <translation>Банджо</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="950"/>
+        <location filename="../src/midi/MidiFile.cpp" line="985"/>
         <source>Shamisen</source>
         <translation>Сямисэн</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="953"/>
+        <location filename="../src/midi/MidiFile.cpp" line="988"/>
         <source>Koto</source>
         <translation>Кото</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="956"/>
+        <location filename="../src/midi/MidiFile.cpp" line="991"/>
         <source>Kalimba</source>
         <translation>Калимба</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="959"/>
+        <location filename="../src/midi/MidiFile.cpp" line="994"/>
         <source>Bag pipe</source>
         <translation>Волынка</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="962"/>
+        <location filename="../src/midi/MidiFile.cpp" line="997"/>
         <source>Fiddle</source>
         <translation>Фиддл</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="965"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1000"/>
         <source>Shanai</source>
         <translation>Шахнай</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="968"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1003"/>
         <source>Tinkle Bell</source>
         <translation>Медные колокольчики</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="971"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1006"/>
         <source>Agogo</source>
         <translation>Агого</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="974"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1009"/>
         <source>Steel Drums</source>
         <translation>Стальные барабаны</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="977"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1012"/>
         <source>Woodblock</source>
         <translation>Деревянная коробочка</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="980"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1015"/>
         <source>Taiko Drum</source>
         <translation>Тайко</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="983"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1018"/>
         <source>Melodic Tom</source>
         <translation>Мелодичный том-том</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="986"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1021"/>
         <source>Synth Drum</source>
         <translation>Электробарабаны</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="989"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1024"/>
         <source>Reverse Cymbal</source>
         <translation>Реверс-цимбалы</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="992"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1027"/>
         <source>Guitar Fret Noise</source>
         <translation>Шум гитарных струн</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="995"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1030"/>
         <source>Breath Noise</source>
         <translation>Дыхание</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="998"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1033"/>
         <source>Seashore</source>
         <translation>Шум прибоя</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1001"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1036"/>
         <source>Bird Tweet</source>
         <translation>Птичья трель</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1004"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1039"/>
         <source>Telephone Ring</source>
         <translation>Телефонный звонок</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1007"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1042"/>
         <source>Helicopter</source>
         <translation>Шум вертолета</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1010"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1045"/>
         <source>Applause</source>
         <translation>Аплодисменты</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1013"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1048"/>
         <source>Gunshot</source>
         <translation>Выстрел</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1016"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1051"/>
         <source>out of range</source>
         <translation>вышел за границы</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1023"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1058"/>
         <source>Bank Select (MSB)</source>
         <translation>Выбор банка (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1026"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1061"/>
         <source>Modulation Wheel (MSB)</source>
         <translation>Колесо модуляции (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1029"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1064"/>
         <source>Breath Controller (MSB) </source>
         <translation>Контроллер дыхания (MSB) </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1033"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1068"/>
         <source>Foot Controller (MSB)</source>
         <translation>Ножной контроллер (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1036"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1071"/>
         <source>Portamento Time (MSB)</source>
         <translation>Время портаменто (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1039"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1074"/>
         <source>Data Entry (MSB)</source>
         <translation>Вход данных (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1042"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1077"/>
         <source>Channel Volume (MSB)</source>
         <translation>Громкость канала (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1045"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1080"/>
         <source>Balance (MSB) </source>
         <translation>Баланс (MSB) </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1049"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1084"/>
         <source>Pan (MSB)</source>
         <translation>Панорамирование (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1052"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1087"/>
         <source>Expression (MSB)</source>
         <translation>Экспрессия (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1055"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1090"/>
         <source>Effect Control 1 (MSB)</source>
         <translation>Эффект 1 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1058"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1093"/>
         <source>Effect Control 2 (MSB) </source>
         <translation>Эффект 2 (MSB) </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1062"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1097"/>
         <source>General Purpose Controller 1 (MSB)</source>
         <translation>Общий контроллер 1 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1065"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1100"/>
         <source>General Purpose Controller 2 (MSB)</source>
         <translation>Общий контроллер 2 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1068"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1103"/>
         <source>General Purpose Controller 3 (MSB)</source>
         <translation>Общий контроллер 3 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1071"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1106"/>
         <source>General Purpose Controller 4 (MSB) </source>
         <translation>Общий контроллер 4 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1075"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1110"/>
         <source>Bank Select (LSB)</source>
         <translation>Выбор банка (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1078"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1113"/>
         <source>Modulation Wheel (LSB)</source>
         <translation>Колесо модуляции (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1081"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1116"/>
         <source>Breath Controller (LSB) </source>
         <translation>Контроллер дыхания (LSB) </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1085"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1120"/>
         <source>Foot Controller (LSB)</source>
         <translation>Ножной контроллер (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1088"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1123"/>
         <source>Portamento Time (LSB)</source>
         <translation>Время портаменто (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1091"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1126"/>
         <source>Data Entry (LSB) Channel</source>
         <translation>Вход данных (LSB) Канал</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1094"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1129"/>
         <source>Channel Volume (LSB)</source>
         <translation>Громкость канала (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1097"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1132"/>
         <source>Balance (LSB) </source>
         <translation>Баланс (LSB) </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1101"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1136"/>
         <source>Pan (LSB)</source>
         <translation>Панорамирование (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1104"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1139"/>
         <source>Expression (LSB)</source>
         <translation>Экспрессия (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1107"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1142"/>
         <source>Effect Control 1 (LSB)</source>
         <translation>Эффект 1 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1110"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1145"/>
         <source>Effect Control 2 (LSB) </source>
         <translation>Эффект 2 (LSB) </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1114"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1149"/>
         <source>General Purpose Controller 1 (LSB)</source>
         <translation>Общий контроллер 1 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1117"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1152"/>
         <source>General Purpose Controller 2 (LSB)</source>
         <translation>Общий контроллер 2 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1120"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1155"/>
         <source>General Purpose Controller 3 (LSB)</source>
         <translation>Общий контроллер 3 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1123"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1158"/>
         <source>General Purpose Controller 4 (LSB) </source>
         <translation>Общий контроллер 4 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1127"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1162"/>
         <source>Sustain Pedal</source>
         <translation>Педаль сустейна</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1130"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1165"/>
         <source>Portamento On/Off</source>
         <translation>Портаменто Вкл./Выкл.</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1133"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1168"/>
         <source>Sostenuto</source>
         <translation>Состенуто (Сверхлегато)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1136"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1171"/>
         <source>Soft Pedal</source>
         <translation>Мягкая педать</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1139"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1174"/>
         <source>Legato Footswitch</source>
         <translation>Ножной переключатель легато</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1142"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1177"/>
         <source>Hold 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1145"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1180"/>
         <source>Sound Controller 1</source>
         <translation>Звуковой контроллер 1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1148"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1183"/>
         <source>Sound Controller 2</source>
         <translation>Звуковой контроллер 2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1151"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1186"/>
         <source>Sound Controller 3</source>
         <translation>Звуковой контроллер 3</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1154"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1189"/>
         <source>Sound Controller 4</source>
         <translation>Звуковой контроллер 4</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1157"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1192"/>
         <source>Sound Controller 5</source>
         <translation>Звуковой контроллер 5</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1160"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1195"/>
         <source>Sound Controller 6</source>
         <translation>Звуковой контроллер 6</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1163"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1198"/>
         <source>Sound Controller 7</source>
         <translation>Звуковой контроллер 7</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1166"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1201"/>
         <source>Sound Controller 8</source>
         <translation>Звуковой контроллер 8</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1169"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1204"/>
         <source>Sound Controller 9</source>
         <translation>Звуковой контроллер 9</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1172"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1207"/>
         <source>Sound Controller 10 (GM2 default: Undefined)</source>
         <translation>Звуковой контроллер 10 (GM2 стнд.: Неизвестно)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1175"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1210"/>
         <source>General Purpose Controller 5</source>
         <translation>Общий контроллер 5</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1178"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1213"/>
         <source>General Purpose Controller 6</source>
         <translation>Общий контроллер 6</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1181"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1216"/>
         <source>General Purpose Controller 7</source>
         <translation>Общий контроллер 7</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1184"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1219"/>
         <source>General Purpose Controller 8</source>
         <translation>Общий контроллер 8</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1187"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1222"/>
         <source>Portamento Control </source>
         <translation>Управление портаменто </translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1191"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1226"/>
         <source>Effects 1 Depth (default: Reverb Send)</source>
         <translation>Эффект 1 Глубина (стнд: Реверб)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1194"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1229"/>
         <source>Effects 2 Depth (default: Tremolo Depth)</source>
         <translation>Эффект 2 Глубина (стнд: Глубина тремоло)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1197"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1232"/>
         <source>Effects 3 Depth (default: Chorus Send)</source>
         <translation>Эффект 3 Глубина (стнд: Хорус)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1200"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1235"/>
         <source>Effects 4 Depth (default: Celeste [Detune] Depth)</source>
         <translation>Эффект 4 Глубина (стнд: Расстройка челесты)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1203"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1238"/>
         <source>Effects 5 Depth (default: Phaser Depth)</source>
         <translation>Эффект 5 Глубина (стнд: Глубина фейзера)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1206"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1241"/>
         <source>Data Increment</source>
         <translation>Инкремент данных</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1209"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1244"/>
         <source>Data Decrement</source>
         <translation>Декремент данных</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1212"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1247"/>
         <source>Non-Registered Parameter Number (LSB)</source>
         <translation>Незарегистрированный параметр (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1215"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1250"/>
         <source>Non-Registered Parameter Number(MSB)</source>
         <translation>Незарегистрированный параметр (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1218"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1253"/>
         <source>Registered Parameter Number (LSB)</source>
         <translation>Зарегистрированный параметр (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1221"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1256"/>
         <source>Registered Parameter Number(MSB) </source>
         <translation>Зарегистрированный параметр (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1225"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1260"/>
         <source>All Sound Off</source>
         <translation>Выкл. все звуки</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1228"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1263"/>
         <source>Reset All Controllers</source>
         <translation>Сброс всех контроллеров</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1231"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1266"/>
         <source>Local Control On/Off</source>
         <translation>Вкл./Выкл. локальный контроллер</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1234"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1269"/>
         <source>All Notes Off</source>
         <translation>Выкл. все ноты</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1237"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1272"/>
         <source>Omni Mode Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1240"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1275"/>
         <source>Omni Mode On</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1243"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1278"/>
         <source>Poly Mode Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1246"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1281"/>
         <source>Poly Mode On</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1250"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1285"/>
         <source>undefined</source>
         <translation></translation>
     </message>
@@ -2489,7 +2583,7 @@
 <context>
     <name>MidiTrack</name>
     <message>
-        <location filename="../src/midi/MidiTrack.cpp" line="58"/>
+        <location filename="../src/midi/MidiTrack.cpp" line="57"/>
         <source>Untitled track</source>
         <translation>Безымянная дорожка</translation>
     </message>
@@ -2497,92 +2591,108 @@
 <context>
     <name>MiscWidget</name>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="45"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="46"/>
         <source>Velocity</source>
         <translation>Сила нажатия</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="47"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="48"/>
         <source>Control Change</source>
         <translation>Упр. Контроллером</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="49"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="50"/>
         <source>Pitch Bend</source>
         <translation>Pitch Bend</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="51"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="52"/>
         <source>Key Pressure</source>
         <translation>Давление клавиши</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="53"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="54"/>
         <source>Channel Pressure</source>
         <translation>Давление канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="400"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="443"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="56"/>
+        <source>Tempo</source>
+        <translation type="unfinished">Темп</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MiscWidget.cpp" line="403"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="446"/>
         <source>Changed selection</source>
         <translation>Изменено выделение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="415"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="418"/>
         <source>Cleared selection</source>
         <translation>Очищено выделение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="491"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="496"/>
         <source>Edited velocity</source>
         <translation>Изменена сила нажатия</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="532"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="811"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="537"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="853"/>
         <source>Edited Control Change Events</source>
         <translation>Изменено значение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="536"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="815"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="541"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="857"/>
         <source>Edited Pitch Bend Events</source>
         <translation>Изменены Pitch Bend события</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="540"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="819"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="545"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="861"/>
         <source>Edited Key Pressure Events</source>
         <translation>Изменено давление клавиши</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="544"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="823"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="549"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="865"/>
         <source>Edited Channel Pressure Events</source>
         <translation>Изменено давление канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="652"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="553"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="869"/>
+        <source>Edited Tempo Change Events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MiscWidget.cpp" line="681"/>
         <source>Inserted Control Change Event</source>
         <translation>Вставлено значение</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="656"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="685"/>
         <source>Inserted Pitch Bend Event</source>
         <translation>Вставлено Pitch Bend событие</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="660"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="689"/>
         <source>Inserted Key Pressure Event</source>
         <translation>Вставлено событие давления клавиши</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="664"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="693"/>
         <source>Inserted Channel Pressure Event</source>
         <translation>Вставлено событие давления канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="784"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="697"/>
+        <source>Inserted Tempo Change Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MiscWidget.cpp" line="826"/>
         <source>Changed velocity</source>
         <translation>Изменена сила нажатия</translation>
     </message>
@@ -2709,52 +2819,52 @@
         <translation>Создать ноту</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="151"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="142"/>
         <source>Create Program Change Event</source>
         <translation>Создать событие смены инструмента</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="162"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="153"/>
         <source>Create Time Signature Event</source>
         <translation>Создать временную метку</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="173"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="164"/>
         <source>Create Tempo Change Event</source>
         <translation>Создать событие смены темпа</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="183"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="174"/>
         <source>Create Key Signature Event</source>
         <translation>Создать клавишную метку</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="193"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="184"/>
         <source>Create Control Change Event</source>
         <translation>Создать событие управления контроллером</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="202"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="193"/>
         <source>Create Key Pressure Event</source>
         <translation>Создать событие давления на клавишу</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="211"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="202"/>
         <source>Create Channel Pressure Event</source>
         <translation>Создать событие давления канала</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="228"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="219"/>
         <source>Create Text Event</source>
         <translation>Создать текстовое событие</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="239"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="230"/>
         <source>Create Unknown Event</source>
         <translation>Создать неизвестное событие</translation>
     </message>
     <message>
-        <location filename="../src/tool/NewNoteTool.cpp" line="247"/>
+        <location filename="../src/tool/NewNoteTool.cpp" line="238"/>
         <source>Create SysEx Event</source>
         <translation>Создать SysEx событие</translation>
     </message>
@@ -2844,143 +2954,143 @@
 <context>
     <name>RecordDialog</name>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="59"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="60"/>
         <source>Add </source>
         <translation>Добавить </translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="59"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="60"/>
         <source> recorded Events</source>
         <translation> записанных событий</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="61"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="62"/>
         <source>Add to track: </source>
         <translation>Добавить на дорожку: </translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="64"/>
-        <location filename="../src/gui/RecordDialog.cpp" line="79"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="65"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="80"/>
         <source>Same as selected for new events</source>
         <translation>Как новые события</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="66"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="67"/>
         <source>Track </source>
         <translation>Дорожка </translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="76"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="77"/>
         <source>Add tochannel: </source>
         <translation>Добавить на канал: </translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="80"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="81"/>
         <source>Keep channel</source>
         <translation>Сохранить (Keep) канал</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="82"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="83"/>
         <source>Channel </source>
         <translation>Канал </translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="89"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="90"/>
         <source>Select events to add:</source>
         <translation>Выберите события для добавления:</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="93"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="94"/>
         <source>Note on/off Events</source>
         <translation>События Вкл./Выкл. ноты</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="94"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="95"/>
         <source>Control Change Events</source>
         <translation>События управления контроллером</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="95"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="96"/>
         <source>Pitch Bend Events</source>
         <translation>Pitch Bend</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="96"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="97"/>
         <source>Channel Pressure Events</source>
         <translation>Давление канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="97"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="98"/>
         <source>Key Pressure Events</source>
         <translation>Давление клавиши</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="98"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="99"/>
         <source>Program Change Events</source>
         <translation>События смены инструмента</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="99"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="100"/>
         <source>System Exclusive Events</source>
         <translation>Системо-зависимые события</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="100"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="101"/>
         <source>Tempo Change Events</source>
         <translation>Изменение темпа</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="101"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="102"/>
         <source>Time Signature Events</source>
         <translation>Размерность</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="102"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="103"/>
         <source>Key Signature Events</source>
         <translation>События смены тональности</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="103"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="104"/>
         <source>Text Events</source>
         <translation>Текстовая вставка</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="104"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="105"/>
         <source>Unknown Events</source>
         <translation>Неизвестное событие</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="108"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="109"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="112"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="113"/>
         <source>Ok</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="155"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="156"/>
         <source>Added recorded events</source>
         <translation>Добавлены записанные события</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="222"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="228"/>
         <source>Cancel?</source>
         <translation>Отмена?</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="224"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="230"/>
         <source>Do you really want to cancel? The recorded events will be lost.</source>
         <translation>Вы действительно хотите отменить? Все записанные события будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="225"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="231"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/gui/RecordDialog.cpp" line="227"/>
+        <location filename="../src/gui/RecordDialog.cpp" line="233"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
@@ -3048,9 +3158,25 @@
 <context>
     <name>SettingsDialog</name>
     <message>
-        <location filename="../src/gui/SettingsDialog.cpp" line="85"/>
+        <location filename="../src/gui/SettingsDialog.cpp" line="86"/>
         <source>Close</source>
         <translation>Закрыть</translation>
+    </message>
+</context>
+<context>
+    <name>TempoDialog</name>
+    <message>
+        <location filename="../src/gui/TempoDialog.cpp" line="22"/>
+        <source>Edit Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeSignatureDialog</name>
+    <message>
+        <location filename="../src/gui/TimeSignatureDialog.cpp" line="26"/>
+        <source>Change Meter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
