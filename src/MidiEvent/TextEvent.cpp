@@ -105,3 +105,15 @@ QString TextEvent::textTypeString(int type) {
     }
     return QString();
 }
+
+int TextEvent::typeForNewEvents = TEXT;
+
+void TextEvent::setTypeForNewEvents(int type)
+{
+    typeForNewEvents = type;
+}
+
+int TextEvent::getTypeForNewEvents()
+{
+    return typeForNewEvents;
+}

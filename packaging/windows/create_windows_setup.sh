@@ -18,21 +18,10 @@ mkdir ProMidEdit-win32/win_root/
 # Copy binary
 cp $MIDIEDITOR_BINARY_WINDOWS ProMidEdit-win32/win_root/ProMidEdit.exe
 
-# Copy assistant files
-cp -R packaging/windows/assistant ProMidEdit-win32/win_root/assistant
-
 # Copy metronome
 cp -R packaging/metronome ProMidEdit-win32/win_root/metronome
 
-# Create manual
-cp -R promidedit-manual/. ProMidEdit-win32/win_root/assistant
-cp -a packaging/manual/. ProMidEdit-win32/win_root/assistant
-D=${PWD}
-cd ProMidEdit-win32/win_root/assistant
-qcollectiongenerator promidedit-collection.qhcp -o promidedit-collection.qhc
-cd $D
-
-cp -R packaging/windows/windows-installer/. ProMidEdit-win32
+cp -R packaging/windows/windows-installer/. MidiEditor-win32
 
 cd ProMidEdit-win32
 

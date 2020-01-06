@@ -8,6 +8,7 @@
         <file>run_environment/graphics/tool/all_mute.png</file>
         <file>run_environment/graphics/tool/all_visible.png</file>
         <file>run_environment/graphics/tool/back.png</file>
+        <file>run_environment/graphics/tool/back_marker.png</file>
         <file>run_environment/graphics/tool/back_to_begin.png</file>
         <file>run_environment/graphics/tool/change_size.png</file>
         <file>run_environment/graphics/tool/config.png</file>
@@ -16,6 +17,7 @@
         <file>run_environment/graphics/tool/equalize.png</file>
         <file>run_environment/graphics/tool/eraser.png</file>
         <file>run_environment/graphics/tool/forward.png</file>
+        <file>run_environment/graphics/tool/forward_marker.png</file>
         <file>run_environment/graphics/tool/load.png</file>
         <file>run_environment/graphics/tool/magnet.png</file>
         <file>run_environment/graphics/tool/metronome.png</file>
@@ -28,6 +30,7 @@
         <file>run_environment/graphics/tool/new.png</file>
         <file>run_environment/graphics/tool/newnote.png</file>
         <file>run_environment/graphics/tool/noicon.png</file>
+        <file>run_environment/graphics/tool/panic.png</file>
         <file>run_environment/graphics/tool/paste.png</file>
         <file>run_environment/graphics/tool/pause.png</file>
         <file>run_environment/graphics/tool/play.png</file>
@@ -63,6 +66,9 @@
         <file>run_environment/graphics/icon.png</file>
         <file>run_environment/graphics/midieditor.png</file>
         <file>CONTRIBUTORS</file>
+        <file>run_environment/graphics/tool/meter.png</file>
+        <file>run_environment/graphics/tool/tempo.png</file>
+        <file>run_environment/graphics/tool/measure.png</file>
         <file>locale/locale_ru.qm</file>
     </qresource>
 </RCC>

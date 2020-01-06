@@ -119,15 +119,6 @@ bool NewNoteTool::release() {
         if (line >= 0 && line <= 127) {
             currentProtocol()->startNewAction(QObject::tr("Create note"), image());
 
-            if (startTick == -1) {
-                int startMs = matrixWidget->msOfXPos(xPos);
-                startTick = file()->tick(startMs);
-            }
-            if (endTick == -1) {
-                int endMs = matrixWidget->msOfXPos(currentX);
-                endTick = file()->tick(endMs);
-            }
-
             NoteOnEvent* on = file()->channel(_channel)->insertNote(127 - line,
                               startTick, endTick, 100, track);
             selectEvent(on, true, true);
@@ -229,7 +220,7 @@ bool NewNoteTool::release() {
                 event = new TextEvent(16, track);
                 TextEvent* textEvent = (TextEvent*)event;
                 textEvent->setText("New Text Event");
-                textEvent->setType(TextEvent::TEXT);
+                textEvent->setType(TextEvent::getTypeForNewEvents());
                 int startMs = matrixWidget->msOfXPos(xPos);
                 int startTick = file()->tick(startMs);
                 file()->channel(16)->insertEvent(event, startTick);

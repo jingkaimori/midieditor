@@ -63,14 +63,6 @@ SIZE=$(du -sb $DIR | cut -f1)
 SIZE=$(($SIZE / 1024))
 sed -i 's/{SIZE}/'"$SIZE"'/g' $PACKAGE_DIR/DEBIAN/control
 
-# Create manual
-cp -R promidedit-manual/. $PACKAGE_DIR/usr/share/promidedit/assistant
-cp -a packaging/manual/. $PACKAGE_DIR/usr/share/promidedit/assistant
-D=${PWD}
-cd $PACKAGE_DIR/usr/share/promidedit/assistant
-qcollectiongenerator promidedit-collection.qhcp -o promidedit-collection.qhc
-cd $D
-
 # permissions
 find $PACKAGE_DIR -type d -exec chmod 755 {} \;
 find $PACKAGE_DIR -type f -exec chmod 644 {} \;

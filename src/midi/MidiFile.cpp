@@ -364,7 +364,6 @@ void MidiFile::calcMaxTime() {
         if (i < events.length() - 1) {
             ticks = events.at(i + 1)->midiTime() - ev->midiTime();
         } else {
-            //ticks = 0;
             ticks = midiTicks - ev->midiTime();
         }
         time += ticks * ev->msPerTick();
@@ -607,6 +606,42 @@ int MidiFile::measure(int startTick, int endTick,
             break;
         }
     }
+    return measure;
+}
+
+int MidiFile::measure(int startTick, int* startTickOfMeasure ,int* endTickOfMeasure) {
+    QList<MidiEvent*> events = channels[18]->eventMap()->values();
+    TimeSignatureEvent* event = 0;
+    int i = 0;
+    int measure = 1;
+
+    // find the startEvent and the firstTick
+    for (; i < events.length(); i++) {
+
+        TimeSignatureEvent* ev = dynamic_cast<TimeSignatureEvent*>(events.at(i));
+        if (!ev) {
+            qWarning("unknown eventtype in the List [2]");
+            continue;
+        }
+        if (!event) {
+            event = ev;
+            measure = 1;
+            continue;
+        } else {
+            if (ev->midiTime() <= startTick) {
+                int ticks = ev->midiTime() - event->midiTime();
+                measure += event->measures(ticks);
+                event = ev;
+            } else {
+                break;
+            }
+        }
+    }
+    int ticks = startTick - event->midiTime();
+    int ticksInmeasure;
+    measure += event->measures(ticks, &ticksInmeasure);
+    *(startTickOfMeasure) = startTick - ticksInmeasure;
+    *(endTickOfMeasure) = *startTickOfMeasure + event->ticksPerMeasure();
     return measure;
 }
 
@@ -1657,7 +1692,7 @@ int MidiFile::tonalityAt(int tick) {
     }
 }
 
-void MidiFile::meterAt(int tick, int* num, int* denum) {
+void MidiFile::meterAt(int tick, int* num, int* denum, TimeSignatureEvent **lastTimeSigEvent) {
     QMap<int, MidiEvent*>* meterEvents = timeSignatureEvents();
     QMap<int, MidiEvent*>::iterator it = meterEvents->begin();
     TimeSignatureEvent* event = 0;
@@ -1674,11 +1709,12 @@ void MidiFile::meterAt(int tick, int* num, int* denum) {
     if (!event) {
         *num = 4;
         *denum = 4;
-    }
-
-    else {
+    } else {
         *num = event->num();
         *denum = event->denom();
+        if (lastTimeSigEvent) {
+            *lastTimeSigEvent = event;
+        }
     }
 }
 
@@ -1752,4 +1788,139 @@ QList<int> MidiFile::quantization(int fractionSize) {
         }
     }
     return list;
+}
+
+
+int MidiFile::startTickOfMeasure(int measure) {
+    QMap<int, MidiEvent*> *timeSigs = timeSignatureEvents();
+    QMap<int, MidiEvent*>::iterator it = timeSigs->begin();
+
+    // Find the time signature event the measure is in and its start measure
+    int currentMeasure = 1;
+    TimeSignatureEvent *currentEvent = dynamic_cast<TimeSignatureEvent*>(timeSigs->value(0));
+    it++;
+    while (it != timeSigs->end()) {
+        int endMeasureOfCurrentEvent = currentMeasure + ceil((it.key() - currentEvent->midiTime()) / currentEvent->ticksPerMeasure());
+        if (endMeasureOfCurrentEvent > measure) {
+            break;
+        }
+        currentEvent = dynamic_cast<TimeSignatureEvent*>(it.value());
+        currentMeasure = endMeasureOfCurrentEvent;
+        it++;
+    }
+
+    return currentEvent->midiTime() + (measure - currentMeasure) * currentEvent->ticksPerMeasure();
+}
+
+void MidiFile::deleteMeasures(int from, int to) {
+    int tickFrom = startTickOfMeasure(from);
+    int tickTo = startTickOfMeasure(to + 1);
+
+    // Find and remember meter (time signture event) at the first undeleted measure
+    TimeSignatureEvent *lastTimeSig;
+    int num;
+    int denom;
+    meterAt(tickTo, &num, &denom, &lastTimeSig);
+    ProtocolEntry* toCopy = copy();
+
+    // Delete all events. For notes, only delete if starting within the given tick range.
+    for (int ch = 0; ch < 19; ch++) {
+        QMap<int, MidiEvent*>::Iterator it = channel(ch)->eventMap()->begin();
+        QList<MidiEvent*> toRemove;
+        while(it != channel(ch)->eventMap()->end()) {
+            if (it.key() >= tickFrom && it.key() <= tickTo) {
+                OffEvent *offEvent = dynamic_cast<OffEvent*>(it.value());
+                if (!offEvent) {
+                    // Only remove if no off-event, off-event are handled separately
+                    toRemove.append(it.value());
+
+                    OnEvent *onEvent = dynamic_cast<OnEvent*>(it.value());
+                    if (onEvent) {
+                        OffEvent *offEventOfRemovedNote = onEvent->offEvent();
+                        toRemove.append(offEventOfRemovedNote);
+                    }
+                }
+            }
+            it++;
+        }
+
+        foreach (MidiEvent* event, toRemove) {
+            channel(ch)->removeEvent(event);
+        }
+    }
+
+    // All remaining events after the end tick have to be shifted. Note: off events that still
+    // exist inbetween the deleted inerval are not shifted, since this would cause negative
+    // duration.
+    for (int ch = 0; ch < 19; ch++) {
+        QList<MidiEvent*> toUpdate;
+        QMap<int, MidiEvent*>::Iterator it = channel(ch)->eventMap()->begin();
+        while(it != channel(ch)->eventMap()->end()) {
+            if (it.key() > tickTo) {
+                toUpdate.append(it.value());
+            }
+            it++;
+        }
+
+        foreach(MidiEvent *event, toUpdate) {
+            event->setMidiTime(event->midiTime() - (tickTo - tickFrom));
+        }
+    }
+
+    // Check meter again. If changed, add event to readjust.
+    int numAfter;
+    int denomAfter;
+    meterAt(tickFrom, &numAfter, &denomAfter);
+    int ticksPerMeasure;
+    if (denom != denomAfter || num != numAfter) {
+        TimeSignatureEvent *newEvent = new TimeSignatureEvent(18, num, denom, 24, 8, track(0));
+        channel(18)->insertEvent(newEvent, tickFrom);
+        ticksPerMeasure = newEvent->ticksPerMeasure();
+    } else {
+        ticksPerMeasure = lastTimeSig->ticksPerMeasure();
+    }
+
+    midiTicks = midiTicks - (tickTo - tickFrom);
+    // make sure, we have at east one measure
+    if (ticksPerMeasure > midiTicks) {
+        midiTicks = ticksPerMeasure;
+    }
+    calcMaxTime();
+    ProtocolEntry::protocol(toCopy, this);
+}
+
+void MidiFile::insertMeasures(int after, int numMeasures) {
+    if (after == 0) {
+        // Cannot insert before first measure.
+        return;
+    }
+    ProtocolEntry* toCopy = copy();
+    int tick = startTickOfMeasure(after + 1);
+
+    // Find meter at measure and compute number of inserted ticks.
+    int num;
+    int denom;
+    TimeSignatureEvent *lastTimeSig;
+    meterAt(tick-1, &num, &denom, &lastTimeSig);
+    int numTicks = lastTimeSig->ticksPerMeasure() * numMeasures;
+    midiTicks = midiTicks + numTicks;
+
+    // Shift all ticks.
+    for (int ch = 0; ch < 19; ch++) {
+        QList<MidiEvent*> toUpdate;
+        QMap<int, MidiEvent*>::Iterator it = channel(ch)->eventMap()->begin();
+        while(it != channel(ch)->eventMap()->end()) {
+            if (it.key() >= tick) {
+                toUpdate.append(it.value());
+            }
+            it++;
+        }
+
+        foreach(MidiEvent *event, toUpdate) {
+            event->setMidiTime(event->midiTime() + numTicks);
+        }
+    }
+
+    calcMaxTime();
+    ProtocolEntry::protocol(toCopy, this);
 }
