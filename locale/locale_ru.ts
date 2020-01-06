@@ -880,7 +880,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1986"/>
         <source>Spreaded </source>
-        <translation>Распространено</translation>
+        <translation>Распространено </translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1986"/>
@@ -945,7 +945,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2056"/>
         <source>Open recent...</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть последний...</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2071"/>
@@ -985,22 +985,22 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2130"/>
         <source>Navigate selection up</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать ноту выше</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2135"/>
         <source>Navigate selection down</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать ноту ниже</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2140"/>
         <source>Navigate selection left</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать ноту левее</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2145"/>
         <source>Navigate selection right</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать ноту правее</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2152"/>
@@ -1059,27 +1059,27 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2256"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2262"/>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время начала</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2268"/>
         <source>End time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время конца</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2274"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Нота</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2280"/>
         <source>Value</source>
-        <translation type="unfinished">Значение</translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2297"/>
@@ -1304,12 +1304,12 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2638"/>
         <source>Previous marker</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущая метка</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2645"/>
         <source>Next marker</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующая метка</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2654"/>
@@ -1538,8 +1538,12 @@
         <translation>Фортепиано</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="679"/>
         <source> Electric Piano 1</source>
+        <translation type="vanished">Электрическое пианино 1</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="679"/>
+        <source>Electric Piano 1</source>
         <translation>Электрическое пианино 1</translation>
     </message>
     <message>
@@ -2174,8 +2178,57 @@
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1064"/>
+        <source>Breath Controller (MSB)</source>
+        <translation>Контроллер дыхания (MSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1080"/>
+        <source>Balance (MSB)</source>
+        <translation>Баланс (MSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1093"/>
+        <source>Effect Control 2 (MSB)</source>
+        <translation>Эффект 2 (MSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1106"/>
+        <source>General Purpose Controller 4 (MSB)</source>
+        <translation>Общий контроллер 4 (MSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1116"/>
+        <source>Breath Controller (LSB)</source>
+        <translation>Контроллер дыхания (LSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1132"/>
+        <source>Balance (LSB)</source>
+        <translation>Баланс (LSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1145"/>
+        <source>Effect Control 2 (LSB)</source>
+        <translation>Эффект 2 (LSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1158"/>
+        <source>General Purpose Controller 4 (LSB)</source>
+        <translation>Общий контроллер 4 (LSB)</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1222"/>
+        <source>Portamento Control</source>
+        <translation>Портаменто</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1256"/>
+        <source>Registered Parameter Number(MSB)</source>
+        <translation>Зарегестрированный числовой параметр (MSB)</translation>
+    </message>
+    <message>
         <source>Breath Controller (MSB) </source>
-        <translation>Контроллер дыхания (MSB) </translation>
+        <translation type="vanished">Контроллер дыхания (MSB) </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1068"/>
@@ -2198,9 +2251,8 @@
         <translation>Громкость канала (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1080"/>
         <source>Balance (MSB) </source>
-        <translation>Баланс (MSB) </translation>
+        <translation type="vanished">Баланс (MSB) </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1084"/>
@@ -2218,9 +2270,8 @@
         <translation>Эффект 1 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1093"/>
         <source>Effect Control 2 (MSB) </source>
-        <translation>Эффект 2 (MSB) </translation>
+        <translation type="vanished">Эффект 2 (MSB) </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1097"/>
@@ -2238,9 +2289,8 @@
         <translation>Общий контроллер 3 (MSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1106"/>
         <source>General Purpose Controller 4 (MSB) </source>
-        <translation>Общий контроллер 4 (MSB)</translation>
+        <translation type="vanished">Общий контроллер 4 (MSB)</translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1110"/>
@@ -2253,9 +2303,8 @@
         <translation>Колесо модуляции (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1116"/>
         <source>Breath Controller (LSB) </source>
-        <translation>Контроллер дыхания (LSB) </translation>
+        <translation type="vanished">Контроллер дыхания (LSB) </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1120"/>
@@ -2278,9 +2327,8 @@
         <translation>Громкость канала (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1132"/>
         <source>Balance (LSB) </source>
-        <translation>Баланс (LSB) </translation>
+        <translation type="vanished">Баланс (LSB) </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1136"/>
@@ -2298,9 +2346,8 @@
         <translation>Эффект 1 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1145"/>
         <source>Effect Control 2 (LSB) </source>
-        <translation>Эффект 2 (LSB) </translation>
+        <translation type="vanished">Эффект 2 (LSB) </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1149"/>
@@ -2318,9 +2365,8 @@
         <translation>Общий контроллер 3 (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1158"/>
         <source>General Purpose Controller 4 (LSB) </source>
-        <translation>Общий контроллер 4 (LSB)</translation>
+        <translation type="vanished">Общий контроллер 4 (LSB)</translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1162"/>
@@ -2423,9 +2469,8 @@
         <translation>Общий контроллер 8</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1222"/>
         <source>Portamento Control </source>
-        <translation>Управление портаменто </translation>
+        <translation type="vanished">Управление портаменто </translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1226"/>
@@ -2478,9 +2523,8 @@
         <translation>Зарегистрированный параметр (LSB)</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1256"/>
         <source>Registered Parameter Number(MSB) </source>
-        <translation>Зарегистрированный параметр (MSB)</translation>
+        <translation type="vanished">Зарегистрированный параметр (MSB)</translation>
     </message>
     <message>
         <location filename="../src/midi/MidiFile.cpp" line="1260"/>
@@ -2618,7 +2662,7 @@
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="56"/>
         <source>Tempo</source>
-        <translation type="unfinished">Темп</translation>
+        <translation>Темп</translation>
     </message>
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="403"/>
@@ -2664,7 +2708,7 @@
         <location filename="../src/gui/MiscWidget.cpp" line="553"/>
         <location filename="../src/gui/MiscWidget.cpp" line="869"/>
         <source>Edited Tempo Change Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменён темп</translation>
     </message>
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="681"/>
@@ -2689,7 +2733,7 @@
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="697"/>
         <source>Inserted Tempo Change Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено изменение темпа</translation>
     </message>
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="826"/>
@@ -3168,7 +3212,7 @@
     <message>
         <location filename="../src/gui/TempoDialog.cpp" line="22"/>
         <source>Edit Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение темпа</translation>
     </message>
 </context>
 <context>
@@ -3176,7 +3220,7 @@
     <message>
         <location filename="../src/gui/TimeSignatureDialog.cpp" line="26"/>
         <source>Change Meter</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер</translation>
     </message>
 </context>
 <context>
