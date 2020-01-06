@@ -33,6 +33,7 @@
 #include "../tool/EventTool.h"
 #include "../tool/Selection.h"
 #include "../tool/Tool.h"
+#include "../midi/MidiOutput.h"
 
 #include <QList>
 #include <QtCore/qmath.h>
@@ -930,6 +931,7 @@ void MatrixWidget::mousePressEvent(QMouseEvent* event) {
             if (inRect) {
                 // play note
                 pianoEvent->setNote(key);
+                pianoEvent->setChannel(MidiOutput::standardChannel(), false);
                 MidiPlayer::play(pianoEvent);
             }
         }
