@@ -2254,31 +2254,31 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QMenu* tweakMenu = new QMenu(tr("Tweak..."), toolsMB);
 
     QAction* tweakTimeAction = new QAction(tr("Time"), tweakMenu);
-    tweakTimeAction->setShortcut(Qt::Key_1);
+    tweakTimeAction->setShortcut(Qt::Key_1 + Qt::CTRL);
     tweakTimeAction->setCheckable(true);
     connect(tweakTimeAction, SIGNAL(triggered()), this, SLOT(tweakTime()));
     tweakMenu->addAction(tweakTimeAction);
 
     QAction* tweakStartTimeAction = new QAction(tr("Start time"), tweakMenu);
-    tweakStartTimeAction->setShortcut(Qt::Key_2);
+    tweakStartTimeAction->setShortcut(Qt::Key_2 + Qt::CTRL);
     tweakStartTimeAction->setCheckable(true);
     connect(tweakStartTimeAction, SIGNAL(triggered()), this, SLOT(tweakStartTime()));
     tweakMenu->addAction(tweakStartTimeAction);
 
     QAction* tweakEndTimeAction = new QAction(tr("End time"), tweakMenu);
-    tweakEndTimeAction->setShortcut(Qt::Key_3);
+    tweakEndTimeAction->setShortcut(Qt::Key_3 + Qt::CTRL);
     tweakEndTimeAction->setCheckable(true);
     connect(tweakEndTimeAction, SIGNAL(triggered()), this, SLOT(tweakEndTime()));
     tweakMenu->addAction(tweakEndTimeAction);
 
     QAction* tweakNoteAction = new QAction(tr("Note"), tweakMenu);
-    tweakNoteAction->setShortcut(Qt::Key_4);
+    tweakNoteAction->setShortcut(Qt::Key_4 + Qt::CTRL);
     tweakNoteAction->setCheckable(true);
     connect(tweakNoteAction, SIGNAL(triggered()), this, SLOT(tweakNote()));
     tweakMenu->addAction(tweakNoteAction);
 
     QAction* tweakValueAction = new QAction(tr("Value"), tweakMenu);
-    tweakValueAction->setShortcut(Qt::Key_5);
+    tweakValueAction->setShortcut(Qt::Key_5 + Qt::CTRL);
     tweakValueAction->setCheckable(true);
     connect(tweakValueAction, SIGNAL(triggered()), this, SLOT(tweakValue()));
     tweakMenu->addAction(tweakValueAction);
@@ -2295,12 +2295,12 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     tweakMenu->addSeparator();
 
     QAction* tweakSmallDecreaseAction = new QAction(tr("Small decrease"), tweakMenu);
-    tweakSmallDecreaseAction->setShortcut(Qt::Key_9);
+    tweakSmallDecreaseAction->setShortcut(Qt::Key_9 + Qt::CTRL);
     connect(tweakSmallDecreaseAction, SIGNAL(triggered()), this, SLOT(tweakSmallDecrease()));
     tweakMenu->addAction(tweakSmallDecreaseAction);
 
     QAction* tweakSmallIncreaseAction = new QAction(tr("Small increase"), tweakMenu);
-    tweakSmallIncreaseAction->setShortcut(Qt::Key_0);
+    tweakSmallIncreaseAction->setShortcut(Qt::Key_0 + Qt::CTRL);
     connect(tweakSmallIncreaseAction, SIGNAL(triggered()), this, SLOT(tweakSmallIncrease()));
     tweakMenu->addAction(tweakSmallIncreaseAction);
 
@@ -2571,7 +2571,6 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QAction* playStopAction = new QAction("PlayStop", this);
     QList<QKeySequence> playStopActionShortcuts;
     playStopActionShortcuts << QKeySequence(Qt::Key_Space)
-                            << QKeySequence(Qt::Key_K)
                             << QKeySequence(Qt::Key_P + Qt::CTRL);
     playStopAction->setShortcuts(playStopActionShortcuts);
     connect(playStopAction, SIGNAL(triggered()), this, SLOT(playStop()));
@@ -2618,8 +2617,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QAction* backAction = new QAction(tr("Previous measure"), this);
     backAction->setIcon(QIcon(":/run_environment/graphics/tool/back.png"));
     QList<QKeySequence> backActionShortcuts;
-    backActionShortcuts << QKeySequence(Qt::Key_Left + Qt::ALT)
-                        << QKeySequence(Qt::Key_J);
+    backActionShortcuts << QKeySequence(Qt::Key_Left + Qt::ALT);
     backAction->setShortcuts(backActionShortcuts);
     connect(backAction, SIGNAL(triggered()), this, SLOT(back()));
     playbackMB->addAction(backAction);
@@ -2627,8 +2625,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QAction* forwAction = new QAction(tr("Next measure"), this);
     forwAction->setIcon(QIcon(":/run_environment/graphics/tool/forward.png"));
     QList<QKeySequence> forwActionShortcuts;
-    forwActionShortcuts << QKeySequence(Qt::Key_Right + Qt::ALT)
-                        << QKeySequence(Qt::Key_L);
+    forwActionShortcuts << QKeySequence(Qt::Key_Right + Qt::ALT);
     forwAction->setShortcuts(forwActionShortcuts);
     connect(forwAction, SIGNAL(triggered()), this, SLOT(forward()));
     playbackMB->addAction(forwAction);
