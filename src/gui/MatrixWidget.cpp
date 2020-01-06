@@ -971,6 +971,8 @@ void MatrixWidget::takeKeyReleaseEvent(QKeyEvent* event) {
 }
 
 void MatrixWidget::pianoEmulator(QKeyEvent* event) {
+    if (!_isPianoEmulationEnabled) return;
+
     int key = event->key();
 
     const int C4_OFFSET = 48;
@@ -1218,6 +1220,14 @@ void MatrixWidget::setColorsByTracks() {
 
 bool MatrixWidget::colorsByChannel() {
     return _colorsByChannels;
+}
+
+bool MatrixWidget::getPianoEmulation() {
+    return _isPianoEmulationEnabled;
+}
+
+void MatrixWidget::setPianoEmulation(bool mode) {
+    _isPianoEmulationEnabled = mode;
 }
 
 void MatrixWidget::setDiv(int div) {

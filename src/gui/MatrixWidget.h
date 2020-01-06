@@ -65,6 +65,9 @@ class MatrixWidget : public PaintWidget {
     void setColorsByTracks();
     bool colorsByChannel();
 
+    bool getPianoEmulation();
+    void setPianoEmulation(bool);
+
     void playNote(int);
 
     int msOfTick(int tick);
@@ -111,6 +114,8 @@ class MatrixWidget : public PaintWidget {
     void paintChannel(QPainter* painter, int channel);
     void paintPianoKey(QPainter* painter, int number, int x, int y,
                        int width, int height);
+
+    bool _isPianoEmulationEnabled = true;
 
     int startTick, endTick, startTimeX, endTimeX, startLineY, endLineY,
         lineNameWidth, timeHeight, msOfFirstEventInList;

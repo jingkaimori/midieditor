@@ -167,6 +167,8 @@ class MainWindow : public QMainWindow {
     void enableMetronome(bool enable);
     void enableThru(bool enable);
 
+    void togglePianoEmulation(bool);
+
     void quantizeSelection();
     void quantizeNtoleDialog();
     void quantizeNtole();

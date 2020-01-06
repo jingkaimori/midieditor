@@ -2697,6 +2697,12 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(metronomeAction, SIGNAL(toggled(bool)), this, SLOT(enableMetronome(bool)));
     playbackMB->addAction(metronomeAction);
 
+    QAction* pianoEmulationAction = new QAction(tr("Piano Emulation"), this);
+    pianoEmulationAction->setCheckable(true);
+    pianoEmulationAction->setChecked(mw_matrixWidget->getPianoEmulation());
+    connect(pianoEmulationAction, SIGNAL(toggled(bool)), this, SLOT(togglePianoEmulation(bool)));
+    playbackMB->addAction(pianoEmulationAction);
+
     // Midi
     QAction* configAction2 = new QAction(tr("Settings..."), this);
     configAction2->setIcon(QIcon(":/run_environment/graphics/tool/config.png"));
@@ -2855,6 +2861,10 @@ void MainWindow::enableMetronome(bool enable) {
 
 void MainWindow::enableThru(bool enable) {
     MidiInput::setThruEnabled(enable);
+}
+
+void MainWindow::togglePianoEmulation(bool mode) {
+    mw_matrixWidget->setPianoEmulation(mode);
 }
 
 void MainWindow::quantizationChanged(QAction* action) {
