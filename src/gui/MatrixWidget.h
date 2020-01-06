@@ -43,7 +43,7 @@ class MatrixWidget : public PaintWidget {
 
     Q_OBJECT
 
-public:
+  public:
     MatrixWidget(QWidget* parent = 0);
     void setFile(MidiFile* file);
     MidiFile* midiFile();
@@ -65,11 +65,13 @@ public:
     void setColorsByTracks();
     bool colorsByChannel();
 
+    void playNote(int);
+
     int msOfTick(int tick);
     int xPosOfMs(int ms);
     QList<QPair<int, int> > divs();
 
-public slots:
+  public slots:
     void scrollXChanged(int scrollPositionX);
     void scrollYChanged(int scrollPositionY);
     void zoomHorIn();
@@ -85,13 +87,13 @@ public slots:
     void setDiv(int div);
     int div();
 
-signals:
+  signals:
     void sizeChanged(int maxScrollTime, int maxScrollLine, int valueX,
-        int valueY);
+                     int valueY);
     void objectListChanged();
     void scrollChanged(int startMs, int maxMs, int startLine, int maxLine);
 
-protected:
+  protected:
     void paintEvent(QPaintEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void resizeEvent(QResizeEvent* event);
@@ -104,10 +106,11 @@ protected:
     void keyReleaseEvent(QKeyEvent* event);
     void wheelEvent(QWheelEvent* event);
 
-private:
+  private:
+    void pianoEmulator(QKeyEvent*);
     void paintChannel(QPainter* painter, int channel);
     void paintPianoKey(QPainter* painter, int number, int x, int y,
-        int width, int height);
+                       int width, int height);
 
     int startTick, endTick, startTimeX, endTimeX, startLineY, endLineY,
         lineNameWidth, timeHeight, msOfFirstEventInList;
