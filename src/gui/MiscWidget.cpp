@@ -624,7 +624,6 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
                         if (tick < 0)
                             tick = 0;
                         switch (mode) {
-                                <<<<<<< HEAD
                             case ControllEditor: {
                                 if (v > 127)
                                     v = 127;
@@ -711,7 +710,6 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
                 if (tick < 0)
                     tick = 0;
                 switch (mode) {
-                        <<<<<<< HEAD
                     case ControllEditor: {
                         if (v > 127)
                             v = 127;
