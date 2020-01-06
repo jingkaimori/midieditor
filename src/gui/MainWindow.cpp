@@ -2053,7 +2053,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(loadAction, SIGNAL(triggered()), this, SLOT(load()));
     fileMB->addAction(loadAction);
 
-    _recentPathsMenu = new QMenu(tr("Open recent.."), this);
+    _recentPathsMenu = new QMenu(tr("Open recent..."), this);
     _recentPathsMenu->setIcon(QIcon(":/run_environment/graphics/tool/noicon.png"));
     fileMB->addMenu(_recentPathsMenu);
     connect(_recentPathsMenu, SIGNAL(triggered(QAction*)), this, SLOT(openRecent(QAction*)));
