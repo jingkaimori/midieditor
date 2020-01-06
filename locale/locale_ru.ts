@@ -934,7 +934,7 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2050"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2754"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2757"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
@@ -1009,13 +1009,13 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2159"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2778"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2781"/>
         <source>Paste events</source>
         <translation>Вставить события</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2160"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2779"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2782"/>
         <source>Paste events at cursor position</source>
         <translation>Вставить события после курсора</translation>
     </message>
@@ -1042,7 +1042,7 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2196"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2704"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2707"/>
         <source>Settings...</source>
         <translation>Настройки...</translation>
     </message>
@@ -1267,82 +1267,87 @@
         <translation>Выключить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2580"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2579"/>
         <source>Play</source>
         <translation>Играть</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2585"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2584"/>
         <source>Pause</source>
         <translation>Пауза</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2595"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2594"/>
         <source>Record</source>
         <translation>Запись</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2601"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2600"/>
         <source>Stop</source>
         <translation>Остановить</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2608"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2607"/>
         <source>Back to begin</source>
         <translation>В начало</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2618"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2617"/>
         <source>Previous measure</source>
         <translation>Предыдущий такт</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2627"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2625"/>
         <source>Next measure</source>
         <translation>Следующий такт</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2638"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2635"/>
         <source>Previous marker</source>
         <translation>Предыдущая метка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2645"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2642"/>
         <source>Next marker</source>
         <translation>Следующая метка</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2654"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2651"/>
         <source>Playback speed...</source>
         <translation>Скорость воспроизведения...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2689"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2686"/>
         <source>Lock screen while playing</source>
         <translation>Блокировать экран во время воспроизведения</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2696"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2693"/>
         <source>Metronome</source>
         <translation>Метроном</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2709"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2700"/>
+        <source>Piano Emulation</source>
+        <translation>Эмуляция фортепиано</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2712"/>
         <source>Connect Midi In/Out</source>
         <translation>Подключить Midi Вход/Выход</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2718"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2721"/>
         <source>Midi panic</source>
         <translation>Midi паника</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2725"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2728"/>
         <source>Manual</source>
         <translation>Руководство</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2729"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2732"/>
         <source>About ProMidEdit</source>
         <translation>Про ProMidEdit</translation>
     </message>
@@ -1351,23 +1356,23 @@
         <translation type="vanished">Про MidiEditor</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2733"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2736"/>
         <source>Donate</source>
         <translation>Поддержать проект</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2847"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2849"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2850"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2852"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2876"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2883"/>
         <source>Quantify events</source>
         <translation>Привязать к сетке</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2947"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2954"/>
         <source>Quantify tuplet</source>
         <translation>Привязать триоль</translation>
     </message>
@@ -1375,62 +1380,62 @@
 <context>
     <name>MatrixWidget</name>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="342"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="343"/>
         <source>Measure </source>
         <translation>Такт </translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="405"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="406"/>
         <source>Control Change</source>
         <translation>Упр. контроллером</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="409"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="410"/>
         <source>Tempo Change</source>
         <translation>Изменение темпа</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="413"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="414"/>
         <source>Time Signature</source>
         <translation>Размерность</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="417"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="418"/>
         <source>Key Signature.</source>
         <translation>Тональность.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="421"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="422"/>
         <source>Program Change</source>
         <translation>Смена инструмента</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="425"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="426"/>
         <source>Key Pressure</source>
         <translation>Давление клавиши</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="429"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="430"/>
         <source>Channel Pressure</source>
         <translation>Давление канала</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="433"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="434"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="437"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="438"/>
         <source>Pitch Bend</source>
         <translation>Pitch Bend</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="441"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="442"/>
         <source>System Exclusive</source>
         <translation>Системо-зависим.</translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="445"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="446"/>
         <source>(Unknown)</source>
         <translation>(Неизвестно)</translation>
     </message>
