@@ -49,6 +49,7 @@ DonateDialog::DonateDialog(QWidget* parent)
     QScrollArea* a = new QScrollArea(this);
     QLabel* content = new QLabel("<html>"
                                  "<body>"
+                                 "<h3>NOTE: If you are trying to donate to Chipotle, donate to Markus instead.</h3>"
                                  "<h3>Reasons to donate</h3>"
                                  "<p>"
                                  "Dear User,<br>"
