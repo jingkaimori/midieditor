@@ -2892,7 +2892,7 @@ QWidget* MainWindow::setupActions(QWidget* parent)
     connect(manualAction, SIGNAL(triggered()), this, SLOT(manual()));
     helpMB->addAction(manualAction);
 
-    QAction* aboutAction = new QAction("About MidiEditor", this);
+    QAction* aboutAction = new QAction("About ChipMidiEditor", this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
     helpMB->addAction(aboutAction);
 

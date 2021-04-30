@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 
     UpdateManager::instance()->init();
     a.setApplicationVersion(UpdateManager::instance()->versionString());
-    a.setApplicationName("MidiEditor");
+    a.setApplicationName("ChipMidiEditor");
     a.setQuitOnLastWindowClosed(true);
     a.setProperty("date_published", UpdateManager::instance()->date());
 
