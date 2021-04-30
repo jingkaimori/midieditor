@@ -235,7 +235,8 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
         for (int i = startLineY; i <= endLineY; i++) {
             int startLine = yPosOfLine(i);
             QColor c(194, 230, 255);
-            if ( !( (1 << (i % 12)) & sharp_strip_mask ) ){
+            //if ( !( (1 << (i % 12)) & sharp_strip_mask ) ){
+            if (i % 2 == 0) {
                 c = QColor(234, 246, 255);
             }
 
