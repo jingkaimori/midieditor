@@ -1,13 +1,18 @@
-
-
 <img align="left" width="70px" src="run_environment/midieditor.ico">
 
-MidiEditor
+<h2>MidiEditorDark64</h2>
+
+<img align="center" width="100%" src="https://i.imgur.com/mlHj7Iy.png">
+
+ 
+Dark Mode for [MidiEditor](https://github.com/markusschwenk/midieditor) by [Markus Schwenk](https://github.com/markusschwenk)
+
+Reskinned by [StrawberryCough](https://github.com/StrawberryCough/)
+
+Inspired by earlier dark-mode fork by [Xorekteer](https://github.com/Xorekteer/midieditor-dark)
+64 Bit mod by [Chipotle](https://github.com/trotlinebeercan)
+
 ===========
-
-[![Build Status](https://api.travis-ci.org/markusschwenk/midieditor.svg?branch=master)](https://travis-ci.org/markusschwenk/midieditor)
-
-Downloads : [last release](https://github.com/markusschwenk/midieditor/releases/)
 
 ### Building Dependencies
 * [Qt >= 5.7](https://www.qt.io/download-open-source/)
