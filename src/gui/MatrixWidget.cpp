@@ -231,25 +231,28 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
         }
 
 
-        // draw lines, pianokeys and linenames
+        // draw background of lines, pianokeys and linenames. when i increase ,the tune decrease.
         for (int i = startLineY; i <= endLineY; i++) {
             int startLine = yPosOfLine(i);
-            QColor c(194, 230, 255);
-            if ( !( (1 << (i % 12)) & sharp_strip_mask ) ){
-                c = QColor(234, 246, 255);
-            }
-
-            if (i > 127) {
-                c = QColor(194, 194, 194);
+            QColor c;
+            if(i<=127){
+                if ( (1 << (static_cast<unsigned int>(i) % 12)) & sharp_strip_mask ){
+                    c = QColor(194, 230, 255);
+                }else{
+                    c = QColor(234, 246, 255);
+                }
+            }else{
                 if (i % 2 == 1) {
                     c = QColor(234, 246, 255);
+                }else{
+                    c = QColor(194, 194, 194);
                 }
             }
             pixpainter->fillRect(lineNameWidth, startLine, width(),
                 startLine + lineHeight(), c);
         }
 
-        // paint measures and timeline
+        // paint measures and timeline background
         pixpainter->fillRect(0, 0, width(), timeHeight, QApplication::palette().window());
 
         pixpainter->setClipping(true);
@@ -263,7 +266,7 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
 
         pixpainter->fillRect(0, timeHeight - 3, width(), 3, QApplication::palette().window());
 
-        // paint time (ms)
+        // paint time text in ms
         int numbers = (width() - lineNameWidth) / 80;
         if (numbers > 0) {
             int step = (endTimeX - startTimeX) / numbers;
@@ -314,7 +317,7 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
             }
         }
 
-        // draw measures
+        // draw measures foreground and text
         int measure = file->measure(startTick, endTick, &currentTimeSignatureEvents);
 
         TimeSignatureEvent* currentEvent = currentTimeSignatureEvents->at(0);
