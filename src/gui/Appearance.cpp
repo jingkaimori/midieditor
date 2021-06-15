@@ -3,6 +3,7 @@
 QMap<int, QColor*> Appearance::channelColors = QMap<int, QColor*>();
 QMap<int, QColor*> Appearance::trackColors = QMap<int, QColor*>();
 int Appearance::_opacity = 100;
+Appearance::stripStyle Appearance::_strip = Appearance::onSharp;
 
 void Appearance::init(QSettings *settings){
     for (int channel = 0; channel < 17; channel++) {
@@ -16,6 +17,7 @@ void Appearance::init(QSettings *settings){
                                   settings, defaultColor(track)));
     }
     _opacity = settings->value("appearance_opacity", 100).toInt();
+    _strip = static_cast<Appearance::stripStyle>(settings->value("strip_style",Appearance::onSharp).toInt()) ;
 }
 
 QColor *Appearance::channelColor(int channel){
@@ -38,6 +40,7 @@ void Appearance::writeSettings(QSettings *settings) {
         write("track_color_" + QString::number(track), settings, trackColors[track]);
     }
     settings->setValue("appearance_opacity", _opacity);
+    settings->setValue("strip_style",_strip);
 }
 
 QColor *Appearance::defaultColor(int n) {
@@ -177,4 +180,12 @@ int Appearance::opacity(){
 
 void Appearance::setOpacity(int opacity){
     _opacity = opacity;
+}
+
+Appearance::stripStyle Appearance::strip(){
+    return _strip;
+}
+
+void Appearance::setStrip(Appearance::stripStyle render){
+    _strip = render;
 }

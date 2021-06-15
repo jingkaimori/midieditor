@@ -17,6 +17,14 @@ public:
     static int opacity();
     static void setOpacity(int opacity);
 
+    enum stripStyle{
+        onOctave = 0,
+        onSharp = 1,
+        onEven = 2,
+    };
+    static stripStyle strip();
+    static void setStrip(stripStyle opacity);
+
 private:
     static int trackToColorIndex(int track);
     static int channelToColorIndex(int channel);
@@ -26,6 +34,7 @@ private:
     static QColor *decode(QString name, QSettings *settings, QColor *defaultColor);
     static void write(QString name, QSettings *settings, QColor *color);
     static int _opacity;
+    static stripStyle _strip;
 };
 
 #endif // APPEARANCE_H

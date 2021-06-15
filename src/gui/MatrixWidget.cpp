@@ -33,6 +33,7 @@
 #include "../tool/EventTool.h"
 #include "../tool/Selection.h"
 #include "../tool/Tool.h"
+#include "../gui/Appearance.h"
 
 #include <QList>
 #include <QtCore/qmath.h>
@@ -236,7 +237,21 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
             int startLine = yPosOfLine(i);
             QColor c;
             if(i<=127){
-                if ( (1 << (static_cast<unsigned int>(i) % 12)) & sharp_strip_mask ){
+                bool isHighlighted = false;
+                Appearance::stripStyle strip = Appearance::strip();
+                switch (strip) {
+                    case Appearance::onOctave :
+                        isHighlighted = (static_cast<unsigned int>(i) % 12) == 2 ;
+                    break;
+                    case Appearance::onSharp :
+                        isHighlighted = ! ( (1 << (static_cast<unsigned int>(i) % 12)) & sharp_strip_mask) ;
+                    break;
+                    case Appearance::onEven :
+                        isHighlighted = (static_cast<unsigned int>(i) % 2);
+                    break;
+
+                }
+                if (isHighlighted){
                     c = QColor(194, 230, 255);
                 }else{
                     c = QColor(234, 246, 255);

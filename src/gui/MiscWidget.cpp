@@ -253,7 +253,7 @@ void MiscWidget::paintEvent(QPaintEvent* event)
         int xOld;
         int yOld;
 
-        QPen pen(Qt::darkBlue);
+        QPen pen(Qt::red);
         pen.setWidth(3);
         painter.setPen(pen);
 

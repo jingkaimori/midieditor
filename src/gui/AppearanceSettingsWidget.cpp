@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QList>
 #include <QSlider>
+#include <QComboBox>
 
 #include "Appearance.h"
 
@@ -71,6 +72,17 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(QWidget* parent)
     opacity->setValue(Appearance::opacity());
     connect(opacity, SIGNAL(valueChanged(int)), this, SLOT(opacityChanged(int)));
     layout->addWidget(opacity, 6, 1, 1, 1);
+
+    layout->addWidget(new QLabel("Strip Style"),7,0,1,1);
+    QComboBox *strip = new QComboBox(this);
+    strip->addItems({
+                        "Highlight between octanes",
+                        "Highlight notes in tunes",
+                        "Highlight oddly"
+                    });
+    strip->setCurrentIndex(Appearance::strip());
+    connect(strip, SIGNAL(currentIndexChanged(int)), this, SLOT(stripStyleChanged(int)));
+    layout->addWidget(strip,7,1,1,1);
 }
 
 void AppearanceSettingsWidget::channelColorChanged(int channel, QColor c){
@@ -101,6 +113,12 @@ void AppearanceSettingsWidget::opacityChanged(int opacity) {
     foreach (NamedColorWidgetItem* item, *_channelItems) {
         item->colorChanged(*Appearance::channelColor(item->number()));
     }
+    update();
+}
+
+void AppearanceSettingsWidget::stripStyleChanged(int strip){
+    Appearance::setStrip(static_cast<Appearance::stripStyle>(strip));
+
     update();
 }
 
