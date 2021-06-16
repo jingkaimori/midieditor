@@ -1,5 +1,8 @@
 TEMPLATE = app
 TARGET = MidiEditor
+TRANSLATIONS += \
+        locale/locale_ru.ts \
+        locale/locale_zh.ts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 QT += core \
     gui \
@@ -88,3 +91,6 @@ macx: {
     MOC_DIR = .tmp
     ICON = midieditor.icns
 }
+
+DISTFILES += \
+    locale/locale_zh.ts

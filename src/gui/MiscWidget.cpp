@@ -21,8 +21,7 @@
 #define WIDTH 7
 
 MiscWidget::MiscWidget(MatrixWidget* mw, QWidget* parent)
-    : PaintWidget(parent)
-{
+    : PaintWidget(parent) {
     setRepaintOnMouseMove(true);
     setRepaintOnMousePress(true);
     setRepaintOnMouseRelease(true);
@@ -41,55 +40,47 @@ MiscWidget::MiscWidget(MatrixWidget* mw, QWidget* parent)
     setFocusPolicy(Qt::ClickFocus);
 }
 
-QString MiscWidget::modeToString(int mode)
-{
+QString MiscWidget::modeToString(int mode) {
     switch (mode) {
     case VelocityEditor:
-        return "Velocity";
+        return tr("Velocity");
     case ControllEditor:
-        return "Control Change";
+        return tr("Control Change");
     case PitchBendEditor:
-        return "Pitch Bend";
+        return tr("Pitch Bend");
     case KeyPressureEditor:
-        return "Key Pressure";
+        return tr("Key Pressure");
     case ChannelPressureEditor:
-        return "Channel Pressure";
-    case TempoEditor:
-        return "Tempo";
+        return tr("Channel Pressure");
     }
     return "";
 }
 
-void MiscWidget::setMode(int mode)
-{
+void MiscWidget::setMode(int mode) {
     this->mode = mode;
     resetState();
     computeMinMax();
 }
 
-void MiscWidget::setEditMode(int mode)
-{
+void MiscWidget::setEditMode(int mode) {
     this->edit_mode = mode;
     resetState();
     computeMinMax();
 }
 
-void MiscWidget::setChannel(int channel)
-{
+void MiscWidget::setChannel(int channel) {
     this->channel = channel;
     resetState();
     computeMinMax();
 }
 
-void MiscWidget::setControl(int ctrl)
-{
+void MiscWidget::setControl(int ctrl) {
     this->controller = ctrl;
     resetState();
     computeMinMax();
 }
 
-void MiscWidget::paintEvent(QPaintEvent* event)
-{
+void MiscWidget::paintEvent(QPaintEvent* event) {
 
     if (!matrixWidget->midiFile())
         return;
@@ -279,8 +270,7 @@ void MiscWidget::paintEvent(QPaintEvent* event)
     }
 }
 
-void MiscWidget::mouseMoveEvent(QMouseEvent* event)
-{
+void MiscWidget::mouseMoveEvent(QMouseEvent* event) {
     if (edit_mode == SINGLE_MODE) {
         if (mode == VelocityEditor) {
             bool above = dragging;
@@ -361,8 +351,7 @@ void MiscWidget::mouseMoveEvent(QMouseEvent* event)
     PaintWidget::mouseMoveEvent(event);
 }
 
-void MiscWidget::mousePressEvent(QMouseEvent* event)
-{
+void MiscWidget::mousePressEvent(QMouseEvent* event) {
 
     if (edit_mode == SINGLE_MODE) {
 
@@ -409,7 +398,7 @@ void MiscWidget::mousePressEvent(QMouseEvent* event)
                     if (velocity > 0) {
                         int h = (height() * velocity) / 128;
                         if (!dragging && mouseInRect(event->x() - LEFT_BORDER_MATRIX_WIDGET, height() - h - 5, WIDTH, 10)) {
-                            matrixWidget->midiFile()->protocol()->startNewAction("Changed selection");
+                            matrixWidget->midiFile()->protocol()->startNewAction(tr("Changed selection"));
                             ProtocolEntry* toCopy = _dummyTool->copy();
                             EventTool::selectEvent(event, true);
                             matrixWidget->update();
@@ -424,7 +413,7 @@ void MiscWidget::mousePressEvent(QMouseEvent* event)
 
             // if nothing selected deselect all
             if (Selection::instance()->selectedEvents().size() > 0 && !clickHandlesSelected && !selectedNew) {
-                matrixWidget->midiFile()->protocol()->startNewAction("Cleared selection");
+                matrixWidget->midiFile()->protocol()->startNewAction(tr("Cleared selection"));
                 ProtocolEntry* toCopy = _dummyTool->copy();
                 EventTool::clearSelection();
                 _dummyTool->protocol(toCopy, _dummyTool);
@@ -452,7 +441,7 @@ void MiscWidget::mousePressEvent(QMouseEvent* event)
                     trackIndex = i;
 
                     if (accordingEvents.at(i)) {
-                        matrixWidget->midiFile()->protocol()->startNewAction("Changed selection");
+                        matrixWidget->midiFile()->protocol()->startNewAction(tr("Changed selection"));
                         ProtocolEntry* toCopy = _dummyTool->copy();
                         EventTool::clearSelection();
                         EventTool::selectEvent(accordingEvents.at(i), true, true);
@@ -485,8 +474,7 @@ void MiscWidget::mousePressEvent(QMouseEvent* event)
     }
 }
 
-void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
-{
+void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
 
     int channelToUse = (mode == TempoEditor) ? 17 : channel;
 
@@ -503,7 +491,7 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
                 int dX = dragY - mouseY;
 
                 if (dX < -3 || dX > 3) {
-                    matrixWidget->midiFile()->protocol()->startNewAction("Edited velocity");
+                    matrixWidget->midiFile()->protocol()->startNewAction(tr("Edited velocity"));
 
                     int dV = 127 * dX / height();
                     foreach (MidiEvent* event, Selection::instance()->selectedEvents()) {
@@ -544,23 +532,19 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
                     QString text = "";
                     switch (mode) {
                     case ControllEditor: {
-                        text = "Edited Control Change Events";
+                        text = tr("Edited Control Change Events");
                         break;
                     }
                     case PitchBendEditor: {
-                        text = "Edited Pitch Bend Events";
+                        text = tr("Edited Pitch Bend Events");
                         break;
                     }
                     case KeyPressureEditor: {
-                        text = "Edited Key Pressure Events";
+                        text = tr("Edited Key Pressure Events");
                         break;
                     }
                     case ChannelPressureEditor: {
-                        text = "Edited Channel Pressure Events";
-                        break;
-                    }
-                    case TempoEditor: {
-                        text = "Edited Tempo Change Events";
+                        text = tr("Edited Channel Pressure Events");
                         break;
                     }
                     }
@@ -571,42 +555,44 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
                         if (v < 0)
                             v = 0;
                         switch (mode) {
-                        case ControllEditor: {
-                            ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(ev);
-                            if (ctrl) {
-                                if (v > 127)
-                                    v = 127;
-                                ctrl->setValue(v);
+
+
+                            case ControllEditor: {
+                                ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(ev);
+                                if (ctrl) {
+                                    if (v > 127)
+                                        v = 127;
+                                    ctrl->setValue(v);
+                                }
+                                break;
                             }
-                            break;
-                        }
-                        case PitchBendEditor: {
-                            PitchBendEvent* event = dynamic_cast<PitchBendEvent*>(ev);
-                            if (event) {
-                                if (v > 16383)
-                                    v = 16383;
-                                event->setValue(v);
+                            case PitchBendEditor: {
+                                PitchBendEvent* event = dynamic_cast<PitchBendEvent*>(ev);
+                                if (event) {
+                                    if (v > 16383)
+                                        v = 16383;
+                                    event->setValue(v);
+                                }
+                                break;
                             }
-                            break;
-                        }
-                        case KeyPressureEditor: {
-                            KeyPressureEvent* event = dynamic_cast<KeyPressureEvent*>(ev);
-                            if (event) {
-                                if (v > 127)
-                                    v = 127;
-                                event->setValue(v);
+                            case KeyPressureEditor: {
+                                KeyPressureEvent* event = dynamic_cast<KeyPressureEvent*>(ev);
+                                if (event) {
+                                    if (v > 127)
+                                        v = 127;
+                                    event->setValue(v);
+                                }
+                                break;
                             }
-                            break;
-                        }
-                        case ChannelPressureEditor: {
-                            ChannelPressureEvent* event = dynamic_cast<ChannelPressureEvent*>(ev);
-                            if (event) {
-                                if (v > 127)
-                                    v = 127;
-                                event->setValue(v);
+                            case ChannelPressureEditor: {
+                                ChannelPressureEvent* event = dynamic_cast<ChannelPressureEvent*>(ev);
+                                if (event) {
+                                    if (v > 127)
+                                        v = 127;
+                                    event->setValue(v);
+                                }
+                                break;
                             }
-                            break;
-                        }
                         case TempoEditor: {
                             TempoChangeEvent* event = dynamic_cast<TempoChangeEvent*>(ev);
                             if (event) {
@@ -688,23 +674,23 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
                 QString text = "";
                 switch (mode) {
                 case ControllEditor: {
-                    text = "Inserted Control Change Event";
+                    text = tr("Inserted Control Change Event");
                     break;
                 }
                 case PitchBendEditor: {
-                    text = "Inserted Pitch Bend Event";
+                    text = tr("Inserted Pitch Bend Event");
                     break;
                 }
                 case KeyPressureEditor: {
-                    text = "Inserted Key Pressure Event";
+                    text = tr("Inserted Key Pressure Event");
                     break;
                 }
                 case ChannelPressureEditor: {
-                    text = "Inserted Channel Pressure Event";
+                    text = tr("Inserted Channel Pressure Event");
                     break;
                 }
                 case TempoEditor: {
-                    text = "Inserted Tempo Change Event";
+                    text = tr("Inserted Tempo Change Event");
                     break;
                 }
                 }
@@ -833,7 +819,7 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
 
                 if (events.size() > 0) {
 
-                    matrixWidget->midiFile()->protocol()->startNewAction("Changed velocity");
+                    matrixWidget->midiFile()->protocol()->startNewAction(tr("Changed velocity"));
 
                     // process per event
                     foreach (MidiEvent* event, events) {
@@ -860,23 +846,23 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event)
                 QString text = "";
                 switch (mode) {
                 case ControllEditor: {
-                    text = "Edited Control Change Events";
+                    text = tr("Edited Control Change Events");
                     break;
                 }
                 case PitchBendEditor: {
-                    text = "Edited Pitch Bend Events";
+                    text = tr("Edited Pitch Bend Events");
                     break;
                 }
                 case KeyPressureEditor: {
-                    text = "Edited Key Pressure Events";
+                    text = tr("Edited Key Pressure Events");
                     break;
                 }
                 case ChannelPressureEditor: {
-                    text = "Edited Channel Pressure Events";
+                    text = tr("Edited Channel Pressure Events");
                     break;
                 }
                 case TempoEditor: {
-                    text = "Edited Tempo Change Events";
+                    text = tr("Edited Tempo Change Events");
                     break;
                 }
                 }
@@ -973,8 +959,7 @@ int MiscWidget::value(double y)
     return v;
 }
 
-double MiscWidget::interpolate(QList<QPair<int, int> > track, int x)
-{
+double MiscWidget::interpolate(QList<QPair<int, int> > track, int x) {
 
     for (int i = 0; i < track.size(); i++) {
 
@@ -996,14 +981,12 @@ double MiscWidget::interpolate(QList<QPair<int, int> > track, int x)
     return 0;
 }
 
-void MiscWidget::leaveEvent(QEvent* event)
-{
+void MiscWidget::leaveEvent(QEvent* event) {
     resetState();
     PaintWidget::leaveEvent(event);
 }
 
-void MiscWidget::resetState()
-{
+void MiscWidget::resetState() {
 
     dragY = -1;
     dragging = false;
@@ -1015,8 +998,7 @@ void MiscWidget::resetState()
     update();
 }
 
-void MiscWidget::keyPressEvent(QKeyEvent* event)
-{
+void MiscWidget::keyPressEvent(QKeyEvent* event) {
     if (Tool::currentTool()) {
         if (Tool::currentTool()->pressKey(event->key())) {
             repaint();
@@ -1024,8 +1006,7 @@ void MiscWidget::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void MiscWidget::keyReleaseEvent(QKeyEvent* event)
-{
+void MiscWidget::keyReleaseEvent(QKeyEvent* event) {
     if (Tool::currentTool()) {
         if (Tool::currentTool()->releaseKey(event->key())) {
             repaint();
@@ -1033,8 +1014,7 @@ void MiscWidget::keyReleaseEvent(QKeyEvent* event)
     }
 }
 
-QList<QPair<int, int> > MiscWidget::getTrack(QList<MidiEvent*>* accordingEvents)
-{
+QList<QPair<int, int> > MiscWidget::getTrack(QList<MidiEvent*>* accordingEvents) {
 
     int channelToUse = (mode == TempoEditor) ? 17 : channel;
 
@@ -1097,101 +1077,99 @@ QList<QPair<int, int> > MiscWidget::getTrack(QList<MidiEvent*>* accordingEvents)
     return track;
 }
 
-bool MiscWidget::filter(MidiEvent* e)
-{
+bool MiscWidget::filter(MidiEvent* e) {
     switch (mode) {
-    case ControllEditor: {
-        ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(e);
-        if (ctrl && ctrl->control() == controller) {
-            return true;
-        } else {
-            return false;
+        case ControllEditor: {
+            ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(e);
+            if (ctrl && ctrl->control() == controller) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
-    case PitchBendEditor: {
-        PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(e);
-        if (pitch) {
-            return true;
-        } else {
-            return false;
+        case PitchBendEditor: {
+            PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(e);
+            if (pitch) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
-    case KeyPressureEditor: {
-        KeyPressureEvent* pressure = dynamic_cast<KeyPressureEvent*>(e);
-        if (pressure && pressure->note() == controller) {
-            return true;
-        } else {
-            return false;
+        case KeyPressureEditor: {
+            KeyPressureEvent* pressure = dynamic_cast<KeyPressureEvent*>(e);
+            if (pressure && pressure->note() == controller) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
-    case ChannelPressureEditor: {
-        ChannelPressureEvent* pressure = dynamic_cast<ChannelPressureEvent*>(e);
-        if (pressure) {
-            return true;
-        } else {
-            return false;
+        case ChannelPressureEditor: {
+            ChannelPressureEvent* pressure = dynamic_cast<ChannelPressureEvent*>(e);
+            if (pressure) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
-    case TempoEditor: {
-        TempoChangeEvent* tempo = dynamic_cast<TempoChangeEvent*>(e);
-        if (tempo) {
-            return true;
-        } else {
-            return false;
+        case TempoEditor: {
+            TempoChangeEvent* tempo = dynamic_cast<TempoChangeEvent*>(e);
+            if (tempo) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
     }
     return false;
 }
 
-QPair<int, int> MiscWidget::processEvent(MidiEvent* e, bool* isOk)
-{
+QPair<int, int> MiscWidget::processEvent(MidiEvent* e, bool* isOk) {
 
     *isOk = false;
     QPair<int, int> pair(-1, -1);
     switch (mode) {
-    case ControllEditor: {
-        ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(e);
-        if (ctrl && ctrl->control() == controller) {
-            int x = ctrl->x() - LEFT_BORDER_MATRIX_WIDGET;
-            int y = ctrl->value();
-            pair.first = x;
-            pair.second = y;
-            *isOk = true;
+        case ControllEditor: {
+            ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(e);
+            if (ctrl && ctrl->control() == controller) {
+                int x = ctrl->x() - LEFT_BORDER_MATRIX_WIDGET;
+                int y = ctrl->value();
+                pair.first = x;
+                pair.second = y;
+                *isOk = true;
+            }
+            break;
         }
-        break;
-    }
-    case PitchBendEditor: {
-        PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(e);
-        if (pitch) {
-            int x = pitch->x() - LEFT_BORDER_MATRIX_WIDGET;
-            int y = pitch->value();
-            pair.first = x;
-            pair.second = y;
-            *isOk = true;
+        case PitchBendEditor: {
+            PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(e);
+            if (pitch) {
+                int x = pitch->x() - LEFT_BORDER_MATRIX_WIDGET;
+                int y = pitch->value();
+                pair.first = x;
+                pair.second = y;
+                *isOk = true;
+            }
+            break;
         }
-        break;
-    }
-    case KeyPressureEditor: {
-        KeyPressureEvent* pressure = dynamic_cast<KeyPressureEvent*>(e);
-        if (pressure && pressure->note() == controller) {
-            int x = pressure->x() - LEFT_BORDER_MATRIX_WIDGET;
-            int y = pressure->value();
-            pair.first = x;
-            pair.second = y;
-            *isOk = true;
+        case KeyPressureEditor: {
+            KeyPressureEvent* pressure = dynamic_cast<KeyPressureEvent*>(e);
+            if (pressure && pressure->note() == controller) {
+                int x = pressure->x() - LEFT_BORDER_MATRIX_WIDGET;
+                int y = pressure->value();
+                pair.first = x;
+                pair.second = y;
+                *isOk = true;
+            }
+            break;
         }
-        break;
-    }
-    case ChannelPressureEditor: {
-        ChannelPressureEvent* pressure = dynamic_cast<ChannelPressureEvent*>(e);
-        if (pressure) {
-            int x = pressure->x() - LEFT_BORDER_MATRIX_WIDGET;
-            int y = pressure->value();
-            pair.first = x;
-            pair.second = y;
-            *isOk = true;
-        }
+        case ChannelPressureEditor: {
+            ChannelPressureEvent* pressure = dynamic_cast<ChannelPressureEvent*>(e);
+            if (pressure) {
+                int x = pressure->x() - LEFT_BORDER_MATRIX_WIDGET;
+                int y = pressure->value();
+                pair.first = x;
+                pair.second = y;
+                *isOk = true;
+            }
         break;
     }
     case TempoEditor: {
@@ -1209,8 +1187,7 @@ QPair<int, int> MiscWidget::processEvent(MidiEvent* e, bool* isOk)
     return pair;
 }
 
-void MiscWidget::computeMinMax()
-{
+void MiscWidget::computeMinMax() {
     switch (mode) {
     case ControllEditor: {
         _max = 127;
