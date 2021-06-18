@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -14,6 +14,7 @@
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="38"/>
         <source>Additional Midi Settings</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="45"/>
@@ -23,14 +24,17 @@
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="53"/>
         <source>Note: There aren&apos;t many reasons to change this. MIDI files have a resolution for how many ticks can fit in a quarter note. Higher values = more detail. Lower values may be required for compatibility. Only affects new files.</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="58"/>
         <source>Manually stop notes</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="64"/>
         <source>Note: the above option should not be enabled in general. It is only required if the stop button does not stop playback as expected (e.g. when some notes are not stopped correctly).</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="69"/>
@@ -45,6 +49,7 @@
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="83"/>
         <source>The start command can be used to start additional software components (e.g. Midi synthesizers) each time, MidiEditor is started. You can see the output of the started software / script in the field below.</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -52,10 +57,12 @@
     <message>
         <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="42"/>
         <source>Note</source>
-     </message>
+        <translation></translation>
+    </message>
     <message>
         <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="53"/>
         <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Enable Automatic Checking for Updates?&lt;/h3&gt;&lt;p&gt;Click below to enable or disable automatic checking for updates. &lt;/p&gt;&lt;p&gt;You can enable this option now, or later by navigating to Edit - Settings - Updates in the menu bar. You can always update your preference in that very same Settings page.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Privacy Note&lt;/b&gt;&lt;/p&gt;&lt;p&gt;When checking for updates, MidiEditor transmits your IP address as well as the currently installed version of MidiEditor and you operating system to a server which is located within the European Union.&lt;/p&gt;&lt;p&gt;Please read our privacy policy at &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt;By enabling the option, you confirm that you have read and understood the terms under which MidiEditor provides this service and that you agree to them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="99"/>
@@ -73,10 +80,12 @@
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="48"/>
         <source>Channel </source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="50"/>
         <source>General Events</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="56"/>
@@ -86,35 +95,43 @@
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="67"/>
         <source>Channel visible</source>
-     </message>
+        <translation></translation>
+    </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="75"/>
         <location filename="../src/gui/ChannelListWidget.cpp" line="117"/>
         <source>Channel audible</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="82"/>
         <source>Solo mode</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="91"/>
         <source>Select instrument</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="104"/>
         <source>Hide channel</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="106"/>
         <source>Show channel</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="115"/>
         <source>Mute channel</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/ChannelListWidget.cpp" line="144"/>
         <source>Events affecting all channels</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -176,7 +193,7 @@
         <location filename="../src/gui/DonateDialog.cpp" line="49"/>
         <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Reasons to donate&lt;/h3&gt;&lt;p&gt;Dear User,&lt;br&gt;I offer MidiEditor for free and I hope you enjoy it. Please note that I developed the editor during my spare time and that I&apos;ve been working on it for more than four years by now! If MidiEditor is useful for you, please send me a little donation so that I can at least cover my huge coffee-bill ;)  &lt;br&gt;&lt;/p&gt;&lt;h3&gt;How to donate&lt;/h3&gt;&lt;p&gt;Donating is very simple - and secure. Please visit the &quot;Donate&quot; section at the editor&apos;s project page in order to make a donation.&lt;br&gt;&lt;a href=&quot;https://midieditor.org/donate&quot;&gt;https://midieditor.org/donate&lt;/a&gt;&lt;/p&gt;&lt;h3&gt;Thank you!&lt;/h3&gt;&lt;p&gt;Your donation will help me to maintain and update MidiEditor.&lt;/p&gt;&lt;h3&gt;Other ways to Contribute&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/markusschwenk/midieditor&quot;&gt;Rate MidiEditor and provide feedback&lt;/a&gt; to let me and other users know about how you liked the software!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>translate.google.com</translatorcomment>
-        <translation>&lt;html&gt; &lt;body&gt; &lt;h3&gt; Причины для пожертвования &lt;/h3&gt; &lt;p&gt; Уважаемый пользователь, &lt;br&gt; Я предлагаю MidiEditor бесплатно и надеюсь, вам понравится. Обратите внимание, что я разрабатывал редактор в свободное время и работаю над ним уже более четырех лет! Если MidiEditor полезен для вас, пожалуйста, пришлите мне небольшое пожертвование, чтобы я мог хотя бы покрыть мой огромный счет за кофе;) &lt;br&gt; &lt;/p&gt; &lt;h3&gt; Как сделать пожертвование &lt;/h3&gt; &lt;p&gt; Пожертвование очень просто - и безопасно. Пожалуйста, посетите раздел «Пожертвования» на странице проекта редактора, чтобы сделать пожертвование. &lt;br&gt; &lt;a href=&quot;https://midieditor.org/donate&quot;&gt; https://midieditor.org/donate&lt;/a &gt; &lt;/p&gt; &lt;h3&gt; Спасибо! &lt;/h3&gt; &lt;p&gt; Ваше пожертвование поможет мне поддерживать и обновлять MidiEditor. &lt;/p&gt; &lt;h3&gt; Другие способы внести свой вклад &lt;/h3&gt; &lt;p&gt; &lt;a href = &quot;https://github.com/markusschwenk/midieditor&quot;&gt; Оцените MidiEditor и оставьте отзыв &lt;/a&gt;, чтобы сообщить мне и другим пользователям о том, как вам понравилось программное обеспечение! &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/DonateDialog.cpp" line="89"/>
@@ -218,30 +235,37 @@
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="766"/>
         <source>Channel Pressure Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="769"/>
         <source>Control Change Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="772"/>
         <source>Key Pressure Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="775"/>
         <source>Key Signature Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="778"/>
         <source>Note On/Off Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="781"/>
         <source>Pitch Bend Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="784"/>
         <source>Program Change Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="787"/>
@@ -251,22 +275,27 @@
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="790"/>
         <source>Temo Change Event</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="793"/>
         <source>Text Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="796"/>
         <source>Time Signature Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="799"/>
         <source>Unknown Event</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="809"/>
         <source>On Tick</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="814"/>
@@ -276,63 +305,79 @@
         <location filename="../src/gui/EventWidget.cpp" line="844"/>
         <location filename="../src/gui/EventWidget.cpp" line="849"/>
         <source>Channel</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="818"/>
         <source>Control</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="824"/>
         <location filename="../src/gui/EventWidget.cpp" line="836"/>
         <source>Note</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="830"/>
         <source>Key</source>
+        <translation></translation>
+    </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="834"/>
         <source>Off Tick</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="835"/>
         <source>Duration</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="837"/>
         <source>Velocity</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="848"/>
         <source>Program</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="853"/>
         <location filename="../src/gui/EventWidget.cpp" line="872"/>
         <source>Data</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="857"/>
         <source>Tempo</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="862"/>
         <source>Text</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="866"/>
         <source>Numerator</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="867"/>
         <source>Denominator</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="876"/>
         <source>Track</source>
+        <translation>音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="905"/>
         <source>Track </source>
+        <translation>音轨 </translation>
     </message>
 </context>
 <context>
@@ -340,14 +385,17 @@
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="325"/>
         <source>Edited </source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="530"/>
         <source>The entered type refers to known Meta Event (</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/EventWidget.cpp" line="547"/>
         <source>The data must not contain byte 0xF7 (End of SysEx)</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -422,64 +470,64 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="351"/>
         <source>Add track</source>
-        <translation>添加 track</translation>
+        <translation>添加音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="359"/>
         <location filename="../src/gui/MainWindow.cpp" line="1785"/>
         <source>All tracks audible</source>
-        <translation></translation>
+        <translation>所有可发声的音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="365"/>
         <location filename="../src/gui/MainWindow.cpp" line="1774"/>
         <source>Mute all tracks</source>
-        <translation>静音所有 tracks</translation>
+        <translation>静音所有音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="373"/>
         <location filename="../src/gui/MainWindow.cpp" line="1796"/>
         <source>Show all tracks</source>
-        <translation>显示所有 tracks</translation>
+        <translation>显示所有音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="379"/>
         <location filename="../src/gui/MainWindow.cpp" line="1807"/>
         <source>Hide all tracks</source>
-        <translation>隐藏所有 tracks</translation>
+        <translation>隐藏所有音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="391"/>
         <source>Tracks</source>
-        <translation></translation>
+        <translation>音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="401"/>
         <location filename="../src/gui/MainWindow.cpp" line="1118"/>
         <source>All channels audible</source>
-        <translation></translation>
+        <translation>所有可发声的频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="407"/>
         <location filename="../src/gui/MainWindow.cpp" line="1107"/>
         <source>Mute all channels</source>
-        <translation>静音所有 channel</translation>
+        <translation>静音所有频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="415"/>
         <source>Show all channels</source>
-        <translation>显示所有 channel</translation>
+        <translation>显示所有频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="421"/>
         <location filename="../src/gui/MainWindow.cpp" line="1140"/>
         <source>Hide all channels</source>
-        <translation>隐藏所有 channel</translation>
+        <translation>隐藏所有频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="431"/>
         <source>Channels</source>
-        <translation></translation>
+        <translation>频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="441"/>
@@ -499,17 +547,17 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="456"/>
         <source>Channel: </source>
-        <translation></translation>
+        <translation>频道：</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="460"/>
         <source>Channel </source>
-        <translation></translation>
+        <translation>频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="465"/>
         <source>Track: </source>
-        <translation></translation>
+        <translation>音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="748"/>
@@ -525,7 +573,7 @@
         <location filename="../src/gui/MainWindow.cpp" line="923"/>
         <location filename="../src/gui/MainWindow.cpp" line="978"/>
         <source>Channels/Tracks mute</source>
-        <translation>静音 Channels/Tracks</translation>
+        <translation>静音频道或音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="924"/>
@@ -603,7 +651,7 @@
         <location filename="../src/gui/MainWindow.cpp" line="1247"/>
         <location filename="../src/gui/MainWindow.cpp" line="1527"/>
         <source>Close without saving</source>
-        <translation>丢弃更改并退出程序</translation>
+        <translation>丢弃更改</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="997"/>
@@ -706,7 +754,7 @@
         <location filename="../src/gui/MainWindow.cpp" line="1614"/>
         <location filename="../src/gui/MainWindow.cpp" line="1634"/>
         <source>Track </source>
-        <translation></translation>
+        <translation>音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1630"/>
@@ -722,7 +770,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1655"/>
         <source>Mute channel</source>
-        <translation></translation>
+        <translation>静音该频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1665"/>
@@ -737,62 +785,64 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1713"/>
         <source>Edit Track Name</source>
-        <translation></translation>
+        <translation>编辑音轨名</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1716"/>
         <location filename="../src/gui/MainWindow.cpp" line="1756"/>
         <source>Set Track Name</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1717"/>
-        <source>Track name (Track </source>
-        <translation></translation>
+        <translation>设置音轨名</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1738"/>
         <source>Remove track</source>
-        <translation></translation>
+        <translation>删除音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1745"/>
         <source>The selected track can&apos;t be removed!
  It&apos;s the last track of the file.</source>
-        <translation></translation>
+        <translation>无法删除当前音轨，因为此音轨为文件中唯一的音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1757"/>
         <source>Track name (New Track)</source>
-        <translation></translation>
+        <translation>新音轨的音轨名</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1758"/>
         <source>New Track</source>
-        <translation></translation>
+        <translation>新建音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1818"/>
         <source>Show track</source>
-        <translation></translation>
+        <translation>显示音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="1829"/>
         <source>Mute track</source>
-        <translation></translation>
+        <translation>静音音轨</translation>
     </message>
     <message>
-        <source>Select all events from channel </source>
-        <translation type="vanished">Выбрать все события на канале </translation>
-    </message>
-    <message>
-        <source>Select all events from track </source>
-        <translation type="vanished">Выбрать все события на дорожке </translation>
+        <location filename="../src/gui/MainWindow.cpp" line="2245"/>
+        <source>Paste to channel...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2179"/>
         <source>Select all</source>
         <translation>全选</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="1717"/>
+        <source>Track name (Track </source>
+        <translation type="unfinished">第 </translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="1717"/>
+        <source>)</source>
+        <translation type="unfinished"> 号音轨的音轨名</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2000"/>
@@ -807,27 +857,27 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2016"/>
         <source>Spread events</source>
-        <translation>Распространение событий</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2064"/>
         <source>Spreading done</source>
-        <translation>Распространено</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2064"/>
         <source>Spreaded </source>
-        <translation>Распространено</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2064"/>
         <source> events</source>
-        <translation> событий</translation>
+        <translation> </translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2089"/>
         <source>Note: </source>
-        <translation>Учтите: </translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2114"/>
@@ -936,12 +986,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2244"/>
         <source>Paste to track...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2245"/>
-        <source>Paste to channel...</source>
-        <translation></translation>
+        <translation>粘贴到音轨...</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2246"/>
@@ -1033,7 +1078,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2497"/>
         <source>Add track...</source>
-        <translation></translation>
+        <translation>添加音轨...</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="2503"/>
@@ -2413,7 +2458,7 @@
     <message>
         <location filename="../src/midi/MidiTrack.cpp" line="58"/>
         <source>Untitled track</source>
-        <translation>未命名 Track</translation>
+        <translation>未命名音轨</translation>
     </message>
 </context>
 <context>
@@ -2421,7 +2466,7 @@
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="46"/>
         <source>Velocity</source>
-        <translation></translation>
+        <translation>力度</translation>
     </message>
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="48"/>
@@ -2431,7 +2476,7 @@
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="50"/>
         <source>Pitch Bend</source>
-        <translation></translation>
+        <translation>弯音轮</translation>
     </message>
     <message>
         <location filename="../src/gui/MiscWidget.cpp" line="52"/>
@@ -2539,22 +2584,22 @@
     <message>
         <location filename="../src/gui/NToleQuantizationDialog.cpp" line="45"/>
         <source>Whole note</source>
-        <translation></translation>
+        <translation>全音符</translation>
     </message>
     <message>
         <location filename="../src/gui/NToleQuantizationDialog.cpp" line="47"/>
         <source>Half note</source>
-        <translation></translation>
+        <translation>二分音符</translation>
     </message>
     <message>
         <location filename="../src/gui/NToleQuantizationDialog.cpp" line="49"/>
         <source>Quarter note</source>
-        <translation></translation>
+        <translation>四分音符</translation>
     </message>
     <message>
         <location filename="../src/gui/NToleQuantizationDialog.cpp" line="51"/>
         <source>th note</source>
-        <translation></translation>
+        <translation>分音符</translation>
     </message>
     <message>
         <location filename="../src/gui/NToleQuantizationDialog.cpp" line="63"/>
@@ -2638,7 +2683,7 @@
     <message>
         <location filename="../src/tool/NewNoteTool.cpp" line="120"/>
         <source>Create note</source>
-        <translation></translation>
+        <translation>创建音符</translation>
     </message>
     <message>
         <location filename="../src/tool/NewNoteTool.cpp" line="142"/>
@@ -2747,7 +2792,7 @@
     <message>
         <location filename="../src/MidiEvent/TextEvent.cpp" line="96"/>
         <source>Trackname</source>
-        <translation></translation>
+        <translation>音轨名</translation>
     </message>
     <message>
         <location filename="../src/MidiEvent/TextEvent.cpp" line="98"/>
@@ -2785,7 +2830,7 @@
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="62"/>
         <source>Add to track: </source>
-        <translation></translation>
+        <translation>添加到音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="65"/>
@@ -2796,12 +2841,12 @@
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="67"/>
         <source>Track </source>
-        <translation></translation>
+        <translation>音轨 </translation>
     </message>
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="77"/>
         <source>Add tochannel: </source>
-        <translation></translation>
+        <translation>添加到频道：</translation>
     </message>
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="81"/>
@@ -2811,7 +2856,7 @@
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="83"/>
         <source>Channel </source>
-        <translation></translation>
+        <translation>频道 </translation>
     </message>
     <message>
         <location filename="../src/gui/RecordDialog.cpp" line="90"/>
@@ -2999,12 +3044,12 @@
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="51"/>
         <source>Track </source>
-        <translation></translation>
+        <translation>音轨 </translation>
     </message>
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="56"/>
         <source>New Track</source>
-        <translation></translation>
+        <translation>新建音轨 </translation>
     </message>
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="66"/>
@@ -3020,27 +3065,27 @@
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="82"/>
         <source>Rename track</source>
-        <translation></translation>
+        <translation>重命名音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="87"/>
         <source>Remove track</source>
-        <translation></translation>
+        <translation>删除音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="99"/>
         <source>Hide track</source>
-        <translation></translation>
+        <translation>隐藏音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="101"/>
         <source>Show track</source>
-        <translation></translation>
+        <translation>显示音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/TrackListWidget.cpp" line="109"/>
         <source>Mute track</source>
-        <translation></translation>
+        <translation>静音音轨</translation>
     </message>
 </context>
 <context>

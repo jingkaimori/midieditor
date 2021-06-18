@@ -849,6 +849,11 @@
         <translation>Установить время распространения</translation>
     </message>
     <message>
+        <location filename="../src/gui/MainWindow.cpp" line="1717"/>
+        <source>)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/gui/MainWindow.cpp" line="2001"/>
         <source>Spread time [ms]</source>
         <translation>Время распространения [мс]</translation>

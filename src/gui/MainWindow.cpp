@@ -1714,7 +1714,7 @@ void MainWindow::renameTrack(int tracknumber) {
 
     bool ok;
     QString text = QInputDialog::getText(this, tr("Set Track Name"),
-                                         tr("Track name (Track ") + QString::number(tracknumber) + ")", QLineEdit::Normal,
+                                         tr("Track name (Track ") + QString::number(tracknumber) + tr(")"), QLineEdit::Normal,
                                          file->tracks()->at(tracknumber)->name(), &ok);
     if (ok && !text.isEmpty()) {
         file->tracks()->at(tracknumber)->setName(text);
