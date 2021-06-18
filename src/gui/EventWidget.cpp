@@ -759,45 +759,45 @@ EventWidget::EventType EventWidget::computeType() {
 
 QString EventWidget::eventType() {
     switch (_currentType) {
-    case MidiEventType: {
-        return tr("Midi Event");
-    }
-    case ChannelPressureEventType: {
-        return tr("Channel Pressure Event");
-    }
-    case ControlChangeEventType: {
-        return tr("Control Change Event");
-    }
-    case KeyPressureEventType: {
-        return tr("Key Pressure Event");
-    }
-    case KeySignatureEventType: {
-        return tr("Key Signature Event");
-    }
-    case NoteEventType: {
-        return tr("Note On/Off Event");
-    }
-    case PitchBendEventType: {
-        return tr("Pitch Bend Event");
-    }
-    case ProgramChangeEventType: {
-        return tr("Program Change Event");
-    }
-    case SystemExclusiveEventType: {
-        return tr("Sysex Event");
-    }
-    case TempoChangeEventType: {
-        return tr("Temo Change Event");
-    }
-    case TextEventType: {
-        return tr("Text Event");
-    }
-    case TimeSignatureEventType: {
-        return tr("Time Signature Event");
-    }
-    case UnknownEventType: {
-        return tr("Unknown Event");
-    }
+        case MidiEventType: {
+            return tr("Midi Event");
+        }
+        case ChannelPressureEventType: {
+            return tr("Channel Pressure Event");
+        }
+        case ControlChangeEventType: {
+            return tr("Control Change Event");
+        }
+        case KeyPressureEventType: {
+            return tr("Key Pressure Event");
+        }
+        case KeySignatureEventType: {
+            return tr("Key Signature Event");
+        }
+        case NoteEventType: {
+            return tr("Note On/Off Event");
+        }
+        case PitchBendEventType: {
+            return tr("Pitch Bend Event");
+        }
+        case ProgramChangeEventType: {
+            return tr("Program Change Event");
+        }
+        case SystemExclusiveEventType: {
+            return tr("Sysex Event");
+        }
+        case TempoChangeEventType: {
+            return tr("Temo Change Event");
+        }
+        case TextEventType: {
+            return tr("Text Event");
+        }
+        case TimeSignatureEventType: {
+            return tr("Time Signature Event");
+        }
+        case UnknownEventType: {
+            return tr("Unknown Event");
+        }
     }
 
     return tr("Midi Event");

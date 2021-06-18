@@ -7,11 +7,11 @@
 # MIDIEDITOR_RELEASE_VERSION_ID=2
 # MIDIEDITOR_RELEASE_VERSION_STRING=3.1.0
 # MIDIEDITOR_PACKAGE_VERSION=1
-# MIDIEDITOR_BINARY=relative/path/to/MidiEditor
+# MIDIEDITOR_BINARY=relative/path/to/ProMidEdit
 #
 
 ARCH=amd64
-PACKAGE_DIR=midieditor_$MIDIEDITOR_RELEASE_VERSION_STRING-$MIDIEDITOR_PACKAGE_VERSION-$ARCH
+PACKAGE_DIR=promidedit_$MIDIEDITOR_RELEASE_VERSION_STRING-$MIDIEDITOR_PACKAGE_VERSION-$ARCH
 BASEDIR=$(dirname "$0")
 DATE='date %Y'
 DATE='$DATE'
@@ -25,36 +25,36 @@ mkdir $PACKAGE_DIR/DEBIAN
 mkdir $PACKAGE_DIR/usr/share
 mkdir $PACKAGE_DIR/usr/share/applications
 mkdir $PACKAGE_DIR/usr/share/pixmaps
-mkdir $PACKAGE_DIR/usr/share/midieditor
-mkdir $PACKAGE_DIR/usr/share/midieditor/assistant
+mkdir $PACKAGE_DIR/usr/share/promidedit
+mkdir $PACKAGE_DIR/usr/share/promidedit/assistant
 mkdir $PACKAGE_DIR/usr/share/doc/
-mkdir $PACKAGE_DIR/usr/share/doc/midieditor
+mkdir $PACKAGE_DIR/usr/share/doc/promidedit
 mkdir $PACKAGE_DIR/usr/lib
-mkdir $PACKAGE_DIR/usr/lib/midieditor
+mkdir $PACKAGE_DIR/usr/lib/promidedit
 
-# Copy the binary and all runfiles to usr/lib/midieditor
-cp $MIDIEDITOR_BINARY $PACKAGE_DIR/usr/lib/midieditor/MidiEditor
+# Copy the binary and all runfiles to usr/lib/promidedit
+cp $MIDIEDITOR_BINARY $PACKAGE_DIR/usr/lib/promidedit/ProMidEdit
 
-# /usr/bin contains midieditor executable
-cp $BASEDIR/midieditor/midieditor $PACKAGE_DIR/bin/
+# /usr/bin contains promidedit executable
+cp $BASEDIR/promidedit/promidedit $PACKAGE_DIR/bin/
 
 # /usr/share/applications gets desktop entry
-cp $BASEDIR/midieditor/MidiEditor.desktop $PACKAGE_DIR/usr/share/applications
+cp $BASEDIR/promidedit/ProMidEdit.desktop $PACKAGE_DIR/usr/share/applications
 
 # /usr/share/pixmaps gets the png file
-cp $BASEDIR/midieditor/logo48.png $PACKAGE_DIR/usr/share/pixmaps/midieditor.png
+cp $BASEDIR/promidedit/logo48.png $PACKAGE_DIR/usr/share/pixmaps/promidedit.png
 
 # Copy metronome
-cp -R packaging/metronome $PACKAGE_DIR/usr/share/midieditor/metronome
+cp -R packaging/metronome $PACKAGE_DIR/usr/share/promidedit/metronome
 
-# copyright goes to /usr/share/doc/midieditor (fields will be replaced below)
-cp $BASEDIR/midieditor/copyright $PACKAGE_DIR/usr/share/doc/midieditor/copyright
+# copyright goes to /usr/share/doc/promidedit (fields will be replaced below)
+cp $BASEDIR/promidedit/copyright $PACKAGE_DIR/usr/share/doc/promidedit/copyright
 
 # copy DEBIAN/control (fields will be replaced below)
-cp $BASEDIR/midieditor/control $PACKAGE_DIR/DEBIAN/control
+cp $BASEDIR/promidedit/control $PACKAGE_DIR/DEBIAN/control
 
 # Update fields in DEBIAN/control file and in copyright
-sed -i 's/{DATE}/'$(date +%Y-%m-%d)'/g' $PACKAGE_DIR/usr/share/doc/midieditor/copyright
+sed -i 's/{DATE}/'$(date +%Y-%m-%d)'/g' $PACKAGE_DIR/usr/share/doc/promidedit/copyright
 sed -i 's/{VERSION}/'$MIDIEDITOR_RELEASE_VERSION_STRING'/g' $PACKAGE_DIR/DEBIAN/control
 sed -i 's/{PACKAGE}/'$MIDIEDITOR_PACKAGE_VERSION'/g' $PACKAGE_DIR/DEBIAN/control
 sed -i 's/{ARCHITECURE}/'$ARCH'/g' $PACKAGE_DIR/DEBIAN/control
@@ -66,8 +66,8 @@ sed -i 's/{SIZE}/'"$SIZE"'/g' $PACKAGE_DIR/DEBIAN/control
 # permissions
 find $PACKAGE_DIR -type d -exec chmod 755 {} \;
 find $PACKAGE_DIR -type f -exec chmod 644 {} \;
-chmod +x $PACKAGE_DIR/bin/midieditor
-chmod +x $PACKAGE_DIR/usr/lib/midieditor/MidiEditor
+chmod +x $PACKAGE_DIR/bin/promidedit
+chmod +x $PACKAGE_DIR/usr/lib/promidedit/ProMidEdit
 
 fakeroot dpkg-deb --build $PACKAGE_DIR
 

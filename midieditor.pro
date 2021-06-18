@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = MidiEditor
+TARGET = ProMidEdit
 TRANSLATIONS += \
         locale/locale_ru.ts \
         locale/locale_zh.ts
@@ -68,7 +68,7 @@ unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
     DEFINES += __LINUX_ALSA__
     LIBS += -lasound
-    CONFIG += release
+    #CONFIG += release
     OBJECTS_DIR = .tmp
     MOC_DIR = .tmp
 }
@@ -94,3 +94,4 @@ macx: {
 
 DISTFILES += \
     locale/locale_zh.ts
+    locale/locale_ru.ts

@@ -48,8 +48,8 @@
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="83"/>
-        <source>The start command can be used to start additional software components (e.g. Midi synthesizers) each time, MidiEditor is started. You can see the output of the started software / script in the field below.</source>
-        <translation></translation>
+        <source>The start command can be used to start additional software components (e.g. Midi synthesizers) each time, ProMidEdit is started. You can see the output of the started software / script in the field below.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -61,8 +61,8 @@
     </message>
     <message>
         <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="53"/>
-        <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Enable Automatic Checking for Updates?&lt;/h3&gt;&lt;p&gt;Click below to enable or disable automatic checking for updates. &lt;/p&gt;&lt;p&gt;You can enable this option now, or later by navigating to Edit - Settings - Updates in the menu bar. You can always update your preference in that very same Settings page.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Privacy Note&lt;/b&gt;&lt;/p&gt;&lt;p&gt;When checking for updates, MidiEditor transmits your IP address as well as the currently installed version of MidiEditor and you operating system to a server which is located within the European Union.&lt;/p&gt;&lt;p&gt;Please read our privacy policy at &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt;By enabling the option, you confirm that you have read and understood the terms under which MidiEditor provides this service and that you agree to them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Enable Automatic Checking for Updates?&lt;/h3&gt;&lt;p&gt;Click below to enable or disable automatic checking for updates. &lt;/p&gt;&lt;p&gt;You can enable this option now, or later by navigating to Edit - Settings - Updates in the menu bar. You can always update your preference in that very same Settings page.&lt;/p&gt;&lt;p&gt;&lt;p&gt;&lt;b&gt;Privacy Note&lt;/b&gt;&lt;/p&gt;&lt;p&gt;When checking for updates, ProMidEdit transmits your IP address as well as the currently installed version of ProMidEditor and you operating system to a server which is located within the European Union.&lt;/p&gt;&lt;p&gt;Please read our privacy policy at &lt;a href=&quot;https://www.midieditor.org/updates-privacy&quot;&gt;www.midieditor.org/updates-privacy&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt;By enabling the option, you confirm that you have read and understood the terms under which ProMidEdit provides this service and that you agree to them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/AutomaticUpdateDialog.cpp" line="99"/>
@@ -88,50 +88,60 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="56"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="52"/>
+        <source>Percussion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="58"/>
         <source>none</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="67"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="69"/>
         <source>Channel visible</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="75"/>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="117"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="77"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="121"/>
         <source>Channel audible</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="82"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="84"/>
         <source>Solo mode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="91"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="94"/>
         <source>Select instrument</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="104"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="108"/>
         <source>Hide channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="106"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="110"/>
         <source>Show channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="115"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="119"/>
         <source>Mute channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/ChannelListWidget.cpp" line="144"/>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="148"/>
         <source>Events affecting all channels</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ChannelListWidget.cpp" line="150"/>
+        <source>Drums and percussion events</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -153,13 +163,21 @@
     </message>
     <message>
         <location filename="../src/gui/CompleteMidiSetupDialog.cpp" line="52"/>
-        <source>&lt;h3&gt;Output is not connected&lt;/h3&gt;&lt;p&gt;In order to play your music, you have to connect MidiEditor to a midi device (on your computer or externally) which can play your sounds.&lt;/br&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;未连接输出设备&lt;/h3&gt;&lt;p&gt;您需要将Midieditor与电脑自带或外置Midi播放设备连接，才能播放音乐。&lt;/br&gt;&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;Output is not connected&lt;/h3&gt;&lt;p&gt;In order to play your music, you have to connect ProMidEdit to a midi device (on your computer or externally) which can play your sounds.&lt;/br&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/CompleteMidiSetupDialog.cpp" line="60"/>
+        <source>&lt;h3&gt;Input is not connected&lt;/h3&gt;&lt;p&gt;In order to record music, ProMidEdit must be connected to a midi device that you will record music on.&lt;/br&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Output is not connected&lt;/h3&gt;&lt;p&gt;In order to play your music, you have to connect MidiEditor to a midi device (on your computer or externally) which can play your sounds.&lt;/br&gt;&lt;/p&gt;</source>
+        <translation type="vanished">&lt;h3&gt;未连接输出设备&lt;/h3&gt;&lt;p&gt;您需要将Midieditor与电脑自带或外置Midi播放设备连接，才能播放音乐。&lt;/br&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
         <source>&lt;h3&gt;Input is not connected&lt;/h3&gt;&lt;p&gt;In order to record music, MidiEditor must be connected to a midi device that you will record music on.&lt;/br&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;未连接输入设备&lt;/h3&gt;&lt;p&gt;您需要将Midieditor与Midi录制设备连接，才能录制音乐。&lt;/br&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;未连接输入设备&lt;/h3&gt;&lt;p&gt;您需要将Midieditor与Midi录制设备连接，才能录制音乐。&lt;/br&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/CompleteMidiSetupDialog.cpp" line="67"/>
@@ -191,9 +209,8 @@
     </message>
     <message>
         <location filename="../src/gui/DonateDialog.cpp" line="49"/>
-        <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Reasons to donate&lt;/h3&gt;&lt;p&gt;Dear User,&lt;br&gt;I offer MidiEditor for free and I hope you enjoy it. Please note that I developed the editor during my spare time and that I&apos;ve been working on it for more than four years by now! If MidiEditor is useful for you, please send me a little donation so that I can at least cover my huge coffee-bill ;)  &lt;br&gt;&lt;/p&gt;&lt;h3&gt;How to donate&lt;/h3&gt;&lt;p&gt;Donating is very simple - and secure. Please visit the &quot;Donate&quot; section at the editor&apos;s project page in order to make a donation.&lt;br&gt;&lt;a href=&quot;https://midieditor.org/donate&quot;&gt;https://midieditor.org/donate&lt;/a&gt;&lt;/p&gt;&lt;h3&gt;Thank you!&lt;/h3&gt;&lt;p&gt;Your donation will help me to maintain and update MidiEditor.&lt;/p&gt;&lt;h3&gt;Other ways to Contribute&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/markusschwenk/midieditor&quot;&gt;Rate MidiEditor and provide feedback&lt;/a&gt; to let me and other users know about how you liked the software!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translatorcomment>translate.google.com</translatorcomment>
-        <translation></translation>
+        <source>&lt;html&gt;&lt;body&gt;&lt;h3&gt;Reasons to donate&lt;/h3&gt;&lt;p&gt;Dear User,&lt;br&gt;I offer ProMidEdit for free and I hope you enjoy it. Please note that I developed the editor during my spare time and that I&apos;ve been working on it for more than four years by now! If ProMidEdit is useful for you, please send me a little donation so that I can at least cover my huge coffee-bill ;)  &lt;br&gt;&lt;/p&gt;&lt;h3&gt;How to donate&lt;/h3&gt;&lt;p&gt;Donating is very simple - and secure. Please visit the &quot;Donate&quot; section at the editor&apos;s project page in order to make a donation.&lt;br&gt;&lt;a href=&quot;https://donationalerts.com/c/prophessor&quot;&gt;https://donationalerts.com/c/prophessor&lt;/a&gt;&lt;/p&gt;&lt;h3&gt;Thank you!&lt;/h3&gt;&lt;p&gt;Your donation will help me to maintain and update ProMidEdit.&lt;/p&gt;&lt;h3&gt;Other ways to Contribute&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/PROPHESSOR/ProMidEdit&quot;&gt;Rate ProMidEdit and provide feedback&lt;/a&gt; to let me and other users know about how you liked the software!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/DonateDialog.cpp" line="89"/>
@@ -204,178 +221,191 @@
 <context>
     <name>EventWidget</name>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="589"/>
-        <location filename="../src/gui/EventWidget.cpp" line="632"/>
+        <location filename="../src/gui/EventWidget.cpp" line="595"/>
+        <location filename="../src/gui/EventWidget.cpp" line="638"/>
         <source>Property</source>
         <translation>属性</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="590"/>
-        <location filename="../src/gui/EventWidget.cpp" line="633"/>
-        <location filename="../src/gui/EventWidget.cpp" line="813"/>
-        <location filename="../src/gui/EventWidget.cpp" line="819"/>
-        <location filename="../src/gui/EventWidget.cpp" line="825"/>
-        <location filename="../src/gui/EventWidget.cpp" line="843"/>
+        <location filename="../src/gui/EventWidget.cpp" line="596"/>
+        <location filename="../src/gui/EventWidget.cpp" line="639"/>
+        <location filename="../src/gui/EventWidget.cpp" line="861"/>
+        <location filename="../src/gui/EventWidget.cpp" line="867"/>
+        <location filename="../src/gui/EventWidget.cpp" line="873"/>
+        <location filename="../src/gui/EventWidget.cpp" line="891"/>
         <source>Value</source>
         <translation>值</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="649"/>
-        <location filename="../src/gui/EventWidget.cpp" line="861"/>
-        <location filename="../src/gui/EventWidget.cpp" line="871"/>
+        <location filename="../src/gui/EventWidget.cpp" line="655"/>
+        <location filename="../src/gui/EventWidget.cpp" line="909"/>
+        <location filename="../src/gui/EventWidget.cpp" line="919"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="763"/>
-        <location filename="../src/gui/EventWidget.cpp" line="803"/>
+        <location filename="../src/gui/EventWidget.cpp" line="770"/>
+        <location filename="../src/gui/EventWidget.cpp" line="810"/>
+        <location filename="../src/gui/EventWidget.cpp" line="851"/>
         <source>Midi Event</source>
         <translation>Midi 事件</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="766"/>
+        <location filename="../src/gui/EventWidget.cpp" line="773"/>
+        <location filename="../src/gui/EventWidget.cpp" line="813"/>
         <source>Channel Pressure Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="769"/>
+        <location filename="../src/gui/EventWidget.cpp" line="776"/>
+        <location filename="../src/gui/EventWidget.cpp" line="816"/>
         <source>Control Change Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="772"/>
+        <location filename="../src/gui/EventWidget.cpp" line="779"/>
+        <location filename="../src/gui/EventWidget.cpp" line="819"/>
         <source>Key Pressure Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="775"/>
+        <location filename="../src/gui/EventWidget.cpp" line="782"/>
+        <location filename="../src/gui/EventWidget.cpp" line="822"/>
         <source>Key Signature Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="778"/>
+        <location filename="../src/gui/EventWidget.cpp" line="785"/>
+        <location filename="../src/gui/EventWidget.cpp" line="825"/>
         <source>Note On/Off Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="781"/>
+        <location filename="../src/gui/EventWidget.cpp" line="788"/>
+        <location filename="../src/gui/EventWidget.cpp" line="828"/>
         <source>Pitch Bend Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="784"/>
+        <location filename="../src/gui/EventWidget.cpp" line="791"/>
+        <location filename="../src/gui/EventWidget.cpp" line="831"/>
         <source>Program Change Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="787"/>
+        <location filename="../src/gui/EventWidget.cpp" line="794"/>
+        <location filename="../src/gui/EventWidget.cpp" line="834"/>
         <source>Sysex Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="790"/>
+        <location filename="../src/gui/EventWidget.cpp" line="797"/>
+        <location filename="../src/gui/EventWidget.cpp" line="837"/>
         <source>Temo Change Event</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="793"/>
+        <location filename="../src/gui/EventWidget.cpp" line="800"/>
+        <location filename="../src/gui/EventWidget.cpp" line="840"/>
         <source>Text Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="796"/>
+        <location filename="../src/gui/EventWidget.cpp" line="803"/>
+        <location filename="../src/gui/EventWidget.cpp" line="843"/>
         <source>Time Signature Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="799"/>
+        <location filename="../src/gui/EventWidget.cpp" line="806"/>
+        <location filename="../src/gui/EventWidget.cpp" line="846"/>
         <source>Unknown Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="809"/>
+        <location filename="../src/gui/EventWidget.cpp" line="857"/>
         <source>On Tick</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="814"/>
-        <location filename="../src/gui/EventWidget.cpp" line="820"/>
-        <location filename="../src/gui/EventWidget.cpp" line="826"/>
-        <location filename="../src/gui/EventWidget.cpp" line="838"/>
-        <location filename="../src/gui/EventWidget.cpp" line="844"/>
-        <location filename="../src/gui/EventWidget.cpp" line="849"/>
+        <location filename="../src/gui/EventWidget.cpp" line="862"/>
+        <location filename="../src/gui/EventWidget.cpp" line="868"/>
+        <location filename="../src/gui/EventWidget.cpp" line="874"/>
+        <location filename="../src/gui/EventWidget.cpp" line="886"/>
+        <location filename="../src/gui/EventWidget.cpp" line="892"/>
+        <location filename="../src/gui/EventWidget.cpp" line="897"/>
         <source>Channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="818"/>
+        <location filename="../src/gui/EventWidget.cpp" line="866"/>
         <source>Control</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="824"/>
-        <location filename="../src/gui/EventWidget.cpp" line="836"/>
+        <location filename="../src/gui/EventWidget.cpp" line="872"/>
+        <location filename="../src/gui/EventWidget.cpp" line="884"/>
         <source>Note</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="830"/>
+        <location filename="../src/gui/EventWidget.cpp" line="878"/>
         <source>Key</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="834"/>
+        <location filename="../src/gui/EventWidget.cpp" line="882"/>
         <source>Off Tick</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="835"/>
+        <location filename="../src/gui/EventWidget.cpp" line="883"/>
         <source>Duration</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="837"/>
+        <location filename="../src/gui/EventWidget.cpp" line="885"/>
         <source>Velocity</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="848"/>
+        <location filename="../src/gui/EventWidget.cpp" line="896"/>
         <source>Program</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="853"/>
-        <location filename="../src/gui/EventWidget.cpp" line="872"/>
+        <location filename="../src/gui/EventWidget.cpp" line="901"/>
+        <location filename="../src/gui/EventWidget.cpp" line="920"/>
         <source>Data</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="857"/>
+        <location filename="../src/gui/EventWidget.cpp" line="905"/>
         <source>Tempo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="862"/>
+        <location filename="../src/gui/EventWidget.cpp" line="910"/>
         <source>Text</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="866"/>
+        <location filename="../src/gui/EventWidget.cpp" line="914"/>
         <source>Numerator</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="867"/>
+        <location filename="../src/gui/EventWidget.cpp" line="915"/>
         <source>Denominator</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="876"/>
+        <location filename="../src/gui/EventWidget.cpp" line="924"/>
         <source>Track</source>
         <translation>音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="905"/>
+        <location filename="../src/gui/EventWidget.cpp" line="953"/>
         <source>Track </source>
         <translation>音轨 </translation>
     </message>
@@ -388,12 +418,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="530"/>
+        <location filename="../src/gui/EventWidget.cpp" line="536"/>
         <source>The entered type refers to known Meta Event (</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/EventWidget.cpp" line="547"/>
+        <location filename="../src/gui/EventWidget.cpp" line="553"/>
         <source>The data must not contain byte 0xF7 (End of SysEx)</source>
         <translation></translation>
     </message>
@@ -474,25 +504,25 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="359"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1785"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1716"/>
         <source>All tracks audible</source>
         <translation>所有可发声的音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="365"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1774"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1705"/>
         <source>Mute all tracks</source>
         <translation>静音所有音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="373"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1796"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1727"/>
         <source>Show all tracks</source>
         <translation>显示所有音轨</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="379"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1807"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1738"/>
         <source>Hide all tracks</source>
         <translation>隐藏所有音轨</translation>
     </message>
@@ -503,13 +533,13 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="401"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1118"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1088"/>
         <source>All channels audible</source>
         <translation>所有可发声的频道</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="407"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1107"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1077"/>
         <source>Mute all channels</source>
         <translation>静音所有频道</translation>
     </message>
@@ -520,7 +550,7 @@
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="421"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1140"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1110"/>
         <source>Hide all channels</source>
         <translation>隐藏所有频道</translation>
     </message>
@@ -550,709 +580,788 @@
         <translation>频道：</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="460"/>
+        <location filename="../src/gui/MainWindow.cpp" line="461"/>
         <source>Channel </source>
         <translation>频道</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="465"/>
+        <location filename="../src/gui/MainWindow.cpp" line="466"/>
         <source>Track: </source>
         <translation>音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="748"/>
+        <location filename="../src/gui/MainWindow.cpp" line="747"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="748"/>
+        <location filename="../src/gui/MainWindow.cpp" line="747"/>
         <source>No events recorded.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="923"/>
-        <location filename="../src/gui/MainWindow.cpp" line="978"/>
+        <location filename="../src/gui/MainWindow.cpp" line="929"/>
+        <location filename="../src/gui/MainWindow.cpp" line="984"/>
         <source>Channels/Tracks mute</source>
         <translation>静音频道或音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="924"/>
-        <location filename="../src/gui/MainWindow.cpp" line="979"/>
+        <location filename="../src/gui/MainWindow.cpp" line="930"/>
+        <location filename="../src/gui/MainWindow.cpp" line="985"/>
         <source>One or more channels/tracks are not audible. They will be audible in the saved file.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="925"/>
-        <location filename="../src/gui/MainWindow.cpp" line="980"/>
+        <location filename="../src/gui/MainWindow.cpp" line="931"/>
+        <location filename="../src/gui/MainWindow.cpp" line="986"/>
         <source>Save file</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="929"/>
-        <location filename="../src/gui/MainWindow.cpp" line="988"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1071"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1084"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1745"/>
+        <location filename="../src/gui/MainWindow.cpp" line="935"/>
+        <location filename="../src/gui/MainWindow.cpp" line="994"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1041"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1054"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1676"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="929"/>
-        <location filename="../src/gui/MainWindow.cpp" line="988"/>
+        <location filename="../src/gui/MainWindow.cpp" line="935"/>
+        <location filename="../src/gui/MainWindow.cpp" line="994"/>
         <source>The file could not be saved. Please make sure that the destination directory exists and that you have the correct access rights to write into this directory.</source>
         <translation>无法保存文件，请确认您保存文件的目录存在，而且您可以写入这个目录。</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="949"/>
+        <location filename="../src/gui/MainWindow.cpp" line="955"/>
         <source>Save file as...</source>
         <translation>另存为...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1037"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1153"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1247"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1527"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1196"/>
         <source>Save file?</source>
         <translation>保存文件？</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1037"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1153"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1247"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1527"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1196"/>
         <source>Save file </source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1037"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1153"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1247"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1527"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1196"/>
         <source> before closing?</source>
         <translation>在关闭之前？</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1037"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1153"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1247"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1527"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2144"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1196"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2079"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1037"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1153"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1247"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1527"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1196"/>
         <source>Close without saving</source>
         <translation>丢弃更改</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="997"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1037"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1153"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1247"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1527"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1196"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1024"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1012"/>
         <source>Open file</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1025"/>
+        <location filename="../src/gui/MainWindow.cpp" line="460"/>
+        <source>Percussion channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="1013"/>
         <source>MIDI Files(*.mid *.midi);;All Files(*)</source>
         <translation>MIDI 文件(*.mid *.midi);;所有文件(*)</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1071"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1041"/>
         <source>The file [</source>
         <translation>文件[</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1071"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1041"/>
         <source>]does not exist!</source>
         <translation>]不存在！</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1084"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1054"/>
         <source>The file is damaged and cannot be opened. </source>
         <translation>文件损坏或格式不正确，Midieditor无法打开文件 </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1129"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1099"/>
         <source>All channels visible</source>
         <translation>所有Channel可见</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1275"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1226"/>
         <source> - Untitled Document[*]</source>
         <translation> - 未命名文档[*]</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1288"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1239"/>
         <source>Scalefactor</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1289"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1240"/>
         <source>Scalefactor:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1299"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2543"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1250"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2482"/>
         <source>Scale events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1322"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2418"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1273"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2357"/>
         <source>Align left</source>
         <translation>左对齐</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1350"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2425"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1301"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2364"/>
         <source>Align right</source>
         <translation>右对齐</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1383"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1334"/>
         <source>Equalize</source>
         <translation>分散对齐</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1407"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1358"/>
         <source>Remove event(s)</source>
         <translation>移除事件</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1424"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1375"/>
         <source>Remove all events from channel </source>
         <translation>移除该 Channel 内的所有事件</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1445"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1396"/>
         <source>Move selected events to channel </source>
         <translation>将已选事件移动至该 Channel 内</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1471"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1422"/>
         <source>Move selected events to track </source>
         <translation>将已选事件移动至该 Track 内</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1614"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1634"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1545"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1565"/>
         <source>Track </source>
         <translation>音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1630"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2257"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1561"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2196"/>
         <source>Same as selected for new events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1632"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1563"/>
         <source>Keep track</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1655"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1586"/>
         <source>Mute channel</source>
         <translation>静音该频道</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1665"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1596"/>
         <source>Select solo channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1678"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1609"/>
         <source>Channel visibility changed</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1713"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1644"/>
         <source>Edit Track Name</source>
         <translation>编辑音轨名</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1716"/>
-        <location filename="../src/gui/MainWindow.cpp" line="1756"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1647"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1687"/>
         <source>Set Track Name</source>
         <translation>设置音轨名</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1738"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1669"/>
         <source>Remove track</source>
         <translation>删除音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1745"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1676"/>
         <source>The selected track can&apos;t be removed!
  It&apos;s the last track of the file.</source>
         <translation>无法删除当前音轨，因为此音轨为文件中唯一的音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1757"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1688"/>
         <source>Track name (New Track)</source>
         <translation>新音轨的音轨名</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1758"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1689"/>
         <source>New Track</source>
         <translation>新建音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1818"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1749"/>
         <source>Show track</source>
         <translation>显示音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1829"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1760"/>
         <source>Mute track</source>
         <translation>静音音轨</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2245"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2070"/>
+        <source>Open recent...</source>
+        <translation type="unfinished">最近打开的文件...</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2184"/>
         <source>Paste to channel...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2179"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2114"/>
         <source>Select all</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1717"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1648"/>
         <source>Track name (Track </source>
         <translation type="unfinished">第 </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="1717"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1648"/>
         <source>)</source>
         <translation type="unfinished"> 号音轨的音轨名</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2000"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1931"/>
         <source>Set spread-time</source>
         <translation>设置持续时间</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2001"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1932"/>
         <source>Spread time [ms]</source>
         <translation>持续时间 [毫秒]</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2016"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1947"/>
         <source>Spread events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2064"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1995"/>
         <source>Spreading done</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2064"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1995"/>
         <source>Spreaded </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2064"/>
+        <location filename="../src/gui/MainWindow.cpp" line="1995"/>
         <source> events</source>
         <translation> </translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2089"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2024"/>
         <source>Note: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2114"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2049"/>
         <source>File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2115"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2050"/>
         <source>Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2116"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2051"/>
         <source>Tools</source>
         <translation>工具</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2117"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2052"/>
         <source>View</source>
         <translation>视图</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2118"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2847"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2053"/>
         <source>Playback</source>
         <translation>回放</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2119"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2054"/>
         <source>Midi</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2120"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2055"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2123"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2058"/>
         <source>New</source>
         <translation>新建</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2129"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2830"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2064"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2779"/>
         <source>Open...</source>
         <translation>打开...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2135"/>
-        <source>Open recent..</source>
-        <translation>最近打开的文件...</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2150"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2085"/>
         <source>Save as...</source>
         <translation>另存为...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2158"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2093"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2165"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2100"/>
         <source>Undo</source>
         <translation>撤销</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2171"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2106"/>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2180"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2115"/>
         <source>Select all visible events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2185"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2120"/>
         <source>Select all events from channel...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2196"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2131"/>
         <source>Select all events from track...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2231"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2147"/>
+        <source>Navigate selection up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2153"/>
+        <source>Navigate selection down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2158"/>
+        <source>Navigate selection left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2163"/>
+        <source>Navigate selection right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2170"/>
         <source>Copy events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2238"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2885"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2177"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2803"/>
         <source>Paste events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2239"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2886"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2178"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2804"/>
         <source>Paste events at cursor position</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2244"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2183"/>
         <source>Paste to track...</source>
         <translation>粘贴到音轨...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2246"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2185"/>
         <source>Paste options...</source>
         <translation>粘贴选项...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2260"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2199"/>
         <source>Keep channel</source>
         <translatorcomment>??</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2275"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2783"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2214"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2729"/>
         <source>Settings...</source>
         <translation>设置...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2281"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2220"/>
         <source>Current tool...</source>
         <translation>当前工具...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2408"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2272"/>
+        <source>Tweak...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2274"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2280"/>
+        <source>Start time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2286"/>
+        <source>End time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2292"/>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2298"/>
+        <source>Value</source>
+        <translation type="unfinished">值</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2315"/>
+        <source>Small decrease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2320"/>
+        <source>Small increase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2325"/>
+        <source>Medium decrease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2330"/>
+        <source>Medium increase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2335"/>
+        <source>Large decrease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2340"/>
+        <source>Large increase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2347"/>
         <source>Remove events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2410"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2349"/>
         <source>Remove selected events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2432"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2371"/>
         <source>Equalize selection</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2441"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2380"/>
         <source>Quantify selection</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2448"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2387"/>
         <source>Quantization fractions</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2457"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2631"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2396"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2570"/>
         <source>Whole note</source>
         <translation>全音符</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2459"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2633"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2398"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2572"/>
         <source>Half note</source>
         <translation>二分音符</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2461"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2635"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2400"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2574"/>
         <source>Quarter note</source>
         <translation>四分音符</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2463"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2637"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2402"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2576"/>
         <source>th note</source>
         <translation>分音符</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2476"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2415"/>
         <source>Quantify tuplet...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2482"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2421"/>
         <source>Repeat tuplet quantization</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2490"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2429"/>
         <source>Spread selection</source>
         <translatorcomment>?</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2497"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2436"/>
         <source>Add track...</source>
         <translation>添加音轨...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2503"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2442"/>
         <source>Remove events from channel...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2514"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2453"/>
         <source>Move events to channel...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2525"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2464"/>
         <source>Move events to track...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2531"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2470"/>
         <source>Transpose selection...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2539"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2478"/>
         <source>Set file duration</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2550"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2489"/>
         <source>Magnet</source>
         <translation>吸附</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2560"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2499"/>
         <source>Zoom...</source>
         <translation>缩放...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2561"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2500"/>
         <source>Horizontal out</source>
         <translation>- 水平缩小</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2568"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2507"/>
         <source>Horizontal in</source>
         <translation>+ 水平放大</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2575"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2514"/>
         <source>Vertical out</source>
         <translation>- 垂直缩小</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2582"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2521"/>
         <source>Vertical in</source>
         <translation>+ 垂直放大</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2591"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2530"/>
         <source>Restore default</source>
         <translation>还原默认</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2608"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2547"/>
         <source>Colors ...</source>
         <translation>颜色...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2609"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2548"/>
         <source>From channels</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2614"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2553"/>
         <source>From tracks</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2623"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2562"/>
         <source>Raster</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2629"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2568"/>
         <source>Off</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2659"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2597"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2664"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2602"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2674"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2612"/>
         <source>Record</source>
         <translation>录制</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2680"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2618"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2687"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2625"/>
         <source>Back to begin</source>
         <translation>返回开头</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2697"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2635"/>
         <source>Previous measure</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2706"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2643"/>
         <source>Next measure</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2733"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2656"/>
+        <source>Previous marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2664"/>
+        <source>Next marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2673"/>
         <source>Playback speed...</source>
         <translation>回放速度...</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2768"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2708"/>
         <source>Lock screen while playing</source>
         <translation>回放时锁定视图</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2775"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2715"/>
         <source>Metronome</source>
         <translation>节拍器</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2788"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2722"/>
+        <source>Piano Emulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2734"/>
         <source>Connect Midi In/Out</source>
         <translation>连接 Midi 输入/输出设备</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2797"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2743"/>
         <source>Midi panic</source>
         <translation>Midi 故障</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2804"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2750"/>
         <source>Manual</source>
         <translation>手册</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2808"/>
-        <source>About MidiEditor</source>
-        <translation>关于 MidiEditor</translation>
+        <location filename="../src/gui/MainWindow.cpp" line="2754"/>
+        <source>About ProMidEdit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2812"/>
+        <source>About MidiEditor</source>
+        <translation type="vanished">关于 MidiEditor</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MainWindow.cpp" line="2758"/>
         <source>Donate</source>
         <translation>捐赠</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2968"/>
-        <location filename="../src/gui/MainWindow.cpp" line="2970"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2872"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2874"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="2997"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2905"/>
         <source>Quantify events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MainWindow.cpp" line="3068"/>
+        <location filename="../src/gui/MainWindow.cpp" line="2976"/>
         <source>Quantify tuplet</source>
         <translation></translation>
     </message>
@@ -1260,62 +1369,62 @@
 <context>
     <name>MatrixWidget</name>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="361"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="365"/>
         <source>Measure </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="424"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="428"/>
         <source>Control Change</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="428"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="432"/>
         <source>Tempo Change</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="432"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="436"/>
         <source>Time Signature</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="436"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="440"/>
         <source>Key Signature.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="440"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="444"/>
         <source>Program Change</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="444"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="448"/>
         <source>Key Pressure</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="448"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="452"/>
         <source>Channel Pressure</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="452"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="456"/>
         <source>Text</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="456"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="460"/>
         <source>Pitch Bend</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="460"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="464"/>
         <source>System Exclusive</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MatrixWidget.cpp" line="464"/>
+        <location filename="../src/gui/MatrixWidget.cpp" line="468"/>
         <source>(Unknown)</source>
         <translation>（未知）</translation>
     </message>
@@ -1403,1012 +1512,1012 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="669"/>
+        <location filename="../src/midi/MidiFile.cpp" line="677"/>
         <source>Acoustic Grand Piano</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="672"/>
+        <location filename="../src/midi/MidiFile.cpp" line="680"/>
         <source>Bright Acoustic Piano</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="675"/>
+        <location filename="../src/midi/MidiFile.cpp" line="683"/>
         <source>Electric Grand Piano</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="678"/>
+        <location filename="../src/midi/MidiFile.cpp" line="686"/>
         <source>Honky-tonk Piano</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="681"/>
-        <source> Electric Piano 1</source>
+        <location filename="../src/midi/MidiFile.cpp" line="689"/>
+        <source>Electric Piano 1</source>
         <translation>电钢琴1</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="684"/>
+        <location filename="../src/midi/MidiFile.cpp" line="692"/>
         <source>Electric Piano 2</source>
         <translation>电钢琴2</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="687"/>
+        <location filename="../src/midi/MidiFile.cpp" line="695"/>
         <source>Harpsichord</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="690"/>
+        <location filename="../src/midi/MidiFile.cpp" line="698"/>
         <source>Clavinet (Clavi)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="693"/>
+        <location filename="../src/midi/MidiFile.cpp" line="701"/>
         <source>Celesta</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="696"/>
+        <location filename="../src/midi/MidiFile.cpp" line="704"/>
         <source>Glockenspiel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="699"/>
+        <location filename="../src/midi/MidiFile.cpp" line="707"/>
         <source>Music Box</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="702"/>
+        <location filename="../src/midi/MidiFile.cpp" line="710"/>
         <source>Vibraphone</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="705"/>
+        <location filename="../src/midi/MidiFile.cpp" line="713"/>
         <source>Marimba</source>
         <translation>马林巴琴</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="708"/>
+        <location filename="../src/midi/MidiFile.cpp" line="716"/>
         <source>Xylophone</source>
         <translation>木琴</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="711"/>
+        <location filename="../src/midi/MidiFile.cpp" line="719"/>
         <source>Tubular Bells</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="714"/>
+        <location filename="../src/midi/MidiFile.cpp" line="722"/>
         <source>Dulcimer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="717"/>
+        <location filename="../src/midi/MidiFile.cpp" line="725"/>
         <source>Drawbar Organ</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="720"/>
+        <location filename="../src/midi/MidiFile.cpp" line="728"/>
         <source>Percussive Organ</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="723"/>
+        <location filename="../src/midi/MidiFile.cpp" line="731"/>
         <source>Rock Organ</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="726"/>
+        <location filename="../src/midi/MidiFile.cpp" line="734"/>
         <source>Church Organ</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="729"/>
+        <location filename="../src/midi/MidiFile.cpp" line="737"/>
         <source>Reed Organ</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="732"/>
+        <location filename="../src/midi/MidiFile.cpp" line="740"/>
         <source>Accordion</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="735"/>
+        <location filename="../src/midi/MidiFile.cpp" line="743"/>
         <source>Harmonica</source>
         <translation>口琴</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="738"/>
+        <location filename="../src/midi/MidiFile.cpp" line="746"/>
         <source>Tango Accordion</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="741"/>
+        <location filename="../src/midi/MidiFile.cpp" line="749"/>
         <source>Acoustic Guitar (nylon)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="744"/>
+        <location filename="../src/midi/MidiFile.cpp" line="752"/>
         <source>Acoustic Guitar (steel)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="747"/>
+        <location filename="../src/midi/MidiFile.cpp" line="755"/>
         <source>Electric Guitar (jazz)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="750"/>
+        <location filename="../src/midi/MidiFile.cpp" line="758"/>
         <source>Electric Guitar (clean)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="753"/>
+        <location filename="../src/midi/MidiFile.cpp" line="761"/>
         <source>Electric Guitar (muted)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="756"/>
+        <location filename="../src/midi/MidiFile.cpp" line="764"/>
         <source>Overdriven Guitar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="759"/>
+        <location filename="../src/midi/MidiFile.cpp" line="767"/>
         <source>Distortion Guitar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="762"/>
+        <location filename="../src/midi/MidiFile.cpp" line="770"/>
         <source>Guitar harmonics</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="765"/>
+        <location filename="../src/midi/MidiFile.cpp" line="773"/>
         <source>Acoustic Bass</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="768"/>
+        <location filename="../src/midi/MidiFile.cpp" line="776"/>
         <source>Electric Bass (finger)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="771"/>
+        <location filename="../src/midi/MidiFile.cpp" line="779"/>
         <source>Electric Bass (pick)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="774"/>
+        <location filename="../src/midi/MidiFile.cpp" line="782"/>
         <source>Fretless Bass</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="777"/>
+        <location filename="../src/midi/MidiFile.cpp" line="785"/>
         <source>Slap Bass 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="780"/>
+        <location filename="../src/midi/MidiFile.cpp" line="788"/>
         <source>Slap Bass 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="783"/>
+        <location filename="../src/midi/MidiFile.cpp" line="791"/>
         <source>Synth Bass 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="786"/>
+        <location filename="../src/midi/MidiFile.cpp" line="794"/>
         <source>Synth Bass 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="789"/>
+        <location filename="../src/midi/MidiFile.cpp" line="797"/>
         <source>Violin</source>
         <translation>小提琴</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="792"/>
+        <location filename="../src/midi/MidiFile.cpp" line="800"/>
         <source>Viola</source>
         <translation>中提琴</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="795"/>
+        <location filename="../src/midi/MidiFile.cpp" line="803"/>
         <source>Cello</source>
         <translation>大提琴</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="798"/>
+        <location filename="../src/midi/MidiFile.cpp" line="806"/>
         <source>Contrabass</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="801"/>
+        <location filename="../src/midi/MidiFile.cpp" line="809"/>
         <source>Tremolo Strings</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="804"/>
+        <location filename="../src/midi/MidiFile.cpp" line="812"/>
         <source>Pizzicato Strings</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="807"/>
+        <location filename="../src/midi/MidiFile.cpp" line="815"/>
         <source>Orchestral Harp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="810"/>
+        <location filename="../src/midi/MidiFile.cpp" line="818"/>
         <source>Timpani</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="813"/>
+        <location filename="../src/midi/MidiFile.cpp" line="821"/>
         <source>String Ensemble 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="816"/>
+        <location filename="../src/midi/MidiFile.cpp" line="824"/>
         <source>String Ensemble 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="819"/>
+        <location filename="../src/midi/MidiFile.cpp" line="827"/>
         <source>Synth Strings 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="822"/>
+        <location filename="../src/midi/MidiFile.cpp" line="830"/>
         <source>Synth Strings 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="825"/>
+        <location filename="../src/midi/MidiFile.cpp" line="833"/>
         <source>Choir Aahs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="828"/>
+        <location filename="../src/midi/MidiFile.cpp" line="836"/>
         <source>Voice Oohs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="831"/>
+        <location filename="../src/midi/MidiFile.cpp" line="839"/>
         <source>Synth Choir</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="834"/>
+        <location filename="../src/midi/MidiFile.cpp" line="842"/>
         <source>Orchestra Hit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="837"/>
+        <location filename="../src/midi/MidiFile.cpp" line="845"/>
         <source>Trumpet</source>
         <translation>小号</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="840"/>
+        <location filename="../src/midi/MidiFile.cpp" line="848"/>
         <source>Trombone</source>
         <translation>长号</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="843"/>
+        <location filename="../src/midi/MidiFile.cpp" line="851"/>
         <source>Tuba</source>
         <translation>大号</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="846"/>
+        <location filename="../src/midi/MidiFile.cpp" line="854"/>
         <source>Muted Trumpet</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="849"/>
+        <location filename="../src/midi/MidiFile.cpp" line="857"/>
         <source>French Horn</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="852"/>
+        <location filename="../src/midi/MidiFile.cpp" line="860"/>
         <source>Brass Section</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="855"/>
+        <location filename="../src/midi/MidiFile.cpp" line="863"/>
         <source>Synth Brass 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="858"/>
+        <location filename="../src/midi/MidiFile.cpp" line="866"/>
         <source>Synth Brass 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="861"/>
+        <location filename="../src/midi/MidiFile.cpp" line="869"/>
         <source>Soprano Sax</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="864"/>
+        <location filename="../src/midi/MidiFile.cpp" line="872"/>
         <source>Alto Sax</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="867"/>
+        <location filename="../src/midi/MidiFile.cpp" line="875"/>
         <source>Tenor Sax</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="870"/>
+        <location filename="../src/midi/MidiFile.cpp" line="878"/>
         <source>Baritone Sax</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="873"/>
+        <location filename="../src/midi/MidiFile.cpp" line="881"/>
         <source>Oboe</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="876"/>
+        <location filename="../src/midi/MidiFile.cpp" line="884"/>
         <source>English Horn</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="879"/>
+        <location filename="../src/midi/MidiFile.cpp" line="887"/>
         <source>Bassoon</source>
         <translation>巴松管</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="882"/>
+        <location filename="../src/midi/MidiFile.cpp" line="890"/>
         <source>Clarinet</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="885"/>
+        <location filename="../src/midi/MidiFile.cpp" line="893"/>
         <source>Piccolo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="888"/>
+        <location filename="../src/midi/MidiFile.cpp" line="896"/>
         <source>Flute</source>
         <translation>笛</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="891"/>
+        <location filename="../src/midi/MidiFile.cpp" line="899"/>
         <source>Recorder</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="894"/>
+        <location filename="../src/midi/MidiFile.cpp" line="902"/>
         <source>Pan Flute</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="897"/>
+        <location filename="../src/midi/MidiFile.cpp" line="905"/>
         <source>Blown Bottle</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="900"/>
+        <location filename="../src/midi/MidiFile.cpp" line="908"/>
         <source>Shakuhachi</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="903"/>
+        <location filename="../src/midi/MidiFile.cpp" line="911"/>
         <source>Whistle</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="906"/>
+        <location filename="../src/midi/MidiFile.cpp" line="914"/>
         <source>Ocarina</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="909"/>
+        <location filename="../src/midi/MidiFile.cpp" line="917"/>
         <source>Lead 1 (square)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="912"/>
+        <location filename="../src/midi/MidiFile.cpp" line="920"/>
         <source>Lead 2 (sawtooth)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="915"/>
+        <location filename="../src/midi/MidiFile.cpp" line="923"/>
         <source>Lead 3 (calliope)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="918"/>
+        <location filename="../src/midi/MidiFile.cpp" line="926"/>
         <source>Lead 4 (chiff)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="921"/>
+        <location filename="../src/midi/MidiFile.cpp" line="929"/>
         <source>Lead 5 (charang)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="924"/>
+        <location filename="../src/midi/MidiFile.cpp" line="932"/>
         <source>Lead 6 (voice)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="927"/>
+        <location filename="../src/midi/MidiFile.cpp" line="935"/>
         <source>Lead 7 (fifths)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="930"/>
+        <location filename="../src/midi/MidiFile.cpp" line="938"/>
         <source>Lead 8 (bass + lead)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="933"/>
+        <location filename="../src/midi/MidiFile.cpp" line="941"/>
         <source>Pad 1 (new age)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="936"/>
+        <location filename="../src/midi/MidiFile.cpp" line="944"/>
         <source>Pad 2 (warm)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="939"/>
+        <location filename="../src/midi/MidiFile.cpp" line="947"/>
         <source>Pad 3 (polysynth)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="942"/>
+        <location filename="../src/midi/MidiFile.cpp" line="950"/>
         <source>Pad 4 (choir)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="945"/>
+        <location filename="../src/midi/MidiFile.cpp" line="953"/>
         <source>Pad 5 (bowed)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="948"/>
+        <location filename="../src/midi/MidiFile.cpp" line="956"/>
         <source>Pad 6 (metallic)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="951"/>
+        <location filename="../src/midi/MidiFile.cpp" line="959"/>
         <source>Pad 7 (halo)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="954"/>
+        <location filename="../src/midi/MidiFile.cpp" line="962"/>
         <source>Pad 8 (sweep)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="957"/>
+        <location filename="../src/midi/MidiFile.cpp" line="965"/>
         <source>FX 1 (rain)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="960"/>
+        <location filename="../src/midi/MidiFile.cpp" line="968"/>
         <source>FX 2 (soundtrack)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="963"/>
+        <location filename="../src/midi/MidiFile.cpp" line="971"/>
         <source>FX 3 (crystal)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="966"/>
+        <location filename="../src/midi/MidiFile.cpp" line="974"/>
         <source>FX 4 (atmosphere)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="969"/>
+        <location filename="../src/midi/MidiFile.cpp" line="977"/>
         <source>FX 5 (brightness)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="972"/>
+        <location filename="../src/midi/MidiFile.cpp" line="980"/>
         <source>FX 6 (goblins)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="975"/>
+        <location filename="../src/midi/MidiFile.cpp" line="983"/>
         <source>FX 7 (echoes)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="978"/>
+        <location filename="../src/midi/MidiFile.cpp" line="986"/>
         <source>FX 8 (sci-fi)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="981"/>
+        <location filename="../src/midi/MidiFile.cpp" line="989"/>
         <source>Sitar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="984"/>
+        <location filename="../src/midi/MidiFile.cpp" line="992"/>
         <source>Banjo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="987"/>
+        <location filename="../src/midi/MidiFile.cpp" line="995"/>
         <source>Shamisen</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="990"/>
+        <location filename="../src/midi/MidiFile.cpp" line="998"/>
         <source>Koto</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="993"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1001"/>
         <source>Kalimba</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="996"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1004"/>
         <source>Bag pipe</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="999"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1007"/>
         <source>Fiddle</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1002"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1010"/>
         <source>Shanai</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1005"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1013"/>
         <source>Tinkle Bell</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1008"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1016"/>
         <source>Agogo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1011"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1019"/>
         <source>Steel Drums</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1014"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1022"/>
         <source>Woodblock</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1017"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1025"/>
         <source>Taiko Drum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1020"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1028"/>
         <source>Melodic Tom</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1023"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1031"/>
         <source>Synth Drum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1026"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1034"/>
         <source>Reverse Cymbal</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1029"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1037"/>
         <source>Guitar Fret Noise</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1032"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1040"/>
         <source>Breath Noise</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1035"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1043"/>
         <source>Seashore</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1038"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1046"/>
         <source>Bird Tweet</source>
         <translation>鸟鸣</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1041"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1049"/>
         <source>Telephone Ring</source>
         <translation>电话铃声</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1044"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1052"/>
         <source>Helicopter</source>
         <translation>直升机</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1047"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1055"/>
         <source>Applause</source>
         <translation>掌声</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1050"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1058"/>
         <source>Gunshot</source>
         <translation>枪声</translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1053"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1061"/>
         <source>out of range</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1060"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1068"/>
         <source>Bank Select (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1063"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1071"/>
         <source>Modulation Wheel (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1066"/>
-        <source>Breath Controller (MSB) </source>
-        <translation></translation>
+        <location filename="../src/midi/MidiFile.cpp" line="1074"/>
+        <source>Breath Controller (MSB)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1070"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1090"/>
+        <source>Balance (MSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1103"/>
+        <source>Effect Control 2 (MSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1116"/>
+        <source>General Purpose Controller 4 (MSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1126"/>
+        <source>Breath Controller (LSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1142"/>
+        <source>Balance (LSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1155"/>
+        <source>Effect Control 2 (LSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1168"/>
+        <source>General Purpose Controller 4 (LSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1232"/>
+        <source>Portamento Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1266"/>
+        <source>Registered Parameter Number(MSB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiFile.cpp" line="1078"/>
         <source>Foot Controller (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1073"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1081"/>
         <source>Portamento Time (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1076"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1084"/>
         <source>Data Entry (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1079"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1087"/>
         <source>Channel Volume (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1082"/>
-        <source>Balance (MSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1086"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1094"/>
         <source>Pan (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1089"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1097"/>
         <source>Expression (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1092"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1100"/>
         <source>Effect Control 1 (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1095"/>
-        <source>Effect Control 2 (MSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1099"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1107"/>
         <source>General Purpose Controller 1 (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1102"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1110"/>
         <source>General Purpose Controller 2 (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1105"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1113"/>
         <source>General Purpose Controller 3 (MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1108"/>
-        <source>General Purpose Controller 4 (MSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1112"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1120"/>
         <source>Bank Select (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1115"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1123"/>
         <source>Modulation Wheel (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1118"/>
-        <source>Breath Controller (LSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1122"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1130"/>
         <source>Foot Controller (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1125"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1133"/>
         <source>Portamento Time (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1128"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1136"/>
         <source>Data Entry (LSB) Channel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1131"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1139"/>
         <source>Channel Volume (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1134"/>
-        <source>Balance (LSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1138"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1146"/>
         <source>Pan (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1141"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1149"/>
         <source>Expression (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1144"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1152"/>
         <source>Effect Control 1 (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1147"/>
-        <source>Effect Control 2 (LSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1151"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1159"/>
         <source>General Purpose Controller 1 (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1154"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1162"/>
         <source>General Purpose Controller 2 (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1157"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1165"/>
         <source>General Purpose Controller 3 (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1160"/>
-        <source>General Purpose Controller 4 (LSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1164"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1172"/>
         <source>Sustain Pedal</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1167"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1175"/>
         <source>Portamento On/Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1170"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1178"/>
         <source>Sostenuto</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1173"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1181"/>
         <source>Soft Pedal</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1176"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1184"/>
         <source>Legato Footswitch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1179"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1187"/>
         <source>Hold 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1182"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1190"/>
         <source>Sound Controller 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1185"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1193"/>
         <source>Sound Controller 2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1188"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1196"/>
         <source>Sound Controller 3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1191"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1199"/>
         <source>Sound Controller 4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1194"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1202"/>
         <source>Sound Controller 5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1197"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1205"/>
         <source>Sound Controller 6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1200"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1208"/>
         <source>Sound Controller 7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1203"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1211"/>
         <source>Sound Controller 8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1206"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1214"/>
         <source>Sound Controller 9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1209"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1217"/>
         <source>Sound Controller 10 (GM2 default: Undefined)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1212"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1220"/>
         <source>General Purpose Controller 5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1215"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1223"/>
         <source>General Purpose Controller 6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1218"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1226"/>
         <source>General Purpose Controller 7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1221"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1229"/>
         <source>General Purpose Controller 8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1224"/>
-        <source>Portamento Control </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1228"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1236"/>
         <source>Effects 1 Depth (default: Reverb Send)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1231"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1239"/>
         <source>Effects 2 Depth (default: Tremolo Depth)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1234"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1242"/>
         <source>Effects 3 Depth (default: Chorus Send)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1237"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1245"/>
         <source>Effects 4 Depth (default: Celeste [Detune] Depth)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1240"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1248"/>
         <source>Effects 5 Depth (default: Phaser Depth)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1243"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1251"/>
         <source>Data Increment</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1246"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1254"/>
         <source>Data Decrement</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1249"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1257"/>
         <source>Non-Registered Parameter Number (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1252"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1260"/>
         <source>Non-Registered Parameter Number(MSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1255"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1263"/>
         <source>Registered Parameter Number (LSB)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1258"/>
-        <source>Registered Parameter Number(MSB) </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1262"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1270"/>
         <source>All Sound Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1265"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1273"/>
         <source>Reset All Controllers</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1268"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1276"/>
         <source>Local Control On/Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1271"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1279"/>
         <source>All Notes Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1274"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1282"/>
         <source>Omni Mode Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1277"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1285"/>
         <source>Omni Mode On</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1280"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1288"/>
         <source>Poly Mode Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1283"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1291"/>
         <source>Poly Mode On</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/midi/MidiFile.cpp" line="1287"/>
+        <location filename="../src/midi/MidiFile.cpp" line="1295"/>
         <source>undefined</source>
         <translation></translation>
     </message>
@@ -2416,25 +2525,37 @@
 <context>
     <name>MidiInput</name>
     <message>
-        <location filename="../src/midi/MidiInput.cpp" line="49"/>
         <source>MidiEditor input</source>
-        <translation>MidiEditor 输入</translation>
+        <translation type="vanished">MidiEditor 输入</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiInput.cpp" line="49"/>
+        <source>ProMidEdit input</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MidiOutput</name>
     <message>
-        <location filename="../src/midi/MidiOutput.cpp" line="47"/>
         <source>MidiEditor output</source>
-        <translation>MidiEditor 输出</translation>
+        <translation type="vanished">MidiEditor 输出</translation>
+    </message>
+    <message>
+        <location filename="../src/midi/MidiOutput.cpp" line="47"/>
+        <source>ProMidEdit output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MidiSettingsWidget</name>
     <message>
-        <location filename="../src/gui/MidiSettingsWidget.cpp" line="118"/>
         <source>Choose the Midi ports on your machine to which MidiEditor connects in order to play and record Midi data.</source>
-        <translation>选择此电脑上的MIDI设备，以输入/输出MIDI信号</translation>
+        <translation type="vanished">选择此电脑上的MIDI设备，以输入/输出MIDI信号</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MidiSettingsWidget.cpp" line="118"/>
+        <source>Choose the Midi ports on your machine to which ProMidEdit connects in order to play and record Midi data.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/gui/MidiSettingsWidget.cpp" line="122"/>
@@ -2456,9 +2577,8 @@
 <context>
     <name>MidiTrack</name>
     <message>
-        <location filename="../src/midi/MidiTrack.cpp" line="58"/>
         <source>Untitled track</source>
-        <translation>未命名音轨</translation>
+        <translation type="vanished">未命名音轨</translation>
     </message>
 </context>
 <context>
@@ -2489,77 +2609,83 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="401"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="444"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="56"/>
+        <source>Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/MiscWidget.cpp" line="403"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="446"/>
         <source>Changed selection</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="416"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="418"/>
         <source>Cleared selection</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="494"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="496"/>
         <source>Edited velocity</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="535"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="849"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="537"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="855"/>
         <source>Edited Control Change Events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="539"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="853"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="541"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="859"/>
         <source>Edited Pitch Bend Events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="543"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="857"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="545"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="863"/>
         <source>Edited Key Pressure Events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="547"/>
-        <location filename="../src/gui/MiscWidget.cpp" line="861"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="549"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="867"/>
         <source>Edited Channel Pressure Events</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="677"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="683"/>
         <source>Inserted Control Change Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="681"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="687"/>
         <source>Inserted Pitch Bend Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="685"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="691"/>
         <source>Inserted Key Pressure Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="689"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="695"/>
         <source>Inserted Channel Pressure Event</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="693"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="699"/>
         <source>Inserted Tempo Change Event</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="822"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="828"/>
         <source>Changed velocity</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/MiscWidget.cpp" line="865"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="553"/>
+        <location filename="../src/gui/MiscWidget.cpp" line="871"/>
         <source>Edited Tempo Change Events</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2756,8 +2882,9 @@
         <translation></translation>
     </message>
     <message>
+        <location filename="../src/tool/StandardTool.cpp" line="171"/>
         <source>Selection changed</source>
-        <translation type="vanished">选区改变</translation>
+        <translation>选区改变</translation>
     </message>
     <message>
         <location filename="../src/tool/SizeChangeTool.cpp" line="38"/>
@@ -3011,8 +3138,8 @@
     </message>
     <message>
         <location filename="../src/gui/RemoteSettingsWidget.cpp" line="74"/>
-        <source>You have to restart MidiEditor to connect!</source>
-        <translation></translation>
+        <source>You have to restart ProMidEdit to connect!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

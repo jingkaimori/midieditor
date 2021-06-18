@@ -42,16 +42,18 @@ MiscWidget::MiscWidget(MatrixWidget* mw, QWidget* parent)
 
 QString MiscWidget::modeToString(int mode) {
     switch (mode) {
-    case VelocityEditor:
-        return tr("Velocity");
-    case ControllEditor:
-        return tr("Control Change");
-    case PitchBendEditor:
-        return tr("Pitch Bend");
-    case KeyPressureEditor:
-        return tr("Key Pressure");
-    case ChannelPressureEditor:
-        return tr("Channel Pressure");
+        case VelocityEditor:
+            return tr("Velocity");
+        case ControllEditor:
+            return tr("Control Change");
+        case PitchBendEditor:
+            return tr("Pitch Bend");
+        case KeyPressureEditor:
+            return tr("Key Pressure");
+        case ChannelPressureEditor:
+            return tr("Channel Pressure");
+        case TempoEditor:
+            return tr("Tempo");
     }
     return "";
 }
@@ -531,24 +533,28 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
 
                     QString text = "";
                     switch (mode) {
-                    case ControllEditor: {
-                        text = tr("Edited Control Change Events");
-                        break;
+                        case ControllEditor: {
+                            text = tr("Edited Control Change Events");
+                            break;
+                        }
+                        case PitchBendEditor: {
+                            text = tr("Edited Pitch Bend Events");
+                            break;
+                        }
+                        case KeyPressureEditor: {
+                            text = tr("Edited Key Pressure Events");
+                            break;
+                        }
+                        case ChannelPressureEditor: {
+                            text = tr("Edited Channel Pressure Events");
+                            break;
+                        }
+                        case TempoEditor: {
+                            text = tr("Edited Tempo Change Events");
+                            break;
+                        }
                     }
-                    case PitchBendEditor: {
-                        text = tr("Edited Pitch Bend Events");
-                        break;
-                    }
-                    case KeyPressureEditor: {
-                        text = tr("Edited Key Pressure Events");
-                        break;
-                    }
-                    case ChannelPressureEditor: {
-                        text = tr("Edited Channel Pressure Events");
-                        break;
-                    }
-                    }
-
+                    
                     matrixWidget->midiFile()->protocol()->startNewAction(text);
 
                     if (ev) {
@@ -593,17 +599,17 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
                                 }
                                 break;
                             }
-                        case TempoEditor: {
-                            TempoChangeEvent* event = dynamic_cast<TempoChangeEvent*>(ev);
-                            if (event) {
-                                if (v > _max)
-                                    v = _max;
-                                if (v < 1)
-                                    v = 1;
-                                event->setBeats(v);
+                            case TempoEditor: {
+                                TempoChangeEvent* event = dynamic_cast<TempoChangeEvent*>(ev);
+                                if (event) {
+                                    if (v > _max)
+                                        v = _max;
+                                    if (v < 1)
+                                        v = 1;
+                                    event->setBeats(v);
+                                }
+                                break;
                             }
-                            break;
-                        }
                         }
 
                     } else {
@@ -620,43 +626,43 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
                         if (tick < 0)
                             tick = 0;
                         switch (mode) {
-                        case ControllEditor: {
-                            if (v > 127)
-                                v = 127;
-                            ControlChangeEvent* ctrl = new ControlChangeEvent(channelToUse, controller, v, track);
-                            matrixWidget->midiFile()->channel(channelToUse)->insertEvent(ctrl, tick);
-                            break;
-                        }
-                        case PitchBendEditor: {
-                            if (v > 16383)
-                                v = 16383;
-                            PitchBendEvent* event = new PitchBendEvent(channelToUse, v, track);
-                            matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                            break;
-                        }
-                        case KeyPressureEditor: {
-                            if (v > 127)
-                                v = 127;
-                            KeyPressureEvent* event = new KeyPressureEvent(channelToUse, v, controller, track);
-                            matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                            break;
-                        }
-                        case ChannelPressureEditor: {
-                            if (v > 127)
-                                v = 127;
-                            ChannelPressureEvent* event = new ChannelPressureEvent(channelToUse, v, track);
-                            matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                            break;
-                        }
-                        case TempoEditor: {
-                            if (v > _max)
-                                v = _max;
-                            if (v < 1)
-                                v = 1;
-                            TempoChangeEvent* event = new TempoChangeEvent(channelToUse, 60000000 / v, track);
-                            matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                            break;
-                        }
+                            case ControllEditor: {
+                                if (v > 127)
+                                    v = 127;
+                                ControlChangeEvent* ctrl = new ControlChangeEvent(channel, controller, v, track);
+                                matrixWidget->midiFile()->channel(channel)->insertEvent(ctrl, tick);
+                                break;
+                            }
+                            case PitchBendEditor: {
+                                if (v > 16383)
+                                    v = 16383;
+                                PitchBendEvent* event = new PitchBendEvent(channel, v, track);
+                                matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                                break;
+                            }
+                            case KeyPressureEditor: {
+                                if (v > 127)
+                                    v = 127;
+                                KeyPressureEvent* event = new KeyPressureEvent(channel, v, controller, track);
+                                matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                                break;
+                            }
+                            case ChannelPressureEditor: {
+                                if (v > 127)
+                                    v = 127;
+                                ChannelPressureEvent* event = new ChannelPressureEvent(channel, v, track);
+                                matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                                break;
+                            }
+                            case TempoEditor: {
+                                if (v > _max)
+                                    v = _max;
+                                if (v < 1)
+                                    v = 1;
+                                TempoChangeEvent* event = new TempoChangeEvent(channelToUse, 60000000 / v, track);
+                                matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
+                                break;
+                            }
                         }
                     }
 
@@ -673,26 +679,26 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
 
                 QString text = "";
                 switch (mode) {
-                case ControllEditor: {
-                    text = tr("Inserted Control Change Event");
-                    break;
-                }
-                case PitchBendEditor: {
-                    text = tr("Inserted Pitch Bend Event");
-                    break;
-                }
-                case KeyPressureEditor: {
-                    text = tr("Inserted Key Pressure Event");
-                    break;
-                }
-                case ChannelPressureEditor: {
-                    text = tr("Inserted Channel Pressure Event");
-                    break;
-                }
-                case TempoEditor: {
-                    text = tr("Inserted Tempo Change Event");
-                    break;
-                }
+                    case ControllEditor: {
+                        text = tr("Inserted Control Change Event");
+                        break;
+                    }
+                    case PitchBendEditor: {
+                        text = tr("Inserted Pitch Bend Event");
+                        break;
+                    }
+                    case KeyPressureEditor: {
+                        text = tr("Inserted Key Pressure Event");
+                        break;
+                    }
+                    case ChannelPressureEditor: {
+                        text = tr("Inserted Channel Pressure Event");
+                        break;
+                    }
+                    case TempoEditor: {
+                        text = tr("Inserted Tempo Change Event");
+                        break;
+                    }
                 }
 
                 matrixWidget->midiFile()->protocol()->startNewAction(text);
@@ -706,43 +712,43 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
                 if (tick < 0)
                     tick = 0;
                 switch (mode) {
-                case ControllEditor: {
-                    if (v > 127)
-                        v = 127;
-                    ControlChangeEvent* ctrl = new ControlChangeEvent(channelToUse, controller, v, track);
-                    matrixWidget->midiFile()->channel(channelToUse)->insertEvent(ctrl, tick);
-                    break;
-                }
-                case PitchBendEditor: {
-                    if (v > 16383)
-                        v = 16383;
-                    PitchBendEvent* event = new PitchBendEvent(channelToUse, v, track);
-                    matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                    break;
-                }
-                case KeyPressureEditor: {
-                    if (v > 127)
-                        v = 127;
-                    KeyPressureEvent* event = new KeyPressureEvent(channelToUse, v, controller, track);
-                    matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                    break;
-                }
-                case ChannelPressureEditor: {
-                    if (v > 127)
-                        v = 127;
-                    ChannelPressureEvent* event = new ChannelPressureEvent(channelToUse, v, track);
-                    matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                    break;
-                }
-                case TempoEditor: {
-                    if (v > _max)
-                        v = _max;
-                    if (v < 1)
-                        v = 1;
-                    TempoChangeEvent* event = new TempoChangeEvent(channelToUse, 60000000 / v, track);
-                    matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                    break;
-                }
+                    case ControllEditor: {
+                        if (v > 127)
+                            v = 127;
+                        ControlChangeEvent* ctrl = new ControlChangeEvent(channel, controller, v, track);
+                        matrixWidget->midiFile()->channel(channel)->insertEvent(ctrl, tick);
+                        break;
+                    }
+                    case PitchBendEditor: {
+                        if (v > 16383)
+                            v = 16383;
+                        PitchBendEvent* event = new PitchBendEvent(channel, v, track);
+                        matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                        break;
+                    }
+                    case KeyPressureEditor: {
+                        if (v > 127)
+                            v = 127;
+                        KeyPressureEvent* event = new KeyPressureEvent(channel, v, controller, track);
+                        matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                        break;
+                    }
+                    case ChannelPressureEditor: {
+                        if (v > 127)
+                            v = 127;
+                        ChannelPressureEvent* event = new ChannelPressureEvent(channel, v, track);
+                        matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                        break;
+                    }
+                    case TempoEditor: {
+                        if (v > _max)
+                            v = _max;
+                        if (v < 1)
+                            v = 1;
+                        TempoChangeEvent* event = new TempoChangeEvent(channelToUse, 60000000 / v, track);
+                        matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
+                        break;
+                    }
                 }
 
                 matrixWidget->midiFile()->protocol()->endAction();
@@ -845,26 +851,26 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
 
                 QString text = "";
                 switch (mode) {
-                case ControllEditor: {
-                    text = tr("Edited Control Change Events");
-                    break;
-                }
-                case PitchBendEditor: {
-                    text = tr("Edited Pitch Bend Events");
-                    break;
-                }
-                case KeyPressureEditor: {
-                    text = tr("Edited Key Pressure Events");
-                    break;
-                }
-                case ChannelPressureEditor: {
-                    text = tr("Edited Channel Pressure Events");
-                    break;
-                }
-                case TempoEditor: {
-                    text = tr("Edited Tempo Change Events");
-                    break;
-                }
+                    case ControllEditor: {
+                        text = tr("Edited Control Change Events");
+                        break;
+                    }
+                    case PitchBendEditor: {
+                        text = tr("Edited Pitch Bend Events");
+                        break;
+                    }
+                    case KeyPressureEditor: {
+                        text = tr("Edited Key Pressure Events");
+                        break;
+                    }
+                    case ChannelPressureEditor: {
+                        text = tr("Edited Channel Pressure Events");
+                        break;
+                    }
+                    case TempoEditor: {
+                        text = tr("Edited Tempo Change Events");
+                        break;
+                    }
                 }
 
                 matrixWidget->midiFile()->protocol()->startNewAction(text);
@@ -901,33 +907,33 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
                     }
                     lastValue = v;
                     switch (mode) {
-                    case ControllEditor: {
-                        ControlChangeEvent* ctrl = new ControlChangeEvent(channelToUse, controller, v, track);
-                        matrixWidget->midiFile()->channel(channelToUse)->insertEvent(ctrl, tick);
-                        break;
-                    }
-                    case PitchBendEditor: {
-                        PitchBendEvent* event = new PitchBendEvent(channelToUse, v, track);
-                        matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                        break;
-                    }
-                    case KeyPressureEditor: {
-                        KeyPressureEvent* event = new KeyPressureEvent(channelToUse, v, controller, track);
-                        matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                        break;
-                    }
-                    case ChannelPressureEditor: {
-                        ChannelPressureEvent* event = new ChannelPressureEvent(channelToUse, v, track);
-                        matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                        break;
-                    }
-                    case TempoEditor: {
-                        if (v < 1)
-                            v = 1;
-                        TempoChangeEvent* event = new TempoChangeEvent(channelToUse, 60000000 / v, track);
-                        matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
-                        break;
-                    }
+                        case ControllEditor: {
+                            ControlChangeEvent* ctrl = new ControlChangeEvent(channel, controller, v, track);
+                            matrixWidget->midiFile()->channel(channel)->insertEvent(ctrl, tick);
+                            break;
+                        }
+                        case PitchBendEditor: {
+                            PitchBendEvent* event = new PitchBendEvent(channel, v, track);
+                            matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                            break;
+                        }
+                        case KeyPressureEditor: {
+                            KeyPressureEvent* event = new KeyPressureEvent(channel, v, controller, track);
+                            matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                            break;
+                        }
+                        case ChannelPressureEditor: {
+                            ChannelPressureEvent* event = new ChannelPressureEvent(channel, v, track);
+                            matrixWidget->midiFile()->channel(channel)->insertEvent(event, tick);
+                            break;
+                        }
+                        case TempoEditor: {
+                            if (v < 1)
+                                v = 1;
+                            TempoChangeEvent* event = new TempoChangeEvent(channelToUse, 60000000 / v, track);
+                            matrixWidget->midiFile()->channel(channelToUse)->insertEvent(event, tick);
+                            break;
+                        }
                     }
                 }
 
@@ -937,18 +943,15 @@ void MiscWidget::mouseReleaseEvent(QMouseEvent* event) {
     }
 }
 
-int MiscWidget::tickOfXPos(int x)
-{
+int MiscWidget::tickOfXPos(int x) {
     return matrixWidget->midiFile()->tick(matrixWidget->msOfXPos(x + LEFT_BORDER_MATRIX_WIDGET));
 }
 
-int MiscWidget::xPosOfTick(int tick)
-{
+int MiscWidget::xPosOfTick(int tick) {
     return matrixWidget->xPosOfMs(matrixWidget->midiFile()->msOfTick(tick)) - LEFT_BORDER_MATRIX_WIDGET;
 }
 
-int MiscWidget::value(double y)
-{
+int MiscWidget::value(double y) {
     int v = _max * (height() - y) / height();
     if (v > _max) {
         v = _max;
@@ -1170,49 +1173,50 @@ QPair<int, int> MiscWidget::processEvent(MidiEvent* e, bool* isOk) {
                 pair.second = y;
                 *isOk = true;
             }
-        break;
-    }
-    case TempoEditor: {
-        TempoChangeEvent* tempo = dynamic_cast<TempoChangeEvent*>(e);
-        if (tempo) {
-            int x = tempo->x() - LEFT_BORDER_MATRIX_WIDGET;
-            int y = tempo->beatsPerQuarter();
-            pair.first = x;
-            pair.second = y;
-            *isOk = true;
+            break;
         }
-        break;
+        case TempoEditor: {
+            TempoChangeEvent* tempo = dynamic_cast<TempoChangeEvent*>(e);
+            if (tempo) {
+                int x = tempo->x() - LEFT_BORDER_MATRIX_WIDGET;
+                int y = tempo->beatsPerQuarter();
+                pair.first = x;
+                pair.second = y;
+                *isOk = true;
+            }
+            break;
+        }
     }
-    }
+
     return pair;
 }
 
 void MiscWidget::computeMinMax() {
     switch (mode) {
-    case ControllEditor: {
-        _max = 127;
-        _default = 0;
-        break;
-    }
-    case PitchBendEditor: {
-        _max = 16383;
-        _default = 0x2000;
-        break;
-    }
-    case KeyPressureEditor: {
-        _max = 127;
-        _default = 0;
-        break;
-    }
-    case ChannelPressureEditor: {
-        _max = 127;
-        _default = 0;
-        break;
-    }
-    case TempoEditor: {
-        _max = 500; // Reasonable but arbitrary; maybe add to preferences?
-        _default = 120;
-        break;
-    }
+        case ControllEditor: {
+            _max = 127;
+            _default = 0;
+            break;
+        }
+        case PitchBendEditor: {
+            _max = 16383;
+            _default = 0x2000;
+            break;
+        }
+        case KeyPressureEditor: {
+            _max = 127;
+            _default = 0;
+            break;
+        }
+        case ChannelPressureEditor: {
+            _max = 127;
+            _default = 0;
+            break;
+        }
+        case TempoEditor: {
+            _max = 500; // Reasonable but arbitrary; maybe add to preferences?
+            _default = 120;
+            break;
+        }
     }
 }

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /usr/share/promidedit
+/usr/lib/promidedit/ProMidEdit $@

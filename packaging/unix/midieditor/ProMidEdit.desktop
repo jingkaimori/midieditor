@@ -1,13 +1,12 @@
 
 [Desktop Entry]
-Version=0.0.1
+Version=1.0.0
 Encoding=UTF-8
-Name=MidiEditor
+Name=ProMidEdit
 Comment=NONE
-Exec=midieditor
+Exec=promidedit
 Icon=midieditor.png
 Terminal=false
 Type=Application
 Categories=AudioVideo;Audio;
-Name[de_DE]=MidiEditor
-Comment[de_DE.utf8]=Midi Editor
+Name[ru_RU]=ProMidEdit.desktop

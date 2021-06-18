@@ -609,8 +609,7 @@ int MidiFile::measure(int startTick, int endTick,
     return measure;
 }
 
-int MidiFile::measure(int startTick, int* startTickOfMeasure ,int* endTickOfMeasure)
-{
+int MidiFile::measure(int startTick, int* startTickOfMeasure ,int* endTickOfMeasure) {
     QList<MidiEvent*> events = channels[18]->eventMap()->values();
     TimeSignatureEvent* event = 0;
     int i = 0;
@@ -646,8 +645,7 @@ int MidiFile::measure(int startTick, int* startTickOfMeasure ,int* endTickOfMeas
     return measure;
 }
 
-int MidiFile::ticksPerQuarter()
-{
+int MidiFile::ticksPerQuarter() {
     return timePerQuarter;
 }
 
@@ -678,7 +676,7 @@ QString MidiFile::instrumentName(int prog) {
             return tr("Honky-tonk Piano");
         }
         case 5: {
-            return tr(" Electric Piano 1");
+            return tr("Electric Piano 1");
         }
         case 6: {
             return tr("Electric Piano 2");
@@ -1063,7 +1061,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Modulation Wheel (MSB)");
         }
         case 2: {
-            return tr("Breath Controller (MSB) ");
+            return tr("Breath Controller (MSB)");
         }
 
         case 4: {
@@ -1079,7 +1077,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Channel Volume (MSB)");
         }
         case 8: {
-            return tr("Balance (MSB) ");
+            return tr("Balance (MSB)");
         }
 
         case 10: {
@@ -1092,7 +1090,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Effect Control 1 (MSB)");
         }
         case 13: {
-            return tr("Effect Control 2 (MSB) ");
+            return tr("Effect Control 2 (MSB)");
         }
 
         case 16: {
@@ -1105,7 +1103,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("General Purpose Controller 3 (MSB)");
         }
         case 19: {
-            return tr("General Purpose Controller 4 (MSB) ");
+            return tr("General Purpose Controller 4 (MSB)");
         }
 
         case 32: {
@@ -1115,7 +1113,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Modulation Wheel (LSB)");
         }
         case 34: {
-            return tr("Breath Controller (LSB) ");
+            return tr("Breath Controller (LSB)");
         }
 
         case 36: {
@@ -1131,7 +1129,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Channel Volume (LSB)");
         }
         case 40: {
-            return tr("Balance (LSB) ");
+            return tr("Balance (LSB)");
         }
 
         case 42: {
@@ -1144,7 +1142,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Effect Control 1 (LSB)");
         }
         case 45: {
-            return tr("Effect Control 2 (LSB) ");
+            return tr("Effect Control 2 (LSB)");
         }
 
         case 48: {
@@ -1157,7 +1155,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("General Purpose Controller 3 (LSB)");
         }
         case 51: {
-            return tr("General Purpose Controller 4 (LSB) ");
+            return tr("General Purpose Controller 4 (LSB)");
         }
 
         case 64: {
@@ -1221,7 +1219,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("General Purpose Controller 8");
         }
         case 84: {
-            return tr("Portamento Control ");
+            return tr("Portamento Control");
         }
 
         case 91: {
@@ -1255,7 +1253,7 @@ QString MidiFile::controlChangeName(int control) {
             return tr("Registered Parameter Number (LSB)");
         }
         case 101: {
-            return tr("Registered Parameter Number(MSB) ");
+            return tr("Registered Parameter Number(MSB)");
         }
 
         case 120: {
@@ -1794,7 +1792,7 @@ QList<int> MidiFile::quantization(int fractionSize) {
 }
 
 
-int MidiFile::startTickOfMeasure(int measure){
+int MidiFile::startTickOfMeasure(int measure) {
     QMap<int, MidiEvent*> *timeSigs = timeSignatureEvents();
     QMap<int, MidiEvent*>::iterator it = timeSigs->begin();
 
@@ -1815,7 +1813,7 @@ int MidiFile::startTickOfMeasure(int measure){
     return currentEvent->midiTime() + (measure - currentMeasure) * currentEvent->ticksPerMeasure();
 }
 
-void MidiFile::deleteMeasures(int from, int to){
+void MidiFile::deleteMeasures(int from, int to) {
     int tickFrom = startTickOfMeasure(from);
     int tickTo = startTickOfMeasure(to + 1);
 
@@ -1892,7 +1890,7 @@ void MidiFile::deleteMeasures(int from, int to){
     ProtocolEntry::protocol(toCopy, this);
 }
 
-void MidiFile::insertMeasures(int after, int numMeasures){
+void MidiFile::insertMeasures(int after, int numMeasures) {
     if (after == 0) {
         // Cannot insert before first measure.
         return;

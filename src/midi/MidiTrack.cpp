@@ -24,8 +24,7 @@
 #include "MidiFile.h"
 
 MidiTrack::MidiTrack(MidiFile* file)
-    : ProtocolEntry()
-{
+    : ProtocolEntry() {
     _number = 0;
     _nameEvent = 0;
     _file = file;

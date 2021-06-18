@@ -34,6 +34,7 @@
 #include "../tool/Selection.h"
 #include "../tool/Tool.h"
 #include "../gui/Appearance.h"
+#include "../midi/MidiOutput.h"
 
 #include <QList>
 #include <QtCore/qmath.h>
@@ -948,8 +949,7 @@ void MatrixWidget::mousePressEvent(QMouseEvent* event) {
             bool inRect = mouseInRect(pianoKeys.value(key));
             if (inRect) {
                 // play note
-                pianoEvent->setNote(key);
-                MidiPlayer::play(pianoEvent);
+                playNote(key);
             }
         }
     }
@@ -972,12 +972,13 @@ void MatrixWidget::mouseReleaseEvent(QMouseEvent* event) {
 }
 
 void MatrixWidget::takeKeyPressEvent(QKeyEvent* event) {
-
     if (Tool::currentTool()) {
         if (Tool::currentTool()->pressKey(event->key())) {
             repaint();
         }
     }
+
+    pianoEmulator(event);
 }
 
 void MatrixWidget::takeKeyReleaseEvent(QKeyEvent* event) {
@@ -986,6 +987,41 @@ void MatrixWidget::takeKeyReleaseEvent(QKeyEvent* event) {
             repaint();
         }
     }
+}
+
+void MatrixWidget::pianoEmulator(QKeyEvent* event) {
+    if (!_isPianoEmulationEnabled) return;
+
+    int key = event->key();
+
+    const int C4_OFFSET = 48;
+
+    // z, s, x, d, c, v -> C, C#, D, D#, E, F
+    int keys[] = {
+        90, 83, 88, 68, 67, 86, 71, 66, 72, 78, 74, 77, // C3 - H3
+        81, 50, 87, 51, 69, 82, 53, 84, 54, 89, 55, 85, // C4 - H4
+        73, 57, 79, 48, 80, 91, 61, 93 // C5 - G5
+    };
+    for (uint8_t idx = 0; idx < sizeof(keys) / sizeof(*keys); idx++) {
+        if (key == keys[idx]) {
+            MatrixWidget::playNote(idx + C4_OFFSET);
+        }
+    }
+
+    int dupkeys[] = {
+        44, 76, 46, 59, 47 // C4 - E4 (,l.;/)
+    };
+    for (uint8_t idx = 0; idx < sizeof(dupkeys) / sizeof(*dupkeys); idx++) {
+        if (key == dupkeys[idx]) {
+            MatrixWidget::playNote(idx + C4_OFFSET + 12);
+        }
+    }
+}
+
+void MatrixWidget::playNote(int note) {
+    pianoEvent->setNote(note);
+    pianoEvent->setChannel(MidiOutput::standardChannel(), false);
+    MidiPlayer::play(pianoEvent);
 }
 
 QList<MidiEvent*>* MatrixWidget::activeEvents() {
@@ -1098,8 +1134,7 @@ int MatrixWidget::maxVisibleMidiTime() {
     return endTick;
 }
 
-void MatrixWidget::wheelEvent(QWheelEvent* event)
-{
+void MatrixWidget::wheelEvent(QWheelEvent* event) {
     /*
      * Qt has some underdocumented behaviors for reporting wheel events, so the
      * following were determined empirically:
@@ -1204,6 +1239,14 @@ void MatrixWidget::setColorsByTracks() {
 
 bool MatrixWidget::colorsByChannel() {
     return _colorsByChannels;
+}
+
+bool MatrixWidget::getPianoEmulation() {
+    return _isPianoEmulationEnabled;
+}
+
+void MatrixWidget::setPianoEmulation(bool mode) {
+    _isPianoEmulationEnabled = mode;
 }
 
 void MatrixWidget::setDiv(int div) {

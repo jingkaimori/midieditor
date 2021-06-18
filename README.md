@@ -1,13 +1,9 @@
-
-
 <img align="left" width="70px" src="run_environment/midieditor.ico">
 
-MidiEditor
+ProMidEdit
 ===========
 
-[![Build Status](https://api.travis-ci.org/markusschwenk/midieditor.svg?branch=master)](https://travis-ci.org/markusschwenk/midieditor)
-
-Downloads : [last release](https://github.com/markusschwenk/midieditor/releases/)
+Downloads : [last release](https://github.com/PROPHESSOR/ProMidEdit/releases/)
 
 ### Building Dependencies
 * [Qt >= 5.7](https://www.qt.io/download-open-source/)
@@ -16,11 +12,11 @@ Downloads : [last release](https://github.com/markusschwenk/midieditor/releases/
 
 ### Introduction
 
-MidiEditor is a free software providing an interface to edit, record, and play Midi data.
+ProMidEdit is a free software providing an interface to edit, record, and play Midi data.
 
-The editor is able to open existing Midi files and modify their content. New files can be created and the user can enter his own composition by either recording Midi data from a connected Midi device (e.g., a digital piano or a keyboard) or by manually creating new notes and other Midi events. The recorded data can be easily quantified and edited afterwards using MidiEditor.
+The editor is able to open existing Midi files and modify their content. New files can be created and the user can enter his own composition by either recording Midi data from a connected Midi device (e.g., a digital piano or a keyboard) or by manually creating new notes and other Midi events. The recorded data can be easily quantified and edited afterwards using ProMidEdit.
 
-![image](midieditor-manual/screenshots/midieditor-full.png)
+![image](manual/screenshots/midieditor-full.png)
 
 ### Features
 
@@ -32,10 +28,16 @@ The editor is able to open existing Midi files and modify their content. New fil
 * Automatic Updates
 * Free
 * Available for Windows and Linux
+* English and Russian languages support
 
 ### Note
 
-MidiEditor was developed by Markus Schwenk. It is entirely written in C++ (Qt) and is available for the platforms Linux and Windows. Should MidiEditor be a software which is helpful for you and which you use often, please let the developer and other users know by providing feedback. Moreover, the developer worked on MidiEditor in his (rare) sparetime and offers it for free. So, when you feel like it, pay him a coffee (or two). Please also feel free to contact the developer in case you have any ideas which could help to improve the editor or in the case you found any bugs you want the developer to	fix.
+ProMidEdit was developed by PROPHESSOR based on [Markus Schwenk's MidiEditor](https://github.com/markusschwenk/midieditor).
+It is entirely written in C++ (Qt 5) and is available for the platforms Linux and Windows.
+Should ProMidEdit be a software which is helpful for you and which you use often, please let the developer and other users know by providing feedback.
+Moreover, the developer worked on ProMidEdit in his (rare) sparetime and offers it for free.
+So, when you feel like it, pay him a coffee (or two).
+Please also feel free to contact the developer in case you have any ideas which could help to improve the editor or in the case you found any bugs you want the developer to fix.
 
 ### Suggestion, Improvements, Bugreports...
 
@@ -49,9 +51,4 @@ Please feel free to contact the developer if you have any suggestions! Please al
 ### Manual
 
 [https://midieditor.org/index.php?category=manual](https://midieditor.org/index.php?category=manual)
-
-
-
-
-
 

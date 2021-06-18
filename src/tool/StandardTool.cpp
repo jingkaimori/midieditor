@@ -151,13 +151,23 @@ bool StandardTool::press(bool leftClick) {
                     EventTool::selectEvent(event, !Selection::instance()->selectedEvents().contains(event));
                     protocol(toCopy, this);
                 }
-					if(QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier)){
-						moveTool->setDirections(true, false);
-					} else if(QApplication::keyboardModifiers().testFlag(Qt::AltModifier)){
-						moveTool->setDirections(false, true);
-					} else {
-						moveTool->setDirections(true, true);
-					}
+                /* TODO reenable
+                    if(altGrPressed){
+                        moveTool->setDirections(true, false);
+                    } else if(spacePressed){
+                        moveTool->setDirections(false, true);
+                    } else {
+                        moveTool->setDirections(true, true);
+                    } */
+
+                if(QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier)) {
+                    moveTool->setDirections(true, false);
+                } else if(QApplication::keyboardModifiers().testFlag(Qt::AltModifier)) {
+                    moveTool->setDirections(false, true);
+                } else {
+                    moveTool->setDirections(true, true);
+                }
+
                 Tool::setCurrentTool(moveTool);
                 moveTool->move(mouseX, mouseY);
                 moveTool->press(leftClick);

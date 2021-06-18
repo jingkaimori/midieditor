@@ -109,7 +109,7 @@ MainWindow::MainWindow(QString initFile)
     : QMainWindow()
     , _initFile(initFile) {
     file = 0;
-    _settings = new QSettings(QString("MidiEditor"), QString("NONE"));
+    _settings = new QSettings(QString("ProMidEdit"), QString("NONE"));
 
     _moveSelectedEventsToChannelMenu = 0;
     _moveSelectedEventsToTrackMenu = 0;
@@ -457,7 +457,8 @@ MainWindow::MainWindow(QString initFile)
     chooserLayout->addWidget(channelLabel, 2, 0, 1, 1);
     _chooseEditChannel = new QComboBox(chooser);
     for (int i = 0; i < 16; i++) {
-        _chooseEditChannel->addItem(tr("Channel ") + QString::number(i));
+        if (i == 9) _chooseEditChannel->addItem(tr("Percussion channel"));
+        else _chooseEditChannel->addItem(tr("Channel ") + QString::number(i)); // TODO: Display channel instrument | UDP: But **file** is *nullptr*
     }
     connect(_chooseEditChannel, SIGNAL(activated(int)), this, SLOT(editChannel(int)));
 
@@ -584,13 +585,11 @@ void MainWindow::setFile(MidiFile* file) {
     checkEnableActionsForSelection();
 }
 
-MidiFile* MainWindow::getFile()
-{
+MidiFile* MainWindow::getFile() {
     return file;
 }
 
-MatrixWidget* MainWindow::matrixWidget()
-{
+MatrixWidget* MainWindow::matrixWidget() {
     return mw_matrixWidget;
 }
 
@@ -828,8 +827,7 @@ void MainWindow::backToBegin() {
     mw_matrixWidget->update();
 }
 
-void MainWindow::forwardMarker()
-{
+void MainWindow::forwardMarker() {
     if (!file)
         return;
 
@@ -862,8 +860,7 @@ void MainWindow::forwardMarker()
     mw_matrixWidget->update();
 }
 
-void MainWindow::backMarker()
-{
+void MainWindow::backMarker() {
     if (!file)
         return;
 
@@ -897,9 +894,7 @@ void MainWindow::backMarker()
     mw_matrixWidget->update();
 }
 
-void MainWindow::save()
-{
-
+void MainWindow::save() {
     if (!file)
         return;
 
@@ -994,25 +989,7 @@ void MainWindow::load() {
     if (file) {
         oldPath = file->path();
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
 
@@ -1034,25 +1011,7 @@ void MainWindow::loadFile(QString nfile) {
     if (file) {
         oldPath = file->path();
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
     if (!nfile.isEmpty()) {
@@ -1150,29 +1109,10 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     if (!file || file->saved()) {
         event->accept();
     } else {
-        switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-            case 0: {
-                // save
-                if (QFile(file->path()).exists()) {
-                    file->save(file->path());
-                    event->accept();
-                } else {
-                    saveas();
-                    event->accept();
-                }
-                break;
-            }
-            case 1: {
-                // close
-                event->accept();
-                break;
-            }
-            case 2: {
-                // break
-                event->ignore();
-                return;
-            }
-        }
+        bool sbc = saveBeforeClose();
+
+        if(sbc) event->accept();
+        else event->ignore();
     }
 
     if (MidiOutput::outputPort() != "") {
@@ -1241,28 +1181,28 @@ void MainWindow::setStartDir(QString dir) {
     startDirectory = dir;
 }
 
+bool MainWindow::saveBeforeClose() {
+    switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
+        case 0:
+            // save
+            if (QFile(file->path()).exists())
+                file->save(file->path());
+            else saveas();
+            return true;
+
+        case 2:
+            // break
+            return false;
+
+        default:
+            return true;
+    }
+}
+
 void MainWindow::newFile() {
     if (file) {
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) {
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
 
@@ -1521,28 +1461,8 @@ void MainWindow::openRecent(QAction* action) {
     QString path = action->data().toString();
 
     if (file) {
-        QString oldPath = file->path();
-
         if (!file->saved()) {
-            switch (QMessageBox::question(this, tr("Save file?"), tr("Save file ") + file->path() + tr(" before closing?"), tr("Save"), tr("Close without saving"), tr("Cancel"), 0, 2)) { // PROPHESSOR: Are you fuckin' serious? Third time? Move it to separated method!
-                case 0: {
-                    // save
-                    if (QFile(file->path()).exists()) {
-                        file->save(file->path());
-                    } else {
-                        saveas();
-                    }
-                    break;
-                }
-                case 1: {
-                    // close
-                    break;
-                }
-                case 2: {
-                    // break
-                    return;
-                }
-            }
+            saveBeforeClose();
         }
     }
 
@@ -2064,8 +1984,7 @@ void MainWindow::spreadSelection() {
     QMessageBox::information(this, tr("Spreading done"), QString(tr("Spreaded ") + QString::number(numSpreads) + tr(" events")));
 }
 
-void MainWindow::manual()
-{
+void MainWindow::manual() {
     QDesktopServices::openUrl(QUrl("http://www.midieditor.org/index.php?category=manual&subcategory=editor-and-components", QUrl::TolerantMode));
 }
 
@@ -2132,7 +2051,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(loadAction, SIGNAL(triggered()), this, SLOT(load()));
     fileMB->addAction(loadAction);
 
-    _recentPathsMenu = new QMenu(tr("Open recent.."), this);
+    _recentPathsMenu = new QMenu(tr("Open recent..."), this);
     _recentPathsMenu->setIcon(QIcon(":/run_environment/graphics/tool/noicon.png"));
     fileMB->addMenu(_recentPathsMenu);
     connect(_recentPathsMenu, SIGNAL(triggered(QAction*)), this, SLOT(openRecent(QAction*)));
@@ -2206,22 +2125,22 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
 
     editMB->addSeparator();
 
-    QAction* navigateSelectionUpAction = new QAction("Navigate selection up", editMB);
+    QAction* navigateSelectionUpAction = new QAction(tr("Navigate selection up"), editMB);
     navigateSelectionUpAction->setShortcut(Qt::Key_Up);
     connect(navigateSelectionUpAction, SIGNAL(triggered()), this, SLOT(navigateSelectionUp()));
     editMB->addAction(navigateSelectionUpAction);
 
-    QAction* navigateSelectionDownAction = new QAction("Navigate selection down", editMB);
+    QAction* navigateSelectionDownAction = new QAction(tr("Navigate selection down"), editMB);
     navigateSelectionDownAction->setShortcut(Qt::Key_Down);
     connect(navigateSelectionDownAction, SIGNAL(triggered()), this, SLOT(navigateSelectionDown()));
     editMB->addAction(navigateSelectionDownAction);
 
-    QAction* navigateSelectionLeftAction = new QAction("Navigate selection left", editMB);
+    QAction* navigateSelectionLeftAction = new QAction(tr("Navigate selection left"), editMB);
     navigateSelectionLeftAction->setShortcut(Qt::Key_Left);
     connect(navigateSelectionLeftAction, SIGNAL(triggered()), this, SLOT(navigateSelectionLeft()));
     editMB->addAction(navigateSelectionLeftAction);
 
-    QAction* navigateSelectionRightAction = new QAction("Navigate selection right", editMB);
+    QAction* navigateSelectionRightAction = new QAction(tr("Navigate selection right"), editMB);
     navigateSelectionRightAction->setShortcut(Qt::Key_Right);
     connect(navigateSelectionRightAction, SIGNAL(triggered()), this, SLOT(navigateSelectionRight()));
     editMB->addAction(navigateSelectionRightAction);
@@ -2330,34 +2249,34 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
 
     // Tweak
 
-    QMenu* tweakMenu = new QMenu("Tweak...", toolsMB);
+    QMenu* tweakMenu = new QMenu(tr("Tweak..."), toolsMB);
 
-    QAction* tweakTimeAction = new QAction("Time", tweakMenu);
-    tweakTimeAction->setShortcut(Qt::Key_1);
+    QAction* tweakTimeAction = new QAction(tr("Time"), tweakMenu);
+    tweakTimeAction->setShortcut(Qt::Key_1 + Qt::CTRL);
     tweakTimeAction->setCheckable(true);
     connect(tweakTimeAction, SIGNAL(triggered()), this, SLOT(tweakTime()));
     tweakMenu->addAction(tweakTimeAction);
 
-    QAction* tweakStartTimeAction = new QAction("Start time", tweakMenu);
-    tweakStartTimeAction->setShortcut(Qt::Key_2);
+    QAction* tweakStartTimeAction = new QAction(tr("Start time"), tweakMenu);
+    tweakStartTimeAction->setShortcut(Qt::Key_2 + Qt::CTRL);
     tweakStartTimeAction->setCheckable(true);
     connect(tweakStartTimeAction, SIGNAL(triggered()), this, SLOT(tweakStartTime()));
     tweakMenu->addAction(tweakStartTimeAction);
 
-    QAction* tweakEndTimeAction = new QAction("End time", tweakMenu);
-    tweakEndTimeAction->setShortcut(Qt::Key_3);
+    QAction* tweakEndTimeAction = new QAction(tr("End time"), tweakMenu);
+    tweakEndTimeAction->setShortcut(Qt::Key_3 + Qt::CTRL);
     tweakEndTimeAction->setCheckable(true);
     connect(tweakEndTimeAction, SIGNAL(triggered()), this, SLOT(tweakEndTime()));
     tweakMenu->addAction(tweakEndTimeAction);
 
-    QAction* tweakNoteAction = new QAction("Note", tweakMenu);
-    tweakNoteAction->setShortcut(Qt::Key_4);
+    QAction* tweakNoteAction = new QAction(tr("Note"), tweakMenu);
+    tweakNoteAction->setShortcut(Qt::Key_4 + Qt::CTRL);
     tweakNoteAction->setCheckable(true);
     connect(tweakNoteAction, SIGNAL(triggered()), this, SLOT(tweakNote()));
     tweakMenu->addAction(tweakNoteAction);
 
-    QAction* tweakValueAction = new QAction("Value", tweakMenu);
-    tweakValueAction->setShortcut(Qt::Key_5);
+    QAction* tweakValueAction = new QAction(tr("Value"), tweakMenu);
+    tweakValueAction->setShortcut(Qt::Key_5 + Qt::CTRL);
     tweakValueAction->setCheckable(true);
     connect(tweakValueAction, SIGNAL(triggered()), this, SLOT(tweakValue()));
     tweakMenu->addAction(tweakValueAction);
@@ -2373,32 +2292,32 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
 
     tweakMenu->addSeparator();
 
-    QAction* tweakSmallDecreaseAction = new QAction("Small decrease", tweakMenu);
-    tweakSmallDecreaseAction->setShortcut(Qt::Key_9);
+    QAction* tweakSmallDecreaseAction = new QAction(tr("Small decrease"), tweakMenu);
+    tweakSmallDecreaseAction->setShortcut(Qt::Key_9 + Qt::CTRL);
     connect(tweakSmallDecreaseAction, SIGNAL(triggered()), this, SLOT(tweakSmallDecrease()));
     tweakMenu->addAction(tweakSmallDecreaseAction);
 
-    QAction* tweakSmallIncreaseAction = new QAction("Small increase", tweakMenu);
-    tweakSmallIncreaseAction->setShortcut(Qt::Key_0);
+    QAction* tweakSmallIncreaseAction = new QAction(tr("Small increase"), tweakMenu);
+    tweakSmallIncreaseAction->setShortcut(Qt::Key_0 + Qt::CTRL);
     connect(tweakSmallIncreaseAction, SIGNAL(triggered()), this, SLOT(tweakSmallIncrease()));
     tweakMenu->addAction(tweakSmallIncreaseAction);
 
-    QAction* tweakMediumDecreaseAction = new QAction("Medium decrease", tweakMenu);
+    QAction* tweakMediumDecreaseAction = new QAction(tr("Medium decrease"), tweakMenu);
     tweakMediumDecreaseAction->setShortcut(Qt::Key_9 + Qt::ALT);
     connect(tweakMediumDecreaseAction, SIGNAL(triggered()), this, SLOT(tweakMediumDecrease()));
     tweakMenu->addAction(tweakMediumDecreaseAction);
 
-    QAction* tweakMediumIncreaseAction = new QAction("Medium increase", tweakMenu);
+    QAction* tweakMediumIncreaseAction = new QAction(tr("Medium increase"), tweakMenu);
     tweakMediumIncreaseAction->setShortcut(Qt::Key_0 + Qt::ALT);
     connect(tweakMediumIncreaseAction, SIGNAL(triggered()), this, SLOT(tweakMediumIncrease()));
     tweakMenu->addAction(tweakMediumIncreaseAction);
 
-    QAction* tweakLargeDecreaseAction = new QAction("Large decrease", tweakMenu);
+    QAction* tweakLargeDecreaseAction = new QAction(tr("Large decrease"), tweakMenu);
     tweakLargeDecreaseAction->setShortcut(Qt::Key_9 + Qt::ALT + Qt::SHIFT);
     connect(tweakLargeDecreaseAction, SIGNAL(triggered()), this, SLOT(tweakLargeDecrease()));
     tweakMenu->addAction(tweakLargeDecreaseAction);
 
-    QAction* tweakLargeIncreaseAction = new QAction("Large increase", tweakMenu);
+    QAction* tweakLargeIncreaseAction = new QAction(tr("Large increase"), tweakMenu);
     tweakLargeIncreaseAction->setShortcut(Qt::Key_0 + Qt::ALT + Qt::SHIFT);
     connect(tweakLargeIncreaseAction, SIGNAL(triggered()), this, SLOT(tweakLargeIncrease()));
     tweakMenu->addAction(tweakLargeIncreaseAction);
@@ -2650,7 +2569,6 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QAction* playStopAction = new QAction("PlayStop", this);
     QList<QKeySequence> playStopActionShortcuts;
     playStopActionShortcuts << QKeySequence(Qt::Key_Space)
-                            << QKeySequence(Qt::Key_K)
                             << QKeySequence(Qt::Key_P + Qt::CTRL);
     playStopAction->setShortcuts(playStopActionShortcuts);
     connect(playStopAction, SIGNAL(triggered()), this, SLOT(playStop()));
@@ -2697,8 +2615,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QAction* backAction = new QAction(tr("Previous measure"), this);
     backAction->setIcon(QIcon(":/run_environment/graphics/tool/back.png"));
     QList<QKeySequence> backActionShortcuts;
-    backActionShortcuts << QKeySequence(Qt::Key_Left + Qt::ALT)
-                        << QKeySequence(Qt::Key_J);
+    backActionShortcuts << QKeySequence(Qt::Key_Left + Qt::ALT);
     backAction->setShortcuts(backActionShortcuts);
     connect(backAction, SIGNAL(triggered()), this, SLOT(back()));
     playbackMB->addAction(backAction);
@@ -2706,22 +2623,21 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QAction* forwAction = new QAction(tr("Next measure"), this);
     forwAction->setIcon(QIcon(":/run_environment/graphics/tool/forward.png"));
     QList<QKeySequence> forwActionShortcuts;
-    forwActionShortcuts << QKeySequence(Qt::Key_Right + Qt::ALT)
-                        << QKeySequence(Qt::Key_L);
+    forwActionShortcuts << QKeySequence(Qt::Key_Right + Qt::ALT);
     forwAction->setShortcuts(forwActionShortcuts);
     connect(forwAction, SIGNAL(triggered()), this, SLOT(forward()));
     playbackMB->addAction(forwAction);
 
     playbackMB->addSeparator();
 
-    QAction* backMarkerAction = new QAction("Previous marker", this);
+    QAction* backMarkerAction = new QAction(tr("Previous marker"), this);
     backMarkerAction->setIcon(QIcon(":/run_environment/graphics/tool/back_marker.png"));
     QList<QKeySequence> backMarkerActionShortcuts;
     backMarkerAction->setShortcut(QKeySequence(Qt::Key_Comma + Qt::ALT));
     connect(backMarkerAction, SIGNAL(triggered()), this, SLOT(backMarker()));
     playbackMB->addAction(backMarkerAction);
 
-    QAction* forwMarkerAction = new QAction("Next marker", this);
+    QAction* forwMarkerAction = new QAction(tr("Next marker"), this);
     forwMarkerAction->setIcon(QIcon(":/run_environment/graphics/tool/forward_marker.png"));
     QList<QKeySequence> forwMarkerActionShortcuts;
     forwMarkerAction->setShortcut(QKeySequence(Qt::Key_Period + Qt::ALT));
@@ -2779,6 +2695,12 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(metronomeAction, SIGNAL(toggled(bool)), this, SLOT(enableMetronome(bool)));
     playbackMB->addAction(metronomeAction);
 
+    QAction* pianoEmulationAction = new QAction(tr("Piano Emulation"), this);
+    pianoEmulationAction->setCheckable(true);
+    pianoEmulationAction->setChecked(mw_matrixWidget->getPianoEmulation());
+    connect(pianoEmulationAction, SIGNAL(toggled(bool)), this, SLOT(togglePianoEmulation(bool)));
+    playbackMB->addAction(pianoEmulationAction);
+
     // Midi
     QAction* configAction2 = new QAction(tr("Settings..."), this);
     configAction2->setIcon(QIcon(":/run_environment/graphics/tool/config.png"));
@@ -2805,7 +2727,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(manualAction, SIGNAL(triggered()), this, SLOT(manual()));
     helpMB->addAction(manualAction);
 
-    QAction* aboutAction = new QAction(tr("About MidiEditor"), this);
+    QAction* aboutAction = new QAction(tr("About ProMidEdit"), this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
     helpMB->addAction(aboutAction);
 
@@ -2813,136 +2735,94 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(donateAction, SIGNAL(triggered()), this, SLOT(donate()));
     helpMB->addAction(donateAction);
 
+    // Button bar
+
     QWidget* buttonBar = new QWidget(parent);
     QGridLayout* btnLayout = new QGridLayout(buttonBar);
+
     buttonBar->setLayout(btnLayout);
     btnLayout->setSpacing(0);
     buttonBar->setContentsMargins(0, 0, 0, 0);
-    QToolBar* fileTB = new QToolBar("File", buttonBar);
 
-    fileTB->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    fileTB->setFloatable(false);
-    fileTB->setContentsMargins(0, 0, 0, 0);
-    fileTB->layout()->setSpacing(0);
-    fileTB->setIconSize(QSize(35, 35));
-    fileTB->addAction(newAction);
-    fileTB->setStyleSheet("QToolBar { border: 0px }");
+    QToolBar* toolBar = new QToolBar("File", buttonBar);
+    toolBar->setFloatable(false);
+    toolBar->setContentsMargins(0, 0, 0, 0);
+    toolBar->layout()->setSpacing(3);
+    toolBar->setIconSize(QSize(20, 20));
+    toolBar->addAction(newAction);
+    toolBar->setStyleSheet("QToolBar { border: 0px }");
+
     QAction* loadAction2 = new QAction(tr("Open..."), this);
     loadAction2->setIcon(QIcon(":/run_environment/graphics/tool/load.png"));
     connect(loadAction2, SIGNAL(triggered()), this, SLOT(load()));
     loadAction2->setMenu(_recentPathsMenu);
-    fileTB->addAction(loadAction2);
+    toolBar->addAction(loadAction2);
 
-    fileTB->addAction(saveAction);
-    fileTB->addSeparator();
+    toolBar->addAction(saveAction);
+    toolBar->addSeparator();
 
-    fileTB->addAction(undoAction);
-    fileTB->addAction(redoAction);
-    fileTB->addSeparator();
+    toolBar->addAction(undoAction);
+    toolBar->addAction(redoAction);
 
-    btnLayout->addWidget(fileTB, 0, 0, 2, 1);
+    toolBar->addSeparator();
 
-    if (QApplication::arguments().contains("--large-playback-toolbar")) {
+    toolBar->addAction(stdToolAction);
+    toolBar->addAction(selectLeftAction);
+    toolBar->addAction(selectRightAction);
 
-        QToolBar* playTB = new QToolBar(tr("Playback"), buttonBar);
+    toolBar->addSeparator();
 
-        playTB->setFloatable(false);
-        playTB->setContentsMargins(0, 0, 0, 0);
-        playTB->layout()->setSpacing(0);
-        playTB->setIconSize(QSize(35, 35));
-
-        playTB->addAction(backToBeginAction);
-        playTB->addAction(backMarkerAction);
-        playTB->addAction(backAction);
-        playTB->addAction(playAction);
-        playTB->addAction(pauseAction);
-        playTB->addAction(stopAction);
-        playTB->addAction(recAction);
-        playTB->addAction(forwAction);
-        playTB->addAction(forwMarkerAction);
-        playTB->addSeparator();
-
-        btnLayout->addWidget(playTB, 0, 1, 2, 1);
-    }
-
-    QToolBar* upperTB = new QToolBar(buttonBar);
-    QToolBar* lowerTB = new QToolBar(buttonBar);
-    btnLayout->addWidget(upperTB, 0, 2, 1, 1);
-    btnLayout->addWidget(lowerTB, 1, 2, 1, 1);
-    upperTB->setFloatable(false);
-    upperTB->setContentsMargins(0, 0, 0, 0);
-    upperTB->layout()->setSpacing(0);
-    upperTB->setIconSize(QSize(20, 20));
-    lowerTB->setFloatable(false);
-    lowerTB->setContentsMargins(0, 0, 0, 0);
-    lowerTB->layout()->setSpacing(0);
-    lowerTB->setIconSize(QSize(20, 20));
-    lowerTB->setStyleSheet("QToolBar { border: 0px }");
-    upperTB->setStyleSheet("QToolBar { border: 0px }");
-
-    lowerTB->addAction(copyAction);
+    toolBar->addAction(newNoteAction);
+    toolBar->addAction(removeNotesAction);
+    toolBar->addAction(copyAction);
 
     pasteActionTB = new QAction(tr("Paste events"), this);
     pasteActionTB->setToolTip(tr("Paste events at cursor position"));
     pasteActionTB->setIcon(QIcon(":/run_environment/graphics/tool/paste.png"));
     connect(pasteActionTB, SIGNAL(triggered()), this, SLOT(paste()));
     pasteActionTB->setMenu(pasteOptionsMenu);
+    toolBar->addAction(pasteActionTB);
 
-    lowerTB->addAction(pasteActionTB);
+    toolBar->addSeparator();
 
-    lowerTB->addSeparator();
+    toolBar->addAction(backToBeginAction);
+    toolBar->addAction(backMarkerAction);
+    toolBar->addAction(backAction);
+    toolBar->addAction(playAction);
+    toolBar->addAction(pauseAction);
+    toolBar->addAction(stopAction);
+    toolBar->addAction(recAction);
+    toolBar->addAction(forwAction);
+    toolBar->addAction(forwMarkerAction);
 
-    lowerTB->addAction(zoomHorInAction);
-    lowerTB->addAction(zoomHorOutAction);
-    lowerTB->addAction(zoomVerInAction);
-    lowerTB->addAction(zoomVerOutAction);
+    toolBar->addSeparator();
 
-    lowerTB->addSeparator();
+    toolBar->addAction(metronomeAction);
 
-    if (!QApplication::arguments().contains("--large-playback-toolbar")) {
+    toolBar->addAction(alignLeftAction);
+    toolBar->addAction(equalizeAction);
+    toolBar->addAction(alignRightAction);
 
-        lowerTB->addAction(backToBeginAction);
-        lowerTB->addAction(backMarkerAction);
-        lowerTB->addAction(backAction);
-        lowerTB->addAction(playAction);
-        lowerTB->addAction(pauseAction);
-        lowerTB->addAction(stopAction);
-        lowerTB->addAction(recAction);
-        lowerTB->addAction(forwAction);
-        lowerTB->addAction(forwMarkerAction);
-        lowerTB->addSeparator();
-    }
+    toolBar->addSeparator();
 
-    lowerTB->addAction(lockAction);
-    lowerTB->addAction(metronomeAction);
-    lowerTB->addAction(thruAction);
-    lowerTB->addAction(panicAction);
+    toolBar->addAction(zoomHorInAction);
+    toolBar->addAction(zoomHorOutAction);
+    toolBar->addAction(zoomVerInAction);
+    toolBar->addAction(zoomVerOutAction);
 
-    upperTB->addAction(stdToolAction);
-    upperTB->addAction(newNoteAction);
-    upperTB->addAction(removeNotesAction);
-    upperTB->addSeparator();
-    upperTB->addAction(selectSingleAction);
-    upperTB->addAction(selectBoxAction);
-    upperTB->addAction(selectLeftAction);
-    upperTB->addAction(selectRightAction);
-    upperTB->addSeparator();
-    upperTB->addAction(moveAllAction);
-    upperTB->addAction(moveLRAction);
-    upperTB->addAction(moveUDAction);
-    upperTB->addAction(sizeChangeAction);
-    upperTB->addSeparator();
-    upperTB->addAction(measureAction);
-    upperTB->addAction(timeSignatureAction);
-    upperTB->addAction(tempoAction);
-    upperTB->addSeparator();
-    upperTB->addAction(alignLeftAction);
-    upperTB->addAction(alignRightAction);
-    upperTB->addAction(equalizeAction);
-    upperTB->addAction(quantizeAction);
-    upperTB->addAction(magnetAction);
+    toolBar->addAction(lockAction);
+
+    toolBar->addSeparator();
+
+    toolBar->addAction(quantizeAction);
+    toolBar->addAction(magnetAction);
+
+    toolBar->addSeparator();
+
+    toolBar->addAction(thruAction);
 
     btnLayout->setColumnStretch(4, 1);
+    btnLayout->addWidget(toolBar, 0, 0, 2, 1);
 
     return buttonBar;
 }
@@ -2979,6 +2859,10 @@ void MainWindow::enableMetronome(bool enable) {
 
 void MainWindow::enableThru(bool enable) {
     MidiInput::setThruEnabled(enable);
+}
+
+void MainWindow::togglePianoEmulation(bool mode) {
+    mw_matrixWidget->setPianoEmulation(mode);
 }
 
 void MainWindow::quantizationChanged(QAction* action) {
