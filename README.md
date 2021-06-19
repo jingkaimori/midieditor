@@ -1,7 +1,7 @@
 <img align="left" width="70px" src="run_environment/midieditor.ico">
 
-ProMidEdit
-===========
+# ProMidEdit
+------
 
 Downloads : [last release](https://github.com/PROPHESSOR/ProMidEdit/releases/)
 

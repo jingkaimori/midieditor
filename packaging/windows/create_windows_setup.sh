@@ -7,27 +7,32 @@
 # MIDIEDITOR_RELEASE_VERSION_ID=2
 # MIDIEDITOR_RELEASE_VERSION_STRING=3.1.0
 # MIDIEDITOR_PACKAGE_VERSION=1
-# MIDIEDITOR_BINARY_WINDOWS=relative/path/to/ProMidEdit.exe
+# MIDIEDITOR_BINARY_WINDOWS=relative/path/to/ProMidiEdit.exe
 # INSTALLJAMMER=/path/to/installjammer
+# QTDLLS=/folder/of/QtCore.dll
 #
 
 # Setup folder structure
-mkdir ProMidEdit-win32
-mkdir ProMidEdit-win32/win_root/
+mkdir -p ProMidiEdit-win32
+mkdir -p ProMidiEdit-win32/win_root/
 
 # Copy binary
-cp $MIDIEDITOR_BINARY_WINDOWS ProMidEdit-win32/win_root/ProMidEdit.exe
+cp $MIDIEDITOR_BINARY_WINDOWS ProMidiEdit-win32/win_root/ProMidiEdit.exe
 
 # Copy metronome
-cp -R packaging/metronome ProMidEdit-win32/win_root/metronome
+cp -R packaging/metronome ProMidiEdit-win32/win_root/metronome
 
-cp -R packaging/windows/windows-installer/. MidiEditor-win32
+# Copy libs
+# HINT: If using new lib please add dll to here
+cp -t ProMidiEdit-win32/win_root ${QTDLLS}/{Qt5Core,Qt5Gui,Qt5Multimedia,Qt5Network,Qt5Widgets,Qt5Xml}.dll ;
 
-cd ProMidEdit-win32
+cp -R packaging/windows/windows-installer/. ProMidiEdit-win32;
 
-sh ../$INSTALLJAMMER -DVersion $MIDIEDITOR_RELEASE_VERSION_STRING --build-for-release windows-installer.mpi
+cd ProMidiEdit-win32
+
+sh "${INSTALLJAMMER}" -DVersion $MIDIEDITOR_RELEASE_VERSION_STRING --build-for-release ./windows-installer.mpi
 
 cd ..
 
-mkdir releases
-cp -a ProMidEdit-win32/output/ProMidEdit-$MIDIEDITOR_RELEASE_VERSION_STRING-Setup.exe releases/ProMidEdit-$MIDIEDITOR_RELEASE_VERSION_STRING-Setup.exe
+mkdir -p releases
+cp -a ProMidiEdit-win32/output/ProMidiEdit-$MIDIEDITOR_RELEASE_VERSION_STRING-Setup.exe releases/ProMidiEdit-$MIDIEDITOR_RELEASE_VERSION_STRING-Setup.exe

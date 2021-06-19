@@ -3,7 +3,7 @@ AllowLanguageSelection
 {No}
 
 AppName
-{MidiEditor}
+{ProMidiEdit}
 
 ApplicationID
 {D4338446-FFE6-1A12-ACFF-CB6F6A6A70A1}
@@ -171,7 +171,7 @@ ScriptExt
 {.sh}
 
 ShortAppName
-{MidiEditor}
+{ProMidiEdit}
 
 SkipUnusedFileGroups
 {Yes}
@@ -234,7 +234,7 @@ test
 
 }
 FileGroup ::E624C1B1-8DF9-7281-07CE-A33400C2045A -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows TarArchive ZipArchive FreeBSD-x86} -name {Program Files} -parent FileGroups
-File ::165EA518-2A3A-CC0A-6AED-C8C86F2EDAE7 -type dir -directory <%InstallDir%> -name ../MidiEditor-win32/win_root -parent E624C1B1-8DF9-7281-07CE-A33400C2045A
+File ::165EA518-2A3A-CC0A-6AED-C8C86F2EDAE7 -type dir -directory <%InstallDir%> -name ../ProMidiEdit-win32/win_root -parent E624C1B1-8DF9-7281-07CE-A33400C2045A
 Component ::5FE49AF5-85E3-BD83-32BB-563CE0DFCC6A -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows FreeBSD-x86} -name {Default Component} -parent Components
 SetupType ::82111003-CFF3-736E-63FF-C3790CE77477 -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows FreeBSD-x86} -name Typical -parent SetupTypes
 SetupType ::CF8CEB4E-CE35-5489-E689-14ABFFABD0E0 -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows FreeBSD-x86} -name Custom -parent SetupTypes
@@ -962,7 +962,7 @@ AIX-ppc,InstallType
 {Typical}
 
 AIX-ppc,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 AIX-ppc,ProgramFolderAllUsers
 {No}
@@ -1286,7 +1286,7 @@ FreeBSD-4-x86,InstallType
 {Typical}
 
 FreeBSD-4-x86,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 FreeBSD-4-x86,ProgramFolderAllUsers
 {No}
@@ -1340,7 +1340,7 @@ FreeBSD-5-x86,InstallType
 {Typical}
 
 FreeBSD-5-x86,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 FreeBSD-5-x86,ProgramFolderAllUsers
 {No}
@@ -1394,7 +1394,7 @@ FreeBSD-6-x86,InstallType
 {Typical}
 
 FreeBSD-6-x86,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 FreeBSD-6-x86,ProgramFolderAllUsers
 {No}
@@ -1448,7 +1448,7 @@ FreeBSD-7-x86,InstallType
 {Typical}
 
 FreeBSD-7-x86,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 FreeBSD-7-x86,ProgramFolderAllUsers
 {No}
@@ -1556,7 +1556,7 @@ HPUX-hppa,InstallType
 {Typical}
 
 HPUX-hppa,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 HPUX-hppa,ProgramFolderAllUsers
 {No}
@@ -1610,7 +1610,7 @@ Linux-x86,InstallType
 {Typical}
 
 Linux-x86,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 Linux-x86,ProgramFolderAllUsers
 {No}
@@ -1664,7 +1664,7 @@ Linux-x86_64,InstallType
 {Typical}
 
 Linux-x86_64,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 Linux-x86_64,ProgramFolderAllUsers
 {No}
@@ -1718,7 +1718,7 @@ Solaris-sparc,InstallType
 {Typical}
 
 Solaris-sparc,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 Solaris-sparc,ProgramFolderAllUsers
 {No}
@@ -1772,7 +1772,7 @@ Solaris-x86,InstallType
 {Typical}
 
 Solaris-x86,ProgramExecutable
-{<%InstallDir%>/MidiEditor}
+{<%InstallDir%>/ProMidiEdit}
 
 Solaris-x86,ProgramFolderAllUsers
 {No}
@@ -1889,7 +1889,7 @@ Windows,LastRequireAdministrator
 {Yes}
 
 Windows,ProgramExecutable
-{<%InstallDir%>/MidiEditor.exe}
+{<%InstallDir%>/ProMidiEdit.exe}
 
 Windows,ProgramFolderAllUsers
 {No}
