@@ -2820,6 +2820,10 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     toolBar->addSeparator();
 
     toolBar->addAction(thruAction);
+    toolBar->addSeparator();
+    toolBar->addAction(measureAction);
+    toolBar->addAction(timeSignatureAction);
+    toolBar->addAction(tempoAction);
 
     btnLayout->setColumnStretch(4, 1);
     btnLayout->addWidget(toolBar, 0, 0, 2, 1);
