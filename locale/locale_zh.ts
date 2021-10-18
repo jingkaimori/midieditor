@@ -572,7 +572,7 @@
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="454"/>
         <source>Add new events to ...</source>
-        <translation></translation>
+        <translation>向以下位置添加新事件：</translation>
     </message>
     <message>
         <location filename="../src/gui/MainWindow.cpp" line="456"/>
