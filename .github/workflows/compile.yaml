@@ -4,6 +4,7 @@ on: push
 jobs:
   job1:
     runs-on: windows-latest
+    if: always()
     strategy:
       # 矩阵配置
       matrix:
