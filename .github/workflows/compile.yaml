@@ -45,7 +45,8 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: '5.15.2'
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
           host: 'windows'
           target: 'desktop'
           cached: 'false'
