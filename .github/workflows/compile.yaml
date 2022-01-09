@@ -69,6 +69,8 @@ jobs:
             packaging/ProMidEdit.exe
             packaging/metronome/
       - name: Report 
+        shell: cmd
+        run: |
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
           echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
           echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
