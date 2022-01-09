@@ -72,7 +72,7 @@ jobs:
           path: |
             packaging/ProMidEdit.exe
             packaging/metronome/
-            packaging/*.dll ;
+            packaging/*.dll
       - name: Report 
         shell: cmd
         run: |
