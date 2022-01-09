@@ -64,15 +64,15 @@ jobs:
         shell: cmd
         run: |
           cp ./bin/ProMidEdit.exe ./packaging/ProMidEdit.exe
-          cp %Qt5_DIR%/bin/{Qt5Core,Qt5Gui,Qt5Multimedia,Qt5Network,Qt5Widgets,Qt5Xml}.dll ./packaging
+          windeployqt ./packaging/ProMidEdit.exe
       - name: Upload 
         uses: actions/upload-artifact@v2
         with:
           name: midieditor-${{ matrix.qt_ver }}-${{ matrix.qt_arch }}
           path: |
-            packaging/ProMidEdit.exe
-            packaging/metronome/
-            packaging/*.dll
+            packaging/
+            !packaging/unix
+            !packaging/windows
       - name: Report 
         shell: cmd
         run: |
