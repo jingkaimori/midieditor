@@ -64,7 +64,7 @@ jobs:
         shell: cmd
         run: |
           cp ./bin/ProMidEdit.exe ./packaging/ProMidEdit.exe
-          cp %Qt5_DIR%/{Qt5Core,Qt5Gui,Qt5Multimedia,Qt5Network,Qt5Widgets,Qt5Xml}.dll ./packaging
+          cp %Qt5_DIR%/bin/{Qt5Core,Qt5Gui,Qt5Multimedia,Qt5Network,Qt5Widgets,Qt5Xml}.dll ./packaging
       - name: Upload 
         uses: actions/upload-artifact@v2
         with:
