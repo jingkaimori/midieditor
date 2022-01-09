@@ -60,7 +60,11 @@ jobs:
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake
           nmake
+      - name: Copy Files 
+        shell: cmd
+        run: |
           cp ./bin/ProMidEdit.exe ./packaging/ProMidEdit.exe
+          cp ${Qt5_DIR}/{Qt5Core,Qt5Gui,Qt5Multimedia,Qt5Network,Qt5Widgets,Qt5Xml}.dll ./packaging;
       - name: Upload 
         uses: actions/upload-artifact@v2
         with:
@@ -68,6 +72,7 @@ jobs:
           path: |
             packaging/ProMidEdit.exe
             packaging/metronome/
+            packaging/*.dll ;
       - name: Report 
         shell: cmd
         run: |
