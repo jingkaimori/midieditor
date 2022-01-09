@@ -5,7 +5,7 @@ jobs:
   job1:
     runs-on: windows-latest
     env:
-      MIDIEDITOR_RELEASE_VERSION_STRING: continous integration triggerd by {{ github.sha }}
+      MIDIEDITOR_RELEASE_VERSION_STRING: "continous integration triggerd by ${{ github.sha }}"
     if: always()
     strategy:
       # 矩阵配置
