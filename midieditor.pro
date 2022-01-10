@@ -10,8 +10,8 @@ QT += core \
     xml \
     multimedia
 #DEFINES += ENABLE_REMOTE
-HEADERS += $$files(**.h, true)
-SOURCES += $$files(**.cpp, true)
+HEADERS += $$files(src/*.h, true) $$files(fluidsynth/*.h, true)
+SOURCES += $$files(src/*.cpp, true)
 FORMS += 
 RESOURCES += resources.qrc
 message(get arch)
@@ -57,10 +57,6 @@ message(Release version id is set to $$MIDIEDITOR_RELEASE_VERSION_ID_QMAKE)
 DEFINES += MIDIEDITOR_RELEASE_VERSION_ID_DEF=$$MIDIEDITOR_RELEASE_VERSION_ID_QMAKE
 
 MIDIEDITOR_RELEASE_DATE_QMAKE=$$(MIDIEDITOR_RELEASE_DATE)
-isEmpty(MIDIEDITOR_RELEASE_DATE_QMAKE) {
-    # Read current date
-    MIDIEDITOR_RELEASE_DATE_QMAKE=\"$$quote($$system("date"))\"
-}
 DEFINES += MIDIEDITOR_RELEASE_DATE_DEF=$$MIDIEDITOR_RELEASE_DATE_QMAKE
 message(Release date is set to $$MIDIEDITOR_RELEASE_DATE_QMAKE)
 
@@ -71,12 +67,19 @@ unix:!macx {
     #CONFIG += release
     OBJECTS_DIR = .tmp
     MOC_DIR = .tmp
+    isEmpty(MIDIEDITOR_RELEASE_DATE_QMAKE) {
+        # Read current date
+        MIDIEDITOR_RELEASE_DATE_QMAKE=\"$$quote($$system("date"))\"
+    }
 }
 
 win32: {
     DEFINES += __WINDOWS_MM__
     LIBS += -lwinmm
     CONFIG += release
+    DEFINES += USE_FLUIDSYNTH
+    LIBS += ../midieditor/lib64/windows/libfluidsynth.dll.a
+    LIBS += ../midieditor/lib/windows/fluidsynth.lib
     RC_FILE = midieditor.rc
     OBJECTS_DIR = .tmp
     MOC_DIR = .tmp

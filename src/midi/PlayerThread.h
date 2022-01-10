@@ -23,16 +23,19 @@
 #include <QObject>
 #include <QThread>
 #include <QTimer>
+#include <QElapsedTimer>
 
 class MidiFile;
 class MidiEvent;
-class QTime;
+//class QTime;
 
 class PlayerThread : public QThread {
 
     Q_OBJECT
 
 public:
+    int mode;
+
     PlayerThread();
     void setFile(MidiFile* f);
     void stop();
@@ -60,9 +63,11 @@ private:
     int interval, position, timeoutSinceLastSignal;
     volatile bool stopped;
     QTimer* timer;
-    QTime* time;
+    QElapsedTimer* time;
 
     int measure, posInMeasure;
+
+    int text_tim;
 };
 
 #endif

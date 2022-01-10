@@ -42,7 +42,7 @@ EventMoveTool::EventMoveTool(bool upDown, bool leftRight)
         setToolTipText(QObject::tr("Move Events (up and down)"));
     } else {
         setImage(":/run_environment/graphics/tool/move_left_right.png");
-        setToolTipText(QObject::tr("Move Events (left and right)"));
+        setToolTipText(QObject::tr("Move Events (left and right)\nor click one nonselected note to align the selected notes"));
     }
 }
 

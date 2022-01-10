@@ -236,7 +236,7 @@ void EventWidgetDelegate::setEditorData(QWidget* editor, const QModelIndex& inde
             QComboBox* box = dynamic_cast<QComboBox*>(editor);
             int current = 0;
             for (int i = 0; i < 128; i++) {
-                QString text = QString::number(i) + ": " + MidiFile::instrumentName(i);
+                QString text = QString::number(i) + ": " + MidiFile::instrumentName(0,i);
                 box->addItem(text);
                 if (!text.compare(index.data().toString())) {
                     current = i;
@@ -808,7 +808,7 @@ QList<QPair<QString, EventWidget::EditorField> > EventWidget::getFields() {
     QList<QPair<QString, EditorField> > fields;
     fields.append(QPair<QString, EditorField>(tr("On Tick"), MidiEventTick));
 
-    switch (_currentType) {
+    switch ((int) _currentType) {
         case ChannelPressureEventType: {
             fields.append(QPair<QString, EditorField>(tr("Value"), MidiEventValue));
             fields.append(QPair<QString, EditorField>(tr("Channel"), MidiEventChannel));
@@ -879,352 +879,352 @@ QList<QPair<QString, EventWidget::EditorField> > EventWidget::getFields() {
 
 QVariant EventWidget::fieldContent(EditorField field) {
     switch (field) {
-        case MidiEventTick: {
-            int tick = -1;
-            foreach (MidiEvent* event, _events) {
-                if (tick == -1) {
-                    tick = event->midiTime();
-                } else if (tick != event->midiTime()) {
-                    return QVariant("");
-                }
+    case MidiEventTick: {
+        int tick = -1;
+        foreach (MidiEvent* event, _events) {
+            if (tick == -1) {
+                tick = event->midiTime();
+            } else if (tick != event->midiTime()) {
+                return QVariant("");
             }
-            return QVariant(tick);
         }
-        case MidiEventTrack: {
-            MidiTrack* track = 0;
-            foreach (MidiEvent* event, _events) {
-                if (!track) {
-                    track = event->track();
-                } else if (track != event->track()) {
-                    return QVariant("");
-                }
-            }
+        return QVariant(tick);
+    }
+    case MidiEventTrack: {
+        MidiTrack* track = 0;
+        foreach (MidiEvent* event, _events) {
             if (!track) {
+                track = event->track();
+            } else if (track != event->track()) {
                 return QVariant("");
             }
-            return QVariant(tr("Track ") + QString::number(track->number()) + ": " + track->name());
         }
-        case MidiEventNote: {
-            int note = -1;
-            foreach (MidiEvent* event, _events) {
-                NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
-                if (onEvent) {
-                    if (note == -1) {
-                        note = onEvent->note();
-                    } else if (note != onEvent->note()) {
-                        return QVariant("");
-                    }
-                }
-                KeyPressureEvent* key = dynamic_cast<KeyPressureEvent*>(event);
-                if (key) {
-                    if (note == -1) {
-                        note = key->note();
-                    } else if (note != key->note()) {
-                        return QVariant("");
-                    }
-                }
-            }
-            if (note < 0) {
-                return QVariant("");
-            }
-            return QVariant(note);
+        if (!track) {
+            return QVariant("");
         }
-        case NoteEventOffTick: {
-            int off = -1;
-            foreach (MidiEvent* event, _events) {
-                NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
-                if (!onEvent) {
-                    continue;
-                }
-                if (off == -1) {
-                    off = onEvent->offEvent()->midiTime();
-                } else if (off != onEvent->offEvent()->midiTime()) {
+        return QVariant(tr("Track ") + QString::number(track->number()) + ": " + track->name());
+    }
+    case MidiEventNote: {
+        int note = -1;
+        foreach (MidiEvent* event, _events) {
+            NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
+            if (onEvent) {
+                if (note == -1) {
+                    note = onEvent->note();
+                } else if (note != onEvent->note()) {
                     return QVariant("");
                 }
             }
-            if (off < 0) {
-                return QVariant("");
-            }
-            return QVariant(off);
-        }
-        case NoteEventVelocity: {
-            int velocity = -1;
-            foreach (MidiEvent* event, _events) {
-                NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
-                if (!onEvent) {
-                    continue;
-                }
-                if (velocity == -1) {
-                    velocity = onEvent->velocity();
-                } else if (velocity != onEvent->velocity()) {
+            KeyPressureEvent* key = dynamic_cast<KeyPressureEvent*>(event);
+            if (key) {
+                if (note == -1) {
+                    note = key->note();
+                } else if (note != key->note()) {
                     return QVariant("");
                 }
             }
-            if (velocity < 0) {
+        }
+        if (note < 0) {
+            return QVariant("");
+        }
+        return QVariant(note);
+    }
+    case NoteEventOffTick: {
+        int off = -1;
+        foreach (MidiEvent* event, _events) {
+            NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
+            if (!onEvent) {
+                continue;
+            }
+            if (off == -1) {
+                off = onEvent->offEvent()->midiTime();
+            } else if (off != onEvent->offEvent()->midiTime()) {
                 return QVariant("");
             }
-            return QVariant(velocity);
         }
-        case NoteEventDuration: {
-            int duration = -1;
-            foreach (MidiEvent* event, _events) {
-                NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
-                if (!onEvent) {
-                    continue;
-                }
-                if (duration == -1) {
-                    duration = onEvent->offEvent()->midiTime() - onEvent->midiTime();
-                } else if (duration != onEvent->offEvent()->midiTime() - onEvent->midiTime()) {
-                    return QVariant("");
-                }
+        if (off < 0) {
+            return QVariant("");
+        }
+        return QVariant(off);
+    }
+    case NoteEventVelocity: {
+        int velocity = -1;
+        foreach (MidiEvent* event, _events) {
+            NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
+            if (!onEvent) {
+                continue;
             }
-            if (duration < 0) {
+            if (velocity == -1) {
+                velocity = onEvent->velocity();
+            } else if (velocity != onEvent->velocity()) {
                 return QVariant("");
             }
-            return QVariant(duration);
         }
-        case MidiEventChannel: {
-            int channel = -1;
-            foreach (MidiEvent* event, _events) {
-                if (channel == -1) {
-                    channel = event->channel();
-                } else if (channel != event->channel()) {
-                    return QVariant("");
-                }
+        if (velocity < 0) {
+            return QVariant("");
+        }
+        return QVariant(velocity);
+    }
+    case NoteEventDuration: {
+        int duration = -1;
+        foreach (MidiEvent* event, _events) {
+            NoteOnEvent* onEvent = dynamic_cast<NoteOnEvent*>(event);
+            if (!onEvent) {
+                continue;
             }
-            if (channel < 0) {
+            if (duration == -1) {
+                duration = onEvent->offEvent()->midiTime() - onEvent->midiTime();
+            } else if (duration != onEvent->offEvent()->midiTime() - onEvent->midiTime()) {
                 return QVariant("");
             }
-            return QVariant(channel);
         }
+        if (duration < 0) {
+            return QVariant("");
+        }
+        return QVariant(duration);
+    }
+    case MidiEventChannel: {
+        int channel = -1;
+        foreach (MidiEvent* event, _events) {
+            if (channel == -1) {
+                channel = event->channel();
+            } else if (channel != event->channel()) {
+                return QVariant("");
+            }
+        }
+        if (channel < 0) {
+            return QVariant("");
+        }
+        return QVariant(channel);
+    }
 
-        case MidiEventValue: {
-            int value = -1;
-            foreach (MidiEvent* event, _events) {
-                {
-                    ChannelPressureEvent* ev = dynamic_cast<ChannelPressureEvent*>(event);
-                    if (ev) {
-                        if (value == -1) {
-                            value = ev->value();
-                        } else if (value != ev->value()) {
-                            return QVariant("");
-                        }
-                    }
-                }
-                {
-                    ControlChangeEvent* ev = dynamic_cast<ControlChangeEvent*>(event);
-                    if (ev) {
-                        if (value == -1) {
-                            value = ev->value();
-                        } else if (value != ev->value()) {
-                            return QVariant("");
-                        }
-                    }
-                }
-                {
-                    KeyPressureEvent* ev = dynamic_cast<KeyPressureEvent*>(event);
-                    if (ev) {
-                        if (value == -1) {
-                            value = ev->value();
-                        } else if (value != ev->value()) {
-                            return QVariant("");
-                        }
-                    }
-                }
-                {
-                    PitchBendEvent* ev = dynamic_cast<PitchBendEvent*>(event);
-                    if (ev) {
-                        if (value == -1) {
-                            value = ev->value();
-                        } else if (value != ev->value()) {
-                            return QVariant("");
-                        }
-                    }
-                }
-                {
-                    TempoChangeEvent* ev = dynamic_cast<TempoChangeEvent*>(event);
-                    if (ev) {
-                        if (value == -1) {
-                            value = ev->beatsPerQuarter();
-                        } else if (value != ev->beatsPerQuarter()) {
-                            return QVariant("");
-                        }
+    case MidiEventValue: {
+        int value = -1;
+        foreach (MidiEvent* event, _events) {
+            {
+                ChannelPressureEvent* ev = dynamic_cast<ChannelPressureEvent*>(event);
+                if (ev) {
+                    if (value == -1) {
+                        value = ev->value();
+                    } else if (value != ev->value()) {
+                        return QVariant("");
                     }
                 }
             }
-            if (value < 0) {
-                return QVariant("");
-            }
-            return QVariant(value);
-        }
-        case ControlChangeControl: {
-            int control = -1;
-            foreach (MidiEvent* event, _events) {
+            {
                 ControlChangeEvent* ev = dynamic_cast<ControlChangeEvent*>(event);
                 if (ev) {
-                    if (control == -1) {
-                        control = ev->control();
-                    } else if (control != ev->control()) {
+                    if (value == -1) {
+                        value = ev->value();
+                    } else if (value != ev->value()) {
                         return QVariant("");
                     }
                 }
             }
-            if (control < 0) {
-                return QVariant("");
-            }
-            return QVariant(QString::number(control) + ": " + MidiFile::controlChangeName(control));
-        }
-        case ProgramChangeProgram: {
-            int program = -1;
-            foreach (MidiEvent* event, _events) {
-                ProgChangeEvent* ev = dynamic_cast<ProgChangeEvent*>(event);
+            {
+                KeyPressureEvent* ev = dynamic_cast<KeyPressureEvent*>(event);
                 if (ev) {
-                    if (program == -1) {
-                        program = ev->program();
-                    } else if (program != ev->program()) {
+                    if (value == -1) {
+                        value = ev->value();
+                    } else if (value != ev->value()) {
                         return QVariant("");
                     }
                 }
             }
-            if (program < 0) {
-                return QVariant("");
-            }
-            return QVariant(QString::number(program) + ": " + MidiFile::instrumentName(program));
-        }
-        case KeySignatureKey: {
-            int key = -1;
-            foreach (MidiEvent* event, _events) {
-                KeySignatureEvent* ev = dynamic_cast<KeySignatureEvent*>(event);
+            {
+                PitchBendEvent* ev = dynamic_cast<PitchBendEvent*>(event);
                 if (ev) {
-                    if (key == -1) {
-                        key = keyIndex(ev->tonality(), ev->minor());
-                    } else if (key != keyIndex(ev->tonality(), ev->minor())) {
+                    if (value == -1) {
+                        value = ev->value();
+                    } else if (value != ev->value()) {
                         return QVariant("");
                     }
                 }
             }
-            if (key < 0) {
-                return QVariant("");
-            }
-            return QVariant(keyStrings().at(key));
-        }
-        case TimeSignatureNum: {
-            int n = -1;
-            foreach (MidiEvent* event, _events) {
-                TimeSignatureEvent* ev = dynamic_cast<TimeSignatureEvent*>(event);
+            {
+                TempoChangeEvent* ev = dynamic_cast<TempoChangeEvent*>(event);
                 if (ev) {
-                    if (n == -1) {
-                        n = ev->num();
-                    } else if (n != ev->num()) {
+                    if (value == -1) {
+                        value = ev->beatsPerQuarter();
+                    } else if (value != ev->beatsPerQuarter()) {
                         return QVariant("");
                     }
                 }
             }
-            if (n < 0) {
-                return QVariant("");
-            }
-            return QVariant(n);
         }
-        case TimeSignatureDenom: {
-            int n = -1;
-            foreach (MidiEvent* event, _events) {
-                TimeSignatureEvent* ev = dynamic_cast<TimeSignatureEvent*>(event);
-                if (ev) {
-                    if (n == -1) {
-                        n = ev->denom();
-                    } else if (n != ev->denom()) {
-                        return QVariant("");
-                    }
-                }
-            }
-            if (n < 0) {
-                return QVariant("");
-            }
-            return QVariant((int)qPow(2, n));
+        if (value < 0) {
+            return QVariant("");
         }
-        case TextType: {
-            int n = -1;
-            foreach (MidiEvent* event, _events) {
-                TextEvent* ev = dynamic_cast<TextEvent*>(event);
-                if (ev) {
-                    if (n == -1) {
-                        n = ev->type();
-                    } else if (n != ev->type()) {
-                        return QVariant("");
-                    }
+        return QVariant(value);
+    }
+    case ControlChangeControl: {
+        int control = -1;
+        foreach (MidiEvent* event, _events) {
+            ControlChangeEvent* ev = dynamic_cast<ControlChangeEvent*>(event);
+            if (ev) {
+                if (control == -1) {
+                    control = ev->control();
+                } else if (control != ev->control()) {
+                    return QVariant("");
                 }
             }
-            if (n < 0) {
-                return QVariant("");
-            }
-            return QVariant(TextEvent::textTypeString(n));
         }
-        case TextText: {
-            bool inited = false;
-            QString n = "";
-            foreach (MidiEvent* event, _events) {
-                TextEvent* ev = dynamic_cast<TextEvent*>(event);
-                if (ev) {
-                    if (!inited) {
-                        n = ev->text();
-                    } else if (n.compare(ev->text())) {
-                        return QVariant("");
-                    }
-                }
-                inited = true;
-            }
-            if (!inited) {
-                return QVariant("");
-            }
-            return QVariant(n);
+        if (control < 0) {
+            return QVariant("");
         }
-        case UnknownType: {
-            int n = -1;
-            foreach (MidiEvent* event, _events) {
-                UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
-                if (ev) {
-                    if (n == -1) {
-                        n = ev->type();
-                    } else if (n != ev->type()) {
-                        return QVariant("");
-                    }
+        return QVariant(QString::number(control) + ": " + MidiFile::controlChangeName(control));
+    }
+    case ProgramChangeProgram: {
+        int program = -1;
+        foreach (MidiEvent* event, _events) {
+            ProgChangeEvent* ev = dynamic_cast<ProgChangeEvent*>(event);
+            if (ev) {
+                if (program == -1) {
+                    program = ev->program();
+                } else if (program != ev->program()) {
+                    return QVariant("");
                 }
             }
-            if (n < 0) {
-                return QVariant("");
-            }
-            QString s;
-            s.sprintf("%02X", n);
-            s = "0x" + s;
-            return QVariant(s);
         }
-        case MidiEventData: {
-            QByteArray data;
-            bool inited = false;
-            foreach (MidiEvent* event, _events) {
-                UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
-                if (ev) {
-                    if (!inited) {
-                        data = ev->data();
-                    } else if (data != ev->data()) {
-                        return QVariant("");
-                    }
-                }
-                SysExEvent* sys = dynamic_cast<SysExEvent*>(event);
-                if (sys) {
-                    if (!inited) {
-                        data = sys->data();
-                    } else if (data != sys->data()) {
-                        return QVariant("");
-                    }
-                }
-                inited = true;
-            }
-            if (!inited) {
-                return QVariant("");
-            }
-            return QVariant(data);
+        if (program < 0) {
+            return QVariant("");
         }
+        return QVariant(QString::number(program) + ": " + MidiFile::instrumentName(0, program));
+    }
+    case KeySignatureKey: {
+        int key = -1;
+        foreach (MidiEvent* event, _events) {
+            KeySignatureEvent* ev = dynamic_cast<KeySignatureEvent*>(event);
+            if (ev) {
+                if (key == -1) {
+                    key = keyIndex(ev->tonality(), ev->minor());
+                } else if (key != keyIndex(ev->tonality(), ev->minor())) {
+                    return QVariant("");
+                }
+            }
+        }
+        if (key < 0) {
+            return QVariant("");
+        }
+        return QVariant(keyStrings().at(key));
+    }
+    case TimeSignatureNum: {
+        int n = -1;
+        foreach (MidiEvent* event, _events) {
+            TimeSignatureEvent* ev = dynamic_cast<TimeSignatureEvent*>(event);
+            if (ev) {
+                if (n == -1) {
+                    n = ev->num();
+                } else if (n != ev->num()) {
+                    return QVariant("");
+                }
+            }
+        }
+        if (n < 0) {
+            return QVariant("");
+        }
+        return QVariant(n);
+    }
+    case TimeSignatureDenom: {
+        int n = -1;
+        foreach (MidiEvent* event, _events) {
+            TimeSignatureEvent* ev = dynamic_cast<TimeSignatureEvent*>(event);
+            if (ev) {
+                if (n == -1) {
+                    n = ev->denom();
+                } else if (n != ev->denom()) {
+                    return QVariant("");
+                }
+            }
+        }
+        if (n < 0) {
+            return QVariant("");
+        }
+        return QVariant((int)qPow(2, n));
+    }
+    case TextType: {
+        int n = -1;
+        foreach (MidiEvent* event, _events) {
+            TextEvent* ev = dynamic_cast<TextEvent*>(event);
+            if (ev) {
+                if (n == -1) {
+                    n = ev->type();
+                } else if (n != ev->type()) {
+                    return QVariant("");
+                }
+            }
+        }
+        if (n < 0) {
+            return QVariant("");
+        }
+        return QVariant(TextEvent::textTypeString(n));
+    }
+    case TextText: {
+        bool inited = false;
+        QString n = "";
+        foreach (MidiEvent* event, _events) {
+            TextEvent* ev = dynamic_cast<TextEvent*>(event);
+            if (ev) {
+                if (!inited) {
+                    n = ev->text();
+                } else if (n.compare(ev->text())) {
+                    return QVariant("");
+                }
+            }
+            inited = true;
+        }
+        if (!inited) {
+            return QVariant("");
+        }
+        return QVariant(n);
+    }
+    case UnknownType: {
+        int n = -1;
+        foreach (MidiEvent* event, _events) {
+            UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
+            if (ev) {
+                if (n == -1) {
+                    n = ev->type();
+                } else if (n != ev->type()) {
+                    return QVariant("");
+                }
+            }
+        }
+        if (n < 0) {
+            return QVariant("");
+        }
+        QString s;
+        s.asprintf("%02X", n);
+        s = "0x" + s;
+        return QVariant(s);
+    }
+    case MidiEventData: {
+        QByteArray data;
+        bool inited = false;
+        foreach (MidiEvent* event, _events) {
+            UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
+            if (ev) {
+                if (!inited) {
+                    data = ev->data();
+                } else if (data != ev->data()) {
+                    return QVariant("");
+                }
+            }
+            SysExEvent* sys = dynamic_cast<SysExEvent*>(event);
+            if (sys) {
+                if (!inited) {
+                    data = sys->data();
+                } else if (data != sys->data()) {
+                    return QVariant("");
+                }
+            }
+            inited = true;
+        }
+        if (!inited) {
+            return QVariant("");
+        }
+        return QVariant(data);
+    }
     }
     return QVariant("");
 }
@@ -1262,7 +1262,7 @@ QString EventWidget::dataToString(QByteArray data) {
     QString s;
     foreach (unsigned char b, data) {
         QString t;
-        t.sprintf("%02X", b);
+        t.asprintf("%02X", b);
         s = s + "0x" + t + "\n";
     }
     return s.trimmed();

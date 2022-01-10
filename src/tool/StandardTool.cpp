@@ -23,6 +23,7 @@
 #include "SizeChangeTool.h"
 
 #include "../MidiEvent/MidiEvent.h"
+#include "../MidiEvent/SysExEvent.h"
 #include "../gui/MatrixWidget.h"
 #include "../midi/MidiFile.h"
 #include "Selection.h"
@@ -42,6 +43,8 @@ StandardTool::StandardTool()
     sizeChangeTool->setStandardTool(this);
     selectTool = new SelectTool(SELECTION_TYPE_BOX);
     selectTool->setStandardTool(this);
+    selectTool2 = new SelectTool(SELECTION_TYPE_BOX2);
+    selectTool2->setStandardTool(this);
     newNoteTool = new NewNoteTool();
     newNoteTool->setStandardTool(this);
 
@@ -53,6 +56,7 @@ StandardTool::StandardTool(StandardTool& other)
     sizeChangeTool = other.sizeChangeTool;
     moveTool = other.moveTool;
     selectTool = other.selectTool;
+    selectTool2 = other.selectTool2;
 }
 
 void StandardTool::draw(QPainter* painter) {
@@ -68,6 +72,12 @@ bool StandardTool::press(bool leftClick) {
         int minDiffToMouse = 0;
         int action = NO_ACTION;
         foreach (MidiEvent* ev, *(matrixWidget->activeEvents())) {
+            SysExEvent* sys = dynamic_cast<SysExEvent*>(ev);
+
+            if(sys) {
+                QByteArray c = sys->data();
+                if(c[1]== (char) 0x66 && c[2]==(char) 0x66 && c[3]=='V') continue;
+            }
             if (pointInRect(mouseX, mouseY, ev->x() - 2, ev->y(), ev->x() + ev->width() + 2,
                             ev->y() + ev->height())) {
 
@@ -130,13 +140,16 @@ bool StandardTool::press(bool leftClick) {
 
             switch (action) {
 
-                case NO_ACTION: {
-                    // no event means SelectTool
-                    Tool::setCurrentTool(selectTool);
-                    selectTool->move(mouseX, mouseY);
-                    selectTool->press(leftClick);
-                    return true;
-                }
+            case NO_ACTION: {
+                // no event means SelectTool
+                Tool::setCurrentTool(selectTool);
+                selectTool->move(mouseX, mouseY);
+                selectTool->press(leftClick);
+                Tool::setCurrentTool(selectTool2);
+                selectTool2->move(mouseX, mouseY);
+                selectTool2->press(leftClick);
+                return true;
+            }
 
             case SIZE_CHANGE_ACTION: {
                 if (!onSelectedEvent) {
@@ -185,6 +198,7 @@ bool StandardTool::press(bool leftClick) {
     Tool::setCurrentTool(selectTool);
     selectTool->move(mouseX, mouseY);
     selectTool->press(leftClick);
+
     return true;
 }
 
@@ -217,6 +231,8 @@ void StandardTool::reloadState(ProtocolEntry* entry) {
     sizeChangeTool = other->sizeChangeTool;
     moveTool = other->moveTool;
     selectTool = other->selectTool;
+    selectTool2 = other->selectTool2;
+
 }
 
 bool StandardTool::release() {

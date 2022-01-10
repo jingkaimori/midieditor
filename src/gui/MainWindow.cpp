@@ -15,7 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "MainWindow.h"
+
+#ifdef USE_FLUIDSYNTH
+#include "../fluid/fluidsynth_proc.h"
+#include "../fluid/FluidDialog.h"
+#include "../VST/VST.h"
+#endif
 
 #include <QAction>
 #include <QComboBox>
@@ -35,7 +42,6 @@
 #include <QProcess>
 #include <QScrollArea>
 #include <QSettings>
-#include <QSplitter>
 #include <QStringList>
 #include <QTabWidget>
 #include <QTextEdit>
@@ -52,6 +58,8 @@
 #include "EventWidget.h"
 #include "FileLengthDialog.h"
 #include "InstrumentChooser.h"
+#include "SoundEffectChooser.h"
+
 #include "MatrixWidget.h"
 #include "MiscWidget.h"
 #include "NToleQuantizationDialog.h"
@@ -90,6 +98,15 @@
 #include "../MidiEvent/OnEvent.h"
 #include "../MidiEvent/TextEvent.h"
 #include "../MidiEvent/TimeSignatureEvent.h"
+#include "../MidiEvent/TempoChangeEvent.h"
+#include "../MidiEvent/ProgChangeEvent.h"
+#include "../MidiEvent/ControlChangeEvent.h"
+#include "../MidiEvent/PitchBendEvent.h"
+#include "../MidiEvent/KeyPressureEvent.h"
+#include "../MidiEvent/ChannelPressureEvent.h"
+#include "../MidiEvent/KeySignatureEvent.h"
+#include "../MidiEvent/SysExEvent.h"
+#include "../MidiEvent/UnknownEvent.h"
 #include "../midi/Metronome.h"
 #include "../midi/MidiChannel.h"
 #include "../midi/MidiFile.h"
@@ -98,6 +115,8 @@
 #include "../midi/MidiPlayer.h"
 #include "../midi/MidiTrack.h"
 #include "../midi/PlayerThread.h"
+#include "../midi/MidiInControl.h"
+#include "../gui/MidiEditorInstrument.h"
 
 #include "../UpdateManager.h"
 #include "CompleteMidiSetupDialog.h"
@@ -105,16 +124,132 @@
 #include "AutomaticUpdateDialog.h"
 #include <QtCore/qmath.h>
 
+instrument_list InstrumentList[129];
+
+extern int Bank_MIDI[17];
+
+int itHaveInstrumentList = 0;
+int itHaveDrumList = 0;
+
+void MainWindow::addInstrumentNames()
+{
+    QString path = _settings->value("instrumentList").toString();
+
+    itHaveInstrumentList=0;
+    itHaveDrumList=0;
+
+    int n,m;
+    for(n=0; n< 129; n++)
+        for(m=0; m<128; m++)
+            InstrumentList[n].name[m]="undefined";
+
+    if (path == "" || !QFile(path).exists()) return;
+
+    QFile* f = new QFile(path);
+
+    if (!f->open(QIODevice::ReadOnly | QIODevice :: Text)) {
+        return;
+    }
+
+        n=0;
+        while ( ! f->atEnd ()) {
+           QByteArray line = f->readLine ();
+           int bank=0, inst=0;
+
+           line[line.length()-1]=0;
+           int r=sscanf(line, "%d:%d = ",&bank,&inst);
+           if(r<0) {
+               char mess[256]="";
+               sprintf(mess, "Error reading instruments list at line %i", n);
+               QMessageBox::information(this, "Information", mess);
+               break;
+           }
+           if(bank<0 || bank>129) {
+               char mess[256]="";
+               sprintf(mess, "Error in bank instruments list at line %i", n);
+               QMessageBox::information(this, "Information", mess);
+               break;
+           }
+
+           if(inst<0 || inst>128) {
+               char mess[256]="";
+               sprintf(mess, "Error in bank instruments list at line %i", n);
+               QMessageBox::information(this, "Information", mess);
+               break;
+           }
+
+           InstrumentList[bank].name[inst]= line.mid(10);
+           itHaveInstrumentList=1;
+           if(bank==128) itHaveDrumList=1;
+           n++;
+
+    }
+    f->close();
+
+}
+
+MainWindow::~MainWindow() {
+
+    if (MidiPlayer::isPlaying() || MidiInput::recording()) {
+        stop();
+    }
+
+    if(finger_main) {
+        delete finger_main;
+        finger_main = NULL;
+    }
+
+    MidiInControl::my_exit();
+    MyInstrument::exit_and_clean_MyInstrument();
+
+#ifdef USE_FLUIDSYNTH
+
+    VST_proc::VST_exit();
+
+    if(fluid_output) {
+
+        delete fluid_output;
+        fluid_output = NULL;
+    }
+
+    remote_VST_exit();
+
+#endif
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* ) {
+#ifdef USE_FLUIDSYNTH
+    VST_proc::VST_external_show(-1); // force to see external windows
+#endif
+}
+
 MainWindow::MainWindow(QString initFile)
     : QMainWindow()
     , _initFile(initFile) {
     file = 0;
     _settings = new QSettings(QString("ProMidEdit"), QString("NONE"));
 
+    Notes_util(this);
+    MidiInControl::init_MidiInControl(_settings);
+
+    finger_main = new FingerPatternDialog(NULL, _settings); // create timer loop
+
+    rightSplitterMode = _settings->value("rightSplitterMode", true).toBool();
+    if(rightSplitterMode) EventSplitterTabPos = 2; else EventSplitterTabPos = 1;
+
+    for (int i = 0; i < 17; i++) {
+        Bank_MIDI[i]=0;
+        Prog_MIDI[i]=0;
+    }
+
     _moveSelectedEventsToChannelMenu = 0;
+    _moveSelectedNotesToChannelMenu = 0;
     _moveSelectedEventsToTrackMenu = 0;
 
     Appearance::init(_settings);
+
+    if (!itHaveInstrumentList)
+        addInstrumentNames();
 
 #ifdef ENABLE_REMOTE
     bool ok;
@@ -187,6 +322,10 @@ MainWindow::MainWindow(QString initFile)
 
     EditorTool::setMainWindow(this);
 
+#ifdef USE_FLUIDSYNTH
+    main_widget = this;
+#endif
+
     setWindowTitle(QApplication::applicationName() + " " + QApplication::applicationVersion());
     setWindowIcon(QIcon(":/run_environment/graphics/icon.png"));
 
@@ -195,7 +334,7 @@ MainWindow::MainWindow(QString initFile)
     centralLayout->setContentsMargins(3, 3, 3, 5);
 
     // there is a vertical split
-    QSplitter* mainSplitter = new QSplitter(Qt::Horizontal, central);
+    /*QSplitter**/ mainSplitter = new QSplitter(Qt::Horizontal, central);
     //mainSplitter->setHandleWidth(0);
 
     // The left side
@@ -205,8 +344,9 @@ MainWindow::MainWindow(QString initFile)
     leftSplitter->setContentsMargins(0, 0, 0, 0);
 
     // The right side
-    QSplitter* rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
-    //rightSplitter->setHandleWidth(0);
+
+    rightSplitter = new QSplitter(Qt::Vertical, mainSplitter);
+
     mainSplitter->addWidget(rightSplitter);
 
     // Set the sizes of mainSplitter
@@ -215,7 +355,8 @@ MainWindow::MainWindow(QString initFile)
     mainSplitter->setContentsMargins(0, 0, 0, 0);
 
     // the channelWidget and the trackWidget are tabbed
-    QTabWidget* upperTabWidget = new QTabWidget(rightSplitter);
+    //QTabWidget*
+            upperTabWidget = new QTabWidget(rightSplitter);
     rightSplitter->addWidget(upperTabWidget);
     rightSplitter->setContentsMargins(0, 0, 0, 0);
 
@@ -228,6 +369,12 @@ MainWindow::MainWindow(QString initFile)
     leftSplitter->addWidget(matrixArea);
     matrixArea->setContentsMargins(0, 0, 0, 0);
     mw_matrixWidget = new MatrixWidget(matrixArea);
+    mw_matrixWidget->visible_Controlflag = _settings->value("visible_Controlflag", true).toBool();
+    mw_matrixWidget->visible_PitchBendflag = _settings->value("visible_PitchBendflag", true).toBool();
+    mw_matrixWidget->visible_TimeLineArea3 = _settings->value("visible_TimeLineArea3", true).toBool();
+    mw_matrixWidget->visible_TimeLineArea4 = _settings->value("visible_TimeLineArea4", true).toBool();
+    mw_matrixWidget->visible_karaoke = _settings->value("visible_karaoke", true).toBool();
+
     vert = new QScrollBar(Qt::Vertical, matrixArea);
     QGridLayout* matrixAreaLayout = new QGridLayout(matrixArea);
     matrixAreaLayout->setHorizontalSpacing(6);
@@ -427,8 +574,15 @@ MainWindow::MainWindow(QString initFile)
     channelWidget = new ChannelListWidget(channels);
     connect(channelWidget, SIGNAL(channelStateChanged()), this, SLOT(updateChannelMenu()), Qt::QueuedConnection);
     connect(channelWidget, SIGNAL(selectInstrumentClicked(int)), this, SLOT(setInstrumentForChannel(int)), Qt::QueuedConnection);
+    connect(channelWidget, SIGNAL(selectSoundEffectClicked(int)), this, SLOT(setSoundEffectForChannel(int)), Qt::QueuedConnection);
+#ifdef USE_FLUIDSYNTH
+    connect(channelWidget, SIGNAL(LoadVSTClicked(int, int)), this, SLOT(setLoadVSTForChannel(int, int)), Qt::QueuedConnection);
+    connect(this, SIGNAL(ToggleViewVST(int, bool)), channelWidget, SLOT(ToggleViewVST(int, bool)), Qt::QueuedConnection);
+
+#endif
     channelsLayout->addWidget(channelWidget, 1, 0, 1, 1);
     upperTabWidget->addTab(channels, tr("Channels"));
+
 
     // terminal
     Terminal::initTerminal(_settings->value("start_cmd", "").toString(),
@@ -441,14 +595,24 @@ MainWindow::MainWindow(QString initFile)
     lowerTabWidget->addTab(protocolWidget, tr("Protocol"));
 
     // EventWidget
-    _eventWidget = new EventWidget(lowerTabWidget);
-    Selection::_eventWidget = _eventWidget;
-    lowerTabWidget->addTab(_eventWidget, tr("Event"));
-    MidiEvent::setEventWidget(_eventWidget);
+    if(!rightSplitterMode) {
+        _eventWidget = new EventWidget(lowerTabWidget);
+        Selection::_eventWidget = _eventWidget;
+        EventSplitterTabPos = lowerTabWidget->count();
+        lowerTabWidget->addTab(_eventWidget, "Event");
+        MidiEvent::setEventWidget(_eventWidget);
+    } else {
+        _eventWidget = new EventWidget(upperTabWidget);
+        Selection::_eventWidget = _eventWidget;
+        EventSplitterTabPos = upperTabWidget->count();
+        upperTabWidget->addTab(_eventWidget, "Event");
+        MidiEvent::setEventWidget(_eventWidget);
+    }
 
     // below add two rows for choosing track/channel new events shall be assigned to
     QWidget* chooser = new QWidget(rightSplitter);
     chooser->setMinimumWidth(350);
+
     rightSplitter->addWidget(chooser);
     QGridLayout* chooserLayout = new QGridLayout(chooser);
     QLabel* trackchannelLabel = new QLabel(tr("Add new events to ..."));
@@ -487,8 +651,13 @@ MainWindow::MainWindow(QString initFile)
 
     QWidget* buttons = setupActions(central);
 
-    rightSplitter->setStretchFactor(0, 5);
-    rightSplitter->setStretchFactor(1, 5);
+    if(rightSplitterMode) {
+        rightSplitter->setStretchFactor(0, 8);
+        rightSplitter->setStretchFactor(1, 2);
+    } else {
+        rightSplitter->setStretchFactor(0, 5);
+        rightSplitter->setStretchFactor(1, 5);
+    }
 
     // Add the Widgets to the central Layout
     centralLayout->setSpacing(0);
@@ -522,6 +691,10 @@ MainWindow::MainWindow(QString initFile)
     if (numStart == 10 && !UpdateManager::autoCheckForUpdates()) {
         QTimer::singleShot(300, this, SLOT(promtUpdatesDeactivatedDialog()));
     }
+
+#ifdef USE_FLUIDSYNTH
+    connect(this, SIGNAL(signal_remote_VST()), this, SLOT(remote_VST()), Qt::BlockingQueuedConnection);
+#endif
 }
 
 void MainWindow::loadInitFile() {
@@ -583,6 +756,12 @@ void MainWindow::setFile(MidiFile* file) {
     mw_matrixWidget->update();
     _miscWidget->update();
     checkEnableActionsForSelection();
+
+#ifdef USE_FLUIDSYNTH
+    VST_proc::VST_setParent(this);
+    VST_proc::VST_LoadfromMIDIfile();
+#endif
+
 }
 
 MidiFile* MainWindow::getFile() {
@@ -615,11 +794,40 @@ void MainWindow::play() {
         CompleteMidiSetupDialog* d = new CompleteMidiSetupDialog(this, false, true);
         d->setModal(true);
         d->exec();
+        delete d;
         return;
     }
+
+#ifdef USE_FLUIDSYNTH
+
+    for(int n = 0; n < PRE_CHAN; n++) {
+
+        VST_proc::VST_DisableButtons(n, true);
+
+    }
+
+    VST_proc::VST_external_show(-1);
+
+    fluid_output->frames = fluid_output->time_frame.msecsSinceStartOfDay();
+
+    if(MidiOutput::outputPort()==FLUID_SYNTH_NAME) {
+        if(fluid_output->it_have_error == 2) {
+            QMessageBox::information(this, "Apuff!", "Fluid Synth engine is stopped\nbe cause a don't recoverable error");
+            return;
+        } else if(fluid_output->sf2_id < 0) {
+            QMessageBox::information(this, "Eeeh!", "You needs a Sound File (SF2) to play!");
+            return;
+        }
+    }
+#endif
+
     if (file && !MidiInput::recording() && !MidiPlayer::isPlaying()) {
         mw_matrixWidget->timeMsChanged(file->msOfTick(file->cursorTick()), true);
-
+#ifdef USE_FLUIDSYNTH
+        FluidActionExportWav->setEnabled(false);
+        FluidActionExportMp3->setEnabled(false);
+        FluidActionExportFlac->setEnabled(false);
+#endif
         _miscWidget->setEnabled(false);
         channelWidget->setEnabled(false);
         protocolWidget->setEnabled(false);
@@ -642,11 +850,19 @@ void MainWindow::play() {
 }
 
 void MainWindow::record() {
+#ifdef USE_FLUIDSYNTH
+    for(int n = 0; n <= PRE_CHAN; n++) {
+
+            VST_proc::VST_show(n, false);
+    }
+#endif
+
 
     if (!MidiOutput::isConnected() || !MidiInput::isConnected()) {
         CompleteMidiSetupDialog* d = new CompleteMidiSetupDialog(this, !MidiInput::isConnected(), !MidiOutput::isConnected());
         d->setModal(true);
         d->exec();
+        delete d;
         return;
     }
 
@@ -665,6 +881,11 @@ void MainWindow::record() {
 
             mw_matrixWidget->timeMsChanged(file->msOfTick(file->cursorTick()), true);
 
+#ifdef USE_FLUIDSYNTH
+            FluidActionExportWav->setEnabled(false);
+            FluidActionExportMp3->setEnabled(false);
+            FluidActionExportFlac->setEnabled(false);
+#endif
             _miscWidget->setEnabled(false);
             channelWidget->setEnabled(false);
             protocolWidget->setEnabled(false);
@@ -674,14 +895,24 @@ void MainWindow::record() {
 #ifdef ENABLE_REMOTE
             _remoteServer->record();
 #endif
-            MidiPlayer::play(file);
+            MidiPlayer::play(file, 1);
             MidiInput::startInput();
+            //MidiInControl::wait_record(this);
+            /*
+            if(MidiInControl::wait_record(this) < 0) {
+                stop(); return;
+            }
+            */
+            MidiPlayer::start();
             connect(MidiPlayer::playerThread(),
                     SIGNAL(playerStopped()), this, SLOT(stop()));
 #ifdef __WINDOWS_MM__
             connect(MidiPlayer::playerThread(),
                     SIGNAL(timeMsChanged(int)), mw_matrixWidget, SLOT(timeMsChanged(int)));
 #endif
+            if(MidiInControl::wait_record(this) < 0) {
+                stop(); return;
+            }
         }
     }
 }
@@ -693,11 +924,19 @@ void MainWindow::pause() {
             stop(false, false, false);
         }
     }
+
+#ifdef USE_FLUIDSYNTH
+    VST_proc::VST_external_show(-1);
+#endif
+
 }
 
 void MainWindow::stop(bool autoConfirmRecord, bool addEvents, bool resetPause) {
 
     if (!file) {
+#ifdef USE_FLUIDSYNTH
+        VST_proc::VST_external_show(-1);
+#endif
         return;
     }
 
@@ -707,9 +946,16 @@ void MainWindow::stop(bool autoConfirmRecord, bool addEvents, bool resetPause) {
     if (resetPause) {
         file->setPauseTick(-1);
         mw_matrixWidget->update();
+        channelWidget->update();
     }
     if (!MidiInput::recording() && MidiPlayer::isPlaying()) {
         MidiPlayer::stop();
+#ifdef USE_FLUIDSYNTH
+        FluidActionExportWav->setEnabled(true);
+        FluidActionExportMp3->setEnabled(true);
+        FluidActionExportFlac->setEnabled(true);
+
+#endif
         _miscWidget->setEnabled(true);
         channelWidget->setEnabled(true);
         _trackWidget->setEnabled(true);
@@ -718,13 +964,36 @@ void MainWindow::stop(bool autoConfirmRecord, bool addEvents, bool resetPause) {
         eventWidget()->setEnabled(true);
         mw_matrixWidget->timeMsChanged(MidiPlayer::timeMs(), true);
         _trackWidget->setEnabled(true);
+        channelWidget->update();
 #ifdef ENABLE_REMOTE
         _remoteServer->stop();
 #endif
         panic();
+        ProgChangeEvent* pevent = 0;
+        ControlChangeEvent* cevent = 0;
+        pevent = new ProgChangeEvent(NewNoteTool::editChannel(), Prog_MIDI[NewNoteTool::editChannel()], 0);
+        cevent = new ControlChangeEvent(NewNoteTool::editChannel(), 0x0, Bank_MIDI[NewNoteTool::editChannel()], 0);
+
+        MidiOutput::sendCommand2(cevent);
+        MidiOutput::sendCommand2(pevent);
+
+        #ifdef USE_FLUIDSYNTH
+            for(int n = 0; n < PRE_CHAN; n++) {
+
+                    VST_proc::VST_DisableButtons(n, false);
+
+                    VST_proc::VST_MIDInotesOff(n);
+            }
+
+            VST_proc::VST_MIDIend();
+
+            VST_proc::VST_external_show(-1);
+
+        #endif
     }
 
     MidiTrack* track = file->track(NewNoteTool::editTrack());
+
     if (!track) {
         return;
     }
@@ -732,6 +1001,18 @@ void MainWindow::stop(bool autoConfirmRecord, bool addEvents, bool resetPause) {
     if (MidiInput::recording()) {
         MidiPlayer::stop();
         panic();
+        ProgChangeEvent* pevent = 0;
+        ControlChangeEvent* cevent = 0;
+        pevent = new ProgChangeEvent(NewNoteTool::editChannel(), Prog_MIDI[NewNoteTool::editChannel()], 0);
+        cevent = new ControlChangeEvent(NewNoteTool::editChannel(), 0x0, Bank_MIDI[NewNoteTool::editChannel()], 0);
+
+        MidiOutput::sendCommand2(cevent);
+        MidiOutput::sendCommand2(pevent);
+#ifdef USE_FLUIDSYNTH
+        FluidActionExportWav->setEnabled(true);
+        FluidActionExportMp3->setEnabled(true);
+        FluidActionExportFlac->setEnabled(true);
+#endif
         _miscWidget->setEnabled(true);
         channelWidget->setEnabled(true);
         protocolWidget->setEnabled(true);
@@ -949,7 +1230,7 @@ void MainWindow::saveas() {
     }
 
     // automatically add '.mid' extension
-    if (!newPath.endsWith(".mid", Qt::CaseInsensitive) && !newPath.endsWith(".midi", Qt::CaseInsensitive)) {
+    if (!newPath.endsWith(".kar", Qt::CaseInsensitive) && !newPath.endsWith(".mid", Qt::CaseInsensitive) && !newPath.endsWith(".midi", Qt::CaseInsensitive)) {
         newPath.append(".mid");
     }
 
@@ -1039,6 +1320,129 @@ void MainWindow::openFile(QString filePath) {
         stop();
         setFile(mf);
         updateRecentPathsList();
+
+        QString info;
+
+#ifdef USE_FLUIDSYNTH
+
+        if(fluid_control) { // anti-crash!
+            fluid_control->disable_mainmenu = true;
+            fluid_control->deleteLater();
+            fluid_control = NULL;
+        }
+
+        // get COPYRIGHT event
+        foreach (MidiEvent* event, *(getFile()->eventsBetween(0, 10))) {
+            TextEvent* te = dynamic_cast<TextEvent*>(event);
+            if (te && te->channel()== 16 && te->type() == TextEvent::COPYRIGHT) {
+                info = te->text();
+                break;
+            }
+        }
+
+        QString s = info.mid(info.indexOf("title: "));
+        if(!s.isEmpty()) {
+            s = s.mid(7);
+            s = s.left(s.indexOf("\n"));
+
+            fluid_output->fluid_settings->setValue("mp3_title", s);
+        } else {
+            QString name;
+            if(filePath.endsWith(".mid")) {
+                name =  filePath;
+                name.remove(name.lastIndexOf(".mid"), 20);
+            } else if(filePath.endsWith(".kar")) {
+                name =  filePath;
+                name.remove(name.lastIndexOf(".kar"), 20);
+            }
+
+            name = name.mid(name.lastIndexOf("/") + 1);
+            name = name.mid(name.lastIndexOf("\\") + 1);
+            fluid_output->fluid_settings->setValue("mp3_title", name);
+        }
+
+        s = info.mid(info.indexOf("artist: "));
+        if(!s.isEmpty()) {
+            s = s.mid(8);
+            s = s.left(s.indexOf("\n"));
+
+            fluid_output->fluid_settings->setValue("mp3_artist", s);
+        } /* else
+            fluid_output->fluid_settings->setValue("mp3_artist", "");*/
+
+        s = info.mid(info.indexOf("album: "));
+        if(!s.isEmpty()) {
+            s = s.mid(7);
+            s = s.left(s.indexOf("\n"));
+
+            fluid_output->fluid_settings->setValue("mp3_album", s);
+        } else
+            fluid_output->fluid_settings->setValue("mp3_album", "");
+
+        s = info.mid(info.indexOf("genre: "));
+        if(!s.isEmpty()) {
+            s = s.mid(7);
+            s = s.left(s.indexOf("\n"));
+
+            fluid_output->fluid_settings->setValue("mp3_genre", s);
+        } else
+            fluid_output->fluid_settings->setValue("mp3_genre", "");
+
+        s = info.mid(info.indexOf("mp3_year: "));
+        if(!s.isEmpty()) {
+            s = s.mid(10);
+            s = s.left(s.indexOf("\n"));
+
+            fluid_output->fluid_settings->setValue("mp3_year", s.toInt());
+        } else
+            fluid_output->fluid_settings->setValue("mp3_year", QDate::currentDate().year());
+
+        s = info.mid(info.indexOf("mp3_track: "));
+        if(!s.isEmpty()) {
+            s = s.mid(11);
+            s = s.left(s.indexOf("\n"));
+
+            fluid_output->fluid_settings->setValue("mp3_track", s.toInt());
+        } else
+            fluid_output->fluid_settings->setValue("mp3_track", 1);
+
+        s = info.mid(info.indexOf("mp3_bitrate: "));
+        if(!s.isEmpty()) {
+            s = s.mid(13);
+            s = s.left(s.indexOf("\n"));
+            fluid_output->fluid_settings->setValue("mp3_bitrate", s.toInt());
+        } else
+            fluid_output->fluid_settings->setValue("mp3_bitrate", 5);
+
+        s = info.mid(info.indexOf("mp3_mode: "));
+        if(!s.isEmpty()) {
+            s = s.mid(10);
+            s = s.left(s.indexOf("\n"));
+            fluid_output->fluid_settings->setValue("mp3_mode", s.toInt() ? true : false);
+        }  else
+            fluid_output->fluid_settings->setValue("mp3_mode", true);
+
+        s = info.mid(info.indexOf("mp3_vbr: "));
+        if(!s.isEmpty()) {
+            s = s.mid(9);
+            s = s.left(s.indexOf("\n"));
+            fluid_output->fluid_settings->setValue("mp3_vbr", s.toInt() ? true : false);
+        } else
+            fluid_output->fluid_settings->setValue("mp3_vbr", false);
+
+
+        s = info.mid(info.indexOf("mp3_hq: "));
+        if(!s.isEmpty()) {
+            s = s.mid(8);
+            s = s.left(s.indexOf("\n"));
+            fluid_output->fluid_settings->setValue("mp3_hq", s.toInt() ? true : false);
+        } else
+            fluid_output->fluid_settings->setValue("mp3_hq", false);
+
+        fluid_output->fluid_settings->setValue("mp3_id3", true);
+
+#endif
+
     } else {
         QMessageBox::warning(this, tr("Error"), QString(tr("The file is damaged and cannot be opened. ")));
     }
@@ -1048,12 +1452,22 @@ void MainWindow::redo() {
     if (file)
         file->protocol()->redo(true);
     updateTrackMenu();
+
+#ifdef USE_FLUIDSYNTH
+    VST_proc::VST_UpdatefromMIDIfile();
+#endif
+
 }
 
 void MainWindow::undo() {
     if (file)
         file->protocol()->undo(true);
     updateTrackMenu();
+
+#ifdef USE_FLUIDSYNTH
+    VST_proc::VST_UpdatefromMIDIfile();
+#endif
+
 }
 
 EventWidget* MainWindow::eventWidget() {
@@ -1213,6 +1627,110 @@ void MainWindow::newFile() {
 
     editTrack(1);
     setWindowTitle(QApplication::applicationName() + tr(" - Untitled Document[*]"));
+
+    QString info;
+
+#ifdef USE_FLUIDSYNTH
+    if(fluid_control) { // anti-crash!
+        fluid_control->disable_mainmenu = true;
+        fluid_control->deleteLater();
+        fluid_control = NULL;
+    }
+
+
+    // get COPYRIGHT event
+    foreach (MidiEvent* event, *(getFile()->eventsBetween(0, 10))) {
+        TextEvent* te = dynamic_cast<TextEvent*>(event);
+        if (te && te->channel()== 16 && te->type() == TextEvent::COPYRIGHT) {
+            info = te->text();
+            break;
+        }
+    }
+
+    QString s = info.mid(info.indexOf("title: "));
+    if(!s.isEmpty()) {
+        s = s.mid(7);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_title", s);
+    } else
+        fluid_output->fluid_settings->setValue("mp3_title", "");
+
+    s = info.mid(info.indexOf("artist: "));
+    if(!s.isEmpty()) {
+        s = s.mid(8);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_artist", s);
+    } /* else
+        fluid_output->fluid_settings->setValue("mp3_artist", "");*/
+
+    s = info.mid(info.indexOf("album: "));
+    if(!s.isEmpty()) {
+        s = s.mid(7);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_album", s);
+    } else
+        fluid_output->fluid_settings->setValue("mp3_album", "");
+
+    s = info.mid(info.indexOf("genre: "));
+    if(!s.isEmpty()) {
+        s = s.mid(7);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_genre", s);
+    } else
+        fluid_output->fluid_settings->setValue("mp3_genre", "");
+
+    s = info.mid(info.indexOf("mp3_year: "));
+    if(!s.isEmpty()) {
+        s = s.mid(10);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_year", s.toInt());
+    } else
+        fluid_output->fluid_settings->setValue("mp3_year", QDate::currentDate().year());
+
+    s = info.mid(info.indexOf("mp3_track: "));
+    if(!s.isEmpty()) {
+        s = s.mid(11);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_track", s.toInt());
+    } else
+        fluid_output->fluid_settings->setValue("mp3_track", 1);
+
+    s = info.mid(info.indexOf("mp3_bitrate: "));
+    if(!s.isEmpty()) {
+        s = s.mid(13);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_bitrate", s.toInt());
+    } else
+        fluid_output->fluid_settings->setValue("mp3_bitrate", 5);
+
+    s = info.mid(info.indexOf("mp3_mode: "));
+    if(!s.isEmpty()) {
+        s = s.mid(10);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_mode", s.toInt() ? true : false);
+    }  else
+        fluid_output->fluid_settings->setValue("mp3_mode", true);
+
+    s = info.mid(info.indexOf("mp3_vbr: "));
+    if(!s.isEmpty()) {
+        s = s.mid(9);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_vbr", s.toInt() ? true : false);
+    } else
+        fluid_output->fluid_settings->setValue("mp3_vbr", false);
+
+
+    s = info.mid(info.indexOf("mp3_hq: "));
+    if(!s.isEmpty()) {
+        s = s.mid(8);
+        s = s.left(s.indexOf("\n"));
+        fluid_output->fluid_settings->setValue("mp3_hq", s.toInt() ? true : false);
+    } else
+        fluid_output->fluid_settings->setValue("mp3_hq", false);
+
+    //fluid_output->fluid_settings->setValue("mp3_id3", 0);
+#endif
+
 }
 
 void MainWindow::panic() {
@@ -1241,7 +1759,7 @@ void MainWindow::scaleSelection() {
             e->setMidiTime((e->midiTime() - minTime) * scale + minTime);
             OnEvent* on = dynamic_cast<OnEvent*>(e);
             if (on) {
-                MidiEvent* off = on->offEvent();
+                MidiEvent* off =(MidiEvent* ) on->offEvent();
                 off->setMidiTime((off->midiTime() - minTime) * scale + minTime);
             }
         }
@@ -1265,7 +1783,7 @@ void MainWindow::alignLeft() {
             e->setMidiTime(minTime);
             OnEvent* on = dynamic_cast<OnEvent*>(e);
             if (on) {
-                MidiEvent* off = on->offEvent();
+                MidiEvent* off =(MidiEvent* ) on->offEvent();
                 off->setMidiTime(minTime + (off->midiTime() - onTime));
             }
         }
@@ -1378,16 +1896,92 @@ void MainWindow::moveSelectedEventsToChannel(QAction* action) {
         return;
     }
 
+    QDialog *d= new QDialog(this,  Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    d->resize(397, 253);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(d);
+    buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+    buttonBox->setGeometry(QRect(30, 170, 341, 32));
+    buttonBox->setOrientation(Qt::Horizontal);
+    buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+    QLabel* label = new QLabel(d);
+    label->setObjectName(QString::fromUtf8("label"));
+    label->setGeometry(QRect(72, 40, 277, 91));
+    label->setText(QCoreApplication::translate("Dialog4", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600;\">Warning:</span><span style=\" font-size:11pt;\"> this copy all events to the</span></p><p><span style=\" font-size:11pt;\"> new channel deleting the matching events!</span><br/></p></body></html>", nullptr));
+    QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
+
+    if(d->exec()==QDialog::Rejected) return;
+
     int num = action->data().toInt();
     MidiChannel* channel = file->channel(num);
 
     if (Selection::instance()->selectedEvents().size() > 0) {
         file->protocol()->startNewAction(tr("Move selected events to channel ") + QString::number(num));
         foreach (MidiEvent* ev, Selection::instance()->selectedEvents()) {
+            TempoChangeEvent* tempo = dynamic_cast<TempoChangeEvent*>(ev);
+            TimeSignatureEvent* time = dynamic_cast<TimeSignatureEvent*>(ev);
+            KeySignatureEvent* key = dynamic_cast<KeySignatureEvent*>(ev);
+            TextEvent* text = dynamic_cast<TextEvent*>(ev);
+            SysExEvent* sys = dynamic_cast<SysExEvent*>(ev);
+            UnknownEvent* unk = dynamic_cast<UnknownEvent*>(ev);
+
+            ProgChangeEvent* prog = dynamic_cast<ProgChangeEvent*>(ev);
+            ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(ev);
+            PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(ev);
+            KeyPressureEvent* key1 = dynamic_cast<KeyPressureEvent*>(ev);
+            ChannelPressureEvent* cpress = dynamic_cast<ChannelPressureEvent*>(ev);
+
+            if(tempo || time || key1 || text || sys || unk) continue;
+
+            if(prog || ctrl || pitch || key || cpress) {
+                int _current_tick = ev->midiTime();
+                // borra eventos repetidos proximos
+                foreach (MidiEvent* event, *(file->eventsBetween(_current_tick-10, _current_tick+10))) {
+                    ProgChangeEvent* prog2 = dynamic_cast<ProgChangeEvent*>(event);
+                    ControlChangeEvent* ctrl2 = dynamic_cast<ControlChangeEvent*>(event);
+                    PitchBendEvent* pitch2 = dynamic_cast<PitchBendEvent*>(event);
+                    KeyPressureEvent* key2 = dynamic_cast<KeyPressureEvent*>(event);
+                    ChannelPressureEvent* cpress2 = dynamic_cast<ChannelPressureEvent*>(event);
+                    if(event->channel()==num) {
+                        if ((ctrl && ctrl2 && ctrl2->control()==ctrl->control()) ||
+                            (prog && prog2) ||
+                            (pitch && pitch2) ||
+                            (key1 && key2) ||
+                            (cpress && cpress2) ) {
+                            file->channel(num)->removeEvent(event);
+                        }
+                    }
+                }
+
+            }
             file->channel(ev->channel())->removeEvent(ev);
             ev->setChannel(num, true);
+
             OnEvent* onevent = dynamic_cast<OnEvent*>(ev);
             if (onevent) {
+                NoteOnEvent* notevent = dynamic_cast<NoteOnEvent*>(ev);
+
+                int _ini_tick = ev->midiTime();
+                int _end_tick = onevent->offEvent()->midiTime();
+
+                // borra eventos repetidos proximos
+                foreach (MidiEvent* event, channel->eventMap()->values()) {
+                    OnEvent* onevent2 = dynamic_cast<OnEvent*>(event);
+                    NoteOnEvent* notevent2 = dynamic_cast<NoteOnEvent*>(event);
+
+                    if(event->channel()==num) {
+                        if (notevent2 && onevent2 && notevent->note()==notevent2->note() &&
+                                ((onevent2->midiTime() >=_ini_tick && onevent2->midiTime() <=_end_tick) ||
+                                (onevent2->offEvent()->midiTime() >=_ini_tick && onevent2->offEvent()->midiTime() <=_end_tick))) {
+                            file->channel(num)->removeEvent(event);
+
+                        }
+                    }
+                }
+
+                file->channel(ev->channel())->removeEvent(ev);
+                ev->setChannel(num, true);
                 channel->insertEvent(onevent->offEvent(), onevent->offEvent()->midiTime());
                 onevent->offEvent()->setChannel(num);
             }
@@ -1398,7 +1992,73 @@ void MainWindow::moveSelectedEventsToChannel(QAction* action) {
     }
 }
 
-void MainWindow::moveSelectedEventsToTrack(QAction* action) {
+void MainWindow::moveSelectedNotesToChannel(QAction* action)
+{
+
+    if (!file) {
+        return;
+    }
+
+    QDialog *d= new QDialog(this,  Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    d->resize(397, 253);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(d);
+    buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+    buttonBox->setGeometry(QRect(30, 170, 341, 32));
+    buttonBox->setOrientation(Qt::Horizontal);
+    buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+    QLabel* label = new QLabel(d);
+    label->setObjectName(QString::fromUtf8("label"));
+    label->setGeometry(QRect(72, 40, 277, 91));
+    label->setText(QCoreApplication::translate("Dialog4", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600;\">Warning:</span><span style=\" font-size:11pt;\"> this copy all notes to the</span></p><p><span style=\" font-size:11pt;\"> new channel deleting the matching notes!</span><br/></p></body></html>", nullptr));
+    QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
+
+    if(d->exec()==QDialog::Rejected) return;
+
+    int num = action->data().toInt();
+    MidiChannel* channel = file->channel(num);
+
+    if (Selection::instance()->selectedEvents().size() > 0) {
+        file->protocol()->startNewAction("Move selected notes to channel " + QString::number(num));
+        foreach (MidiEvent* ev, Selection::instance()->selectedEvents()) {
+            OnEvent* onevent = dynamic_cast<OnEvent*>(ev);
+            if (onevent) {
+                NoteOnEvent* notevent = dynamic_cast<NoteOnEvent*>(ev);
+
+                int _ini_tick = ev->midiTime();
+                int _end_tick = onevent->offEvent()->midiTime();
+
+                // borra eventos repetidos proximos
+                foreach (MidiEvent* event, channel->eventMap()->values()) {
+                    OnEvent* onevent2 = dynamic_cast<OnEvent*>(event);
+                    NoteOnEvent* notevent2 = dynamic_cast<NoteOnEvent*>(event);
+
+                    if(event->channel()==num) {
+                        if (notevent2 && onevent2 && notevent->note()==notevent2->note() &&
+                                ((onevent2->midiTime() >=_ini_tick && onevent2->midiTime() <=_end_tick) ||
+                                (onevent2->offEvent()->midiTime() >=_ini_tick && onevent2->offEvent()->midiTime() <=_end_tick))) {
+                            file->channel(num)->removeEvent(event);
+                        }
+                    }
+                }
+
+                file->channel(ev->channel())->removeEvent(ev);
+                ev->setChannel(num, true);
+
+                channel->insertEvent(onevent->offEvent(), onevent->offEvent()->midiTime());
+                onevent->offEvent()->setChannel(num);
+
+                channel->insertEvent(ev, ev->midiTime());
+            }
+        }
+
+        file->protocol()->endAction();
+    }
+}
+
+void MainWindow::moveSelectedEventsToTrack(QAction* action)
+{
 
     if (!file) {
         return;
@@ -1475,7 +2135,9 @@ void MainWindow::updateChannelMenu() {
     foreach (QAction* action, _deleteChannelMenu->actions()) {
         int channel = action->data().toInt();
         if (file) {
-            action->setText(QString::number(channel) + " " + MidiFile::instrumentName(file->channel(channel)->progAtTick(0)));
+            if(channel!=9) action->setText(QString::number(channel) + " " + MidiFile::instrumentName(Bank_MIDI[channel], Prog_MIDI[channel]/*file->channel(channel)->progAtTick(0)*/));
+            else action->setText(QString::number(channel) + " " + MidiFile::drumName(Prog_MIDI[channel]));
+
         }
     }
 
@@ -1483,23 +2145,39 @@ void MainWindow::updateChannelMenu() {
     foreach (QAction* action, _moveSelectedEventsToChannelMenu->actions()) {
         int channel = action->data().toInt();
         if (file) {
-            action->setText(QString::number(channel) + " " + MidiFile::instrumentName(file->channel(channel)->progAtTick(0)));
+            if(channel!=9) action->setText(QString::number(channel) + " " + MidiFile::instrumentName(Bank_MIDI[channel], Prog_MIDI[channel]));
+            else action->setText(QString::number(channel) + " " + MidiFile::drumName(Prog_MIDI[channel]));
+
         }
     }
+
+    // move notes to channel...
+    foreach (QAction* action, _moveSelectedNotesToChannelMenu->actions()) {
+        int channel = action->data().toInt();
+        if (file) {
+            if(channel!=9) action->setText(QString::number(channel) + " " + MidiFile::instrumentName(Bank_MIDI[channel], Prog_MIDI[channel]));
+            else action->setText(QString::number(channel) + " " + MidiFile::drumName(Prog_MIDI[channel]));
+
+        }
+    }
+
 
     // paste events to channel...
     foreach (QAction* action, _pasteToChannelMenu->actions()) {
         int channel = action->data().toInt();
         if (file && channel >= 0) {
-            action->setText(QString::number(channel) + " " + MidiFile::instrumentName(file->channel(channel)->progAtTick(0)));
-        }
+                if(channel!=9) action->setText(QString::number(channel) + " " + MidiFile::instrumentName(Bank_MIDI[channel], file->channel(channel)->progAtTick(0)));
+                else action->setText(QString::number(channel) + " " + MidiFile::drumName(file->channel(channel)->progAtTick(0)));
+
+            }
     }
 
     // select all events from channel...
     foreach (QAction* action, _selectAllFromChannelMenu->actions()) {
         int channel = action->data().toInt();
         if (file) {
-            action->setText(QString::number(channel) + " " + MidiFile::instrumentName(file->channel(channel)->progAtTick(0)));
+            if(channel!=9) action->setText(QString::number(channel) + " " + MidiFile::instrumentName(Bank_MIDI[channel], file->channel(channel)->progAtTick(0)));
+            else action->setText(QString::number(channel) + " " + MidiFile::drumName(file->channel(channel)->progAtTick(0)));
         }
     }
 
@@ -1518,7 +2196,8 @@ void MainWindow::updateTrackMenu() {
 
     for (int i = 0; i < file->numTracks(); i++) {
         QVariant variant(i);
-        QAction* moveToTrackAction = new QAction(QString::number(i) + " " + file->tracks()->at(i)->name(), this);
+        QAction* moveToTrackAction = new QAction(QString::number(i) + " " +
+                                                 file->tracks()->at(i)->name(), this);
         moveToTrackAction->setData(variant);
         _moveSelectedEventsToTrackMenu->addAction(moveToTrackAction);
     }
@@ -1897,6 +2576,7 @@ void MainWindow::setInstrumentForChannel(int i) {
     InstrumentChooser* d = new InstrumentChooser(file, i, this);
     d->setModal(true);
     d->exec();
+    delete d;
 
     if (i == NewNoteTool::editChannel()) {
         editChannel(i);
@@ -1910,7 +2590,39 @@ void MainWindow::instrumentChannel(QAction* action) {
     }
 }
 
-void MainWindow::spreadSelection() {
+void MainWindow::setSoundEffectForChannel(int i)
+{
+    SoundEffectChooser* d = new SoundEffectChooser(file, i, this, SOUNDEFFECTCHOOSER_ALL);
+    d->exec();
+    delete d;
+
+    updateChannelMenu();
+    channelWidget->update();
+}
+
+#ifdef USE_FLUIDSYNTH
+
+void MainWindow::setLoadVSTForChannel(int channel, int flag)
+{
+    VST_chan vst(this, channel, flag);
+    if(!flag) vst.exec();
+
+    updateChannelMenu();
+    channelWidget->update();
+}
+
+#endif
+
+void MainWindow::SoundEffectChannel(QAction* action)
+{
+    if (file) {
+        setSoundEffectForChannel(action->data().toInt());
+    }
+
+}
+
+void MainWindow::spreadSelection()
+{
 
     if (!file) {
         return;
@@ -2033,6 +2745,7 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     QMenu* fileMB = menuBar()->addMenu(tr("File"));
     QMenu* editMB = menuBar()->addMenu(tr("Edit"));
     QMenu* toolsMB = menuBar()->addMenu(tr("Tools"));
+    QMenu* notesMB = menuBar()->addMenu(tr("Notes"));
     QMenu* viewMB = menuBar()->addMenu(tr("View"));
     QMenu* playbackMB = menuBar()->addMenu(tr("Playback"));
     QMenu* midiMB = menuBar()->addMenu(tr("Midi"));
@@ -2071,6 +2784,28 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     saveAsAction->setIcon(QIcon(":/run_environment/graphics/tool/saveas.png"));
     connect(saveAsAction, SIGNAL(triggered()), this, SLOT(saveas()));
     fileMB->addAction(saveAsAction);
+
+#ifdef USE_FLUIDSYNTH
+
+    FluidActionExportWav = new QAction("Export to WAV file..", this);
+
+    connect(FluidActionExportWav, SIGNAL(triggered()), this, SLOT(FluidSaveAsWav()));
+    fileMB->addAction(FluidActionExportWav);
+
+    FluidActionExportMp3 = new QAction("Export to MP3 file..", this);
+
+    connect(FluidActionExportMp3, SIGNAL(triggered()), this, SLOT(FluidSaveAsMp3()));
+    fileMB->addAction(FluidActionExportMp3);
+
+    FluidActionExportFlac = new QAction("Export to FLAC file..", this);
+
+    connect(FluidActionExportFlac, SIGNAL(triggered()), this, SLOT(FluidSaveAsFlac()));
+    fileMB->addAction(FluidActionExportFlac);
+#endif
+
+    QAction* ImportSF2NamesAction = new QAction("Import Instrument names from .SF2/.SF3 file", this);
+    connect(ImportSF2NamesAction, SIGNAL(triggered()), this, SLOT(ImportSF2Names()));
+    fileMB->addAction(ImportSF2NamesAction);
 
     fileMB->addSeparator();
 
@@ -2216,10 +2951,16 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     toolsToolsMenu->addAction(selectSingleAction);
     QAction* selectBoxAction = new ToolButton(new SelectTool(SELECTION_TYPE_BOX), QKeySequence(Qt::Key_F5), toolsToolsMenu);
     toolsToolsMenu->addAction(selectBoxAction);
+    QAction* selectBoxAction2 = new ToolButton(new SelectTool(SELECTION_TYPE_BOX2), 0, toolsToolsMenu);
+    toolsToolsMenu->addAction(selectBoxAction2);
+    QAction* selectBoxAction3 = new ToolButton(new SelectTool(SELECTION_TYPE_BOX3), 0, toolsToolsMenu);
+    toolsToolsMenu->addAction(selectBoxAction3);
     QAction* selectLeftAction = new ToolButton(new SelectTool(SELECTION_TYPE_LEFT), QKeySequence(Qt::Key_F6), toolsToolsMenu);
     toolsToolsMenu->addAction(selectLeftAction);
     QAction* selectRightAction = new ToolButton(new SelectTool(SELECTION_TYPE_RIGHT), QKeySequence(Qt::Key_F7), toolsToolsMenu);
     toolsToolsMenu->addAction(selectRightAction);
+    QAction* selectCursorAction = new ToolButton(new SelectTool(SELECTION_TYPE_CURSOR), 0/*QKeySequence(Qt::Key_F7)*/, toolsToolsMenu);
+    toolsToolsMenu->addAction(selectCursorAction);
 
     toolsToolsMenu->addSeparator();
 
@@ -2332,6 +3073,40 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteSelectedEvents()));
     toolsMB->addAction(deleteAction);
 
+    QAction* textAction = new QAction("Insert text event", this);
+
+    textAction->setToolTip("Insert text event");
+    textAction->setIcon(QIcon(":/run_environment/graphics/tool/midi_text.png"));
+    connect(textAction, SIGNAL(triggered()), this, SLOT(midi_text_edit()));
+    toolsMB->addAction(textAction);
+
+    QAction* markerAction = new QAction("Insert marker event", this);
+
+    markerAction->setToolTip("Insert marker event");
+    markerAction->setIcon(QIcon(":/run_environment/graphics/tool/midi_marker.png"));
+    connect(markerAction, SIGNAL(triggered()), this, SLOT(midi_marker_edit()));
+    toolsMB->addAction(markerAction);
+
+    ////////
+    // Tweak
+
+    QMenu* textevMenu = new QMenu("Insert more text events...", toolsMB);
+
+    QAction* evLyrikAction = new QAction("Insert Lyrik event", textevMenu);
+    evLyrikAction->setToolTip("Insert Lyrik event");
+    evLyrikAction->setIcon(QIcon(":/run_environment/graphics/tool/midi_text.png"));
+    connect(evLyrikAction, SIGNAL(triggered()), this, SLOT(midi_lyrik_edit()));
+    textevMenu->addAction(evLyrikAction);
+
+    QAction* evTracknameAction = new QAction("Insert Track Name event", textevMenu);
+    evTracknameAction->setToolTip("Insert Track Name event");
+    evTracknameAction->setIcon(QIcon(":/run_environment/graphics/tool/midi_text.png"));
+    connect(evTracknameAction, SIGNAL(triggered()), this, SLOT(midi_track_name_edit()));
+    textevMenu->addAction(evTracknameAction);
+
+    toolsMB->addMenu(textevMenu);
+    //////////
+
     toolsMB->addSeparator();
 
     QAction* alignLeftAction = new QAction(tr("Align left"), this);
@@ -2441,6 +3216,17 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
         _moveSelectedEventsToChannelMenu->addAction(moveToChannelAction);
     }
 
+    _moveSelectedNotesToChannelMenu = new QMenu(tr("Move notes to channel..."), editMB);
+    toolsMB->addMenu(_moveSelectedNotesToChannelMenu);
+    connect(_moveSelectedNotesToChannelMenu, SIGNAL(triggered(QAction*)), this, SLOT(moveSelectedNotesToChannel(QAction*)));
+
+    for (int i = 0; i < 16; i++) {
+        QVariant variant(i);
+        QAction* moveToChannelAction = new QAction(QString::number(i), this);
+        moveToChannelAction->setData(variant);
+        _moveSelectedNotesToChannelMenu->addAction(moveToChannelAction);
+    }
+
     _moveSelectedEventsToTrackMenu = new QMenu(tr("Move events to track..."), editMB);
     toolsMB->addMenu(_moveSelectedEventsToTrackMenu);
     connect(_moveSelectedEventsToTrackMenu, SIGNAL(triggered(QAction*)), this, SLOT(moveSelectedEventsToTrack(QAction*)));
@@ -2474,6 +3260,157 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     magnetAction->setChecked(false);
     magnetAction->setChecked(EventTool::magnetEnabled());
     connect(magnetAction, SIGNAL(toggled(bool)), this, SLOT(enableMagnet(bool)));
+
+    QAction* velocityscale = new QAction("Velocity Scale", this);
+    _activateWithSelections.append(velocityscale);
+    connect(velocityscale, SIGNAL(triggered()), this, SLOT(velocityScale()));
+    notesMB->addAction(velocityscale);
+
+    notesMB->addSeparator();
+
+    QAction* overlappedNotes = new QAction("Overlapped Notes Correction", this);
+    _activateWithSelections.append(overlappedNotes);
+    connect(overlappedNotes, SIGNAL(triggered()), this, SLOT(overlappedNotesCorrection()));
+    notesMB->addAction(overlappedNotes);
+
+    QAction* longNotes = new QAction("Long Notes Correction", this);
+    _activateWithSelections.append(longNotes);
+    connect(longNotes, SIGNAL(triggered()), this, SLOT(longNotesCorrection()));
+    notesMB->addAction(longNotes);
+
+    notesMB->addSeparator();
+
+    QMenu* buildPowers = new QMenu("Build Power Chords from Single Notes", notesMB);
+    notesMB->addMenu(buildPowers);
+
+    QAction* powerchordSelection = new QAction("Power Chord", this);
+    _activateWithSelections.append(powerchordSelection);
+    connect(powerchordSelection, SIGNAL(triggered()), this, SLOT(buildpowerchord()));
+    buildPowers->addAction(powerchordSelection);
+
+    QAction* powerchordInvSelection = new QAction("Power Chord Inverted", this);
+    _activateWithSelections.append(powerchordInvSelection);
+    connect(powerchordInvSelection, SIGNAL(triggered()), this, SLOT(buildpowerchordInv()));
+    buildPowers->addAction(powerchordInvSelection);
+
+    QAction* power2chordSelection = new QAction("Power Chord Extended", this);
+    _activateWithSelections.append(power2chordSelection);
+    connect(power2chordSelection, SIGNAL(triggered()), this, SLOT(buildpowerpowerchord()));
+    buildPowers->addAction(power2chordSelection);
+
+    QMenu* buildChords = new QMenu("Build Chords from Single Notes", notesMB);
+    notesMB->addMenu(buildChords);
+
+    QAction* buildMajorSelection = new QAction("Major Chord (CM)", this);
+    _activateWithSelections.append(buildMajorSelection);
+    connect(buildMajorSelection, SIGNAL(triggered()), this, SLOT(buildMajor()));
+    buildChords->addAction(buildMajorSelection);
+
+    QAction* buildMinorSelection = new QAction("Minor Chord (Cm)", this);
+    _activateWithSelections.append(buildMinorSelection);
+    connect(buildMinorSelection, SIGNAL(triggered()), this, SLOT(buildMinor()));
+    buildChords->addAction(buildMinorSelection);
+
+    QAction* buildAugSelection = new QAction("Augmented Chord (Caug)", this);
+    _activateWithSelections.append(buildAugSelection);
+    connect(buildAugSelection, SIGNAL(triggered()), this, SLOT(buildAug()));
+    buildChords->addAction(buildAugSelection);
+
+    QAction* buildDisSelection = new QAction("Diminished Chord (Cdim)", this);
+    _activateWithSelections.append(buildDisSelection);
+    connect(buildDisSelection, SIGNAL(triggered()), this, SLOT(buildDis()));
+    buildChords->addAction(buildDisSelection);
+
+    QAction* buildSeventhSelection = new QAction("Seventh Chord (C7)", this);
+    _activateWithSelections.append(buildSeventhSelection);
+    connect(buildSeventhSelection, SIGNAL(triggered()), this, SLOT(buildSeventh()));
+    buildChords->addAction(buildSeventhSelection);
+
+    QAction* buildMajorSeventhSelection = new QAction("Major Chord (C7M)", this);
+    _activateWithSelections.append(buildMajorSeventhSelection);
+    connect(buildMajorSeventhSelection, SIGNAL(triggered()), this, SLOT(buildMajorSeventh()));
+    buildChords->addAction(buildMajorSeventhSelection);
+
+    QAction* buildMinorSeventhSelection = new QAction("7 Minor Chord (C7m)", this);
+    _activateWithSelections.append(buildMinorSeventhSelection);
+    connect(buildMinorSeventhSelection, SIGNAL(triggered()), this, SLOT(buildMinorSeventh()));
+    buildChords->addAction(buildMinorSeventhSelection);
+
+    QAction* buildMinorSeventhMajorSelection = new QAction("Minor with 7 Major Chord Cm(7M)", this);
+    _activateWithSelections.append(buildMinorSeventhMajorSelection);
+    connect(buildMinorSeventhMajorSelection, SIGNAL(triggered()), this, SLOT(buildMinorSeventhMajor()));
+    buildChords->addAction(buildMinorSeventhMajorSelection);
+
+    notesMB->addSeparator();
+
+    QMenu* buildPChords = new QMenu("Build Progression Chords from Single Notes", notesMB);
+    notesMB->addMenu(buildPChords);
+
+    QAction* buildCMajorSelection = new QAction("C Major (CM)", this);
+    _activateWithSelections.append(buildCMajorSelection);
+    connect(buildCMajorSelection, SIGNAL(triggered()), this, SLOT(buildCMajor()));
+    buildPChords->addAction(buildCMajorSelection);
+
+    QAction* buildCMajorInv1Selection = new QAction("C Major Inversion 1 (CM)", this);
+    _activateWithSelections.append(buildCMajorInv1Selection);
+    connect(buildCMajorInv1Selection, SIGNAL(triggered()), this, SLOT(buildCMajorInv1()));
+    buildPChords->addAction(buildCMajorInv1Selection);
+
+    QAction* buildCMajorInv2Selection = new QAction("C Major Inversion 2 (CM)", this);
+    _activateWithSelections.append(buildCMajorInv2Selection);
+    connect(buildCMajorInv2Selection, SIGNAL(triggered()), this, SLOT(buildCMajorInv2()));
+    buildPChords->addAction(buildCMajorInv2Selection);
+
+    QAction* buildCMinorSelection = new QAction("C Minor (Cm)", this);
+    _activateWithSelections.append(buildCMinorSelection);
+    connect(buildCMinorSelection, SIGNAL(triggered()), this, SLOT(buildCMinor()));
+    buildPChords->addAction(buildCMinorSelection);
+
+    QAction* buildCMinorInv1Selection = new QAction("C Minor Inversion 1 (Cm)", this);
+    _activateWithSelections.append(buildCMinorInv1Selection);
+    connect(buildCMinorInv1Selection, SIGNAL(triggered()), this, SLOT(buildCMinorInv1()));
+    buildPChords->addAction(buildCMinorInv1Selection);
+
+    QAction* buildCMinorInv2Selection = new QAction("C Minor Inversion 2 (Cm)", this);
+    _activateWithSelections.append(buildCMinorInv2Selection);
+    connect(buildCMinorInv2Selection, SIGNAL(triggered()), this, SLOT(buildCMinorInv2()));
+    buildPChords->addAction(buildCMinorInv2Selection);
+
+    notesMB->addSeparator();
+
+    QAction* adjustVel = new QAction("Adjust Velocity for Chords", this);
+
+    connect(adjustVel, SIGNAL(triggered()), this, SLOT(setChordVelocityProp()));
+    notesMB->addAction(adjustVel);
+
+    notesMB->addSeparator();
+
+    QAction* pitchbend1 = new QAction("Pitch Bend Effect 1", this);
+    _activateWithSelections.append(pitchbend1);
+    connect(pitchbend1, SIGNAL(triggered()), this, SLOT(pitchbend_effect1()));
+    notesMB->addAction(pitchbend1);
+
+    QAction* volumeoff = new QAction("Volume Off Effect", this);
+    _activateWithSelections.append(volumeoff);
+    connect(volumeoff, SIGNAL(triggered()), this, SLOT(volumeoff_effect()));
+    notesMB->addAction(volumeoff);
+
+    QAction* choppy_audio = new QAction("Choppy Audio Effect", this);
+    _activateWithSelections.append(choppy_audio);
+    connect(choppy_audio, SIGNAL(triggered()), this, SLOT(choppy_audio_effect()));
+    notesMB->addAction(choppy_audio);
+
+    notesMB->addSeparator();
+
+    QAction* pattern_note = new QAction("Pattern Note", this);
+    _activateWithSelections.append(pattern_note);
+    connect(pattern_note, SIGNAL(triggered()), this, SLOT(conv_pattern_note()));
+    notesMB->addAction(pattern_note);
+
+    QAction* finger_pattern = new QAction("Finger Pattern Utility", this);
+    //_activateWithSelections.append(finger_pattern);
+    connect(finger_pattern, SIGNAL(triggered()), this, SLOT(finger_pattern()));
+    notesMB->addAction(finger_pattern);
 
     // View
     QMenu* zoomMenu = new QMenu(tr("Zoom..."), viewMB);
@@ -2565,6 +3502,127 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(divMenu, SIGNAL(triggered(QAction*)), this, SLOT(divChanged(QAction*)));
     viewMB->addMenu(divMenu);
 
+    viewMB->addSeparator();
+
+    QAction *_viewRightPan = new QAction("Right Pannel Mode", this);
+    _viewRightPan->setCheckable(true);
+    _viewRightPan->setChecked(rightSplitterMode);
+    viewMB->addAction(_viewRightPan);
+    connect(_viewRightPan, QOverload<bool>::of(&QAction::triggered), [=](bool){
+        rightSplitterMode^=1;
+         _settings->setValue("rightSplitterMode", rightSplitterMode);
+
+        EventTool::clearSelection();
+        delete Selection::instance();
+
+        if(!rightSplitterMode) {
+            upperTabWidget->removeTab(EventSplitterTabPos);
+            delete _eventWidget;
+            _eventWidget = new EventWidget(lowerTabWidget);
+            Selection::_eventWidget = _eventWidget;
+            EventSplitterTabPos = lowerTabWidget->count();
+            lowerTabWidget->addTab(_eventWidget, "Event");
+
+        } else {
+            lowerTabWidget->removeTab(EventSplitterTabPos);
+            delete _eventWidget;
+            _eventWidget = new EventWidget(upperTabWidget);
+            Selection::_eventWidget = _eventWidget;
+            EventSplitterTabPos = upperTabWidget->count();
+            upperTabWidget->addTab(_eventWidget, "Event");
+
+        }
+
+        MidiEvent::setEventWidget(_eventWidget);
+        Selection::setFile(file);
+        _eventWidget->setFile(file);
+        connect(file->protocol(), SIGNAL(actionFinished()), eventWidget(), SLOT(reload()));
+        _eventWidget->update();
+
+        if(rightSplitterMode) {
+            upperTabWidget->setFixedSize(rightSplitter->width(), rightSplitter->height() * 7/10 - 18);
+            rightSplitter->setStretchFactor(0, 8);
+            rightSplitter->setStretchFactor(1, 2);
+
+        } else {
+            upperTabWidget->setFixedSize(rightSplitter->width(), rightSplitter->height() * 5/10 - 18);
+            rightSplitter->setStretchFactor(0, 5);
+            rightSplitter->setStretchFactor(1, 5);
+
+        }
+
+        rightSplitter->update();
+
+    });
+
+
+    viewMB->addSeparator();
+
+    QMenu* textMenu = new QMenu("Text/Karaoke Events", viewMB);
+    viewMB->addMenu(textMenu);
+
+    viewMB->addSeparator();
+
+    QAction *_viewKaraoke = new QAction("View karaoke text", this);
+    _viewKaraoke->setCheckable(true);
+    _viewKaraoke->setChecked(mw_matrixWidget->visible_TimeLineArea4);
+    textMenu->addAction(_viewKaraoke);
+    connect(_viewKaraoke, QOverload<bool>::of(&QAction::triggered), [=](bool){
+        mw_matrixWidget->visible_karaoke^= 1;
+        _settings->setValue("visible_karaoke", mw_matrixWidget->visible_karaoke);
+        mw_matrixWidget->registerRelayout();
+
+    });
+
+    QMenu* timMenu = new QMenu("Time Line Edit Box", viewMB);
+    viewMB->addMenu(timMenu);
+
+    viewMB->addSeparator();
+
+    QAction *_viewCtrl = new QAction("View Control Events", this);
+    _viewCtrl->setCheckable(true);
+    _viewCtrl->setChecked(mw_matrixWidget->visible_Controlflag);
+    timMenu->addAction(_viewCtrl);
+    connect(_viewCtrl, QOverload<bool>::of(&QAction::triggered), [=](bool){
+        mw_matrixWidget->visible_Controlflag^= 1;
+        _settings->setValue("visible_Controlflag", mw_matrixWidget->visible_Controlflag);
+        mw_matrixWidget->registerRelayout();
+
+    });
+
+    QAction *_viewPitch = new QAction("View Pitch Events", this);
+    _viewPitch->setCheckable(true);
+    _viewPitch->setChecked(mw_matrixWidget->visible_PitchBendflag);
+    timMenu->addAction(_viewPitch);
+    connect(_viewPitch, QOverload<bool>::of(&QAction::triggered), [=](bool){
+        mw_matrixWidget->visible_PitchBendflag^= 1;
+        _settings->setValue("visible_PitchBendflag", mw_matrixWidget->visible_PitchBendflag);
+        mw_matrixWidget->registerRelayout();
+
+    });
+
+    QAction *_viewTim3 = new QAction("View Prog and SysEx* Events", this);
+    _viewTim3->setCheckable(true);
+    _viewTim3->setChecked(mw_matrixWidget->visible_TimeLineArea3);
+    timMenu->addAction(_viewTim3);
+    connect(_viewTim3, QOverload<bool>::of(&QAction::triggered), [=](bool){
+        mw_matrixWidget->visible_TimeLineArea3^= 1;
+        _settings->setValue("visible_TimeLineArea3", mw_matrixWidget->visible_TimeLineArea3);
+        mw_matrixWidget->registerRelayout();
+
+    });
+
+    QAction *_viewTim4 = new QAction("View Text Events", this);
+    _viewTim4->setCheckable(true);
+    _viewTim4->setChecked(mw_matrixWidget->visible_TimeLineArea4);
+    timMenu->addAction(_viewTim4);
+    connect(_viewTim4, QOverload<bool>::of(&QAction::triggered), [=](bool){
+        mw_matrixWidget->visible_TimeLineArea4^= 1;
+        _settings->setValue("visible_TimeLineArea4", mw_matrixWidget->visible_TimeLineArea4);
+        mw_matrixWidget->registerRelayout();
+
+    });
+
     // Playback
     QAction* playStopAction = new QAction("PlayStop", this);
     QList<QKeySequence> playStopActionShortcuts;
@@ -2587,6 +3645,11 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     pauseAction->setShortcut(QKeySequence(Qt::Key_Space + Qt::CTRL));
 #endif
     connect(pauseAction, SIGNAL(triggered()), this, SLOT(pause()));
+
+#ifdef USE_FLUIDSYNTH
+    connect(fluid_output, SIGNAL(pause_player()), this, SLOT(pause()));
+    connect(fluid_output, SIGNAL(message_timeout(QString, QString)), this, SLOT(message_timeout(QString, QString)));
+#endif
     playbackMB->addAction(pauseAction);
 
     QAction* recAction = new QAction(tr("Record"), this);
@@ -2714,6 +3777,39 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     connect(thruAction, SIGNAL(toggled(bool)), this, SLOT(enableThru(bool)));
     midiMB->addAction(thruAction);
 
+    QAction* MidiInAction = new QAction("MIDI In Control", this);
+    MidiInAction->setIcon(QIcon(":/run_environment/graphics/tool/config_midiin.png"));
+    connect(MidiInAction, SIGNAL(triggered()), this, SLOT(DMidiInControl()));
+    midiMB->addAction(MidiInAction);
+
+    midiMB->addSeparator();
+
+#ifdef USE_FLUIDSYNTH
+
+    QAction* FluidAction = new QAction("Fluid Synth Control", this);
+    FluidAction->setIcon(QIcon(":/run_environment/graphics/tool/config_fluid.png"));
+    connect(FluidAction, SIGNAL(triggered()), this, SLOT(FluidControl()));
+    midiMB->addAction(FluidAction);
+
+ #endif
+
+    QAction* PianoAction = new QAction("Piano Play/Record", this);
+    PianoAction->setIcon(QIcon(":/run_environment/graphics/channelwidget/instrument.png"));
+    connect(PianoAction, SIGNAL(triggered()), this, SLOT(PianoPlay()));
+
+    midiMB->addAction(PianoAction);
+
+    QAction* DrumAction = new QAction("Drum Play/Record", this);
+    DrumAction->setIcon(QIcon(":/run_environment/graphics/tool/drum.png"));
+    connect(DrumAction, SIGNAL(triggered()), this, SLOT(DrumPlay()));
+    midiMB->addAction(DrumAction);
+
+    QAction* DrumBoxAction = new QAction("Drum Rhythm Box", this);
+    DrumBoxAction->setIcon(QIcon(":/run_environment/graphics/tool/drumbox.png"));
+    connect(DrumBoxAction, SIGNAL(triggered()), this, SLOT(DrumRhythmBox()));
+    midiMB->addAction(DrumBoxAction);
+
+
     midiMB->addSeparator();
 
     QAction* panicAction = new QAction(tr("Midi panic"), this);
@@ -2809,21 +3905,51 @@ QWidget* MainWindow::setupActions(QWidget* parent) {
     toolBar->addAction(zoomHorOutAction);
     toolBar->addAction(zoomVerInAction);
     toolBar->addAction(zoomVerOutAction);
-
+    toolBar->addSeparator();
     toolBar->addAction(lockAction);
-
+    toolBar->addAction(metronomeAction);
     toolBar->addSeparator();
-
-    toolBar->addAction(quantizeAction);
-    toolBar->addAction(magnetAction);
-
-    toolBar->addSeparator();
-
     toolBar->addAction(thruAction);
+    toolBar->addAction(panicAction);
+    toolBar->addAction(MidiInAction);
+
+#ifdef USE_FLUIDSYNTH
+    toolBar->addAction(FluidAction);
+#endif
+
+    toolBar->addSeparator();
+    toolBar->addAction(PianoAction);
+    toolBar->addAction(DrumAction);
+    toolBar->addAction(DrumBoxAction);
+
+    toolBar->addAction(stdToolAction);
+    toolBar->addAction(newNoteAction);
+    toolBar->addAction(removeNotesAction);
+    toolBar->addAction(textAction);
+    toolBar->addAction(markerAction);
+    toolBar->addSeparator();
+    toolBar->addAction(selectSingleAction);
+    toolBar->addAction(selectBoxAction);
+    toolBar->addAction(selectBoxAction2);
+    toolBar->addAction(selectBoxAction3);
+    toolBar->addAction(selectLeftAction);
+    toolBar->addAction(selectRightAction);
+    toolBar->addAction(selectCursorAction);
+    toolBar->addSeparator();
+    toolBar->addAction(moveAllAction);
+    toolBar->addAction(moveLRAction);
+    toolBar->addAction(moveUDAction);
+    toolBar->addAction(sizeChangeAction);
     toolBar->addSeparator();
     toolBar->addAction(measureAction);
     toolBar->addAction(timeSignatureAction);
     toolBar->addAction(tempoAction);
+    toolBar->addSeparator();
+    toolBar->addAction(alignLeftAction);
+    toolBar->addAction(alignRightAction);
+    toolBar->addAction(equalizeAction);
+    toolBar->addAction(quantizeAction);
+    toolBar->addAction(magnetAction);
 
     btnLayout->setColumnStretch(4, 1);
     btnLayout->addWidget(toolBar, 0, 0, 2, 1);
@@ -3010,6 +4136,9 @@ void MainWindow::checkEnableActionsForSelection() {
     if (_moveSelectedEventsToChannelMenu) {
         _moveSelectedEventsToChannelMenu->setEnabled(enabled);
     }
+    if (_moveSelectedNotesToChannelMenu) {
+        _moveSelectedNotesToChannelMenu->setEnabled(enabled);
+    }
     if (_moveSelectedEventsToTrackMenu) {
         _moveSelectedEventsToTrackMenu->setEnabled(enabled);
     }
@@ -3038,12 +4167,14 @@ void MainWindow::updateDetected(Update* update) {
     UpdateDialog* d = new UpdateDialog(update, this);
     d->setModal(true);
     d->exec();
+    delete d;
 }
 
 void MainWindow::promtUpdatesDeactivatedDialog() {
     AutomaticUpdateDialog* d = new AutomaticUpdateDialog(this);
     d->setModal(true);
     d->exec();
+    delete d;
 }
 
 void MainWindow::updateAll() {
@@ -3052,6 +4183,7 @@ void MainWindow::updateAll() {
     channelWidget->update();
     _trackWidget->update();
     _miscWidget->update();
+
 }
 
 void MainWindow::tweakTime() {
@@ -3118,3 +4250,61 @@ void MainWindow::navigateSelectionLeft() {
 void MainWindow::navigateSelectionRight() {
     selectionNavigator->right();
 }
+
+void MainWindow::update_channel_list() {
+    channelWidget->update();
+}
+
+void MainWindow::message_timeout(QString title, QString message) {
+    QMessageBox *mb = new QMessageBox(title, message, QMessageBox::Critical,
+                          QMessageBox::Ok, 0, 0, this);
+    mb->button(QMessageBox::Ok)->animateClick(3000);
+    mb->exec();
+    delete mb;
+}
+
+
+MidiInControl *MidiIn_control = NULL;
+
+void MainWindow::DMidiInControl() {
+
+    int fl = 0;
+
+    if (!MidiInput::isConnected()) {
+        QMessageBox::information(this, "MIDI In Control", "MIDI In port is not connected");
+        fl = 1;
+    }
+
+    if(!MidiIn_control) {
+        MidiIn_control = new MidiInControl((QWidget*) this);
+        MidiInControl::MidiIn_toexit(MidiIn_control);
+    }
+
+    if(!MidiIn_control) return;
+
+    int x = (this->width() - MidiIn_control->width())/2;
+    if(x < 0) x = 0;
+
+    MidiIn_control->move(x, 0);
+
+    MidiIn_control->MIDI_INPUT->clear();
+
+    foreach (QString name, MidiInput::inputPorts()) {
+        if(name != MidiInput::inputPort()) continue;
+        MidiIn_control->MIDI_INPUT->addItem(name);
+        break;
+    }
+
+    if(fl)
+        MidiIn_control->setDisabled(true);
+    else
+        MidiIn_control->setDisabled(false);
+
+    MidiIn_control->VST_reset();
+
+    MidiIn_control->setModal(false);
+    MidiIn_control->show();
+    MidiIn_control->raise();
+    MidiIn_control->activateWindow();
+}
+

@@ -23,6 +23,10 @@
 #include <QMainWindow>
 #include <QScrollBar>
 #include <QSettings>
+#include <QSplitter>
+#include <QDateTime>
+#include <QSemaphore>
+#include "../tool/FingerPatternDialog.h"
 
 class MatrixWidget;
 class MidiEvent;
@@ -44,6 +48,13 @@ class QShowEvent;
 class Update;
 class SelectionNavigator;
 class TweakTarget;
+class FluidWidget;
+
+typedef struct {
+    QByteArray name[128];
+} instrument_list;
+
+extern instrument_list InstrumentList[129];
 
 class MainWindow : public QMainWindow {
 
@@ -51,6 +62,8 @@ class MainWindow : public QMainWindow {
 
   public:
     MainWindow(QString initFile = "");
+    ~MainWindow();
+
     void setFile(MidiFile* f);
     MidiFile* getFile();
     MatrixWidget* matrixWidget();
@@ -58,12 +71,36 @@ class MainWindow : public QMainWindow {
     void setStartDir(QString dir);
     void setInitFile(const char* file);
     bool saveBeforeClose();
+    void addInstrumentNames();
+    void update_channel_list();
 
-  protected:
-    void dropEvent(QDropEvent* ev);
-    void dragEnterEvent(QDragEnterEvent* ev);
+    void Notes_util(QWidget * _MW); // Notes_util.cpp
 
-  public slots:
+    QSettings* getSettings() {
+        return _settings;
+    }
+
+    QTabWidget* upperTabWidget;
+    QTabWidget* lowerTabWidget;
+
+    bool rightSplitterMode;
+    int EventSplitterTabPos;
+
+    ChannelListWidget* channelWidget;
+
+protected:
+    void dropEvent(QDropEvent* ev) override;
+    void dragEnterEvent(QDragEnterEvent* ev) override;
+
+#ifdef USE_FLUIDSYNTH
+signals:
+    int signal_remote_VST();
+    void ToggleViewVST(int channel, bool on);
+#endif
+
+public slots:
+    void setChordVelocityProp();
+    void velocity_accept();
     void updateAll();
     void loadInitFile();
     void matrixSizeChanged(int maxScrollTime, int maxScrollLine, int vX, int vY);
@@ -107,6 +144,7 @@ class MainWindow : public QMainWindow {
     void deleteSelectedEvents();
     void deleteChannel(QAction* action);
     void moveSelectedEventsToChannel(QAction* action);
+    void moveSelectedNotesToChannel(QAction* action);
     void moveSelectedEventsToTrack(QAction* action);
     void updateRecentPathsList();
     void openRecent(QAction* action);
@@ -116,6 +154,7 @@ class MainWindow : public QMainWindow {
     void soloChannel(QAction* action);
     void viewChannel(QAction* action);
     void instrumentChannel(QAction* action);
+    void SoundEffectChannel(QAction* action);
 
     void renameTrackMenuClicked(QAction* action);
     void removeTrackMenuClicked(QAction* action);
@@ -126,7 +165,51 @@ class MainWindow : public QMainWindow {
     void renameTrack(int tracknumber);
     void removeTrack(int tracknumber);
 
+    void velocityScale();
+    void NotesCorrection(int mode);
+    void overlappedNotesCorrection();
+    void longNotesCorrection();
+
+    void buildCMajorProg(int d3, int d5, int d7);
+    void buildCMinorProg(int d3, int d5, int d7);
+
+    void buildCMajor();
+    void buildCMinor();
+    void buildCMajorInv1();
+    void buildCMinorInv1();
+    void buildCMajorInv2();
+    void buildCMinorInv2();
+
+    void builddichord(int d3, int d5, int d7);
+
+    void buildpowerchord();
+    void buildpowerchordInv();
+    void buildpowerpowerchord();
+    void buildMajor();
+    void buildMinor();
+    void buildAug();
+    void buildDis();
+    void buildSeventh();
+    void buildMajorSeventh();
+    void buildMinorSeventh();
+    void buildMinorSeventhMajor();
+
+    void pitchbend_effect1();
+    void volumeoff_effect();
+    void choppy_audio_effect();
+    void conv_pattern_note();
+    void finger_pattern();
+
     void setInstrumentForChannel(int i);
+    void setSoundEffectForChannel(int i);
+#ifdef USE_FLUIDSYNTH
+    void setLoadVSTForChannel(int channel, int flag);
+    void remote_VST();
+    void remote_VST_exit();
+#endif
+
+    void message_timeout(QString title, QString message);
+
     void spreadSelection();
     void copy();
     void paste();
@@ -166,6 +249,25 @@ class MainWindow : public QMainWindow {
 
     void enableMetronome(bool enable);
     void enableThru(bool enable);
+    void DMidiInControl();
+
+    void midi_text_edit();
+    void midi_marker_edit();
+    void midi_lyrik_edit();
+    void midi_track_name_edit();
+
+ #ifdef USE_FLUIDSYNTH
+    static void FluidControl();
+    void FluidSaveAsWav();
+    void FluidSaveAsMp3();
+    void FluidSaveAsFlac();
+ #endif
+
+    void ImportSF2Names();
+
+    void PianoPlay();
+    void DrumPlay();
+    void DrumRhythmBox();
 
     void togglePianoEmulation(bool);
 
@@ -199,15 +301,28 @@ class MainWindow : public QMainWindow {
     void navigateSelectionLeft();
     void navigateSelectionRight();
 
-  protected:
-    void closeEvent(QCloseEvent* event);
-    void keyPressEvent(QKeyEvent* e);
-    void keyReleaseEvent(QKeyEvent* event);
+protected:
+    void closeEvent(QCloseEvent* event) override;
+    void keyPressEvent(QKeyEvent* e) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
 
-  private:
+
+private:
+#ifdef USE_FLUIDSYNTH
+
+    QAction* FluidActionExportWav;
+    QAction* FluidActionExportMp3;
+    QAction* FluidActionExportFlac;
+
+#endif
+
+    QSplitter* mainSplitter;
+    QSplitter* rightSplitter;
+
     MatrixWidget* mw_matrixWidget;
     QScrollBar *vert, *hori;
-    ChannelListWidget* channelWidget;
+    //ChannelListWidget* channelWidget;
     ProtocolWidget* protocolWidget;
     TrackListWidget* _trackWidget;
     MidiFile* file;
@@ -216,12 +331,10 @@ class MainWindow : public QMainWindow {
     QSettings* _settings;
     QStringList _recentFilePaths;
     QMenu *_recentPathsMenu, *_deleteChannelMenu,
-          *_moveSelectedEventsToTrackMenu, *_moveSelectedEventsToChannelMenu,
-          *_pasteToTrackMenu, *_pasteToChannelMenu, *_selectAllFromTrackMenu, *_selectAllFromChannelMenu;
+        *_moveSelectedEventsToTrackMenu, *_moveSelectedEventsToChannelMenu, *_moveSelectedNotesToChannelMenu,
+        *_pasteToTrackMenu, *_pasteToChannelMenu, *_selectAllFromTrackMenu, *_selectAllFromChannelMenu;
 
-    QTabWidget* lowerTabWidget;
     QAction *_colorsByChannel, *_colorsByTracks;
-
     QComboBox *_chooseEditTrack, *_chooseEditChannel;
 
 #ifdef ENABLE_REMOTE
@@ -244,6 +357,8 @@ class MainWindow : public QMainWindow {
 
     TweakTarget* currentTweakTarget;
     SelectionNavigator* selectionNavigator;
+
+    FingerPatternDialog *finger_main;
 };
 
 #endif

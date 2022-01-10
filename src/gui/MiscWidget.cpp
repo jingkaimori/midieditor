@@ -189,8 +189,8 @@ void MiscWidget::paintEvent(QPaintEvent* event) {
         QList<MidiEvent*> accordingEvents;
         QList<QPair<int, int> > track = getTrack(&accordingEvents);
 
-        int xOld;
-        int yOld;
+        int xOld = 0;
+        int yOld = 0;
 
         for (int i = 0; i < track.size(); i++) {
 
