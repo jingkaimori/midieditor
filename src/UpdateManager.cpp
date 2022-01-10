@@ -36,8 +36,9 @@ UpdateManager::UpdateManager()
             SLOT(fileDownloaded(QNetworkReply*)));
 }
 
-void UpdateManager::init() {
-    _mirrors.append("https://midieditor.org/update");
+void UpdateManager::init()
+{
+    //_mirrors.append("https://midieditor.org/update");
 }
 
 QString UpdateManager::versionString() {

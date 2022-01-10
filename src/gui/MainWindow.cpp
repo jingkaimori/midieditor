@@ -1520,6 +1520,10 @@ void MainWindow::updateTrackMenu() {
         QVariant variant(i);
         QAction* moveToTrackAction = new QAction(QString::number(i) + " " + file->tracks()->at(i)->name(), this);
         moveToTrackAction->setData(variant);
+
+        QString formattedKeySequence = QString("Alt+%1").arg(i);
+        moveToTrackAction->setShortcut(QKeySequence::fromString(formattedKeySequence));
+
         _moveSelectedEventsToTrackMenu->addAction(moveToTrackAction);
     }
 
