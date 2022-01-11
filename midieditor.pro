@@ -11,7 +11,11 @@ QT += core \
     multimedia
 #DEFINES += ENABLE_REMOTE
 HEADERS += $$files(**.h, true)
+HEADERS -= $$files(src/midi/rtmidi/**.h, true)
+HEADERS += src/midi/rtmidi/RtMidi.h
 SOURCES += $$files(**.cpp, true)
+SOURCES -= $$files(src/midi/rtmidi/**.cpp, true)
+SOURCES += src/midi/rtmidi/RtMidi.cpp
 FORMS += 
 RESOURCES += resources.qrc
 message(get arch)
