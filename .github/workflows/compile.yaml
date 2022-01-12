@@ -76,7 +76,7 @@ jobs:
           mkdir ./packaging/org.midieditor.midieditor/data/metronome
           cp ./run_environment/metronome/metronome-01.wav ./packaging/org.midieditor.midieditor/data/metronome
           mkdir ./packaging/org.midieditor.manual/data/
-          cp -Recurse -Path ./maunal/ -Destination ./packaging/org.midieditor.manual/data/
+          cp -Recurse -Path ./manual/ -Destination ./packaging/org.midieditor.manual/data/
       - name: packaging
         shell: cmd
         run: |
