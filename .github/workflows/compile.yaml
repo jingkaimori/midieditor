@@ -86,7 +86,7 @@ jobs:
         with:
           name: midieditor-${{ matrix.qt_ver }}-${{ matrix.qt_arch }}
           path: |
-            packaging/Install.exe
+            Install.exe
       - name: Report 
         shell: cmd
         run: |
