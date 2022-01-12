@@ -70,12 +70,13 @@ jobs:
       - name: Copy Files 
         shell: cmd
         run: |
+          mkdir ./packaging/org.midieditor.midieditor/data/
           cp ./bin/ProMidEdit.exe ./packaging/org.midieditor.midieditor/data/ProMidEdit.exe
           windeployqt ./packaging/org.midieditor.midieditor/data/ProMidEdit.exe
           mkdir ./packaging/org.midieditor.midieditor/data/metronome
           cp ./run_environment/metronome/metronome-01.wav ./packaging/org.midieditor.midieditor/data/metronome
           mkdir ./packaging/org.midieditor.manual/data/
-          robocopy ./maunal/* ./packaging/org.midieditor.manual/data/
+          robocopy ./maunal/ ./packaging/org.midieditor.manual/data/
       - name: packaging
         shell: cmd
         run: |
