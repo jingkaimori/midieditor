@@ -3,3 +3,16 @@ doxy/
 .qmake.stash
 ProMidiEdit-*/
 releases/
+
+#local 
+.tmp
+*.o
+Makefile
+*.Debug
+*.Release
+release/**
+bin/
+
+packaging/Install.exe
+packaging/org.midieditor.midieditor/data/**
+packaging/org.midieditor.manual/data/**
