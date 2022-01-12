@@ -63,7 +63,7 @@ jobs:
         id: build
         shell: cmd
         run: |
-          set MIDIEDITOR_RELEASE_DATE=\"%DATE%\"
+          set MIDIEDITOR_RELEASE_DATE="%DATE%"
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake
           nmake
