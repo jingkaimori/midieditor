@@ -68,7 +68,7 @@ jobs:
           qmake
           nmake
       - name: Copy Files 
-        shell: cmd
+        shell: pwsh
         run: |
           mkdir ./packaging/org.midieditor.midieditor/data/
           cp ./bin/ProMidEdit.exe ./packaging/org.midieditor.midieditor/data/ProMidEdit.exe
@@ -76,7 +76,7 @@ jobs:
           mkdir ./packaging/org.midieditor.midieditor/data/metronome
           cp ./run_environment/metronome/metronome-01.wav ./packaging/org.midieditor.midieditor/data/metronome
           mkdir ./packaging/org.midieditor.manual/data/
-          robocopy ./maunal/ ./packaging/org.midieditor.manual/data/
+          cp -Recursive -Path ./maunal/ -Destination ./packaging/org.midieditor.manual/data/
       - name: packaging
         shell: cmd
         run: |
