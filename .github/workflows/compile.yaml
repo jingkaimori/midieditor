@@ -56,6 +56,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+          submodules: true
 
       - name: msvc-build
         id: build
@@ -74,7 +75,7 @@ jobs:
           mkdir ./packaging/org.midieditor.manual/data/
           robocopy ./maunal/* ./packaging/org.midieditor.manual/data/
       - name: packaging
-        shell: pwsh
+        shell: cmd
         run: |
           binarycreator.exe --offline-only -c .\scripts\packaging\windows\config.xml -p .\packaging Install.exe
       - name: Upload 
