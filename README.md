@@ -3,7 +3,10 @@
 # ProMidEdit
 ------
 
-Downloads : [last release](https://github.com/PROPHESSOR/ProMidEdit/releases/)
+[![Example Online](https://badgen.net/badge/Discord%20Activity/Currently%20Online/green?icon=discord)](https://discord.gg/9YGbfGCP)
+[![build windows](https://github.com/jingkaimori/midieditor/actions/workflows/compile.yaml/badge.svg)](https://github.com/jingkaimori/midieditor/actions/workflows/compile.yaml)
+
+Downloads : [last release](https://github.com/jingkaimori/midieditor/releases/)
 
 ### Building Dependencies
 * [Qt >= 5.7](https://www.qt.io/download-open-source/)
@@ -28,7 +31,7 @@ The editor is able to open existing Midi files and modify their content. New fil
 * Automatic Updates
 * Free
 * Available for Windows and Linux
-* English and Russian languages support
+* English, Russian, and Simplified Chinese languages support
 
 ### Note
 
