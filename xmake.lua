@@ -40,7 +40,8 @@ target("ProMidEdit") do
         "QtCore",
         "QtNetwork",
         "QtXml",
-        "QtMultimedia"
+        "QtMultimedia",
+        "QtMultimediaWidgets"
     })
     add_files("src/**.cpp")
     add_files("src/**.h")
@@ -60,6 +61,7 @@ target("ProMidEdit") do
     elseif is_plat("windows", "mingw") then
         add_defines("__WINDOWS_MM__")
         add_syslinks("winmm")
+        add_files("midieditor.rc")
     elseif is_plat("macosx") then
         add_defines("__MACOSX_CORE__")
         add_frameworks("CoreMidi", "CoreAudio", "CoreFoundation")
@@ -67,10 +69,21 @@ target("ProMidEdit") do
         add_installfiles("midieditor.icns")
     end
     
-    set_installdir("build/repository")
-    after_install(function (target)
-        print("after_install of target ProMidEdit")
-        if is_plat("mingw", "windows") then
+    local installdir = "packaging/org.midieditor.midieditor/data/"
+    local bindir = path.join(installdir, "bin")
+    local plugindir = path.join(bindir, "plugins")
+    set_installdir(installdir)
+    if is_plat("windows") then
+        set_values("qt.deploy.flags", {
+            "--plugindir", plugindir,
+            "--libdir", bindir
+        })
+        after_install(function (target) 
+            os.rm(path.join(bindir, "**", "dsengine.dll"))
+        end)
+    elseif is_plat("mingw") then
+        after_install(function (target)
+            print("after_install of target ProMidEdit")
             import("core.base.option")
             import("core.project.config")
             import("lib.detect.find_tool")
@@ -83,7 +96,7 @@ target("ProMidEdit") do
             
             -- deploy necessary dll
             -- mingw with posix thread should be used, or dll error will be reported
-            local deploy_argv = {"--compiler-runtime", "-printsupport"}
+            local deploy_argv = {"--compiler-runtime", "--release"}
             if option.get("diagnosis") then
                 table.insert(deploy_argv, "--verbose=2")
             elseif option.get("verbose") then
@@ -91,10 +104,42 @@ target("ProMidEdit") do
             else
                 table.insert(deploy_argv, "--verbose=0")
             end
-            local install_bindir = path.join(target:installdir(), "bin")
-            table.insert(deploy_argv, install_bindir)
+            local bindir = path.join(target:installdir(), "bin")
+            local plugindir = path.join(bindir, "plugins")
+            -- print(plugindir)
+            table.join2(deploy_argv, {"--plugindir", plugindir})
+            table.join2(deploy_argv, {"--libdir", bindir})
+            table.insert(deploy_argv, bindir)
             os.iorunv(windeployqt, deploy_argv)
+            os.rm(path.join(bindir, "**", "dsengine.dll"))
+        end)
+    end
+end
+
+target("installer") do
+    set_kind("phony")
+    
+    local installdir = 
+    set_installdir("packaging/org.midieditor.manual/data/manual")
+    add_installfiles("manual/(**)")
+    add_packages("qtifw")
+    add_deps("ProMidEdit")
+
+    after_install(function (target, opt)
+        if is_plat("windows", "mingw") then
+            print("generate off-line installer")
+            import("core.project.config")
+            import("lib.detect.find_tool")
+            local qtifw_dir = target:pkg("qtifw"):installdir()
+            local binarycreator_path = path.join(qtifw_dir, "/bin/binarycreator.exe")
+            -- generate windows package
+            local buildir = config.buildir()
+            local package_argv = {
+                "--config", "scripts/packaging/windows/config.xml",
+                "--packages", "packaging",
+                "packaging/Install.exe"
+            }
+            os.iorunv(binarycreator_path, package_argv)
         end
     end)
 end
--- TODO: Qt installer framework
