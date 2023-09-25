@@ -21,15 +21,21 @@
 #include "../MidiEvent/NoteOnEvent.h"
 #include "../MidiEvent/OffEvent.h"
 #include "../MidiEvent/TimeSignatureEvent.h"
+#include "../MidiEvent/TextEvent.h"
 #include "MidiFile.h"
 #include "MidiInput.h"
 #include "MidiOutput.h"
 #include "MidiPlayer.h"
+#include "MidiInControl.h"
 #include <QMultiMap>
 #include <QTime>
 
 #define INTERVAL_TIME 15
 #define TIMEOUTS_PER_SIGNAL 1
+
+//static MidiEvent *
+int text_ev[8];
+QString *midi_text[8];
 
 PlayerThread::PlayerThread()
     : QThread()
@@ -57,6 +63,14 @@ void PlayerThread::setInterval(int i)
 
 void PlayerThread::run()
 {
+    for(int n = 0; n < 8; n++) {
+        text_ev[n] = -1;
+        midi_text[n] = NULL;
+    }
+
+    realtimecount = QDateTime::currentMSecsSinceEpoch();
+
+    text_tim = 0;
 
     if (!timer) {
         timer = new QTimer();
@@ -74,7 +88,8 @@ void PlayerThread::run()
         position = file->msOfTick(file->cursorTick());
     }
 
-    emit playerStarted();
+    if(!mode)
+        emit playerStarted();
 
     // Reset all Controllers
     for (int i = 0; i < 16; i++) {
@@ -92,6 +107,7 @@ void PlayerThread::run()
         if (it.key() >= position) {
             break;
         }
+
         MidiOutput::sendCommand(it.value());
         it++;
     }
@@ -99,7 +115,10 @@ void PlayerThread::run()
     setInterval(INTERVAL_TIME);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()), Qt::DirectConnection);
-    timer->start(INTERVAL_TIME);
+    if(!mode) {
+        realtimecount = QDateTime::currentMSecsSinceEpoch();
+        timer->start(INTERVAL_TIME);
+    }
 
     stopped = false;
 
@@ -107,7 +126,21 @@ void PlayerThread::run()
 
     int tickInMeasure = 0;
     measure = file->measure(file->cursorTick(), file->cursorTick(), &list, &tickInMeasure);
+
     emit(measureChanged(measure, tickInMeasure));
+
+    if(mode) {
+
+        if(MidiInControl::wait_record_thread() < 0) {
+            emit playerStopped();
+            return;
+        }
+
+        realtimecount = QDateTime::currentMSecsSinceEpoch();
+        emit playerStarted();
+        timer->start(INTERVAL_TIME);
+        //emit(measureChanged(measure, tickInMeasure));
+    }
 
     if (exec() == 0) {
         timer->stop();
@@ -115,15 +148,19 @@ void PlayerThread::run()
     }
 }
 
+
 void PlayerThread::timeout()
 {
 
     if (!time) {
-        time = new QTime();
+        time = new QElapsedTimer();
         time->start();
     }
 
     disconnect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
+    qint64 crealtimecount = QDateTime::currentMSecsSinceEpoch();
+    qint64 diff_t = crealtimecount - realtimecount;
+
     if (stopped) {
         disconnect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
 
@@ -147,11 +184,19 @@ void PlayerThread::timeout()
                 }
             }
         }
+
+        for(int n = 0; n < 8; n++) {
+            text_ev[n] = -1;
+            if(midi_text[n]) delete midi_text[n];
+            midi_text[n] = NULL;
+        }
+
+        text_tim = 0;
         quit();
 
     } else {
 
-        int newPos = position + time->elapsed() * MidiPlayer::speedScale();
+        int newPos = position + diff_t /*time->elapsed()*/ * MidiPlayer::speedScale();
         int tick = file->tick(newPos);
         QList<TimeSignatureEvent*>* list = 0;
         int ickInMeasure = 0;
@@ -164,9 +209,75 @@ void PlayerThread::timeout()
             emit measureChanged(new_measure, ickInMeasure);
             measure = new_measure;
         }
+
         time->restart();
+
         QMultiMap<int, MidiEvent*>::iterator it = events->lowerBound(position);
 
+        // window for karaoke text events (displaced +500 tick)
+        while (it != events->end() && it.key() <= newPos + 500) {
+
+            int sendPosition = it.key();
+
+            // get text events before
+            while (it != events->end()){
+                TextEvent* textev = dynamic_cast<TextEvent*>(it.value());
+                if (textev &&
+                        it.value()->isOnEvent() && it.key() >= sendPosition
+                        && it.key() <= sendPosition + 500) {
+
+
+                    if(textev->type() == (char) TextEvent::TEXT) {
+
+                        int n;
+                        int flag = 1;
+                        for(n = 0; n < 8; n++) { // skip repeated events
+                            if(text_ev[n]==textev->midiTime()) {
+                                flag =0; break;
+                            }
+                        }
+
+                        if(flag) {
+
+                            if(midi_text[0]) delete midi_text[0];
+                            for(n = 0; n < 7; n++) {
+                                text_ev[n] = text_ev[n + 1];
+                                midi_text[n] = midi_text[n + 1];
+                            }
+
+                            text_ev[7] = textev->midiTime();
+                            QString *s = new QString(textev->text());
+                            midi_text[7] = s;
+                            text_tim= 0;
+
+                            //perror((const char *) midi_text[7]->toLatin1());
+                        }
+
+                    } //gk
+
+                    it++;break;
+                }
+
+                it++;
+            }
+
+        }
+        text_tim+= INTERVAL_TIME;
+
+        if(text_tim > 2000) { // deleting text events
+            int n;
+            if(midi_text[0]) delete midi_text[0];
+            for(n = 0; n < 7; n++) {
+                text_ev[n] = text_ev[n + 1];
+                midi_text[n] = midi_text[n + 1];
+            }
+
+            text_ev[7] = 0;
+            midi_text[7] = NULL;
+
+        }
+
+        it = events->lowerBound(position);
         while (it != events->end() && it.key() < newPos) {
 
             // save events for the given tick
@@ -174,7 +285,10 @@ void PlayerThread::timeout()
             int sendPosition = it.key();
 
             do {
-                if (it.value()->isOnEvent()) {
+                TextEvent* textev = dynamic_cast<TextEvent*>(it.value());
+                // ignore text event
+                if(textev/*it.value()->line() == MidiEvent::TEXT_EVENT_LINE*/) ;
+                    else if (it.value()->isOnEvent()) {
                     onEv.append(it.value());
                 } else {
                     offEv.append(it.value());
@@ -198,11 +312,11 @@ void PlayerThread::timeout()
                         emit meterChanged(timeSig->num(), timeSig->denom());
                     }
                 }
+
                 MidiOutput::sendCommand(ev);
             }
 
-            //MidiOutput::sendCommand(it.value());
-            //it++;
+
         }
 
         // end if it was last event, but only if not recording
@@ -218,6 +332,7 @@ void PlayerThread::timeout()
             timeoutSinceLastSignal = 0;
         }
     }
+    realtimecount = crealtimecount;
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()), Qt::DirectConnection);
 }
 

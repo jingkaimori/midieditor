@@ -42,7 +42,7 @@ EventMoveTool::EventMoveTool(bool upDown, bool leftRight)
         setToolTipText(QObject::tr("Move Events (up and down)"));
     } else {
         setImage(":/run_environment/graphics/tool/move_left_right.png");
-        setToolTipText(QObject::tr("Move Events (left and right)"));
+        setToolTipText(QObject::tr("Move Events (left and right)\nor click one nonselected note to align the selected notes"));
     }
 }
 
@@ -157,7 +157,8 @@ bool EventMoveTool::release() {
         return true;
     }
 
-    currentProtocol()->startNewAction(QObject::tr("Move events"), image());
+    currentProtocol()->startNewAction(QObject::tr("Move events") + " (" + QString::number(selected()) + ")", image());
+    int selected = Selection::instance()->selectedEvents().size();
 
     // backwards to hold stability
     for (int i = Selection::instance()->selectedEvents().count() - 1; i >= 0; i--) {

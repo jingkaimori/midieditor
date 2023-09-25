@@ -17,6 +17,7 @@
  */
 
 #include "MidiInput.h"
+#include "MidiInControl.h"
 
 #include "../MidiEvent/ControlChangeEvent.h"
 #include "../MidiEvent/KeyPressureEvent.h"
@@ -55,51 +56,693 @@ void MidiInput::init() {
     }
 }
 
-void MidiInput::receiveMessage(double deltatime, std::vector<unsigned char>* message, void* userData) {
-    if (message->size() > 1) {
-        _messages->insert(_currentTime, *message);
-    }
+static unsigned char map_key[16][128];
+static int pedal_chan = -1;
 
-    if (_thru) {
-        QByteArray a;
-        for (int i = 0; i < message->size(); i++) {
-            // check channel
-            if (i == 0) {
-                switch (message->at(i) & 0xF0) {
-                    case 0x80: {
-                        a.append(0x80 | MidiOutput::standardChannel());
-                        continue;
-                    }
-                    case 0x90: {
-                        a.append(0x90 | MidiOutput::standardChannel());
-                        continue;
-                    }
-                    case 0xD0: {
-                        a.append(0xD0 | MidiOutput::standardChannel());
-                        continue;
-                    }
-                    case 0xC0: {
-                        a.append(0xC0 | MidiOutput::standardChannel());
-                        continue;
-                    }
-                    case 0xB0: {
-                        a.append(0xB0 | MidiOutput::standardChannel());
-                        continue;
-                    }
-                    case 0xA0: {
-                        a.append(0xA0 | MidiOutput::standardChannel());
-                        continue;
-                    }
-                    case 0xE0: {
-                        a.append(0xE0 | MidiOutput::standardChannel());
-                        continue;
+void MidiInput::cleanKeyMaps() {
+
+    memset(map_key, 0, 16 * 128);
+    pedal_chan = -1;
+}
+
+#define DELAYED_BREAK 1000
+
+// from FingerPatternDialog
+
+extern int finger_token;
+extern bool _note_finger_disabled;
+
+void MidiInput::receiveMessage(double /*deltatime*/, std::vector<unsigned char>* message, void* userData)
+{
+
+    int is_effect = 0;
+    int no_record = 0;
+
+    int note_finger = -1;
+
+    static int _is_recursive = 0;
+    int is_finger_token = 0;
+
+    if(((void *) &finger_token) == userData)
+        is_finger_token = 1;
+
+    if (message->size() > 1) {
+
+        int evt = message->at(0);
+
+        int ch = evt & 0xF;
+
+        evt&= 0xF0;
+
+        int is_note = 0;
+
+
+        if(evt== 0x80 || evt== 0x90) {
+            is_note = 1;
+            MidiInControl::key_live = 1; // used for no sleep the computer
+           // qDebug("note 0x%x chan %i %i", evt, ch, is_finger_token);
+        }
+        /*
+        else {
+            if(evt == 0xb0) {
+                qDebug("event 0x%x ch: %i %i %i", evt, ch, message->at(1), message->at(2));
+            } else {
+                if(evt == 0xE0) {
+                    qDebug("event 0x%x ch: %i %i %i", evt, ch, message->at(1), message->at(2));
+                } else
+                qDebug("event 0x%x", evt);
+            }
+        }
+        */
+
+        if(!_is_recursive) {
+            if(evt == 0x90) { // read key on
+                MidiInControl::set_key((int) message->at(1));
+            }
+
+            if(evt == 0xB0 && message->at(1) == 11) { // expression
+                int mode = MidiInControl::expression_mode;
+                if(mode == 0) return; // ignore
+                if(mode == 1)
+                    message->at(1) = 64; // expression pedal to sustain
+            }
+
+            if(evt == 0xD0 || evt == 0xA0) { // aftertouch
+                int mode = MidiInControl::aftertouch_mode;
+                if(mode == 0) return; // ignore
+
+            }
+
+            // notes from 0 to 23 and 96 to 127 from DRUM channel can be used for effects
+            if((!is_note || (is_note && ch != 9) ||
+                (is_note && ch == 9 && ( message->at(1) < 24 ||  message->at(1) >= 96)))
+                    && MidiInControl::key_effect()) { // apply effect event
+
+                if((evt == 0xB0 && message->at(1) == 64)) { // test pedal
+                    int chan = message->at(0) & 0xF;
+                    if(pedal_chan == -1)
+                        pedal_chan = chan;
+                    else if(pedal_chan != chan)  // skip events from other chans
+                            return;
+                }
+
+                is_effect = 0;
+
+                if(!is_finger_token ||
+                        (is_finger_token && evt != 0x80 && evt != 0x90))
+                    is_effect = MidiInControl::set_effect(message);
+
+                if(is_effect) {
+                    evt = message->at(0) & 0xF0;
+                    if(evt == 0) return; // skip
+                    if(is_effect == 2) {
+                        if(!no_record) _messages->insert(_currentTime, *message);
+
+                        if(_thru && no_record != 2)
+                            send_thru(is_effect,  message);
+                        return;
                     }
                 }
+
+
+            } else if(MidiInControl::split_enable()) {
+
+                if((evt == 0xB0 && message->at(1) == 64)) { // test pedal
+                    int chan = message->at(0) & 0xF;
+                    if(MidiInControl::events_to_down()) {
+                        if(chan == MidiInControl::inchannelDown())
+                            pedal_chan = chan;
+                        else if(MidiInControl::inchannelDown() == -1) {
+                            if(pedal_chan == -1)
+                                pedal_chan = chan;
+                        }
+                    } else {
+                        if(chan == MidiInControl::inchannelUp())
+                            pedal_chan = chan;
+                        else if(MidiInControl::inchannelUp() == -1) {
+                            if(pedal_chan == -1)
+                                pedal_chan = chan;
+                        }
+                    }
+
+                    if(pedal_chan != chan)  // skip events from other chans
+                            return;
+                }
+
             }
-            a.append(message->at(i));
+
+            if(MidiInControl::skip_prgbanks() // skip prg and bank changes
+                    && (evt == 0xc0 || (evt == 0xb0 && message->at(1) == 0))) return;
+
+            if(MidiInControl::skip_bankonly() && evt == 0xB0 // force bank to 0
+                    && message->at(1) == 0) message->at(2) = 0;
         }
-        MidiOutput::sendCommand(a);
+
+        // finger
+
+        if(!_note_finger_disabled) {
+
+            if(!is_finger_token) {
+
+                if(evt == 0x80 || evt == 0x90) {
+
+                    if(MidiInControl::finger_func(message))
+                        return;
+
+                    is_finger_token = 2;
+
+                    evt = message->at(0);
+
+                    ch = evt & 0xF;
+
+                    evt&= 0xF0;
+
+                }
+
+            }
+
+            if(is_finger_token) {
+
+                 note_finger = finger_token;
+            }
+        }
+
+        // ignore DRUM channel...
+
+        if((!is_note ||  (is_note && ch != 9)) && MidiInControl::split_enable()) {
+
+            if(evt == 0x80 || evt == 0x90) {
+
+                int note = (int) (message->at(1));
+                int velocity = (int) (message->at(2));
+                int input_chan = (int) (message->at(0) & 0xF);
+
+                int note_master = note;
+
+                int note_up = -1;
+
+                int ch_up = ((MidiInControl::channelUp() < 0)
+                             ? MidiOutput::standardChannel()
+                             : MidiInControl::channelUp()) & 15;
+                int ch_down = ((MidiInControl::channelDown() < 0)
+                               ? ((MidiInControl::channelUp() < 0)
+                                  ? MidiOutput::standardChannel()
+                                  : MidiInControl::channelUp())
+                               : MidiInControl::channelDown()) & 0xF;
+                int note_down = -1;
+
+                //qWarning("tecla %x %i ch %i", evt, note, input_chan);
+
+                /********** down (sub keyboard) **********/
+
+                int play_down = 0;
+                int play_up = 0;
+
+                if(note_finger < 0)
+                    note_finger = note;
+
+                if(is_finger_token && input_chan == ch_down) {
+
+                    play_down = 1;
+
+                }
+
+                if(is_finger_token && input_chan == ch_up ) {
+
+                    play_up = 1;
+
+                }
+
+                if(MidiInControl::note_duo())
+                    play_down = 1;
+                else if(input_chan == ch_down && ch_up == ch_down)
+                    play_down = 0;
+
+
+                int finput = ((input_chan == MidiInControl::inchannelDown()) || MidiInControl::inchannelDown() == -1);
+
+                if(!_note_finger_disabled && is_finger_token) finput = 0;
+
+                if(evt == 0x90)
+                    MidiInControl::key_flag = 0;
+
+                if(play_down || (finput && ((ch_up != ch_down) && (MidiInControl::note_duo() || note < MidiInControl::note_cut())))) {
+
+                    note_down =  note // transpose
+                            + MidiInControl::transpose_note_down();
+
+                    if(evt == 0x90)
+                        MidiInControl::key_flag = 1;
+
+                    if(note_down < 0) note_down = 0;
+                    if(note_down > 127) note_down = 127;
+
+                    message->at(0) = evt | ch_down;
+
+                    /*****/
+                    int note_send = note_down, vel_send;
+
+                    if(MidiInControl::fixVelDown()) { // fix velocity
+                        if(evt == 0x90 && velocity != 0)
+                            vel_send = (MidiInControl::VelocityDOWN_enable) ? MidiInControl::VelocityDOWN_cut : 100;
+                        else
+                            vel_send = 0;
+
+                    } else  {
+
+                        vel_send = velocity;
+
+                        if(MidiInControl::VelocityDOWN_enable && velocity != 0) {
+                            vel_send += (vel_send * (MidiInControl::VelocityDOWN_scale % 10)/10);
+                            if(vel_send < (127 * MidiInControl::VelocityDOWN_scale/100))
+                                vel_send = (127 * MidiInControl::VelocityDOWN_scale/100);
+                            if(vel_send > MidiInControl::VelocityDOWN_cut)
+                                vel_send =  MidiInControl::VelocityDOWN_cut;
+                        }
+                    }
+
+                    int vel_send2 = vel_send;
+
+                    for(int n = 0; n < MidiInControl::autoChordfunDown(AUTOCHORD_MAX, -1, -1); n++) { // auto chord
+                    //U
+                        MidiInControl::set_leds(false, true);
+
+                        note_send = MidiInControl::autoChordfunDown(n, note_down, -1);
+                        //if(n == 0) note_master = note_send;
+
+                        message->at(1) = note_send;
+
+                        if(evt == 0x90) {
+                            vel_send  = MidiInControl::autoChordfunDown(n, -1, vel_send2);
+                            message->at(2) = vel_send;
+                        }
+
+                        //
+                        no_record = 0;
+
+                        if(evt == 0x80) {
+
+                            int ch = ch_down;
+                            int note = note_send;
+
+                            /* this method to disable notes is used because notes
+                               can be transposed or autochord notes on/off or change notes.
+                            */
+
+                            if(n != 0) no_record = 2; // skip all
+                            else {
+                                no_record = 2;
+                                n = DELAYED_BREAK; // delayed break
+
+                                if(map_key[ch][note] == 0) { // orphan note off (only play by _thru)
+                                        no_record = 1;
+                                }
+
+                                for(int m = 0; m < 128; m++) {
+                                    if(map_key[ch][m] == (128 + note_master)) {
+                                        map_key[ch][m] = 0;
+                                        message->at(1) = m;
+                                        no_record = 2;
+                                        _messages->insert(_currentTime, *message);
+                                        if(_thru)
+                                            send_thru(is_effect,  message);
+                                    }
+                                }
+
+                            }
+
+                        } else if(evt == 0x90) {
+                            int ch = ch_down;
+                            int note = note_send;
+                            no_record = 0;
+
+                            if(map_key[ch][note] & 128) { // double note on
+
+                                    message->at(0) = 0x80 | ch;
+                                    if(map_key[ch][note] & 128)
+                                    message->at(1) = note;
+                                    message->at(2) = 0;
+
+                                    _messages->insert((_currentTime) ? (_currentTime - 1) : 0, *message);
+                                    if(_thru)
+                                        send_thru(is_effect,  message);
+                                    message->at(0) =  0x90 | ch;
+                                    message->at(1) = note_send;
+                                    message->at(2) = velocity;
+
+                                    map_key[ch][note] = 128 + note_master;
+
+
+                            } else
+                                map_key[ch][note] = 128 + note_master;
+                        }
+
+                        if(!no_record) _messages->insert(_currentTime, *message);
+
+                        if(_thru && no_record != 2)
+                            send_thru(is_effect,  message);
+
+                        if(n == DELAYED_BREAK) break;
+                    }// U
+                }
+
+                /********** up (sub keyboard) **********/
+
+                finput = ((input_chan == MidiInControl::inchannelUp()) || MidiInControl::inchannelUp() == -1);
+
+                if(!_note_finger_disabled && is_finger_token) finput = 0;
+
+                if(play_up || (finput && (MidiInControl::note_duo() ||
+                        ((ch_up == ch_down) && !MidiInControl::note_duo())
+                        || note >= MidiInControl::note_cut()))) {// up
+
+                    note_up = (int) (note) // transpose
+                            + MidiInControl::transpose_note_up();
+
+                    if(evt == 0x90)
+                        MidiInControl::key_flag = 2;
+
+                    if(note_up < 0) note_up = 0;
+                    if(note_up > 127) note_up = 127;
+
+                    message->at(0) = evt | ch_up;
+
+                    /*****/
+                    int note_send = note_up, vel_send;
+
+                    if(MidiInControl::fixVelUp()) { // fix velocity
+                        if(evt == 0x90 && velocity != 0)
+                            vel_send = (MidiInControl::VelocityUP_enable) ? MidiInControl::VelocityUP_cut : 100;
+                        else
+                            vel_send = 0;
+
+                    } else   {
+                        vel_send = velocity;
+
+                        if(MidiInControl::VelocityUP_enable && velocity != 0) {
+                            vel_send += (vel_send * (MidiInControl::VelocityUP_scale % 10)/10);
+                            if(vel_send < (127 * MidiInControl::VelocityUP_scale/100))
+                                vel_send = (127 * MidiInControl::VelocityUP_scale/100);
+                            if(vel_send > MidiInControl::VelocityUP_cut)
+                                vel_send =  MidiInControl::VelocityUP_cut;
+                        }
+                    }
+
+                    int vel_send2 = vel_send;
+
+                    for(int n = 0; n < MidiInControl::autoChordfunUp(AUTOCHORD_MAX, -1, -1); n++) { // auto chord
+                    //U
+                        MidiInControl::set_leds(true, false);
+
+                        note_send = MidiInControl::autoChordfunUp(n, note_up, -1);
+                        //if(n == 0) note_master = note_send;
+
+                        message->at(1) = note_send;
+
+                        if(evt == 0x90) {
+                            vel_send  = MidiInControl::autoChordfunUp(n, -1, vel_send2);
+                            message->at(2) = vel_send;
+                        }
+
+                        //
+                        no_record = 0;
+
+                        if(evt == 0x80) {
+                            int ch = ch_up;
+                            int note = note_send;
+
+                            /* this method to disable notes is used because notes
+                               can be transposed or autochord notes on/off or change notes.
+                            */
+
+                            if(n != 0) no_record = 2; // skip all
+                            else {
+                                no_record = 2;
+                                n = DELAYED_BREAK; // delayed break
+
+                                if(map_key[ch][note] == 0) { // orphan note off (only play by _thru)
+                                        no_record = 1;
+                                }
+
+                                for(int m = 0; m < 128; m++) {
+                                    if(map_key[ch][m] == (128 + note_master)) {
+                                        map_key[ch][m] = 0;
+                                        message->at(1) = m;
+                                        no_record = 2;
+                                        _messages->insert(_currentTime, *message);
+                                        if(_thru)
+                                            send_thru(is_effect,  message);
+                                    }
+                                }
+
+                            }
+
+                        } else if(evt == 0x90) {
+                            int ch = ch_up;
+                            int note = note_send;
+                            no_record = 0;
+
+                            if(map_key[ch][note] & 128) { // double note on
+
+                                    message->at(0) = 0x80 | ch;
+                                    if(map_key[ch][note] & 128)
+                                    message->at(1) = note;
+                                    message->at(2) = 0;
+
+                                    _messages->insert((_currentTime) ? (_currentTime - 1) : 0, *message);
+                                    if(_thru)
+                                        send_thru(is_effect,  message);
+                                    message->at(0) =  0x90 | ch;
+                                    message->at(1) = note_send;
+                                    message->at(2) = velocity;
+
+                                    map_key[ch][note] = 128 + note_master;
+
+
+                            } else
+                                map_key[ch][note] = 128 + note_master;
+                        }
+
+                        if(!no_record) _messages->insert(_currentTime, *message);
+
+                        if(_thru && no_record != 2)
+                            send_thru(is_effect,  message);
+
+                        if(n == DELAYED_BREAK) break;
+                    }// U
+                    /*****************/
+                }
+                return;
+
+            } else if(evt != 0xF0) { // end notes, others events... except 0xF0
+                int ch_up = ((MidiInControl::channelUp() < 0)
+                             ? MidiOutput::standardChannel()
+                             : (MidiInControl::channelUp() & 15));
+
+                int ch_down = ((MidiInControl::channelDown() < 0)
+                               ? ((MidiInControl::channelUp() < 0)
+                                  ? MidiOutput::standardChannel()
+                                  : (MidiInControl::channelUp() & 15))
+                               : (MidiInControl::channelDown() & 15));
+
+                if(evt == 0x00) { // unknown, surely part of data of a SysEx or broken event...
+
+                    _messages->insert(_currentTime, *message);
+                    if(_thru)
+                        send_thru(is_effect,  message);
+
+                    return;
+
+                }
+
+                message->at(0) = evt | ch_up;
+
+                if(MidiInControl::events_to_down()) { // event to channel down
+
+                    if(ch_up != ch_down && MidiInControl::note_duo()) {// and events to channel up
+
+                        _messages->insert(_currentTime, *message);
+                        if(_thru)
+                            send_thru(is_effect,  message);
+                    }
+
+                    if(MidiInControl::notes_only() && !is_effect) return;
+
+                    message->at(0) = evt | ch_down;
+
+                    _messages->insert(_currentTime, *message);
+
+                    if(_thru)
+                        send_thru(is_effect,  message);
+                    return;
+
+                } else
+                    if(MidiInControl::notes_only() && !is_effect) return;
+
+                //qWarning("mess event 0x%x %i", evt, message->at(1));
+                    _messages->insert(_currentTime, *message);
+                    if(_thru)
+                        send_thru(is_effect,  message);
+                    return;
+
+            } else if(evt == 0xf0){// skip 0xf0 messages
+                if(MidiInControl::notes_only() && !is_effect) return;
+                _messages->insert(_currentTime, *message);
+                if(_thru)
+                    send_thru(is_effect,  message);
+                return;
+            }
+        } else { // no split (direct)
+
+
+            int note = message->at(0);
+            int chan = note & 15;
+            note&= 0xf0;
+
+            if(note == 0x90) {
+                int ch_up = ((MidiInControl::channelUp() < 0)
+                             ? MidiOutput::standardChannel()
+                             : MidiInControl::channelUp()) & 15;
+                int ch_down = ((MidiInControl::channelDown() < 0)
+                               ? ((MidiInControl::channelUp() < 0)
+                                  ? MidiOutput::standardChannel()
+                                  : MidiInControl::channelUp())
+                               : MidiInControl::channelDown()) & 0xF;
+                int velocity = message->at(2);
+
+                if(chan == ch_up) {
+
+                    if(MidiInControl::VelocityUP_enable && velocity != 0) {
+                        velocity+= (velocity * (MidiInControl::VelocityUP_scale % 10)/10);
+                        if(velocity < (127 * MidiInControl::VelocityUP_scale/100))
+                            velocity = (127 * MidiInControl::VelocityUP_scale/100);
+                    }
+
+                    if(MidiInControl::VelocityUP_enable && velocity > MidiInControl::VelocityUP_cut)
+                       velocity =  MidiInControl::VelocityUP_cut;
+                    message->at(2) = velocity;
+
+
+                } else if(chan == ch_down) {
+
+                    if(MidiInControl::VelocityDOWN_enable && velocity != 0) {
+                        velocity+= (velocity * (MidiInControl::VelocityDOWN_scale % 10)/10);
+                        if(velocity < (127 * MidiInControl::VelocityDOWN_scale/100))
+                            velocity = (127 * MidiInControl::VelocityDOWN_scale/100);
+                    }
+
+                    if(MidiInControl::VelocityDOWN_enable && velocity > MidiInControl::VelocityDOWN_cut)
+                       velocity =  MidiInControl::VelocityDOWN_cut;
+                    message->at(2) = velocity;
+
+                }
+            }
+            _messages->insert(_currentTime, *message);
+            if(_thru)
+                send_thru(is_effect,  message);
+            return;
+        }
+    } // end messages
+
+    // ignore messages truncated
+    if(_thru)
+        send_thru(is_effect,  message);
+}
+
+void MidiInput::send_thru(int is_effect, std::vector<unsigned char>* message)
+{
+
+    QByteArray a;
+    /* no program and bank event from thru */
+
+    int evt = message->at(0) & 0xF0;
+
+    if(MidiInControl::skip_prgbanks() // skip prg and bank changes
+            && (evt == 0xc0 || (evt == 0xb0 && message->at(1) == 0))) return;
+
+    for (int i = 0; i < (int) message->size(); i++) {
+        // check channel
+        if (i == 0) {
+            switch (message->at(i) & 0xF0) {
+            case 0x80: {
+                if(MidiInControl::split_enable())
+                    a.append(message->at(0));
+                else if(MidiInControl::skip_prgbanks())
+                    a.append(0x80 | MidiOutput::standardChannel());
+                else
+                    a.append(message->at(0));
+
+                continue;
+            }
+            case 0x90: {
+                if(MidiInControl::split_enable())
+                    a.append(message->at(0));
+                else if(MidiInControl::skip_prgbanks())
+                    a.append(0x90 | MidiOutput::standardChannel());
+                else
+                    a.append(message->at(0));
+
+                MidiInControl::set_output_prog_bank_channel(
+                            (MidiInControl::split_enable())
+                            ? (message->at(0) & 15)
+                            : MidiOutput::standardChannel());
+
+                continue;
+            }
+            case 0xD0: {
+                if(MidiInControl::skip_prgbanks())
+                    a.append(0xD0 | MidiOutput::standardChannel());
+                else
+                    a.append(message->at(0));
+
+                continue;
+            }
+            case 0xC0: {
+                if(MidiInControl::skip_prgbanks())
+                    a.append(0xC0 | MidiOutput::standardChannel());
+                else {
+                    MidiInControl::set_prog(((int) message->at(0)) & 15,
+                                            message->at(1) & 127);
+
+                    a.append(message->at(0));
+                }
+                continue;
+            }
+            case 0xB0: {
+                if(MidiInControl::skip_prgbanks() && !is_effect)
+                    a.append(0xB0 | MidiOutput::standardChannel());
+                else {
+
+                    if(message->at(1) == 0) {// change bank
+                        if(MidiInControl::skip_bankonly()) message->at(2) = 0; // force bank to 0
+                        MidiInControl::set_bank(((int) message->at(0)) & 15,
+                                                message->at(2) & 15);
+                    }
+                    a.append(message->at(0));
+                }
+                continue;
+            }
+            case 0xA0: {
+                if(MidiInControl::skip_prgbanks())
+                    a.append(0xA0 | MidiOutput::standardChannel());
+                else
+                    a.append(message->at(0));
+                continue;
+            }
+            case 0xE0: {
+                if(MidiInControl::skip_prgbanks() && !is_effect)
+                    a.append(0xE0 | MidiOutput::standardChannel());
+                else
+                    a.append(message->at(0));
+
+                continue;
+            }
+            }
+        }
+        a.append(message->at(i));
     }
+
+    MidiOutput::sendCommand(a);
 }
 
 QStringList MidiInput::inputPorts() {
@@ -124,6 +767,8 @@ bool MidiInput::setInputPort(QString name) {
 
     // try to find the port
     unsigned int nPorts = _midiIn->getPortCount();
+
+    cleanKeyMaps();
 
     for (unsigned int i = 0; i < nPorts; i++) {
 
@@ -155,6 +800,7 @@ void MidiInput::startInput() {
 
     // clear eventlist
     _messages->clear();
+    cleanKeyMaps();
 
     _recording = true;
 }

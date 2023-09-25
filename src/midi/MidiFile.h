@@ -26,6 +26,10 @@
 #include <QMultiMap>
 #include <QObject>
 
+extern int Bank_MIDI[17];
+extern int Prog_MIDI[17];
+extern int OctaveChan_MIDI[17];
+
 class MidiEvent;
 class TimeSignatureEvent;
 class TempoChangeEvent;
@@ -61,11 +65,13 @@ public:
     QMultiMap<int, MidiEvent*>* channelEvents(int channel);
 
     Protocol* protocol();
+    void cleanProtocol();
     MidiChannel* channel(int i);
     void preparePlayerData(int tickFrom);
     QMultiMap<int, MidiEvent*>* playerData();
 
-    static QString instrumentName(int prog);
+    static QString instrumentName(int bank, int prog);
+    static QString drumName(int prog);
     static QString controlChangeName(int control);
     int cursorTick();
     int pauseTick();

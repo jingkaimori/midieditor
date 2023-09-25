@@ -1,3 +1,4 @@
+#ifndef CUSTOM_MIDIEDITOR
 #include "UpdateManager.h"
 
 #include <QSettings>
@@ -139,3 +140,4 @@ void UpdateManager::fileDownloaded(QNetworkReply* reply) {
         }
     }
 }
+#endif

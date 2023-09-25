@@ -236,7 +236,7 @@ void EventWidgetDelegate::setEditorData(QWidget* editor, const QModelIndex& inde
             QComboBox* box = dynamic_cast<QComboBox*>(editor);
             int current = 0;
             for (int i = 0; i < 128; i++) {
-                QString text = QString::number(i) + ": " + MidiFile::instrumentName(i);
+                QString text = QString::number(i) + ": " + MidiFile::instrumentName(0,i);
                 box->addItem(text);
                 if (!text.compare(index.data().toString())) {
                     current = i;
@@ -1089,7 +1089,7 @@ QVariant EventWidget::fieldContent(EditorField field) {
             if (program < 0) {
                 return QVariant("");
             }
-            return QVariant(QString::number(program) + ": " + MidiFile::instrumentName(program));
+            return QVariant(QString::number(program) + ": " + MidiFile::instrumentName(0, program));
         }
         case KeySignatureKey: {
             int key = -1;
@@ -1178,53 +1178,53 @@ QVariant EventWidget::fieldContent(EditorField field) {
             }
             return QVariant(n);
         }
-        case UnknownType: {
-            int n = -1;
-            foreach (MidiEvent* event, _events) {
-                UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
-                if (ev) {
-                    if (n == -1) {
-                        n = ev->type();
-                    } else if (n != ev->type()) {
-                        return QVariant("");
-                    }
+    case UnknownType: {
+        int n = -1;
+        foreach (MidiEvent* event, _events) {
+            UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
+            if (ev) {
+                if (n == -1) {
+                    n = ev->type();
+                } else if (n != ev->type()) {
+                    return QVariant("");
                 }
             }
-            if (n < 0) {
-                return QVariant("");
-            }
-            QString s;
-            s.sprintf("%02X", n);
-            s = "0x" + s;
-            return QVariant(s);
         }
-        case MidiEventData: {
-            QByteArray data;
-            bool inited = false;
-            foreach (MidiEvent* event, _events) {
-                UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
-                if (ev) {
-                    if (!inited) {
-                        data = ev->data();
-                    } else if (data != ev->data()) {
-                        return QVariant("");
-                    }
-                }
-                SysExEvent* sys = dynamic_cast<SysExEvent*>(event);
-                if (sys) {
-                    if (!inited) {
-                        data = sys->data();
-                    } else if (data != sys->data()) {
-                        return QVariant("");
-                    }
-                }
-                inited = true;
-            }
-            if (!inited) {
-                return QVariant("");
-            }
-            return QVariant(data);
+        if (n < 0) {
+            return QVariant("");
         }
+        QString s;
+
+        s = s.asprintf("0x%02X", n);
+        return QVariant(s);
+    }
+    case MidiEventData: {
+        QByteArray data;
+        bool inited = false;
+        foreach (MidiEvent* event, _events) {
+            UnknownEvent* ev = dynamic_cast<UnknownEvent*>(event);
+            if (ev) {
+                if (!inited) {
+                    data = ev->data();
+                } else if (data != ev->data()) {
+                    return QVariant("");
+                }
+            }
+            SysExEvent* sys = dynamic_cast<SysExEvent*>(event);
+            if (sys) {
+                if (!inited) {
+                    data = sys->data();
+                } else if (data != sys->data()) {
+                    return QVariant("");
+                }
+            }
+            inited = true;
+        }
+        if (!inited) {
+            return QVariant("");
+        }
+        return QVariant(data);
+    }
     }
     return QVariant("");
 }
@@ -1260,11 +1260,11 @@ void EventWidget::getKey(int index, int* tonality, bool* minor) {
 
 QString EventWidget::dataToString(QByteArray data) {
     QString s;
+
     foreach (unsigned char b, data) {
-        QString t;
-        t.sprintf("%02X", b);
-        s = s + "0x" + t + "\n";
+        s = s + s.asprintf("0x%02X\n", b);
     }
+
     return s.trimmed();
 }
 

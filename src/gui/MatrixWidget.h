@@ -31,6 +31,8 @@
 #include <QPixmap>
 #include <QResizeEvent>
 #include <QWidget>
+#include <QTextCodec>
+#include "../tool/EventMoveTool.h"
 
 class MidiFile;
 class TempoChangeEvent;
@@ -74,7 +76,14 @@ class MatrixWidget : public PaintWidget {
     int xPosOfMs(int ms);
     QList<QPair<int, int> > divs();
 
-  public slots:
+    bool visible_Controlflag;
+    bool visible_PitchBendflag;
+    bool visible_TimeLineArea3;
+    bool visible_TimeLineArea4;
+
+    bool visible_karaoke;
+
+public slots:
     void scrollXChanged(int scrollPositionX);
     void scrollYChanged(int scrollPositionY);
     void zoomHorIn();
@@ -103,7 +112,7 @@ class MatrixWidget : public PaintWidget {
     void enterEvent(QEvent* event);
     void leaveEvent(QEvent* event);
     void mousePressEvent(QMouseEvent* event);
-    void mouseDoubleClickEvent(QMouseEvent* event);
+    void mouseDoubleClickEvent(QMouseEvent* /*event*/);
     void mouseReleaseEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent* e);
     void keyReleaseEvent(QKeyEvent* event);
@@ -122,7 +131,8 @@ class MatrixWidget : public PaintWidget {
     double scaleX, scaleY;
     MidiFile* file;
 
-    QRectF ToolArea, PianoArea, TimeLineArea;
+    QRectF ToolArea, PianoArea, TimeLineArea, TimeLineArea2,
+        TimeLineArea3, TimeLineArea4;
     bool screen_locked;
     // pixmap is the painted widget (without tools and cursorLines).
     // it will be zero if it needs to be repainted
@@ -149,5 +159,6 @@ class MatrixWidget : public PaintWidget {
     static const unsigned sharp_strip_mask = (1 << 4) | (1 << 6) | (1 << 9) | (1 << 11) | (1 << 1);
 
 };
+
 
 #endif

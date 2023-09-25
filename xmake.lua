@@ -29,6 +29,7 @@ end
 
 target("ProMidEdit") do
     add_deps("translation")
+    set_languages("cxx11")
     add_packages({
         "rtmidi",
         "qt5widgets"

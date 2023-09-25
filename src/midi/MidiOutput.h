@@ -35,22 +35,27 @@ public:
     static void init();
     static void sendCommand(QByteArray array);
     static void sendCommand(MidiEvent* e);
+    static void sendCommand2(MidiEvent* e);
     static QStringList outputPorts();
     static bool setOutputPort(QString name);
     static QString outputPort();
     static void sendEnqueuedCommand(QByteArray array);
     static bool isAlternativePlayer;
+    static bool omitSysExLength;
     static QMap<int, QList<int> > playedNotes;
     static void setStandardChannel(int channel);
     static int standardChannel();
     static void sendProgram(int channel, int prog);
     static bool isConnected();
+    static RtMidiOut* _midiOut;
 
+    void sendFluidSynthMessage( std::vector<unsigned char> *message );
 private:
     static QString _outPort;
-    static RtMidiOut* _midiOut;
+
     static SenderThread* _sender;
     static int _stdChannel;
+
 };
 
 #endif

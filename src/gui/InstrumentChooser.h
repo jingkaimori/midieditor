@@ -21,6 +21,8 @@
 
 #include <QDialog>
 
+#include "MainWindow.h"
+
 class MidiFile;
 class QComboBox;
 class QCheckBox;
@@ -30,16 +32,27 @@ class InstrumentChooser : public QDialog {
     Q_OBJECT
 
 public:
-    InstrumentChooser(MidiFile* f, int channel, QWidget* parent = 0);
+    InstrumentChooser(MidiFile* f, int channel, QWidget* parent = 0, int mode=0, int ticks=0, int instrument=0, int bank=0);
 
 public slots:
     void accept();
+    void setInstrument(int index);
+    void setBank(int index);
+    void PlayTest();
+    void PlayTestOff();
 
 private:
     MidiFile* _file;
     QComboBox* _box;
+    QComboBox* _box2;
     QCheckBox* _removeOthers;
     int _channel;
+
+    int _mode;
+    int _current_tick;
+    int _instrument;
+    int _bank;
+
 };
 
 #endif

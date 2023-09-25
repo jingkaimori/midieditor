@@ -17,9 +17,18 @@
  */
 
 #include "MatrixWidget.h"
+#include <QMessageBox>
+#include "InstrumentChooser.h"
+#include "SoundEffectChooser.h"
+#include "TextEventEdit.h"
 #include "../MidiEvent/MidiEvent.h"
+#include "../MidiEvent/ProgChangeEvent.h"
+#include "../MidiEvent/ControlChangeEvent.h"
+#include "../MidiEvent/PitchBendEvent.h"
+#include "../MidiEvent/SysExEvent.h"
 #include "../MidiEvent/NoteOnEvent.h"
 #include "../MidiEvent/OffEvent.h"
+#include "../MidiEvent/TextEvent.h"
 #include "../MidiEvent/TempoChangeEvent.h"
 #include "../MidiEvent/TimeSignatureEvent.h"
 #include "../midi/MidiChannel.h"
@@ -28,7 +37,9 @@
 #include "../midi/MidiPlayer.h"
 #include "../midi/MidiTrack.h"
 #include "../midi/PlayerThread.h"
+#include "../midi/MidiOutput.h"
 #include "../protocol/Protocol.h"
+#include "../tool/NewNoteTool.h"
 #include "../tool/EditorTool.h"
 #include "../tool/EventTool.h"
 #include "../tool/Selection.h"
@@ -36,25 +47,42 @@
 #include "../gui/Appearance.h"
 #include "../midi/MidiOutput.h"
 
+#ifdef USE_FLUIDSYNTH
+#include "../fluid/FluidDialog.h"
+#include "../VST/VST.h"
+#endif
+
 #include <QList>
 #include <QtCore/qmath.h>
+
+int _cur_edit = -1;
+
+extern QString *midi_text[8];
+extern int text_ev[8];
 
 #define NUM_LINES 139
 #define PIXEL_PER_S 100
 #define PIXEL_PER_LINE 11
 #define PIXEL_PER_EVENT 15
 
+//QByteArray conv_char8_spanish_to_utf8(QByteArray a);
+
+
 MatrixWidget::MatrixWidget(QWidget* parent)
     : PaintWidget(parent) {
 
     screen_locked = false;
+    visible_Controlflag = true;
+    visible_PitchBendflag = true;
+    visible_TimeLineArea3 = true;
+    visible_TimeLineArea4 = true;
     startTimeX = 0;
     startLineY = 50;
     endTimeX = 0;
     endLineY = 0;
     file = 0;
     scaleX = 1;
-    pianoEvent = new NoteOnEvent(0, 100, 0, 0);
+    pianoEvent = new NoteOnEvent(0, 100, MidiOutput::standardChannel(), 0);
     scaleY = 1;
     lineNameWidth = 110;
     timeHeight = 50;
@@ -76,6 +104,7 @@ MatrixWidget::MatrixWidget(QWidget* parent)
 
     pixmap = 0;
     _div = 2;
+
 }
 
 void MatrixWidget::setScreenLocked(bool b) {
@@ -155,7 +184,8 @@ void MatrixWidget::scrollYChanged(int scrollPositionY) {
     repaint();
 }
 
-void MatrixWidget::paintEvent(QPaintEvent* event) {
+void MatrixWidget::paintEvent(QPaintEvent* /*event*/)
+{
 
     if (!file)
         return;
@@ -317,7 +347,7 @@ void MatrixWidget::paintEvent(QPaintEvent* event) {
                 text += QString("%1:").arg(minutes, 2, 10, QChar('0'));
                 text += QString("%1").arg(seconds, 2, 10, QChar('0'));
                 text += QString(".%1").arg(ms / 10, 2, 10, QChar('0'));
-                int textlength = QFontMetrics(pixpainter->font()).width(text);
+                int textlength = QFontMetrics(pixpainter->font()).horizontalAdvance(text);
                 if (startNumber > 0) {
                     pixpainter->drawText(pos - textlength / 2, timeHeight / 2 - 6, text);
                 }
@@ -360,10 +390,10 @@ void MatrixWidget::paintEvent(QPaintEvent* event) {
                 pixpainter->setPen(Qt::gray);
                 pixpainter->drawLine(xfrom, timeHeight / 2, xfrom, height());
                 QString text = tr("Measure ") + QString::number(measure - 1);
-                int textlength = QFontMetrics(pixpainter->font()).width(text);
+                int textlength = QFontMetrics(pixpainter->font()).horizontalAdvance(text);
                 if (textlength > xto - xfrom) {
                     text = QString::number(measure - 1);
-                    textlength = QFontMetrics(pixpainter->font()).width(text);
+                    textlength = QFontMetrics(pixpainter->font()).horizontalAdvance(text);
                 }
                 int pos = (xfrom + xto) / 2;
                 pixpainter->setPen(Qt::white);
@@ -470,7 +500,7 @@ void MatrixWidget::paintEvent(QPaintEvent* event) {
             font = painter->font();
             font.setPixelSize(10);
             painter->setFont(font);
-            int textlength = QFontMetrics(font).width(text);
+            int textlength = QFontMetrics(font).horizontalAdvance(text);
             painter->drawText(lineNameWidth - 15 - textlength, startLine + lineHeight(), text);
         }
     }
@@ -528,6 +558,28 @@ void MatrixWidget::paintEvent(QPaintEvent* event) {
         painter->drawPolygon(points, 3);
     }
 
+    // paint edit cursor
+#ifdef USE_FLUIDSYNTH
+    if(!fluid_control) _cur_edit = -666;
+#endif
+
+    if (_cur_edit >= startTick && _cur_edit <= endTick) {
+        painter->setPen(Qt::darkGray);
+        int x = xPosOfMs(msOfTick(_cur_edit));
+        painter->drawLine(x, 0, x, height());
+        QPointF points[3] = {
+            QPointF(x - 5, timeHeight / 2 + 2),
+            QPointF(x + 5, timeHeight / 2 + 2),
+            QPointF(x, timeHeight - 2),
+        };
+
+        painter->setBrush(QBrush(QColor(255, 230, 194 ), Qt::SolidPattern));
+
+        painter->drawPolygon(points, 3);
+        painter->setPen(Qt::gray);
+    }
+
+
     // border
     painter->setPen(Qt::gray);
     painter->drawLine(width() - 1, height() - 1, lineNameWidth, height() - 1);
@@ -538,33 +590,293 @@ void MatrixWidget::paintEvent(QPaintEvent* event) {
         painter->setBrush(Qt::red);
         painter->drawEllipse(width() - 20, timeHeight + 5, 15, 15);
     }
+
+    // shows karaoke text events
+    if(visible_karaoke && (midi_text[0] || midi_text[1] || midi_text[2]
+            || midi_text[3] || midi_text[4] || midi_text[5]
+            || midi_text[6] || midi_text[7])) {
+
+        font.setPixelSize(24);
+        painter->setFont(font);
+
+        QString str, str2;
+
+        int n, m;
+
+        for(n = 0; n < 8; n++) {
+            if(midi_text[n] && MidiPlayer::timeMs() <= (msOfTick(text_ev[n]) )) {
+                break;
+            }
+        }
+
+        for(m = 0; m <= n; m++) {
+            if(m < 8 && midi_text[m]) str+= midi_text[m];
+        }
+
+        QFontMetrics fm(font);
+        QRect r1 = fm.boundingRect(str);
+        QRect r2;
+
+        int xx = (width() - r1.width()) / 2;
+        int yy = timeHeight + 4 + (80 - r1.height())/2;
+
+        if(n < 8) {
+
+            if((n + 1) < 8) {
+                for(m = n + 1; m < 8; m++) {
+                    if(midi_text[m]) str2+= midi_text[m];
+                }
+
+                r2 = fm.boundingRect(str2);
+
+                xx = (width() - r1.width() - r2.width() - 8) / 2;
+                if(r2.height() > r1.height()) yy = timeHeight + 4 + (80 - r2.height())/2;
+            }
+        }
+
+        int ancho = r1.width() + r2.width() + 8 + 16;
+
+        if(ancho < 480) ancho = 480;
+
+        painter->setPen(Qt::black);
+        QBrush brush(QColor(0x10, 0x30, 0x20), Qt::DiagCrossPattern);
+        painter->setBrush(brush);
+
+        painter->setClipping(false);
+        painter->fillRect((width() - ancho - 8) / 2, timeHeight, ancho + 8, 88, QColor(0, 0xc0, 0xc0));
+        painter->fillRect((width() - ancho) / 2, timeHeight + 4, ancho, 80, QColor(0, 0x20, 0x10));
+
+        painter->drawRect((width() - ancho) / 2, timeHeight + 4, ancho, 80);
+        painter->setBrush(Qt::black);
+        painter->setPen(Qt::white);
+
+        painter->setPen(QColor(0xFF, 0xFF, 0x80));
+        if(n < 8) {
+
+            painter->drawText(xx, yy, r1.width() + 8, 80, 0, str);
+            painter->setPen(Qt::white);
+            painter->drawText(xx + r1.width() + 8, yy, r2.width() + 8, 80, 0, str2);
+
+        } else
+            painter->drawText(xx, yy, r1.width() + 8, 80, Qt::AlignLeft, str);
+
+
+
+    }
+    painter->end();
     delete painter;
 
     // if MouseRelease was not used, delete it
     mouseReleased = false;
+
 
     if (totalRepaint) {
         emit objectListChanged();
     }
 }
 
-void MatrixWidget::paintChannel(QPainter* painter, int channel) {
+void MatrixWidget::paintChannel(QPainter* painter, int channel)
+{
+    // Estwald Visible
+    bool chan16hide = false;
+
     if (!file->channel(channel)->visible()) {
-        return;
+        if(channel != 16)
+            return;
+        else
+            chan16hide = true;
     }
+
     QColor cC = *file->channel(channel)->color();
 
     // filter events
     QMultiMap<int, MidiEvent*>* map = file->channelEvents(channel);
 
-    QMap<int, MidiEvent*>::iterator it = map->lowerBound(startTick);
+    QMap<int, MidiEvent*>::iterator it = map->lowerBound(0/*startTick*/);
     while (it != map->end() && it.key() <= endTick) {
         MidiEvent* event = it.value();
+        SysExEvent* sys = dynamic_cast<SysExEvent*>(event);
+
+        if(sys) {
+            QByteArray c = sys->data();
+#ifdef USE_FLUIDSYNTH
+            if(c[1]== (char) 0x66 && c[2]==(char) 0x66 && c[3]=='V') {
+#ifndef VISIBLE_VST_SYSEX
+                it++; continue;
+#endif
+            } else if(chan16hide && c[1]== (char) 0x66 && c[2]==(char) 0x66 && c[3]=='W') {
+                if(!file->channel(c[0] & 15)->visible()) {
+                    it++; continue;
+                }
+            } else if(chan16hide && c[1]== (char) 0x66 && c[2]==(char) 0x66 && (c[3] & 0x70) == 0x70) {
+                if(!file->channel(c[3] & 15)->visible()) {
+                    it++; continue;
+                }
+            } else if(chan16hide) {
+                it++; continue;
+            }
+#else
+            if(chan16hide) {
+                it++; continue;
+            }
+#endif
+        }
+        OnEvent* onEvent = dynamic_cast<OnEvent*>(event);
+        if(onEvent) {
+            if(onEvent->offEvent()) {
+                if(onEvent->offEvent()->midiTime() < startTick) {
+                    it++;
+                    continue;
+                }
+                // veeery long event note pass here
+            } else if(onEvent->midiTime() < startTick) {
+                it++;
+                continue;
+            }
+        } else if(!event || event->midiTime() < startTick) { // skip events before of startTick
+            it++;
+            continue;
+        }
+
+        if(!(event->track()->hidden())) {// draw ctrl lines
+            ProgChangeEvent* prg = dynamic_cast<ProgChangeEvent*>(event);
+            ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(event);
+            PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(event);
+            SysExEvent* sys = dynamic_cast<SysExEvent*>(event);
+            TextEvent* text = dynamic_cast<TextEvent*>(event);
+
+            if(chan16hide && !sys) {
+                it++; continue;
+            }
+
+
+            if(!visible_Controlflag) ctrl = NULL;
+            if(!visible_PitchBendflag) pitch = NULL;
+            if(!visible_TimeLineArea3) {prg = NULL; sys = NULL;}
+            if(!visible_TimeLineArea4) text = NULL;
+
+            if(text && (text->type() == TextEvent::TEXT ||
+                        text->type() == TextEvent::MARKER ||
+                        text->type() == TextEvent::LYRIK ||
+                        text->type() == TextEvent::TRACKNAME)){
+                int x = xPosOfMs(msOfTick(text->midiTime()));
+                int wd = 16;
+
+                painter->setPen(QPen(QColor(0xf08080), 1, Qt::DashLine));
+                painter->setClipping(false);
+                painter->drawLine(x, 50-24, x, yPosOfLine(event->line()));
+                painter->setPen(Qt::SolidLine);
+
+                if((x)<lineNameWidth) {wd+=(x)-lineNameWidth;x=lineNameWidth;}
+                else if((x+8)>this->width()) {wd-=(x+8)-this->width();}
+
+                painter->setPen(0x804040);
+                painter->setBrush(QColor(0x60C08080));
+                painter->drawRect(x, 50-24, wd, 8);
+                painter->setClipping(true);
+            }
+
+            if(prg){
+                int x = xPosOfMs(msOfTick(prg->midiTime()));
+                int wd = 16;
+
+                painter->setPen(QPen(QColor(0xf08080), 1, Qt::DashLine));
+                painter->setClipping(false);
+                painter->drawLine(x, 50-16, x, yPosOfLine(event->line()));
+                painter->setPen(Qt::SolidLine);
+
+                if((x)<lineNameWidth) {wd+=(x)-lineNameWidth;x=lineNameWidth;}
+                else if((x+8)>this->width()) {wd-=(x+8)-this->width();}
+
+                painter->setPen(0x804040);
+                painter->setBrush(QColor(0xf08080));
+                painter->drawRect(x, 50-16, wd, 8);
+                painter->setClipping(true);
+            }
+
+            if(sys){
+                QByteArray d= sys->data();
+                if((d[0]==(char) 0 || (d[0]==(char) 0x10 && d[3]=='R'))
+                        && d[1]==(char) 0x66 && d[2]==(char) 0x66 &&
+                  (d[3]=='R' || (d[3] & 0xF0)==0x70)) {
+                    int x = xPosOfMs(msOfTick(sys->midiTime()));
+                    int wd = 16;
+
+                    painter->setPen(QPen(QColor(0x908090), 1, Qt::DashLine));
+                    painter->setClipping(false);
+                    painter->drawLine(x, 50-16, x, yPosOfLine(event->line()));
+                    painter->setPen(Qt::SolidLine);
+
+                    if((x)<lineNameWidth) {wd+=(x)-lineNameWidth;x=lineNameWidth;}
+                    else if((x+8)>this->width()) {wd-=(x+8)-this->width();}
+
+                    painter->setPen(0x504050);
+                    painter->setBrush(QColor(0x908090));
+                    painter->drawRect(x, 50-16, wd, 8);
+                    painter->setClipping(true);
+                } else if(d[1]==(char) 0x66 && d[2]==(char) 0x66 &&
+                      d[3]=='W') {
+                      int x = xPosOfMs(msOfTick(sys->midiTime()));
+                      int wd = 16;
+
+                      painter->setPen(QPen(QColor(0x908090), 1, Qt::DashLine));
+                      painter->setClipping(false);
+                      painter->drawLine(x, 50-16, x, yPosOfLine(event->line()));
+                      painter->setPen(Qt::SolidLine);
+
+                      if((x)<lineNameWidth) {wd+=(x)-lineNameWidth;x=lineNameWidth;}
+                      else if((x+8)>this->width()) {wd-=(x+8)-this->width();}
+
+                      painter->setPen(0x504050);
+                      painter->setBrush(QColor(0x90c0c0));
+                      painter->drawRect(x, 50-16, wd, 8);
+                      painter->setClipping(true);
+                  }
+            }
+
+            if(ctrl && ctrl->control() != 0 && ctrl->control() != 3){
+                int x = xPosOfMs(msOfTick(ctrl->midiTime()));
+                int wd = 16;
+
+                painter->setPen(QPen(QColor(0xff69b4), 1, Qt::DashLine));
+                painter->drawLine(x, 50, x, yPosOfLine(event->line()));
+                painter->setClipping(false);
+                painter->setPen(Qt::SolidLine);
+
+                if((x)<lineNameWidth) {wd+=(x)-lineNameWidth;x=lineNameWidth;}
+                else if((x+8)>this->width()) {wd-=(x+8)-this->width();}
+               // painter->fillRect(x, 50-8, wd, 8 , 0xff69b4);
+                painter->setPen(0x803050);
+                painter->setBrush(QColor(0xff69b4));
+                painter->drawRect(x, 50-8, wd, 8);
+                painter->setClipping(true);
+            }
+
+
+            if(pitch){
+                int x = xPosOfMs(msOfTick(pitch->midiTime()));
+                int wd = 16;
+
+                painter->setPen(QPen(QColor(0xff69b4), 1, Qt::DashLine));
+                painter->drawLine(x, 50, x, yPosOfLine(event->line()));
+                painter->setClipping(false);
+                painter->setPen(Qt::SolidLine);
+                if((x)<lineNameWidth) {wd+=(x)-lineNameWidth;x=lineNameWidth;}
+                else if((x+8)>this->width()) {wd-=(x+8)-this->width();}
+                painter->setPen(0x803050);
+                painter->setBrush(QColor(0xff69b4));
+                painter->drawRect(x, 50-8, wd, 8);
+                painter->setClipping(true);
+            }
+        }
+
+
         if (eventInWidget(event)) {
             // insert all Events in objects, set their coordinates
             // Only onEvents are inserted. When there is an On
             // and an OffEvent, the OnEvent will hold the coordinates
             int line = event->line();
+
 
             OffEvent* offEvent = dynamic_cast<OffEvent*>(event);
             OnEvent* onEvent = dynamic_cast<OnEvent*>(event);
@@ -573,7 +885,20 @@ void MatrixWidget::paintChannel(QPainter* painter, int channel) {
             int y = yPosOfLine(line);
             int height = lineHeight();
 
+            int displaced = 0;
+
             if (onEvent || offEvent) {
+
+                // visual octave correction for notes
+                if(OctaveChan_MIDI[channel]) {
+                    line = (127 - line) + OctaveChan_MIDI[channel] * 12;
+                    if(line < 0) line = 0;
+                    if(line > 127) line = 127;
+                    line = 127 - line;
+                    y = yPosOfLine(line);
+                    displaced = 1;
+                }
+
                 if (onEvent) {
                     offEvent = onEvent->offEvent();
                 } else if (offEvent) {
@@ -582,6 +907,7 @@ void MatrixWidget::paintChannel(QPainter* painter, int channel) {
 
                 width = xPosOfMs(msOfTick(offEvent->midiTime())) - xPosOfMs(msOfTick(onEvent->midiTime()));
                 x = xPosOfMs(msOfTick(onEvent->midiTime()));
+
                 event = onEvent;
                 if (objects->contains(event)) {
                     it++;
@@ -597,11 +923,16 @@ void MatrixWidget::paintChannel(QPainter* painter, int channel) {
             event->setWidth(width);
             event->setHeight(height);
 
+
             if (!(event->track()->hidden())) {
                 if (!_colorsByChannels) {
                     cC = *event->track()->color();
                 }
-                event->draw(painter, cC);
+
+                if(displaced)
+                    event->draw2(painter, cC, Qt::Dense1Pattern);
+                else
+                    event->draw(painter, cC);
 
                 if (Selection::instance()->selectedEvents().contains(event)) {
                     painter->setPen(Qt::gray);
@@ -624,7 +955,10 @@ void MatrixWidget::paintChannel(QPainter* painter, int channel) {
             }
         }
         it++;
+
+
     }
+
 }
 
 void MatrixWidget::paintPianoKey(QPainter* painter, int number, int x, int y,
@@ -805,7 +1139,7 @@ void MatrixWidget::paintPianoKey(QPainter* painter, int number, int x, int y,
 
         if (name != "") {
             painter->setPen(Qt::gray);
-            int textlength = QFontMetrics(painter->font()).width(name);
+            int textlength = QFontMetrics(painter->font()).horizontalAdvance(name);
             painter->drawText(x + width - textlength - 2, y + height - 1, name);
             painter->setPen(Qt::black);
         }
@@ -871,7 +1205,9 @@ void MatrixWidget::calcSizes() {
                       height() - timeHeight);
     PianoArea = QRectF(0, timeHeight, lineNameWidth, height() - timeHeight);
     TimeLineArea = QRectF(lineNameWidth, 0, width() - lineNameWidth, timeHeight);
-
+    TimeLineArea2 = QRectF(lineNameWidth, timeHeight-7, width() - lineNameWidth, 8);
+    TimeLineArea3 = QRectF(lineNameWidth, timeHeight-15, width() - lineNameWidth, 8);
+    TimeLineArea4 = QRectF(lineNameWidth, timeHeight-23, width() - lineNameWidth, 8);
     scrollXChanged(startTimeX);
     scrollYChanged(startLineY);
 
@@ -936,26 +1272,314 @@ void MatrixWidget::leaveEvent(QEvent* event) {
         }
     }
 }
-void MatrixWidget::mousePressEvent(QMouseEvent* event) {
+
+void MatrixWidget::mousePressEvent(QMouseEvent* event)
+{
+
+    static int _locked = 0;
+
     PaintWidget::mousePressEvent(event);
     if (!MidiPlayer::isPlaying() && Tool::currentTool() && mouseInRect(ToolArea)) {
         if (Tool::currentTool()->press(event->buttons() == Qt::LeftButton)) {
             if (enabled) {
+
+                if(cursor() == Qt::SizeHorCursor && _locked == 0) { // 1
+
+                    _locked = 1;
+
+                    int tick = file->tick(msOfXPos(mouseX));
+
+                    int x = mouseX;
+                    int y = mouseY;
+
+                    int breaked = 0;
+
+                    QList<MidiEvent*> selected = Selection::instance()->selectedEvents();
+
+                    for(int chan = 0; chan < 16; chan++) { // 2
+                        if(file->channel(chan)->visible()) { //3
+                            foreach (MidiEvent* event, file->channel(chan)->eventMap()->values()) {  // 4
+                                NoteOnEvent* noteOn = dynamic_cast<NoteOnEvent*>(event);
+                                if(noteOn && noteOn->shown() && noteOn->offEvent() &&
+                                        noteOn->midiTime() <= tick
+                                       && noteOn->offEvent()->midiTime() >= tick && !selected.contains(event)) {  // 5
+
+                                    int yy =  noteOn->y();
+
+                                    if(y >= yy && y < (yy + noteOn->height())
+                                            && x >= noteOn->x() && x < (noteOn->x() + noteOn->width())) {  // 6
+
+                                        if (!selected.contains(event)) {  // 7
+
+                                            int tmid = 0x7fffffff;
+                                            int tx = 0x7fffffff;
+                                            breaked = 1;
+                                            foreach (MidiEvent* event2, Selection::instance()->selectedEvents()) {
+                                                if(event2->midiTime() < tmid) {
+                                                    tx = event2->x(); tmid = event2->midiTime();
+                                                }
+                                            }
+
+                                            if(tmid != 0x7fffffff) {
+                                                tmid -= noteOn->midiTime();
+                                                tx -= noteOn->x();
+
+                                                int selected = Selection::instance()->selectedEvents().size();
+                                                midiFile()->protocol()->startNewAction("Move events aligned (" + QString::number(selected) + ")");
+
+                                                foreach (MidiEvent* event2, Selection::instance()->selectedEvents()) {
+                                                    event2->setMidiTime(event2->midiTime() - tmid);
+                                                    event2->setX(event2->x() - tx);
+                                                    NoteOnEvent* noteOn2 = dynamic_cast<NoteOnEvent*>(event2);
+                                                    if(noteOn2 && noteOn2->offEvent()) {
+
+                                                        noteOn2->offEvent()->setMidiTime(noteOn2->offEvent()->midiTime() - tmid);
+                                                        noteOn2->offEvent()->setX(noteOn2->offEvent()->x() - tx);
+
+                                                    }
+                                                }
+                                                midiFile()->protocol()->endAction();
+                                            }
+                                            break;
+                                        } // 7
+
+                                    }  // 6
+                                } // 5
+                            } // 4
+                        } // 3
+
+                        if(breaked) break;
+                    } // 2
+
+                    _locked = 0;
+                } // 1
+
                 update();
             }
         }
-    } else if (enabled && (!MidiPlayer::isPlaying()) && (mouseInRect(PianoArea))) {
+    }
+
+    if (enabled && (!MidiPlayer::isPlaying()) && (mouseInRect(PianoArea))) {
         foreach (int key, pianoKeys.keys()) {
             bool inRect = mouseInRect(pianoKeys.value(key));
             if (inRect) {
                 // play note
                 playNote(key);
             }
+
+
         }
-    }
+    } else if (enabled && (!MidiPlayer::isPlaying()) && mouseInRect(TimeLineArea2)
+               && event->buttons() == Qt::LeftButton) {
+        int tick = file->tick(msOfXPos(mouseX));
+        int dtick= file->tick(150); // range
+
+        for(int chan = 0; chan < 16; chan++) {
+
+            if(file->channel(chan)->visible())
+                foreach (MidiEvent* event2, file->channel(chan)->eventMap()->values()) {
+                    if(event2->midiTime() >= tick - dtick && event2->midiTime() < tick + dtick) {
+
+
+                        ControlChangeEvent* ctrl = dynamic_cast<ControlChangeEvent*>(event2);
+                        PitchBendEvent* pitch = dynamic_cast<PitchBendEvent*>(event2);
+
+                        if(!visible_Controlflag) ctrl = NULL;
+                        if(!visible_PitchBendflag) pitch = NULL;
+
+                        if ((ctrl && ctrl->control() == 1  && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 10 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 7  && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 64 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 66 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 72 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 73 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 75 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 91 && ctrl->channel() == chan) ||
+                                (ctrl && ctrl->control() == 93 && ctrl->channel() == chan) ||
+                                (pitch && pitch->channel() == chan)) {
+
+                            _cur_edit = event2->midiTime();
+                            SoundEffectChooser* d = new SoundEffectChooser(file, chan, this, SOUNDEFFECTCHOOSER_EDITALL, _cur_edit);
+                            d->exec();
+                            delete d;
+                            _cur_edit = -1;
+                            break;
+                        }
+
+                    }
+
+                }
+        }
+
+        if (enabled) {
+            update();
+        }
+        mouseX = mouseY = 0;
+    } else if (enabled && (!MidiPlayer::isPlaying()) && visible_TimeLineArea3 && mouseInRect(TimeLineArea3)
+              && event->buttons() == Qt::LeftButton) {
+       int tick = file->tick(msOfXPos(mouseX));
+       int wtick = file->tick(msOfXPos(mouseX+16))-tick;
+       int dtick= file->tick(150);
+
+       foreach (MidiEvent* event2, *(file->eventsBetween(tick-dtick, tick+dtick))) {
+// Estwald Visible
+           bool show = true;
+           int chan = event2->channel();
+
+#ifdef USE_FLUIDSYNTH
+           if(!file->channel(chan)->visible() && chan != 16)
+               show = false;
+#else
+           if(!file->channel(chan)->visible())
+               show = false;
+#endif
+           if(tick>=event2->midiTime() && tick<=(event2->midiTime()+wtick) && show) {
+
+               ProgChangeEvent* prg = dynamic_cast<ProgChangeEvent*>(event2);
+#ifdef USE_FLUIDSYNTH
+
+                SysExEvent* sys = dynamic_cast<SysExEvent*>(event2);
+
+                if(sys){
+
+                    QByteArray d= sys->data();
+// Estwald Visible
+
+                    if(chan == 16 && !file->channel(chan)->visible()) {
+
+                        if(d[1]== (char) 0x66 && d[2]==(char) 0x66 && d[3]=='W') {
+                            if(!file->channel(d[0] & 15)->visible()) {
+                                continue;
+                            }
+                        } else if(d[1]== (char) 0x66 && d[2]==(char) 0x66 && (d[3] & 0x70) == 0x70) {
+                            if(!file->channel(d[3] & 15)->visible()) {
+                                continue;
+                            }
+                        }
+                    }
+
+
+                    //
+
+
+                    if(d[1]==(char) 0x66 && d[2]==(char) 0x66 &&
+                                          d[3]=='W') {
+                        file->setCursorTick(sys->midiTime());
+                        VST_proc::VST_LoadParameterStream(sys->save());
+                        VST_chan vst(main_widget, d[0], 1);
+                       // vst.exec();
+                    } else if((d[0]==(char) 0 || (d[0]==(char) 0x10 && d[3]=='R'))
+                            && d[1]==(char) 0x66 && d[2]==(char) 0x66 &&
+                      (d[3]=='R' || (d[3] & 0xF0)==(char) 0x70)) {
+
+                        MainWindow::FluidControl();
+
+                        if(fluid_control) {
+                            _cur_edit = event2->midiTime();
+                            fluid_control->LoadSelectedPresset(event2->midiTime());
+                        }
+                    }
+                }
+
+
+#endif
+
+               if (prg) {
+                   int bank=-1;
+                   // comprueba si tiene un ctrl proximo
+
+                   foreach (MidiEvent* event3, *(file->eventsBetween(tick-dtick, tick+dtick))) {
+                       ControlChangeEvent* toFind = dynamic_cast<ControlChangeEvent*>(event3);
+                       if (toFind && event3->channel()==event2->channel()
+                               && toFind->control()==0x0) {
+                           bank=toFind->value();break;
+                       }
+                   }
+                   if(bank<0) { // si no hay banco, busca desde el inicio
+                       bank=0;
+                       foreach (MidiEvent* event3, *(file->eventsBetween(0, tick))) {
+                           ControlChangeEvent* toFind = dynamic_cast<ControlChangeEvent*>(event3);
+                           if (toFind && event3->channel()==event2->channel()
+                                   && toFind->control()==0x0) {
+                               bank=toFind->value();break;
+                           }
+                       }
+                   }
+                   _cur_edit = event2->midiTime();
+                   InstrumentChooser* d = new InstrumentChooser(file, event2->channel(), this, 1, event2->midiTime(), prg->program(), bank);
+                   d->setModal(true);
+                   d->exec();
+                   delete d;
+                   _cur_edit = -1;
+
+               }
+
+           }
+
+       }
+       if (enabled) {
+           update();
+       }
+       mouseX = mouseY = 0;
+   }
+   if (enabled && (!MidiPlayer::isPlaying()) && visible_TimeLineArea4 && mouseInRect(TimeLineArea4)
+              && event->buttons() == Qt::LeftButton) {
+       int tick = file->tick(msOfXPos(mouseX));
+       int wtick = file->tick(msOfXPos(mouseX+16))-tick;
+       int dtick= file->tick(150);
+
+       foreach (MidiEvent* event2, *(file->eventsBetween(tick-dtick, tick+dtick))) {
+
+           if(tick>=event2->midiTime() && tick<=(event2->midiTime()+wtick)
+                   && file->channel(event2->channel())->visible()) {
+
+               TextEvent* text = dynamic_cast<TextEvent*>(event2);
+
+               if (text && (text->type() == TextEvent::TEXT ||
+                            text->type() == TextEvent::MARKER ||
+                            text->type() == TextEvent::LYRIK||
+                            text->type() == TextEvent::TRACKNAME)) {
+
+                   _cur_edit = event2->midiTime();
+                   TextEventEdit* d = new TextEventEdit(file, event2->channel(), this,
+                                        (text->type() == TextEvent::TEXT)
+                                            ? TEXTEVENT_EDIT_TEXT
+                                            : ((text->type() == TextEvent::LYRIK)
+                                               ? TEXTEVENT_EDIT_LYRIK
+                                               : ((text->type() == TextEvent::TRACKNAME)
+                                                  ? TEXTEVENT_EDIT_TRACK_NAME
+                                                  : TEXTEVENT_EDIT_MARKER)));
+
+
+                   d->textEdit->setText(text->text());
+                   d->setModal(true);
+                   if(d->exec() ==QDialog::Accepted) {
+                       file->protocol()->startNewAction("Text Event editor");
+                       if(d->delBox->isChecked())
+                           file->channel(event2->channel())->removeEvent(event2);
+                       else
+                           text->setText(d->textEdit->text());
+                       file->protocol()->endAction();
+
+                   }
+                   delete d;
+                   _cur_edit = -1;
+
+               }
+
+           }
+
+       }
+       if (enabled) {
+           update();
+       }
+       mouseX = mouseY = 0;
+   }
 }
 void MatrixWidget::mouseReleaseEvent(QMouseEvent* event) {
     PaintWidget::mouseReleaseEvent(event);
+
     if (!MidiPlayer::isPlaying() && Tool::currentTool() && mouseInRect(ToolArea)) {
         if (Tool::currentTool()->release()) {
             if (enabled) {
@@ -971,7 +1595,9 @@ void MatrixWidget::mouseReleaseEvent(QMouseEvent* event) {
     }
 }
 
-void MatrixWidget::takeKeyPressEvent(QKeyEvent* event) {
+
+void MatrixWidget::takeKeyPressEvent(QKeyEvent* event)
+{
     if (Tool::currentTool()) {
         if (Tool::currentTool()->pressKey(event->key())) {
             repaint();
@@ -981,7 +1607,9 @@ void MatrixWidget::takeKeyPressEvent(QKeyEvent* event) {
     pianoEmulator(event);
 }
 
-void MatrixWidget::takeKeyReleaseEvent(QKeyEvent* event) {
+void MatrixWidget::takeKeyReleaseEvent(QKeyEvent* event)
+{
+
     if (Tool::currentTool()) {
         if (Tool::currentTool()->releaseKey(event->key())) {
             repaint();
@@ -1054,11 +1682,35 @@ bool MatrixWidget::eventInWidget(MidiEvent* event) {
     }
     if (on && off) {
         int line = off->line();
-        int tick = off->midiTime();
-        bool offIn = line >= startLineY && line <= endLineY && tick >= startTick && tick <= endTick;
+        int tick = on->midiTime();
+        int tick2 = off->midiTime();
+        int channel = event->channel();
+
+        // visual octave correction for notes
+        if(OctaveChan_MIDI[channel]) {
+            line = (127 - line) + OctaveChan_MIDI[channel] * 12;
+            if(line < 0) line = 0;
+            if(line > 127) line = 127;
+            line = 127 - line;
+        }
+
+
+        bool offIn = line >= startLineY && line <= endLineY
+                && tick2 >= startTick && tick2 <= endTick;
+
         line = on->line();
-        tick = on->midiTime();
-        bool onIn = line >= startLineY && line <= endLineY && tick >= startTick && tick <= endTick;
+
+        // visual octave correction for notes
+        if(OctaveChan_MIDI[channel]) {
+            line = (127 - line) + OctaveChan_MIDI[channel] * 12;
+            if(line < 0) line = 0;
+            if(line > 127) line = 127;
+            line = 127 - line;
+        }
+
+        bool onIn = line >= startLineY && line <= endLineY &&
+                ((tick >= startTick && tick <= endTick) ||
+                 (tick2 >= endTick && tick <= startTick)); // veeery long notes
 
         off->setShown(offIn);
         on->setShown(onIn);
@@ -1068,7 +1720,8 @@ bool MatrixWidget::eventInWidget(MidiEvent* event) {
     } else {
         int line = event->line();
         int tick = event->midiTime();
-        bool shown = line >= startLineY && line <= endLineY && tick >= startTick && tick <= endTick;
+        bool shown = line >= startLineY && line <= endLineY
+                && tick >= startTick && tick <= endTick;
         event->setShown(shown);
 
         return shown;
@@ -1113,10 +1766,21 @@ void MatrixWidget::zoomVerOut() {
     }
 }
 
-void MatrixWidget::mouseDoubleClickEvent(QMouseEvent* event) {
+void MatrixWidget::mouseDoubleClickEvent(QMouseEvent* /*event*/)
+{
     if (mouseInRect(TimeLineArea)) {
         int tick = file->tick(msOfXPos(mouseX));
         file->setCursorTick(tick);
+
+#ifdef USE_FLUIDSYNTH
+        if(fluid_control) {
+            fluid_control->UpdateCursor();
+            if(!fluid_control->EditMode())
+                _cur_edit = -666;
+        } else
+            _cur_edit = -666;
+#endif
+
         update();
     }
 }
@@ -1262,3 +1926,6 @@ QList<QPair<int, int> > MatrixWidget::divs() {
 int MatrixWidget::div() {
     return _div;
 }
+
+
+
