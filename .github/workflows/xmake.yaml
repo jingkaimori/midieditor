@@ -5,10 +5,13 @@ jobs:
   build:
     runs-on: windows-latest
     if: always()
+    env:
+      # Force xmake to a specific folder (for cache)
+      XMAKE_GLOBALDIR: "${{ github.workspace }}\\.xmake-global"
     steps:
       - uses: xmake-io/github-action-setup-xmake@v1
         with:
-          xmake-version: v2.8.2
+          xmake-version: v2.8.3
       - name: update repo
         run: |
           xrepo update-repo
@@ -20,7 +23,7 @@ jobs:
         with:
           path: |
             ${{ env.XMAKE_GLOBALDIR }}/.xmake/packages
-          key: ${{ runner.os }}-xrepo-qt-${{ hashFiles('scripts/xmake/packages.lua', 'scripts/xmake/packages/**') }}
+          key: ${{ runner.os }}-xrepo-qt-${{ hashFiles('scripts/xmake/packages.lua') }}
       - name: cache xmake
         uses: actions/cache@v2
         with:
@@ -34,8 +37,8 @@ jobs:
 
       - name: config by xmake
         run: |
-          xmake config --yes
+          xmake config --yes --verbose --diagnosis
 
       - name: build by xmake
         run: |
-          xmake build --jobs=2
+          xmake build --verbose --diagnosis --jobs=2

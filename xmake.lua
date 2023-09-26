@@ -1,6 +1,13 @@
 
 local MIDIEDITOR_RELEASE_VERSION_STRING = "3.4.1"
 set_version(MIDIEDITOR_RELEASE_VERSION_STRING)
+set_allowedplats("windows", "linux", "macosx")
+option("fluidsynth", {
+    description = "enable fluidsynth support",
+    default = true,
+    values = {true, false},
+    showmenu = true,
+})
 
 includes("scripts/xmake/packages.lua")
 add_all_requires()
@@ -50,6 +57,10 @@ target("ProMidEdit") do
     if is_arch("x86_64") then
         add_defines("__ARCH64__")
     end
+    if has_config("fluidsynth") then
+        add_defines("USE_FLUIDSYNTH")
+        add_packages("fluidsynth")
+    end
     add_defines("MIDIEDITOR_RELEASE_VERSION_ID_DEF=" .. 0)
     add_defines("MIDIEDITOR_RELEASE_DATE_DEF=" .. os.date("%x"))
     add_defines("MIDIEDITOR_RELEASE_VERSION_STRING_DEF=" .. MIDIEDITOR_RELEASE_VERSION_STRING)
@@ -59,7 +70,7 @@ target("ProMidEdit") do
             "__LINUX_ALSA__"
         })
         add_syslinks("asound")
-    elseif is_plat("windows", "mingw") then
+    elseif is_plat("windows") then
         add_defines("__WINDOWS_MM__")
         add_syslinks("winmm")
         add_files("midieditor.rc")
@@ -75,44 +86,58 @@ target("ProMidEdit") do
     local plugindir = path.join(bindir, "plugins")
     set_installdir(installdir)
     if is_plat("windows") then
-        set_values("qt.deploy.flags", {
+        local configs = {
             "--plugindir", plugindir,
             "--libdir", bindir
-        })
+        }
+        set_values("qt.deploy.flags", configs)
         after_install(function (target) 
             os.rm(path.join(bindir, "**", "dsengine.dll"))
         end)
-    elseif is_plat("mingw") then
-        after_install(function (target)
-            print("after_install of target ProMidEdit")
-            import("core.base.option")
-            import("core.project.config")
-            import("lib.detect.find_tool")
+        after_uninstall(function (target)
+            os.rm(path.join(installdir, "**", "*.dll"))
+            os.rm(path.join(installdir, "**", "*.exe"))
+        end)
+    end
+end
 
-            -- get windeployqt
-            local windeployqt_tool = assert(
-                find_tool("windeployqt", {check = "--help"}),
-                "windeployqt.exe not found!")
-            local windeployqt = windeployqt_tool.program
-            
-            -- deploy necessary dll
-            -- mingw with posix thread should be used, or dll error will be reported
-            local deploy_argv = {"--compiler-runtime", "--release"}
-            if option.get("diagnosis") then
-                table.insert(deploy_argv, "--verbose=2")
-            elseif option.get("verbose") then
-                table.insert(deploy_argv, "--verbose=1")
-            else
-                table.insert(deploy_argv, "--verbose=0")
-            end
-            local bindir = path.join(target:installdir(), "bin")
-            local plugindir = path.join(bindir, "plugins")
-            -- print(plugindir)
-            table.join2(deploy_argv, {"--plugindir", plugindir})
-            table.join2(deploy_argv, {"--libdir", bindir})
-            table.insert(deploy_argv, bindir)
-            os.iorunv(windeployqt, deploy_argv)
+target("remoteVST") do
+    -- add_deps("translation")
+    set_languages("cxx11")
+    add_packages({
+        "qt5widgets"
+    })
+    add_rules("qt.widgetapp")
+    add_frameworks({
+        "QtGui",
+        "QtCore",
+    })
+    add_includedirs("remoteVST")
+    add_files({
+        "remoteVST/main.cpp", "remoteVST/mainwindow.cpp", "remoteVST/VST/VST.cpp"
+    })
+    add_files({
+        "remoteVST/mainwindow.h", "remoteVST/VST/VST.h"
+    })
+    add_defines("QT_DISABLE_DEPRECATED_BEFORE=0x060000")
+    add_files("remoteVST/resources/resources.qrc")
+    
+    local installdir = "packaging/org.midieditor.remotevst/data/"
+    local bindir = path.join(installdir, "bin")
+    local plugindir = path.join(bindir, "plugins")
+    set_installdir(installdir)
+    if is_plat("windows") then
+        local configs = {
+            "--plugindir", plugindir,
+            "--libdir", bindir
+        }
+        set_values("qt.deploy.flags", configs)
+        after_install(function (target) 
             os.rm(path.join(bindir, "**", "dsengine.dll"))
+        end)
+        after_uninstall(function (target)
+            os.rm(path.join(installdir, "**", "*.dll"))
+            os.rm(path.join(installdir, "**", "*.exe"))
         end)
     end
 end
@@ -126,8 +151,8 @@ target("installer") do
     add_packages("qtifw")
     add_deps("ProMidEdit")
 
-    after_install(function (target, opt)
-        if is_plat("windows", "mingw") then
+    if is_plat("windows") then
+        after_install(function (target, opt)
             print("generate off-line installer")
             import("core.project.config")
             import("lib.detect.find_tool")
@@ -141,6 +166,6 @@ target("installer") do
                 "packaging/Install.exe"
             }
             os.iorunv(binarycreator_path, package_argv)
-        end
-    end)
+        end)
+    end
 end

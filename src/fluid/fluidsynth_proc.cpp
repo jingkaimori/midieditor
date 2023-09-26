@@ -28,6 +28,7 @@
 #include "../midi/MidiChannel.h"
 #include "../midi/MidiInControl.h"
 #include "math.h"
+#include <QtMath>
 #include <QMessageBox>
 #include <QSemaphore>
 #include <QDateTime>

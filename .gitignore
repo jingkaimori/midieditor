@@ -1,9 +1,7 @@
-midieditor.pro.user
 build/
+locale/*.qm
 doxy/
-.qmake.stash
 .xmake/
-ProMidiEdit-*/
 releases/
 
 #local 
@@ -17,5 +15,4 @@ bin/
 .vscode/
 
 packaging/Install.exe
-packaging/org.midieditor.midieditor/data/**
-packaging/org.midieditor.manual/data/**
+packaging/*/data/**

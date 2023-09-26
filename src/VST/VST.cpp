@@ -813,7 +813,11 @@ void VSTDialog::Save() {
         encode_sys_format(qd, (void *) &dat);
         dat = VST_preset_data[chan]->numParams;
         encode_sys_format(qd, (void *) &dat);
+#ifdef _MSC_VER
+        char* data2 = reinterpret_cast<char*>(_malloca(clen + 4));
+#else
         char data2[clen + 4];
+#endif
         memset(data2, 0, clen + 4);
         memcpy(data2, name.data(), clen);
         for(int n = 0; n < clen; n+= 4) {
@@ -3760,7 +3764,11 @@ int VST_proc::VST_SaveParameters(int chan)
         encode_sys_format(qd, (void *) &dat);
         dat = VST_preset_data[chan]->numParams;
         encode_sys_format(qd, (void *) &dat);
+#ifdef _MSC_VER
+        char* data2 = reinterpret_cast<char*>(_malloca(clen + 4));
+#else
         char data2[clen + 4];
+#endif
         memset(data2, 0, clen + 4);
         memcpy(data2, name.data(), clen);
         for(int n = 0; n < clen; n+= 4) {
@@ -3784,7 +3792,11 @@ int VST_proc::VST_SaveParameters(int chan)
             break;
         }
 
+#ifdef _MSC_VER
+        char* data2 = reinterpret_cast<char*>(_malloca(clen + 4));
+#else
         char data2[clen + 4];
+#endif
         memset(data2, 0, clen + 4);
         memcpy(data2, VST_preset_data[chan]->preset[pre].data(), clen);
 

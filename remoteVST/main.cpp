@@ -27,7 +27,6 @@
 #include <QFileDevice>
 #include <QThread>
 
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "VST/VST.h"
