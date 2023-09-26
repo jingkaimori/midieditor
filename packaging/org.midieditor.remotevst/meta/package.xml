@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Package>
+    <DisplayName>remoteVST</DisplayName>
+    <Description>remoteVST is a Midieditor resource process to loading 32-bits VST plugins.</Description>
+    <Version>3.4.0</Version>
+    <ReleaseDate>2021-12-31</ReleaseDate>
+    <Name>org.midieditor.remotevst</Name>
+    <Default>true</Default>
+    <ForcedInstallation>false</ForcedInstallation>
+    <ForcedUpdate>false</ForcedUpdate>
+    <Essential>false</Essential>
+</Package>

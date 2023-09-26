@@ -1801,7 +1801,7 @@ void MainWindow::FluidSaveAsMp3() {
         return; // canceled
     }
 
-    QString file_mp3 = QApplication::applicationDirPath() + "/encoders/lame.exe";
+    QString file_mp3 = QApplication::applicationDirPath() + "/../encoders/bin/lame.exe";
 
     if(!QFile::exists(file_mp3)) {
         QMessageBox::critical(this, "MP3 Saving", "lame.exe not found!");
@@ -1936,7 +1936,7 @@ void MainWindow::FluidSaveAsFlac() {
         return; // canceled
     }
 
-    QString file_flac = QApplication::applicationDirPath() + "/encoders/flac.exe";
+    QString file_flac = QApplication::applicationDirPath() + "/../encoders/bin/flac.exe";
 
     if(!QFile::exists(file_flac)) {
         QMessageBox::critical(this, "FLAC Saving", "flac.exe not found!");
@@ -2475,7 +2475,7 @@ void MainWindow::remote_VST() {
     QStringList args;
     args.append(QString::number(this->centralWidget()->winId()));
 
-    VSTprocess->start(QApplication::applicationDirPath() + "/encoders/remoteVST.exe", args);
+    VSTprocess->start(QApplication::applicationDirPath() + "/../encoders/bin/remoteVST.exe", args);
 
     if(!VSTprocess->waitForStarted()) {
         qWarning("remoteVST Process cannot start");

@@ -122,7 +122,7 @@ target("remoteVST") do
     add_defines("QT_DISABLE_DEPRECATED_BEFORE=0x060000")
     add_files("remoteVST/resources/resources.qrc")
     
-    local installdir = "packaging/org.midieditor.remotevst/data/"
+    local installdir = "packaging/org.midieditor.remotevst/data/encoders"
     local bindir = path.join(installdir, "bin")
     local plugindir = path.join(bindir, "plugins")
     set_installdir(installdir)
