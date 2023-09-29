@@ -16,4 +16,11 @@
 
     <TargetDir>@HomeDir@/ProMidEdit</TargetDir>
     <AdminTargetDir>@RootDir@/ProMidEdit</AdminTargetDir>
+    <RemoteRepositories>
+        <Repository>
+            <Url>https://jingkaimori.github.io/midieditor/repository</Url>
+            <Enabled>1</Enabled>
+            <DisplayName>Github repository</DisplayName>
+        </Repository>
+    </RemoteRepositories>
 </Installer>

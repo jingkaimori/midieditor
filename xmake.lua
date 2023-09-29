@@ -8,6 +8,12 @@ option("fluidsynth", {
     values = {true, false},
     showmenu = true,
 })
+option("generate-repository", {
+    description = "generate repositiory to update online repositories",
+    default = false,
+    values = {true, false},
+    showmenu = true,
+})
 
 includes("scripts/xmake/packages.lua")
 add_all_requires()
@@ -153,19 +159,37 @@ target("installer") do
 
     if is_plat("windows") then
         after_install(function (target, opt)
-            print("generate off-line installer")
             import("core.project.config")
-            import("lib.detect.find_tool")
             local qtifw_dir = target:pkg("qtifw"):installdir()
             local binarycreator_path = path.join(qtifw_dir, "/bin/binarycreator.exe")
-            -- generate windows package
-            local buildir = config.buildir()
-            local package_argv = {
-                "--config", "scripts/packaging/windows/config.xml",
-                "--packages", "packaging",
-                "packaging/Install.exe"
-            }
-            os.iorunv(binarycreator_path, package_argv)
+            local repogen_path = path.join(qtifw_dir, "/bin/repogen.exe")
+            if config.get("generate-repository") then
+                print("generate site")
+                print("  generate repository")
+                local repo_argv = {
+                    "--update-new-components",
+                    "--packages", "packaging",
+                    path.join(config.buildir(), "website", "repository")
+                }
+                os.iorunv(repogen_path, repo_argv)
+                print("  generate installer")
+                local package_argv = {
+                    "--config", "scripts/packaging/windows/config.xml",
+                    "--packages", "packaging",
+                    path.join(config.buildir(), "website", "ProMidiEdit.exe")
+                }
+                os.iorunv(binarycreator_path, package_argv)
+                print("  copy online manual")
+                os.cp("manual/*", path.join(config.buildir(), "website"))
+            else
+                print("generate off-line installer")
+                local package_argv = {
+                    "--config", "scripts/packaging/windows/config.xml",
+                    "--packages", "packaging",
+                    "packaging/Install.exe"
+                }
+                os.iorunv(binarycreator_path, package_argv)
+            end
         end)
     end
 end
