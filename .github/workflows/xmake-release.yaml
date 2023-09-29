@@ -42,29 +42,15 @@ jobs:
             ${{ github.workspace }}/build/.gens
             ${{ github.workspace }}/build/.objs
           key: ${{ runner.os }}-xmake-build-${{ hashFiles('**/xmake.lua') }}
-      - name: Cache doxygen
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: doxygen
-          key: ${{ runner.os }}-doxygen-${{ env.DOXYGEN_VERSION }}
-
-      - name: "Setup doxygen"
-        if:  steps.cache.outputs.cache-hit != 'true'
+      - name: Setup graphviz
         run: |
-          mkdir doxygen
-          cd doxygen
-          $release = "${{env.DOXYGEN_VERSION}}".replace(".", "_")
-          Invoke-WebRequest -Uri "https://github.com/doxygen/doxygen/releases/download/Release_$release/doxygen-${{env.DOXYGEN_VERSION}}.windows.x64.bin.zip" -OutFile doxygen.zip
-          Expand-Archive -Path doxygen.zip -DestinationPath $PWD.Path
-          echo $PWD.Path | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-          rm doxygen.zip
+          choco install graphviz doxygen.install
       - name: install by xmake
         run: |
           xmake config --yes --mode=release --generate-repository=y
           xmake build --jobs=2
           xmake install installer
-          xmake doxygen --yes --outputdir=build/website/api
+          xmake doxygen --yes
       
       - name: Release installer
         uses: softprops/action-gh-release@v1
