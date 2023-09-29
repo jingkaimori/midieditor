@@ -1,4 +1,4 @@
-name: build with xmake on windows
+name: publish website with xmake on windows
 on:
   push:
     tags: '*'
