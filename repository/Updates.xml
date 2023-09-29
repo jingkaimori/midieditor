@@ -1,0 +1,51 @@
+<Updates>
+ <ApplicationName>{AnyApplication}</ApplicationName>
+ <ApplicationVersion>1.0.0</ApplicationVersion>
+ <Checksum>true</Checksum>
+ <PackageUpdate>
+  <Name>org.midieditor.manual</Name>
+  <DisplayName>Manual</DisplayName>
+  <Description>manual of ProMidEdit</Description>
+  <Version>3.4.0</Version>
+  <ReleaseDate>2022-01-31</ReleaseDate>
+  <Default>true</Default>
+  <ForcedInstallation>false</ForcedInstallation>
+  <ForcedUpdate>false</ForcedUpdate>
+  <Essential>false</Essential>
+  <UpdateFile OS="Any" CompressedSize="414787" UncompressedSize="508561"/>
+  <DownloadableArchives>manual.7z</DownloadableArchives>
+  <SHA1>388f86401fb39af7905df4a7d52c4658b8b99ba1</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>org.midieditor.midieditor</Name>
+  <DisplayName>ProMidEdit</DisplayName>
+  <Description>ProMidEdit is a free software providing an interface to edit, record, and play Midi data. Packed with all necessary dependencies.</Description>
+  <Version>3.4.0</Version>
+  <ReleaseDate>2022-01-31</ReleaseDate>
+  <Default>true</Default>
+  <ForcedInstallation>true</ForcedInstallation>
+  <ForcedUpdate>false</ForcedUpdate>
+  <Essential>false</Essential>
+  <UpdateFile OS="Any" CompressedSize="43310853" UncompressedSize="94423593"/>
+  <DownloadableArchives>bin.7z</DownloadableArchives>
+  <Licenses>
+   <License name="License Agreement" file="LICENSE"/>
+  </Licenses>
+  <SHA1>0ff5ee17067ea4a5c9448a1acadca31cd1adb29b</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>org.midieditor.remotevst</Name>
+  <DisplayName>remoteVST</DisplayName>
+  <Description>remoteVST is a Midieditor resource process to loading 32-bits VST plugins.</Description>
+  <Version>3.4.0</Version>
+  <ReleaseDate>2021-12-31</ReleaseDate>
+  <Default>true</Default>
+  <ForcedInstallation>false</ForcedInstallation>
+  <ForcedUpdate>false</ForcedUpdate>
+  <Essential>false</Essential>
+  <UpdateFile OS="Any" CompressedSize="0" UncompressedSize="0"/>
+  <SHA1>c9edd7fafb5d936dbf52f6c6a031d649efe8a918</SHA1>
+ </PackageUpdate>
+ <SHA1>8582a53f8873130d530404327bd5420dec725c81</SHA1>
+ <MetadataName>2023-09-29-1436_meta.7z</MetadataName>
+</Updates>
