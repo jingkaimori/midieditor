@@ -150,6 +150,7 @@ end
 
 target("installer") do
     set_kind("phony")
+    set_enabled(is_plat("windows", "macosx"))
     
     local installdir = 
     set_installdir("packaging/org.midieditor.manual/data/manual")
