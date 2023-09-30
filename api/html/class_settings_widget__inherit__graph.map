@@ -1,0 +1,9 @@
+<map id="SettingsWidget" name="SettingsWidget">
+<area shape="rect" id="node1" title=" " alt="" coords="126,107,236,133"/>
+<area shape="rect" id="node3" href="$class_additional_midi_settings_widget.html" title=" " alt="" coords="284,5,475,32"/>
+<area shape="rect" id="node4" href="$class_appearance_settings_widget.html" title=" " alt="" coords="290,56,469,83"/>
+<area shape="rect" id="node5" href="$class_midi_settings_widget.html" title=" " alt="" coords="313,107,447,133"/>
+<area shape="rect" id="node6" href="$class_remote_settings_widget.html" title=" " alt="" coords="302,157,457,184"/>
+<area shape="rect" id="node7" href="$class_update_settings_widget.html" title=" " alt="" coords="304,208,455,235"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,107,78,133"/>
+</map>

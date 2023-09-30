@@ -1,0 +1,15 @@
+<map id="EditorTool" name="EditorTool">
+<area shape="rect" id="node1" title="EditorTool is a Tool which can be connected to a Widget to act on." alt="" coords="247,208,326,235"/>
+<area shape="rect" id="node4" href="$class_event_tool.html" title=" " alt="" coords="374,208,452,235"/>
+<area shape="rect" id="node2" href="$class_tool.html" title="Tool is the superclass for every Tool in the program." alt="" coords="154,208,199,235"/>
+<area shape="rect" id="node3" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="5,208,106,235"/>
+<area shape="rect" id="node5" href="$class_eraser_tool.html" title=" " alt="" coords="522,5,606,32"/>
+<area shape="rect" id="node6" href="$class_event_move_tool.html" title=" " alt="" coords="510,56,618,83"/>
+<area shape="rect" id="node7" href="$class_measure_tool.html" title=" " alt="" coords="516,107,612,133"/>
+<area shape="rect" id="node8" href="$class_new_note_tool.html" title=" " alt="" coords="515,157,613,184"/>
+<area shape="rect" id="node9" href="$class_select_tool.html" title=" " alt="" coords="523,208,605,235"/>
+<area shape="rect" id="node10" href="$class_size_change_tool.html" title=" " alt="" coords="506,259,622,285"/>
+<area shape="rect" id="node11" href="$class_standard_tool.html" title=" " alt="" coords="515,309,613,336"/>
+<area shape="rect" id="node12" href="$class_tempo_tool.html" title=" " alt="" coords="522,360,606,387"/>
+<area shape="rect" id="node13" href="$class_time_signature_tool.html" title=" " alt="" coords="500,411,628,437"/>
+</map>

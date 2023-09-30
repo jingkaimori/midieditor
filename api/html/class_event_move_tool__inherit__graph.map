@@ -1,0 +1,7 @@
+<map id="EventMoveTool" name="EventMoveTool">
+<area shape="rect" id="node1" title=" " alt="" coords="5,304,113,331"/>
+<area shape="rect" id="node2" href="$class_event_tool.html" title=" " alt="" coords="20,229,98,256"/>
+<area shape="rect" id="node3" href="$class_editor_tool.html" title="EditorTool is a Tool which can be connected to a Widget to act on." alt="" coords="19,155,99,181"/>
+<area shape="rect" id="node4" href="$class_tool.html" title="Tool is the superclass for every Tool in the program." alt="" coords="36,80,82,107"/>
+<area shape="rect" id="node5" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="9,5,109,32"/>
+</map>

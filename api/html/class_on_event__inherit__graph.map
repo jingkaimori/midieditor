@@ -1,0 +1,7 @@
+<map id="OnEvent" name="OnEvent">
+<area shape="rect" id="node1" title=" " alt="" coords="83,155,153,181"/>
+<area shape="rect" id="node5" href="$class_note_on_event.html" title=" " alt="" coords="70,229,167,256"/>
+<area shape="rect" id="node2" href="$class_midi_event.html" title=" " alt="" coords="80,80,157,107"/>
+<area shape="rect" id="node3" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="5,5,106,32"/>
+<area shape="rect" id="node4" href="$class_graphic_object.html" title=" " alt="" coords="130,5,234,32"/>
+</map>

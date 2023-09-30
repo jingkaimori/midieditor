@@ -1,0 +1,26 @@
+var class_midi_channel =
+[
+    [ "MidiChannel", "class_midi_channel.html#a98bb60368ab70f4db6af553992fe613c", null ],
+    [ "MidiChannel", "class_midi_channel.html#a0d57ebe1328fe569a356f3afa5253fe2", null ],
+    [ "color", "class_midi_channel.html#aa51cb1ded5926f1ca4aabd184d00d86d", null ],
+    [ "copy", "class_midi_channel.html#a4fe5d3320ae0d41b34fc97f5adf3bd70", null ],
+    [ "deleteAllEvents", "class_midi_channel.html#ae489cec7f785122a60d72638d6af5802", null ],
+    [ "eventMap", "class_midi_channel.html#ab8d8ccc275513b80a375e61ea275217f", null ],
+    [ "file", "class_midi_channel.html#a982cf4de02cf5aca643ec6c595954242", null ],
+    [ "insertEvent", "class_midi_channel.html#a29ea8b0f97d80d14f3cf7d627f070351", null ],
+    [ "insertNote", "class_midi_channel.html#a50c76820a3b3dd15a7340b81f6b73c7c", null ],
+    [ "mute", "class_midi_channel.html#adca31f5ead2e7f619789a9d255b7eb7c", null ],
+    [ "number", "class_midi_channel.html#af3e377e3735e3c7fac83ad03c3317b2d", null ],
+    [ "progAtTick", "class_midi_channel.html#a5f7e228eb101d91d168545c851ee104a", null ],
+    [ "reloadState", "class_midi_channel.html#a85e137e1795583452b770433d46b4fac", null ],
+    [ "removeEvent", "class_midi_channel.html#af67d7155eeb320bdbe95349c0cff5fbf", null ],
+    [ "setMute", "class_midi_channel.html#a54ed50c9185c4bd378daefa20dd0f828", null ],
+    [ "setSolo", "class_midi_channel.html#a4f3fecb13a288772671215c93ca2440f", null ],
+    [ "setVisible", "class_midi_channel.html#aed4a688ad6eb83f71f8ac322ab2d588b", null ],
+    [ "solo", "class_midi_channel.html#a39fe50fb1edd0eaf3f67d5a0b0cd3ba2", null ],
+    [ "visible", "class_midi_channel.html#ac1920942bc17a268b5c002849db41422", null ],
+    [ "_events", "class_midi_channel.html#aac5b5c01b6aa02722589cb02c09fc575", null ],
+    [ "_midiFile", "class_midi_channel.html#a30f0a744282b14900fc58388f4a6082e", null ],
+    [ "_num", "class_midi_channel.html#a6c2e7294608d8625c3ed532067989679", null ],
+    [ "_visible", "class_midi_channel.html#aafcd7e287139b9ca008a32417b89d12a", null ]
+];

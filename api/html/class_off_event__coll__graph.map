@@ -1,0 +1,12 @@
+<map id="OffEvent" name="OffEvent">
+<area shape="rect" id="node1" title=" " alt="" coords="119,248,188,275"/>
+<area shape="rect" id="node10" href="$class_on_event.html" title=" " alt="" coords="118,339,189,365"/>
+<area shape="rect" id="node2" href="$class_midi_event.html" title=" " alt="" coords="152,172,229,199"/>
+<area shape="rect" id="node3" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="122,5,222,32"/>
+<area shape="rect" id="node5" href="$class_midi_file.html" title=" " alt="" coords="254,81,320,108"/>
+<area shape="rect" id="node9" href="$class_midi_track.html" title=" " alt="" coords="152,81,229,108"/>
+<area shape="rect" id="node4" href="$class_graphic_object.html" title=" " alt="" coords="24,81,128,108"/>
+<area shape="rect" id="node6" title=" " alt="" coords="247,5,316,32"/>
+<area shape="rect" id="node7" href="$class_event_widget.html" title=" " alt="" coords="345,81,439,108"/>
+<area shape="rect" id="node8" title=" " alt="" coords="340,5,444,32"/>
+</map>

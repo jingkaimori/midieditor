@@ -1,0 +1,7 @@
+<map id="StandardTool" name="StandardTool">
+<area shape="rect" id="node1" title=" " alt="" coords="7,304,104,331"/>
+<area shape="rect" id="node2" href="$class_event_tool.html" title=" " alt="" coords="17,229,94,256"/>
+<area shape="rect" id="node3" href="$class_editor_tool.html" title="EditorTool is a Tool which can be connected to a Widget to act on." alt="" coords="16,155,95,181"/>
+<area shape="rect" id="node4" href="$class_tool.html" title="Tool is the superclass for every Tool in the program." alt="" coords="33,80,78,107"/>
+<area shape="rect" id="node5" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="5,5,106,32"/>
+</map>

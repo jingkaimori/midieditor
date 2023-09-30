@@ -1,0 +1,19 @@
+<map id="EventMoveTool" name="EventMoveTool">
+<area shape="rect" id="node1" title=" " alt="" coords="167,5,274,32"/>
+<area shape="rect" id="node2" href="$class_event_tool.html" title=" " alt="" coords="17,56,94,83"/>
+<area shape="rect" id="node8" href="$class_standard_tool.html" title=" " alt="" coords="172,107,269,133"/>
+<area shape="rect" id="node3" href="$class_editor_tool.html" title="EditorTool is a Tool which can be connected to a Widget to act on." alt="" coords="655,252,734,279"/>
+<area shape="rect" id="node4" href="$class_tool.html" title="Tool is the superclass for every Tool in the program." alt="" coords="450,208,495,235"/>
+<area shape="rect" id="node5" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="5,216,106,243"/>
+<area shape="rect" id="node9" href="$class_midi_file.html" title=" " alt="" coords="187,259,253,285"/>
+<area shape="rect" id="node6" href="$class_tool_button.html" title=" " alt="" coords="179,157,262,184"/>
+<area shape="rect" id="node7" title=" " alt="" coords="21,157,90,184"/>
+<area shape="rect" id="node10" title=" " alt="" coords="21,275,90,301"/>
+<area shape="rect" id="node11" href="$class_matrix_widget.html" title=" " alt="" coords="423,303,522,329"/>
+<area shape="rect" id="node12" href="$class_paint_widget.html" title=" " alt="" coords="174,309,266,336"/>
+<area shape="rect" id="node13" title=" " alt="" coords="19,325,92,352"/>
+<area shape="rect" id="node14" href="$class_main_window.html" title=" " alt="" coords="425,360,520,387"/>
+<area shape="rect" id="node15" title=" " alt="" coords="168,360,273,387"/>
+<area shape="rect" id="node16" href="$class_channel_list_widget.html" title=" " alt="" coords="155,411,285,437"/>
+<area shape="rect" id="node17" title=" " alt="" coords="9,411,102,437"/>
+</map>

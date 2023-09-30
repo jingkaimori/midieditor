@@ -3,20 +3,6 @@
  <ApplicationVersion>1.0.0</ApplicationVersion>
  <Checksum>true</Checksum>
  <PackageUpdate>
-  <Name>org.midieditor.manual</Name>
-  <DisplayName>Manual</DisplayName>
-  <Description>manual of ProMidEdit</Description>
-  <Version>3.4.0</Version>
-  <ReleaseDate>2022-01-31</ReleaseDate>
-  <Default>true</Default>
-  <ForcedInstallation>false</ForcedInstallation>
-  <ForcedUpdate>false</ForcedUpdate>
-  <Essential>false</Essential>
-  <UpdateFile OS="Any" CompressedSize="414787" UncompressedSize="508561"/>
-  <DownloadableArchives>manual.7z</DownloadableArchives>
-  <SHA1>388f86401fb39af7905df4a7d52c4658b8b99ba1</SHA1>
- </PackageUpdate>
- <PackageUpdate>
   <Name>org.midieditor.midieditor</Name>
   <DisplayName>ProMidEdit</DisplayName>
   <Description>ProMidEdit is a free software providing an interface to edit, record, and play Midi data. Packed with all necessary dependencies.</Description>
@@ -26,10 +12,10 @@
   <ForcedInstallation>true</ForcedInstallation>
   <ForcedUpdate>false</ForcedUpdate>
   <Essential>false</Essential>
-  <UpdateFile OS="Any" CompressedSize="43310853" UncompressedSize="94423593"/>
+  <UpdateFile OS="Any" UncompressedSize="94423593" CompressedSize="43310853"/>
   <DownloadableArchives>bin.7z</DownloadableArchives>
   <Licenses>
-   <License name="License Agreement" file="LICENSE"/>
+   <License file="LICENSE" name="License Agreement"/>
   </Licenses>
   <SHA1>0ff5ee17067ea4a5c9448a1acadca31cd1adb29b</SHA1>
  </PackageUpdate>
@@ -43,9 +29,23 @@
   <ForcedInstallation>false</ForcedInstallation>
   <ForcedUpdate>false</ForcedUpdate>
   <Essential>false</Essential>
-  <UpdateFile OS="Any" CompressedSize="0" UncompressedSize="0"/>
+  <UpdateFile OS="Any" UncompressedSize="0" CompressedSize="0"/>
   <SHA1>c9edd7fafb5d936dbf52f6c6a031d649efe8a918</SHA1>
  </PackageUpdate>
- <SHA1>8582a53f8873130d530404327bd5420dec725c81</SHA1>
- <MetadataName>2023-09-29-1436_meta.7z</MetadataName>
+ <SHA1>0336c1f7f100deb1f9c6560ce0425392ed61de76</SHA1>
+ <MetadataName>2023-09-30-1406_meta.7z</MetadataName>
+ <PackageUpdate>
+  <Name>org.midieditor.manual</Name>
+  <DisplayName>Manual</DisplayName>
+  <Description>manual of ProMidEdit</Description>
+  <Version>3.4.1</Version>
+  <ReleaseDate>2023-09-30</ReleaseDate>
+  <Default>true</Default>
+  <ForcedInstallation>false</ForcedInstallation>
+  <ForcedUpdate>false</ForcedUpdate>
+  <Essential>false</Essential>
+  <UpdateFile UncompressedSize="504520" OS="Any" CompressedSize="414693"/>
+  <DownloadableArchives>manual.7z</DownloadableArchives>
+  <SHA1>209d89237dfc6d1c8680203aa22f39a007c9f96d</SHA1>
+ </PackageUpdate>
 </Updates>

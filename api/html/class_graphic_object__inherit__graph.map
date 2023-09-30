@@ -1,0 +1,18 @@
+<map id="GraphicObject" name="GraphicObject">
+<area shape="rect" id="node1" title=" " alt="" coords="5,309,110,336"/>
+<area shape="rect" id="node2" href="$class_midi_event.html" title=" " alt="" coords="158,309,235,336"/>
+<area shape="rect" id="node3" href="$class_channel_pressure_event.html" title=" " alt="" coords="283,5,435,32"/>
+<area shape="rect" id="node4" href="$class_control_change_event.html" title=" " alt="" coords="290,56,428,83"/>
+<area shape="rect" id="node5" href="$class_key_pressure_event.html" title=" " alt="" coords="295,107,423,133"/>
+<area shape="rect" id="node6" href="$class_key_signature_event.html" title=" " alt="" coords="294,157,425,184"/>
+<area shape="rect" id="node7" href="$class_off_event.html" title=" " alt="" coords="325,208,394,235"/>
+<area shape="rect" id="node8" href="$class_on_event.html" title=" " alt="" coords="324,259,394,285"/>
+<area shape="rect" id="node10" href="$class_pitch_bend_event.html" title=" " alt="" coords="303,309,416,336"/>
+<area shape="rect" id="node11" href="$class_prog_change_event.html" title=" " alt="" coords="297,360,421,387"/>
+<area shape="rect" id="node12" href="$class_sys_ex_event.html" title=" " alt="" coords="313,411,405,437"/>
+<area shape="rect" id="node13" href="$class_tempo_change_event.html" title=" " alt="" coords="291,461,427,488"/>
+<area shape="rect" id="node14" href="$class_text_event.html" title=" " alt="" coords="320,512,398,539"/>
+<area shape="rect" id="node15" href="$class_time_signature_event.html" title=" " alt="" coords="291,563,427,589"/>
+<area shape="rect" id="node16" href="$class_unknown_event.html" title=" " alt="" coords="306,613,412,640"/>
+<area shape="rect" id="node9" href="$class_note_on_event.html" title=" " alt="" coords="483,259,581,285"/>
+</map>

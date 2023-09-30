@@ -1,0 +1,26 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,563,73,589"/>
+<area shape="rect" id="node2" href="$class_about_dialog.html" title=" " alt="" coords="163,5,255,32"/>
+<area shape="rect" id="node3" href="$class_automatic_update_dialog.html" title=" " alt="" coords="130,56,288,83"/>
+<area shape="rect" id="node4" href="$class_complete_midi_setup_dialog.html" title=" " alt="" coords="124,107,294,133"/>
+<area shape="rect" id="node5" href="$class_donate_dialog.html" title=" " alt="" coords="160,157,258,184"/>
+<area shape="rect" id="node6" href="$class_file_length_dialog.html" title=" " alt="" coords="150,208,268,235"/>
+<area shape="rect" id="node7" href="$class_finger_pattern_dialog.html" title=" " alt="" coords="141,259,277,285"/>
+<area shape="rect" id="node8" href="$class_instrument_chooser.html" title=" " alt="" coords="144,309,274,336"/>
+<area shape="rect" id="node9" href="$class_main_thread_progress_dialog.html" title=" " alt="" coords="121,360,297,387"/>
+<area shape="rect" id="node10" href="$class_midi_in_control.html" title=" " alt="" coords="161,411,257,437"/>
+<area shape="rect" id="node11" href="$class_midi_in_control__chord.html" title=" " alt="" coords="141,461,277,488"/>
+<area shape="rect" id="node12" href="$class_my_instrument.html" title=" " alt="" coords="159,512,259,539"/>
+<area shape="rect" id="node13" href="$class_n_tole_quantization_dialog.html" title=" " alt="" coords="127,563,291,589"/>
+<area shape="rect" id="node14" href="$class_record_dialog.html" title=" " alt="" coords="160,613,258,640"/>
+<area shape="rect" id="node15" href="$class_settings_dialog.html" title=" " alt="" coords="156,664,262,691"/>
+<area shape="rect" id="node16" href="$class_sound_effect_chooser.html" title=" " alt="" coords="139,715,279,741"/>
+<area shape="rect" id="node17" href="$class_tempo_dialog.html" title=" " alt="" coords="161,765,257,792"/>
+<area shape="rect" id="node18" href="$class_text_event_edit.html" title=" " alt="" coords="158,816,260,843"/>
+<area shape="rect" id="node19" href="$class_time_signature_dialog.html" title=" " alt="" coords="139,867,279,893"/>
+<area shape="rect" id="node20" href="$class_transpose_dialog.html" title=" " alt="" coords="150,917,268,944"/>
+<area shape="rect" id="node21" href="$class_update_dialog.html" title=" " alt="" coords="160,968,258,995"/>
+<area shape="rect" id="node22" href="$classchord_vel_dialog.html" title=" " alt="" coords="155,1019,263,1045"/>
+<area shape="rect" id="node23" href="$classedit_dialog.html" title=" " alt="" coords="170,1069,248,1096"/>
+<area shape="rect" id="node24" href="$classvelocity_dialog.html" title=" " alt="" coords="159,1120,259,1147"/>
+</map>

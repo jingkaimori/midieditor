@@ -1,0 +1,8 @@
+<map id="TweakTarget" name="TweakTarget">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,100,133"/>
+<area shape="rect" id="node2" href="$class_end_time_tweak_target.html" title=" " alt="" coords="150,5,296,32"/>
+<area shape="rect" id="node3" href="$class_note_tweak_target.html" title=" " alt="" coords="162,56,284,83"/>
+<area shape="rect" id="node4" href="$class_start_time_tweak_target.html" title=" " alt="" coords="148,107,298,133"/>
+<area shape="rect" id="node5" href="$class_time_tweak_target.html" title=" " alt="" coords="162,157,284,184"/>
+<area shape="rect" id="node6" href="$class_value_tweak_target.html" title=" " alt="" coords="159,208,287,235"/>
+</map>

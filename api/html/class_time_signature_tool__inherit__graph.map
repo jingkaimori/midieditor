@@ -1,0 +1,7 @@
+<map id="TimeSignatureTool" name="TimeSignatureTool">
+<area shape="rect" id="node1" title=" " alt="" coords="5,304,134,331"/>
+<area shape="rect" id="node2" href="$class_event_tool.html" title=" " alt="" coords="31,229,108,256"/>
+<area shape="rect" id="node3" href="$class_editor_tool.html" title="EditorTool is a Tool which can be connected to a Widget to act on." alt="" coords="30,155,109,181"/>
+<area shape="rect" id="node4" href="$class_tool.html" title="Tool is the superclass for every Tool in the program." alt="" coords="47,80,92,107"/>
+<area shape="rect" id="node5" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="19,5,120,32"/>
+</map>

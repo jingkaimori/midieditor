@@ -24,12 +24,27 @@
 */
 var NAVTREE =
 [
-  [ "ProMidEdit", "index.html", ]
+  [ "ProMidEdit", "index.html", [
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"_about_dialog_8h_source.html",
+"class_protocol.html#a54fc16a6c2cceeda9b9e69876ae36618"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

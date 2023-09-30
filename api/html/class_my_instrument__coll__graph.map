@@ -1,0 +1,11 @@
+<map id="MyInstrument" name="MyInstrument">
+<area shape="rect" id="node1" title=" " alt="" coords="150,188,251,215"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,73,32"/>
+<area shape="rect" id="node9" href="$classedit_dialog.html" title=" " alt="" coords="48,81,126,108"/>
+<area shape="rect" id="node3" href="$class_q_m_group_box.html" title=" " alt="" coords="150,81,251,108"/>
+<area shape="rect" id="node4" title=" " alt="" coords="156,5,245,32"/>
+<area shape="rect" id="node5" href="$class_q_m_combo_box.html" title=" " alt="" coords="275,81,382,108"/>
+<area shape="rect" id="node6" title=" " alt="" coords="281,5,376,32"/>
+<area shape="rect" id="node7" href="$class_q_m_list_widget.html" title=" " alt="" coords="406,81,510,108"/>
+<area shape="rect" id="node8" title=" " alt="" coords="411,5,504,32"/>
+</map>

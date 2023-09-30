@@ -1,0 +1,5 @@
+<map id="MidiTrack" name="MidiTrack">
+<area shape="rect" id="node1" title=" " alt="" coords="56,80,133,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,75,32"/>
+<area shape="rect" id="node3" href="$class_protocol_entry.html" title="ProtocolEntry is the superclass for objects to protocol." alt="" coords="99,5,200,32"/>
+</map>
