@@ -1,4 +1,4 @@
-name: build with xmake on windows
+name: Build with xmake
 on:
   push:
     branches:
@@ -16,7 +16,11 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    name: Build on ${{ matrix.os }}
     if: always()
     env:
       # Force xmake to a specific folder (for cache)
