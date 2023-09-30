@@ -3,8 +3,8 @@
 # ProMidEdit
 ------
 
-[![Example Online](https://badgen.net/badge/Discord%20Activity/Currently%20Online/green?icon=discord)](https://discord.gg/9YGbfGCP)
-[![build windows](https://github.com/jingkaimori/midieditor/actions/workflows/compile.yaml/badge.svg)](https://github.com/jingkaimori/midieditor/actions/workflows/compile.yaml)
+[![Discord Channel](https://badgen.net/badge/Discord%20Activity/Currently%20Online/green?icon=discord)](https://discord.gg/9YGbfGCP)
+[![CI status](https://github.com/jingkaimori/midieditor/actions/workflows/xmake.yaml/badge.svg)](https://github.com/jingkaimori/midieditor/actions/workflows/xmake.yaml)
 
 Downloads : [last release](https://github.com/jingkaimori/midieditor/releases/)
 
@@ -46,12 +46,7 @@ Please also feel free to contact the developer in case you have any ideas which 
 
 Please feel free to contact the developer if you have any suggestions! Please also reach out to the developer if you found a bug.
 
-### Project Page
+### Project Page and Manual
 
-[https://midieditor.org](https://midieditor.org)
-
-
-### Manual
-
-[https://midieditor.org/index.php?category=manual](https://midieditor.org/index.php?category=manual)
+[https://jingkaimori.github.io/midieditor](https://jingkaimori.github.io/midieditor)
 
