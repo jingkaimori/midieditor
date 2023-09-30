@@ -9,7 +9,7 @@ jobs:
     if: always()
     env:
       # Force xmake to a specific folder (for cache)
-      XMAKE_GLOBALDIR: "${{ github.workspace }}\\.xmake-global"
+      XMAKE_GLOBALDIR: "${{ github.workspace }}/.xmake-global"
       DOXYGEN_VERSION: 1.9.5
     steps:
       - uses: xmake-io/github-action-setup-xmake@v1
