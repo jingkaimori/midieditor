@@ -2,8 +2,8 @@
 <Package>
     <DisplayName>Manual</DisplayName>
     <Description>manual of ProMidEdit</Description>
-    <Version>3.4.1</Version>
-    <ReleaseDate>2023-09-30</ReleaseDate>
+    <Version>3.4.2</Version>
+    <ReleaseDate>2023-10-01</ReleaseDate>
     <Name>org.midieditor.manual</Name>
     <Default>true</Default>
     <ForcedInstallation>false</ForcedInstallation>
