@@ -14,6 +14,12 @@ option("generate-repository", {
     values = {true, false},
     showmenu = true,
 })
+option("libraries-from-apt", {
+    description = "use libraries from apt rather than xmake-repo",
+    default = false,
+    values = {true, false},
+    showmenu = is_plat("linux") and linuxos.name() == "ubuntu",
+})
 
 includes("scripts/xmake/packages.lua")
 add_all_requires()
