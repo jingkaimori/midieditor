@@ -21,8 +21,10 @@ option("libraries-from-apt", {
     showmenu = is_plat("linux") and linuxos.name() == "ubuntu",
 })
 
-includes("scripts/xmake/packages.lua")
-add_all_requires()
+if has_config("plat") then
+    includes("scripts/xmake/packages/" .. get_config("plat") .. ".lua")
+    add_all_requires()
+end
 
 target("translation") do
     set_kind("phony")

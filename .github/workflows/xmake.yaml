@@ -19,9 +19,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    name: Build on ${{ matrix.os }}
+        system: 
+          - os: windows-latest
+            lockfile: scripts/xmake/packages/windows.lua
+          - os: ubuntu-latest
+            lockfile: scripts/xmake/packages/linux.lua
+          - os: macos-latest
+            lockfile: scripts/xmake/packages/macosx.lua
+    runs-on: ${{ matrix.system.os }}
+    name: Build on ${{ matrix.system.os }}
     if: always()
     env:
       # Force xmake to a specific folder (for cache)
@@ -41,7 +47,7 @@ jobs:
         with:
           path: |
             ${{ env.XMAKE_GLOBALDIR }}/.xmake/packages
-          key: ${{ runner.os }}-xrepo-qt-${{ hashFiles('scripts/xmake/packages.lua') }}
+          key: ${{ runner.os }}-xrepo-qt-${{ hashFiles(matrix.system.lockfile) }}
       - name: cache xmake
         uses: actions/cache@v2
         with:
