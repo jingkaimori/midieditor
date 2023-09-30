@@ -1,7 +1,7 @@
 
 function add_all_requires()
     if linuxos.name() == "ubuntu" then
-        add_requires({"apt::libasound2-dev", "apt::libpulse-mainloop-glib0"})
+        add_requires("apt::libasound2-dev")
         if has_config("libraries-from-apt") then
             add_requires("apt::libfluidsynth-dev", {alias = "fluidsynth"})
             add_requires({

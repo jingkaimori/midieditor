@@ -32,6 +32,7 @@ jobs:
     env:
       # Force xmake to a specific folder (for cache)
       XMAKE_GLOBALDIR: "${{ github.workspace }}/.xmake-global"
+      NEEDRESTART_MODE: a
     steps:
       - uses: xmake-io/github-action-setup-xmake@v1
         with:
@@ -39,6 +40,11 @@ jobs:
       - name: update repo
         run: |
           xrepo update-repo
+      - name: (Linux) Install some necessary packages
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt update
+          sudo apt install libasound2-dev libpulse-mainloop-glib0
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
