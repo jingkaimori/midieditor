@@ -1,9 +1,11 @@
 
 function add_all_requires()
-    add_requires("rtmidi")
     add_requires("fluidsynth")
     add_requires("qt5widgets")
-    if not is_plat("linux") then
+    if is_plat("linux") then
+        add_requires("rtmidi", {configs = {alsa = true}})
+    else
         add_requires("qtifw")
+        add_requires("rtmidi")
     end
 end
