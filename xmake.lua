@@ -18,7 +18,7 @@ option("libraries-from-apt", {
     description = "use libraries from apt rather than xmake-repo",
     default = false,
     values = {true, false},
-    showmenu = is_plat("linux") and linuxos.name() == "ubuntu",
+    showmenu = is_host("linux") and (linuxos.name() == "ubuntu"),
 })
 
 if has_config("plat") then
@@ -48,6 +48,7 @@ target("translation") do
     end)
 end
 
+local installdir = "packaging/org.midieditor.midieditor/data/"
 target("ProMidEdit") do
     add_deps("translation")
     set_languages("cxx11")
@@ -95,7 +96,6 @@ target("ProMidEdit") do
         add_installfiles("midieditor.icns")
     end
     
-    local installdir = "packaging/org.midieditor.midieditor/data/"
     local bindir = path.join(installdir, "bin")
     local plugindir = path.join(bindir, "plugins")
     set_installdir(installdir)
@@ -156,17 +156,22 @@ target("remoteVST") do
     end
 end
 
-target("installer") do
+target("manual") do
     set_kind("phony")
-    set_enabled(is_plat("windows", "macosx"))
-    
-    local installdir = 
+    set_enabled(is_plat("windows"))
     set_installdir("packaging/org.midieditor.manual/data/manual")
     add_installfiles("manual/(**)")
-    add_packages("qtifw")
-    add_deps("ProMidEdit")
+end
 
+target("installer") do
+    set_kind("phony")
+    set_enabled(is_plat("windows", "linux"))
+    add_deps("ProMidEdit")
+    
+    set_installdir(installdir)
     if is_plat("windows") then
+        add_deps("manual")
+        add_packages("qtifw")
         after_install(function (target, opt)
             import("core.project.config")
             local qtifw_dir = target:pkg("qtifw"):installdir()
@@ -199,6 +204,32 @@ target("installer") do
                 }
                 os.iorunv(binarycreator_path, package_argv)
             end
+        end)
+    elseif is_plat("linux") and linuxos.name() == "ubuntu" then
+        add_installfiles("scripts/packaging/debian/ProMidEdit.desktop", {prefixdir = "usr/share/applications"})
+        add_installfiles("scripts/packaging/debian/logo48.png", {prefixdir = "usr/share/pixmaps"})
+        add_installfiles("scripts/packaging/debian/copyright", {prefixdir = "usr/share/doc/promidedit/copyright"})
+        add_installfiles("$(buildir)/control", {prefixdir = "DEBIAN"})
+        add_configfiles("scripts/packaging/debian/control", {
+            pattern = "{(.-)}",
+            variables = {
+                PACKAGE = 1,
+                DEPENDS = "libc6(>=2.19), libfluidsynth3, qtbase5-dev, qtdeclarative5-dev, libqt5webkit5-dev, libsqlite3-dev, qt5-default, qtmultimedia5-dev, libqt5multimedia5, qttools5-dev-tools, libqt5multimedia5-plugins, libasound2, libgstreamer1.0-0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-bad, gstreamer1.0-plugins-ugly, gstreamer1.0-libav, gstreamer1.0-doc, gstreamer1.0-tools",
+                SIZE = 70, -- in kb, todo
+            }
+        })
+        after_install(function (target, opt)
+            import("core.project.config")
+            local installdir_glob = path.join(target:installdir(), "**")
+            for _, file in ipairs(os.dirs(installdir_glob)) do
+                os.runv("chmod", {"755", file})
+            end
+            for _, file in ipairs(os.files(installdir_glob)) do
+                os.runv("chmod", {"644", file})
+            end
+            os.runv("chmod", {
+                "+x", path.join(target:installdir(), "bin", target:deps()["ProMidEdit"]:filename())})
+            os.iorunv("fakeroot", {"dpkg-deb", "--build", target:installdir()})
         end)
     end
 end
