@@ -3,7 +3,7 @@
 # ProMidEdit
 ------
 
-[![Discord Channel](https://badgen.net/badge/Discord%20Activity/Currently%20Online/green?icon=discord)](https://discord.gg/9YGbfGCP)
+[![Discord Channel](https://badgen.net/badge/Discord%20Activity/Currently%20Online/green?icon=discord)](https://discord.gg/gSYa9VRhNP)
 [![CI status](https://github.com/jingkaimori/midieditor/actions/workflows/xmake.yaml/badge.svg)](https://github.com/jingkaimori/midieditor/actions/workflows/xmake.yaml)
 
 Downloads : [last release](https://github.com/jingkaimori/midieditor/releases/)
