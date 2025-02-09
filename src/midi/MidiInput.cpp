@@ -1273,6 +1273,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
 {
 
     QByteArray a;
+    int channel = -1;
 
     std::vector<unsigned char> message_out = *message;
 
@@ -1296,7 +1297,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
                         a.append(0x80 | MidiOutput::standardChannel());
                     else
                         a.append(message_out.at(0));
-
+                    channel = a[0] & 15;
                     continue;
                 }
                 case 0x90: {
@@ -1312,6 +1313,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
                                 ? (message_out.at(0) & 15)
                                 : MidiOutput::standardChannel());
 
+                    channel = a[0] & 15;
                     continue;
                 }
                 case 0xD0: {
@@ -1320,6 +1322,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
                     else
                         a.append(message_out.at(0));
 
+                    channel = a[0] & 15;
                     continue;
                 }
                 case 0xC0: {
@@ -1331,6 +1334,8 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
 
                         a.append(message_out.at(0));
                     }
+
+                    channel = a[0] & 15;
                     continue;
                 }
                 case 0xB0: {
@@ -1349,6 +1354,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
 
                         a.append(message_out.at(0));
                     }
+                    channel = a[0] & 15;
                     continue;
                 }
                 case 0xA0: {
@@ -1356,6 +1362,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
                         a.append(0xA0 | MidiOutput::standardChannel());
                     else
                         a.append(message_out.at(0));
+                    channel = a[0] & 15;
                     continue;
                 }
                 case 0xE0: {
@@ -1363,7 +1370,7 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
                         a.append(0xE0 | MidiOutput::standardChannel());
                     else
                         a.append(message_out.at(0));
-
+                    channel = a[0] & 15;
                     continue;
                 }
             }
@@ -1371,7 +1378,12 @@ void MidiInput::send_thru(int pairdev, int is_effect, std::vector<unsigned char>
 
         a.append(message_out.at(i));
     }
-
+/*
+    if(MidiInput::file && channel >= 0 && MidiInput::file->channel(channel)) {
+        // skip channel muted
+        if(MidiInput::file->channel(channel)->mute(track_index)) return;
+    }
+*/
     MidiOutput::sendCommand(a, track_index);
 }
 

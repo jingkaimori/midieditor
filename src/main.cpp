@@ -32,6 +32,7 @@
 #ifdef USE_FLUIDSYNTH
     #include "fluid/fluidsynth_proc.h"
     fluidsynth_proc *fluid_output=NULL;
+    QMutex *vst_fluid_lock = NULL;
 #endif
 
 bool MidieditorMaster = false;
@@ -70,6 +71,20 @@ int main(int argc, char* argv[])
 #endif
 
     QApplication a(argc, argv);
+
+#ifdef USE_FLUIDSYNTH
+
+    vst_fluid_lock =  new QMutex();
+
+    if(!vst_fluid_lock) {
+        QMessageBox::critical(NULL, "MidiEditor", "Error creating vst_fluid_lock");
+
+        return -1;
+    }
+
+       //vst_fluid_lock->lock();
+
+#endif
 
     IsFirstInstance = new QSharedMemory("MidiEditor_Instance");
 

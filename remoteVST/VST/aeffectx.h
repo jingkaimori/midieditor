@@ -305,34 +305,36 @@ public:
 class VstTimeInfo
 {
 public:
-   // 00
-   double samplePos;
-   // 08
-   double sampleRate;
-   // 10
-   double nanoSeconds;
-   // 18
-   double ppqPos;
-   // 20?
-   double tempo;
-   // 28
-   double barStartPos;
-   // 30?
-   double cycleStartPos;
-   // 38?
-   double cycleEndPos;
-   // 40?
-   int timeSigNumerator;
-   // 44?
-   int timeSigDenominator;
-   // unconfirmed 48 4c 50
-   char empty3[4 + 4 + 4];
-   // 54
-   int flags;
+  // 00
+  double samplePos;
+  // 08
+  double sampleRate;
+  // 10
+  double nanoSeconds;
+  // 18
+  double ppqPos;
+  // 20
+  double tempo;
+  // 28
+  double barStartPos;
+  // 30
+  double cycleStartPos;
+  // 38
+  double cycleEndPos;
+  // 40
+  int timeSigNumerator;
+  // 44
+  int timeSigDenominator;
+  // 48
+  int smpteOffset;
+  // 4c
+  int smpteFrameRate;
+  // 50
+  int samplesToNextClock;
+  // 54
+  int flags;
 
 } ;
-
-
 
 typedef intptr_t (* audioMasterCallback)( AEffect * , int32_t, int32_t, intptr_t, void * , float );
 

@@ -4275,6 +4275,10 @@ void MainWindow::editTrack(int i, bool assign)
     int track_ind = file->track(i)->fluid_index() * 32;
 
     for(int n = 0; n < 32; n++) {
+        ToggleViewVST((n & 31), false);
+    }
+
+    for(int n = 0; n < 32; n++) {
 
         bool flag = false;
 

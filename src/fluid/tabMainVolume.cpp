@@ -1265,13 +1265,13 @@ void FluidDialog::timer_update(){
     for(int n = 0; n < 25;n++) {
         int flag= 25 - vl / 8;
         if(n>=flag) {
-            if(n < 5) line_l[n]->setStyleSheet(QString::fromUtf8("color: #FF6000;"));
+            if(n < 3) line_l[n]->setStyleSheet(QString::fromUtf8("color: #FF6000;"));
             else line_l[n]->setStyleSheet(QString::fromUtf8("color: #60FF00;"));
         } else
             line_l[n]->setStyleSheet(QString::fromUtf8("color: #408000;"));
-        flag= 25 - vr /8;
+        flag= 25 - vr / 8;
         if(n >= flag) {
-            if(n < 5) line_r[n]->setStyleSheet(QString::fromUtf8("color: #FF8000;"));
+            if(n < 3) line_r[n]->setStyleSheet(QString::fromUtf8("color: #FF8000;"));
             else line_r[n]->setStyleSheet(QString::fromUtf8("color: #80FF00;"));
         } else
             line_r[n]->setStyleSheet(QString::fromUtf8("color: #608000;"));
