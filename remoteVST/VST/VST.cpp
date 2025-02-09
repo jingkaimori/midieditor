@@ -48,6 +48,9 @@ extern QSemaphore *sVST_EXT;
 int fluid_output_sample_rate = 44100;
 int fluid_output_fluid_out_samples = 512;
 
+static int _samplerate = -1;
+static int _nsamples = -1;
+
 unsigned int synth_chanvolume[48] = {
     127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
     127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,
@@ -128,9 +131,13 @@ VSTDialog::VSTDialog(QWidget* parent, int chan) : QDialog(parent, Qt::WindowSyst
     scrollArea->horizontalScrollBar()->setStyleSheet(QString::fromUtf8("background-color: #E5E5E5;"));
     scrollArea->verticalScrollBar()->setStyleSheet(QString::fromUtf8("background-color: #E5E5E5;"));
 
+    QString ss1 = QString::fromUtf8("background: qlineargradient(x1: 0, y1: 0, x2: 1.0, y2: 1.0, stop: 0 #b0b0b0, stop: 0.5 #e0e0e0, stop: 1 #b0b0b0);");
+    QString ss2 = QString::fromUtf8("background: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5, stop: 0 #8080ff, stop: 1 #90d0ff);");
+    QString ss3 = QString::fromUtf8("background: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5, stop: 0 #b0b0df, stop: 1 #d0d0ff);");
+
     groupBox = new QGroupBox(Dialog);
     if(chan == PRE_CHAN) groupBox->setEnabled(false);
-    groupBox->setStyleSheet(QString::fromUtf8("background-color: #E5E5E5;"));
+    groupBox->setStyleSheet(ss1);
     groupBox->setObjectName(QString::fromUtf8("groupBox"));
 
     groupBox->setGeometry(QRect(10, 0, 440 + 180, 41));
@@ -142,40 +149,47 @@ VSTDialog::VSTDialog(QWidget* parent, int chan) : QDialog(parent, Qt::WindowSyst
     pushButtonSave->setText("Save");
     pushButtonSave->setToolTip("Save the current preset");
     pushButtonSave->setFocusPolicy(Qt::NoFocus);
+    pushButtonSave->setStyleSheet(ss2);
     x+=80;
     pushButtonReset = new QPushButton(groupBox);
     pushButtonReset->setObjectName(QString::fromUtf8("pushButtonReset"));
     pushButtonReset->setGeometry(QRect(x, y, 75, 23));
     pushButtonReset->setText("Reset");
     pushButtonReset->setToolTip("set factory preset");
+    pushButtonReset->setStyleSheet(ss2);
     x+=80;
     pushButtonDelete = new QPushButton(groupBox);
     pushButtonDelete->setObjectName(QString::fromUtf8("pushButtonDelete"));
     pushButtonDelete->setGeometry(QRect(x, y, 75, 23));
     pushButtonDelete->setText("Delete");
-    pushButtonDelete->setToolTip("delete the current preset");
+    pushButtonDelete->setToolTip("delete the current preset datas");
+    pushButtonDelete->setStyleSheet(ss2);
     x+=100;
     pushButtonSet = new QPushButton(groupBox);
     pushButtonSet->setObjectName(QString::fromUtf8("pushButtonSet"));
     pushButtonSet->setGeometry(QRect(x, y, 75, 23));
     pushButtonSet->setText("Set Preset");
     pushButtonSet->setToolTip("Set the current preset in cursor position");
+    pushButtonSet->setStyleSheet(ss3);
     x+=80;
     pushButtonDis = new QPushButton(groupBox);
     pushButtonDis->setObjectName(QString::fromUtf8("pushButtonDis"));
     pushButtonDis->setGeometry(QRect(x, y, 75, 23));
     pushButtonDis->setText("Dis Preset");
     pushButtonDis->setToolTip("Disable VST plugin from cursor position");
+    pushButtonDis->setStyleSheet(ss3);
     x+=80;
     pushButtonUnset = new QPushButton(groupBox);
     pushButtonUnset->setObjectName(QString::fromUtf8("pushButtonUnset"));
     pushButtonUnset->setGeometry(QRect(x, y, 75, 23));
     pushButtonUnset->setText("Unset Preset");
     pushButtonUnset->setToolTip("Remove presets in cursor position");
+    pushButtonUnset->setStyleSheet(ss3);
     x+=80;
     labelPreset = new QLabel(groupBox);
     labelPreset->setObjectName(QString::fromUtf8("labelPreset"));
     labelPreset->setGeometry(QRect(x, y, 47, 21));
+    labelPreset->setStyleSheet(QString::fromUtf8("background: #00000000;"));
     x+=50;
 
     SpinBoxPreset = new QSpinBox(groupBox);
@@ -537,6 +551,7 @@ VSTDialog::~VSTDialog() {
 /////////////////////////////////////////////////////////////////////////////////////////
 // VST_PROC
 
+VstTimeInfo vstTimeInfo;
 
 intptr_t AudioMaster(AEffect * effect,
                      int32_t opcode,
@@ -557,121 +572,144 @@ intptr_t AudioMaster(AEffect * effect,
     // chance to set its instance pointer.
     switch (opcode)
     {
-    case audioMasterVersion:
-        return (intptr_t) 2400;
 
-    case audioMasterCurrentId:
-        return mCurrentEffectID;
+        case audioMasterPinConnected:
+            return !((value) ? true : true);
+        case audioMasterWantMidi:
+            return true;
+        case audioMasterGetTime:
+            return (intptr_t) &vstTimeInfo;
 
-    case audioMasterGetVendorString:
-        strcpy((char *) ptr, "midieditor");    // Do not translate, max 64 + 1 for null terminator
-        return 1;
+        case audioMasterProcessEvents:
+        case audioMasterSetTime:
+        case audioMasterIOChanged:
+            return false;
 
-    case audioMasterGetProductString:
-        strcpy((char *) ptr, "midieditor");         // Do not translate, max 64 + 1 for null terminator
-        return 1;
+        case audioMasterGetParameterQuantization:
+            return 1;
 
-    case audioMasterGetVendorVersion:
-        return (intptr_t) (1 << 24 |
-                           0 << 16 |
-                           0 << 8 |
-                           0);
+        case audioMasterGetSampleRate:
+            return (intptr_t) (_samplerate > 0) ? _samplerate : 44100;
+        case audioMasterGetBlockSize:
+            return (intptr_t) (_nsamples > 0) ? _nsamples : 512;
+
+        case audioMasterGetPreviousPlug:
+        case audioMasterGetNextPlug:
+            return -1;
+
+        case audioMasterSetOutputSampleRate:
+            return 1;
+        case audioMasterOpenWindow:
+            return 0;
+        case audioMasterCloseWindow:
+            return 0;
+        case audioMasterGetDirectory:
+
+            if(VSTpre)
+                return (intptr_t) &VSTpre->path;
+            return (intptr_t) 0;
+
+        case audioMasterVersion:
+            return (intptr_t) 2400;
+
+        case audioMasterCurrentId:
+            return mCurrentEffectID;
+
+        case audioMasterGetVendorString:
+            strcpy((char *) ptr, "midieditor");    // Do not translate, max 64 + 1 for null terminator
+            return true;
+
+        case audioMasterGetProductString:
+            strcpy((char *) ptr, "midieditor");         // Do not translate, max 64 + 1 for null terminator
+            return true;
+
+        case audioMasterGetVendorVersion:
+            return (intptr_t) (0 << 24 |
+                              0 << 16 |
+                              0 << 8 |
+                              1);
 
         // Some (older) effects depend on an effIdle call when requested.  An
         // example is the Antress Modern plugins which uses the call to update
         // the editors display when the program (preset) changes.
-    case audioMasterNeedIdle:
+        case audioMasterNeedIdle:
 
-        if (VSTpre){
-            VSTpre->needIdle = true;
-            return 1;
-        }
+            if (VSTpre){
+                VSTpre->needIdle = true;
+                return true;
+            }
 
-        return 0;
+            return false;
 
         // We would normally get this if the effect editor is dipslayed and something "major"
         // has changed (like a program change) instead of multiple automation calls.
         // Since we don't do anything with the parameters while the editor is displayed,
         // there's no need for us to do anything.
 
-    case audioMasterUpdateDisplay:
-        if (VSTpre){
-            VSTpre->needUpdate = true;
-            return 1;
-        }
-        return 0;
+        case audioMasterUpdateDisplay:
+            if (VSTpre){
+                VSTpre->needUpdate = true;
+                return true;
+            }
+            return false;
 
-        // Return the current time info.
-    case audioMasterGetTime:
-        return 0;
+        case audioMasterIdle:
+            QThread::usleep(1);
 
-        // Inputs, outputs, or initial delay has changed...all we care about is initial delay.
-    case audioMasterIOChanged:
+            return true;
 
-        return 0;
+        case audioMasterGetCurrentProcessLevel:
 
-    case audioMasterGetSampleRate:
+            return 0;
 
-        return 0;
-    case audioMasterIdle:
-        QThread::usleep(1);
-
-        return 1;
-
-    case audioMasterGetCurrentProcessLevel:
-
-        return 0;
-
-    case audioMasterGetLanguage:
-        return kVstLangEnglish;
+        case audioMasterGetLanguage:
+            return kVstLangEnglish;
 
         // We always replace, never accumulate
-    case audioMasterWillReplaceOrAccumulate:
-        return 1;
+        case audioMasterWillReplaceOrAccumulate:
+            return true;
 
         // Resize the window to accommodate the effect size
-    case audioMasterSizeWindow:
+        case audioMasterSizeWindow:
         // size index (w) value(h)
-        if (VSTpre){
-            VST_proc::VST_Resize(((VSTDialog *) VSTpre->vstWidget)->channel, index, value);
-        }
-        return 0;
+            if (VSTpre){
+                VST_proc::VST_Resize(((VSTDialog *) VSTpre->vstWidget)->channel, index, value);
+                return true;
+            }
+            return false;
 
-    case audioMasterCanDo:
-    {
-        char *s = (char *) ptr;
-        if (strcmp(s, "acceptIOChanges") == 0 ||
+        case audioMasterCanDo:
+        {
+            char *s = (char *) ptr;
+
+            if (strcmp(s, "acceptIOChanges") == 0 ||
+                strcmp(s, "sendVstMidiEvent") == 0 ||
+                strcmp(s, "sendVstEvents") == 0 ||
+                strcmp(s, "sendVstMidiEventFlagIsRealtime") == 0 ||
                 strcmp(s, "sendVstTimeInfo") == 0 ||
                 strcmp(s, "startStopProcess") == 0 ||
                 strcmp(s, "shellCategory") == 0 ||
                 strcmp(s, "sizeWindow") == 0)
-        {
-            return 1;
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+        case audioMasterBeginEdit:
+        case audioMasterEndEdit:
+            return 0;
+
+        case audioMasterOfflineStart:
+        case audioMasterOfflineRead:
+        case audioMasterOfflineWrite:
+        case audioMasterAutomate:
+            return false;
+
         }
 
-        return 0;
-    }
-
-    case audioMasterBeginEdit:
-    case audioMasterEndEdit:
-        return 0;
-
-    case audioMasterAutomate:
-
-        return 0;
-
-        // We're always connected (sort of)
-    case audioMasterPinConnected:
-
-        // We don't do MIDI yet
-    case audioMasterWantMidi:
-    case audioMasterProcessEvents:
-
-        // Don't need to see any messages about these
-        return 0;
-    }
-
-    opt = 0.0f;
+    Q_UNUSED(opt);
 
     return 0;
 }
@@ -1116,20 +1154,35 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
         else QThread::msleep(50);
     }
 
+    vstTimeInfo.samplePos = 0.0;
+    vstTimeInfo.sampleRate =  (float) (_samplerate > 0 ? _samplerate : 44100);
+    vstTimeInfo.nanoSeconds = 0.0;
+    vstTimeInfo.ppqPos = 0.0;
+    vstTimeInfo.tempo = 120.0;
+    vstTimeInfo.barStartPos = 0.0;
+    vstTimeInfo.cycleStartPos = 0.0;
+    vstTimeInfo.cycleEndPos = 0.0;
+    vstTimeInfo.timeSigNumerator = 4;
+    vstTimeInfo.timeSigDenominator = 4;
+    vstTimeInfo.smpteOffset = 0;
+    vstTimeInfo.smpteFrameRate = 1;
+    vstTimeInfo.samplesToNextClock = 0;
+    vstTimeInfo.flags = 0;
+
     if(first_time) {
 
-        out_vst = new float*[PRE_CHAN];
-        for(int n = 0; n < PRE_CHAN; n++) {
-            out_vst[n] = new float[FLUID_OUT_SAMPLES + 256];
-        }
+          out_vst = new float*[PRE_CHAN];
+          for(int n = 0; n < PRE_CHAN; n++) {
+              out_vst[n] = new float[FLUID_OUT_SAMPLES + 256];
+          }
 
-        for(int n = 0; n < PRE_CHAN + 1; n++) {
+          for(int n = 0; n < PRE_CHAN + 1; n++) {
 
-            VST_preset_data[n] = NULL;
-        }
+              VST_preset_data[n] = NULL;
+          }
 
-        first_time = 0;
-    }
+          first_time = 0;
+      }
 
     if(!_parentS) return -1;
 
@@ -1195,7 +1248,7 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
 
         VST_preset_data[chan]->vstEffect = pluginMain(AudioMaster);
 
-        // Was it successful?
+             // Was it successful?
         if (VST_preset_data[chan]->vstEffect) {
             // Save a reference to ourselves
             //
@@ -1206,19 +1259,30 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
 
             _block_timer2 = 1;
 
+
+            // Open the plugin
+            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effOpen, 0, 0, NULL, 0.0);
+
             // Give the plugin an initial sample rate and blocksize
             VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effSetSampleRate, 0, 0, NULL, 44100.0);
             VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effSetBlockSize, 0, 512, NULL, 0);
 
+            //resume
+            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effMainsChanged, 0, true, NULL, 0.0f);
+            //pause
+            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effMainsChanged, 0, false, NULL, 0.0f);
+
+            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effSetBlockSize, 0, 512, NULL, 0.0f);
+            // resume
+            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effMainsChanged, 0, true, NULL, 0.0f);
+
             VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effIdentify, 0, 0, NULL, 0);
 
-            // Open the plugin
-            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effOpen, 0, 0, NULL, 0.0);
             // Get the VST version the plugin understands
             VST_preset_data[chan]->vstVersion = VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effGetVstVersion, 0, 0, NULL, 0);
             // Give the plugin an initial sample rate and blocksize
             VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effSetSampleRate, 0, 0, NULL, (float) 44100);
-            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effSetBlockSize, 0, 2048, NULL, 0);
+            VST_preset_data[chan]->vstEffect->dispatcher(VST_preset_data[chan]->vstEffect, effSetBlockSize, 0, 512, NULL, 0);
 
             //
             // Ensure that it looks like a plugin and can deal with ProcessReplacing
@@ -1226,8 +1290,8 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
             int type = 0;
 
             if (VST_preset_data[chan]->vstEffect->magic == kEffectMagic &&
-                    !(VST_preset_data[chan]->vstEffect->flags & effFlagsIsSynth) &&
-                    VST_preset_data[chan]->vstEffect->flags & effFlagsCanReplacing) {
+                !(VST_preset_data[chan]->vstEffect->flags & effFlagsIsSynth) &&
+                VST_preset_data[chan]->vstEffect->flags & effFlagsCanReplacing) {
 
                 // Make sure we start out with a valid program selection
                 // I've found one plugin (SoundHack +morphfilter) that will
@@ -1274,6 +1338,8 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
             QString path = QFileInfo(mfile).dir().path();
             QString name = QFileInfo(mfile).fileName();
 
+            VST_preset_data[chan]->path = path;
+
             if(name.length() > 79) {
                 vst_mix_disable = 0;
                 return -1; // file name too long...
@@ -1299,7 +1365,7 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
                 VST_temp->factory.append((char *) chunk, clen);
 
             } else {
-            nochunk:
+                nochunk:
 
                 VST_temp->type_data = 1;
 
@@ -1314,11 +1380,11 @@ int VST_proc::VST_load(int chan, const QString pathModule) {
             VST_preset_data[chan] = VST_temp;
 
             VST_preset_data[chan]->vstEffect->ptr2 = VST_preset_data[chan];
-/*
-            if(fluid_control && chan < PRE_CHAN) {
-                fluid_control->wicon[chan]->setVisible(true);
-            }
-*/
+          /*
+                      if(fluid_control && chan < PRE_CHAN) {
+                          fluid_control->wicon[chan]->setVisible(true);
+                      }
+          */
             _block_timer2 = 0;
 
             vst_mix_disable = 0;
@@ -1362,9 +1428,11 @@ void VST_proc::VST_Resize(int chan, int w, int h) {
         scrWidth = winWidth;
     }
 
-    if(winHeight >= clientRect.height()) {
-        winHeight = clientRect.height();
-        scrHeight = winHeight - opH - scrBarH;
+    int hh = clientRect.height() - 32;
+
+    if(winHeight >= hh) {
+        winHeight = hh -  scrBarH;
+        scrHeight = winHeight - opH;
     }
 
 
@@ -1398,11 +1466,9 @@ int VST_proc::VST_mix(float**in, int nchans, int samplerate, int nsamples) {
 
     _block_timer = 1;
 
-    static int _samplerate = -1;
-    static int _nsamples = -1;
-
     if(_samplerate != samplerate || _nsamples != nsamples) {
         _samplerate = samplerate;
+        vstTimeInfo.sampleRate =  (float) (_samplerate > 0 ? _samplerate : 44100);
         _nsamples = nsamples;
 
         for(int chan = 0; chan < nchans; chan++) {
@@ -1544,7 +1610,7 @@ bool VST_proc::VST_isEnabled(int chan) {
 
 int VST_proc::VST_SaveParameters(int chan)
 {
-    chan = -1;
+    Q_UNUSED(chan);
     return 0;
 }
 

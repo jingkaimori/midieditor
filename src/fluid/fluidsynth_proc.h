@@ -53,6 +53,7 @@
 extern QProcess *process;
 extern QSharedMemory *sharedAudioBuffer;
 extern QSharedMemory *sharedVSText;
+extern QMutex *vst_fluid_lock;
 
 extern QSystemSemaphore *sys_sema_in;
 extern QSystemSemaphore *sys_sema_out;

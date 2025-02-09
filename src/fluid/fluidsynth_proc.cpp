@@ -840,6 +840,15 @@ int fluidsynth_proc::SendMIDIEvent(QByteArray array, int track)
 
     case 0xE0: // pitch bend
 
+        if(VST_proc::VST_isMIDI(channel + desp_channelVST) && mixer) {
+
+            VST_proc::VST_MIDIcmd(channel + desp_channelVST,
+                                      ((time_frame.msecsSinceStartOfDay() - frames) *  _sample_rate) / 1000
+                                      , array);
+            ret = 0;
+            break;
+        }
+
         ret = fluid_synth_pitch_bend(synth, channel + desp_channel, (array[1] & 0x7f) | (array[2]<<7));
         break;
 
@@ -1486,7 +1495,9 @@ void fluid_Thread::run()
          memset(mix_buffer, 0, fluid_out_samples * 2 * sizeof(float));
          int n, m;
 
-         if(1) {
+
+         // VST_mix
+         if(vst_fluid_lock && vst_fluid_lock->tryLock()) {
 
              VST_proc::VST_mix(dry, /*n_aud_chan*/PRE_CHAN, (_proc->_player_wav) ? _proc->_wave_sample_rate : _proc->_sample_rate, fluid_out_samples, 1);
              if(sharedAudioBuffer)
@@ -1494,6 +1505,7 @@ void fluid_Thread::run()
 
              VST_proc::VST_mix(dry, /*n_aud_chan*/PRE_CHAN, (_proc->_player_wav) ? _proc->_wave_sample_rate : _proc->_sample_rate, fluid_out_samples, 2);
 
+             vst_fluid_lock->unlock();
          }
 
          _proc->frames = _proc->time_frame.msecsSinceStartOfDay();
@@ -1571,7 +1583,7 @@ void fluid_Thread::run()
 
                      /** WAVE MODULATOR (3) IN **/
 
-                     if(WAVE_MOD && m < 96 && _proc->freq_WaveModulator[m>>1] != 0 && _proc->level_WaveModulator[m>>1] != 0) {
+                     if(WAVE_MOD && (m < 96) && _proc->freq_WaveModulator[m>>1] != 0 && _proc->level_WaveModulator[m>>1] != 0) {
                          float c = (sin(f) + 1.0f)/2.0f;
 
                         c = c*lev1 + lev2; // sin wave
@@ -1600,24 +1612,87 @@ void fluid_Thread::run()
 
          float addl = 0.0, addr = 0.0;
 
-
          for(n = 0; n < fluid_out_samples * 2; n++) {
 
              if(*f < -1.0f) *f = -1.0f;
              else if(*f  > 1.0f) *f = 1.0f;
 
-             if(n & 1) {
-                 if(*f < 0) addr-= *f; else addr+= *f;
-             } else {
-                 if(*f < 0) addl-= *f; else addl+= *f;
-             }
+             if(n & 1)
+                addr+= *f * *f;
+             else
+                addl+= *f * *f;
 
              buffer[n] = 32767.0f * (*(f++));
 
          }
 
+
+         addl = sqrtf((addl) / (float) (fluid_out_samples));
+         addr = sqrtf((addr) /  (float) (fluid_out_samples));
+
+
+#if 0
+         addl = addl / (float) (fluid_out_samples);
+         addr = addr /  (float) (fluid_out_samples);
+
+         if(addl == 0)
+             addl = -25;
+         else {
+             //addl /= (float) fluid_out_samples;
+            addl = 20.0 * log10(addl); // convert to dB
+         }
+
+         if(addr == 0)
+             addr = -25;
+         else {
+             //addr /= (float) fluid_out_samples;
+             addr = 20.0 * log10(addr);
+         }
+
+         if(addl < -47) addl = -47; // min -47 dB
+         if(addr < -47) addr = -47;  // min -47 dB
+
+         if(addr > 3) addr = 3; // max +3dB
+         if(addl > 3) addl = 3; // max +3dB
+
+         //qDebug("db %f ", addl);
+
+         addr-= 3; // dB correction
+         addl-= 3; // dB correction
+
+         addl = (50.0f + addl) * 4; // 50dB to power bar (0 to 200)
+         addr = (50.0f + addr) * 4; // 50dB to power bar (0 to 200)
+
+         if(addl > saddl) // remanence simulator
+             saddl = addl;
+
+         if(addr > saddr) // remanence simulator
+             saddr = addr;
+
+         addl = saddl;
+         addr = saddr;
+
+         //_proc->cleft = (25.0f + addl) * 8;
+         //_proc->cright = (25.0f + addr) * 8;
+
+         _proc->cleft = addl;
+         _proc->cright = addr;
+
+         if(saddl >= 1) saddl-= 1; // remanence simulator
+         if(saddr >= 1) saddr-= 1; // remanence simulator
+#else
+
+
+         _proc->cleft = 40.0 * log(addl * 200.0);
+         _proc->cright = 40.0 * log(addr * 200.0);
+
+
+#endif
+         /*
+
          _proc->cleft = 40.0 * log(addl * 200.0 / (float) fluid_out_samples);
          _proc->cright = 40.0 * log(addr * 200.0 / (float) fluid_out_samples);
+*/
 
          if(_proc->cleft > 200)  _proc->cleft = 200;
          if(_proc->cright > 200)  _proc->cright = 200;
@@ -3008,6 +3083,11 @@ int fluid_Thread_playerWAV::sendCommand(MidiEvent*event, int ms, int track) {
         return 0;
 
     } else if(type == 0xE0) { // pitch bend
+        if(VST_proc::VST_isMIDI(channel + desp_channelVST)) {
+
+            VST_proc::VST_MIDIcmd(channel + desp_channelVST,((event_ticks % 1000 * (_proc->fluid_out_samples / _proc->_wave_sample_rate)) * _proc->_wave_sample_rate) / 1000 , data);
+
+        }
         sequence_command(fluid_event_pitch_bend(evt, (int) (channel + desp_channel), (int) ((data[1] & 0x7f) | (data[2]<<7))))
         if(fluid_res < 0) return fluid_res;
         return 0;

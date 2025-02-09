@@ -313,26 +313,28 @@ public:
    double nanoSeconds;
    // 18
    double ppqPos;
-   // 20?
+   // 20
    double tempo;
    // 28
    double barStartPos;
-   // 30?
+   // 30
    double cycleStartPos;
-   // 38?
+   // 38
    double cycleEndPos;
-   // 40?
+   // 40
    int timeSigNumerator;
-   // 44?
+   // 44
    int timeSigDenominator;
-   // unconfirmed 48 4c 50
-   char empty3[4 + 4 + 4];
+   // 48
+   int smpteOffset;
+   // 4c
+   int smpteFrameRate;
+   // 50
+   int samplesToNextClock;
    // 54
    int flags;
 
 } ;
-
-
 
 typedef intptr_t (* audioMasterCallback)( AEffect * , int32_t, int32_t, intptr_t, void * , float );
 

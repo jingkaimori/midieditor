@@ -326,6 +326,7 @@ void ChannelListItem::ToggleViewVST1(bool on) {
         bViewVST1->setStyleSheet(QString::fromUtf8("background-color: #6080ff80;"));
     else
         bViewVST1->setStyleSheet(QString::fromUtf8("background-color: #2080ff80;"));
+    update();
 }
 
 void ChannelListItem::LoadVST1()
@@ -354,6 +355,7 @@ void ChannelListItem::ToggleViewVST2(bool on) {
         bViewVST2->setStyleSheet(QString::fromUtf8("background-color: #6040ffff;"));
     else
         bViewVST2->setStyleSheet(QString::fromUtf8("background-color: #2040ffff;"));
+    update();
 }
 
 void ChannelListItem::LoadVST2()

@@ -95,6 +95,8 @@ typedef struct {
 
     QMutex *mux;
 
+    QString path;
+
 } VST_preset_data_type;
 
 class VSTDialog: public QDialog
